@@ -27,7 +27,9 @@
 
 ## 設計書
 
-<!-- 省略 -->
+### ER図
+
+![PixeleriaのER図](https://raw.githubusercontent.com/3-masato/Pixeleria/develop/application_spec/assets/Pixeleria_ER_diagram.png "ER図")
 
 ## 開発環境
 - OS：Linux(CentOS)
