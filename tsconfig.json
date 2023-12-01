@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./output",
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  },
+  "include": [
+    "app/javascript/**/*"
+  ]
+}
