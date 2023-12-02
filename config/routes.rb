@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'homes/top'
-    get 'homes/about'
-  end
   # 管理者
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
@@ -15,11 +11,17 @@ Rails.application.routes.draw do
   # 一般ユーザー
   devise_for :user, skip: [:passwords], controllers: {
     registrations: "public/registrations",
-    sessions: 'public/sessions'
+    sessions: "public/sessions"
   }
 
   scope module: :public do
-      root "homes#top"
-      get "about" => "homes#about"
+    root "homes#top"
+    get "about" => "homes#about"
+
+    get   "users/:account_name",      to: "users#show",                 as: :user_profile
+    get   "users/:account_name/edit", to: "users#edit",                 as: :edit_user_profile
+    patch "users/:account_name",      to: "users#update",               as: :update_user_profile
+    get   "confirm_deactivation",     to: "users#confirm_deactivation", as: :confirm_deactivation
+    patch "deactivate",               to: "users#deactivate",           as: :deactivate
   end
 end
