@@ -1,4 +1,4 @@
-<h2>Log in</h2>
+<%= tag.h2 t("devise.shared.sign_in") %>
 
 <%= form_with(
   model: resource,
@@ -23,7 +23,7 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit t("devise.shared.sign_in") %>
   </div>
 <% end %>
 

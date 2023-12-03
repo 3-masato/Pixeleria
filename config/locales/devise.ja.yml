@@ -9,7 +9,7 @@ ja:
         current_password: 現在のパスワード
         current_sign_in_at: 現在のログイン時刻
         current_sign_in_ip: 現在のログインIPアドレス
-        email: Eメール
+        email: メールアドレス
         encrypted_password: 暗号化パスワード
         failed_attempts: 失敗したログイン試行回数
         last_sign_in_at: 最終ログイン時刻
@@ -22,9 +22,10 @@ ja:
         reset_password_sent_at: パスワードリセット送信時刻
         reset_password_token: パスワードリセット用トークン
         sign_in_count: ログイン回数
-        unconfirmed_email: 未確認Eメール
+        unconfirmed_email: 未確認メールアドレス
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+        display_name: ユーザー名
       admin:
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
@@ -33,7 +34,7 @@ ja:
         current_password: 現在のパスワード
         current_sign_in_at: 現在のログイン時刻
         current_sign_in_ip: 現在のログインIPアドレス
-        email: Eメール
+        email: メールアドレス
         encrypted_password: 暗号化パスワード
         failed_attempts: 失敗したログイン試行回数
         last_sign_in_at: 最終ログイン時刻
@@ -46,13 +47,13 @@ ja:
         reset_password_sent_at: パスワードリセット送信時刻
         reset_password_token: パスワードリセット用トークン
         sign_in_count: ログイン回数
-        unconfirmed_email: 未確認Eメール
+        unconfirmed_email: 未確認メールアドレス
         unlock_token: ロック解除用トークン
         updated_at: 更新日
     models:
       user: ユーザー
       admin: 管理者
-  public:
+  devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
       new:
@@ -126,7 +127,7 @@ ja:
         update: 更新
         we_need_your_current_password_to_confirm_your_changes: 変更を反映するには現在のパスワードを入力してください
       new:
-        sign_up: アカウント登録
+        sign_up: 新規登録
       signed_up: アカウント登録が完了しました。
       signed_up_but_inactive: ログインするためには、アカウントを有効化してください。
       signed_up_but_locked: アカウントがロックされているためログインできません。
@@ -148,8 +149,10 @@ ja:
         forgot_your_password: パスワードを忘れましたか？
         sign_in: ログイン
         sign_in_with_provider: "%{provider}でログイン"
-        sign_up: アカウント登録
+        sign_up: 新規登録
       minimum_password_length: "（%{count}字以上）"
+      sign_in: ログイン
+      sign_up: 新規登録
     unlocks:
       new:
         resend_unlock_instructions: アカウントのロック解除方法を再送する

@@ -1,4 +1,4 @@
-<h2>Sign up</h2>
+<%= tag.h2 t("devise.shared.sign_up") %>
 
 <%= form_with(
   model: resource,
@@ -8,14 +8,19 @@
   <%= render "public/shared/error_messages", resource: resource %>
 
   <div class="field">
+    <%= f.label :display_name %><br />
+    <%= f.text_field :display_name, autofocus: true %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autocomplete: "email" %>
   </div>
 
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <%= tag.span t("devise.shared.minimum_password_length", count: @minimum_password_length) %>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
@@ -26,7 +31,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit t("devise.shared.sign_up") %>
   </div>
 <% end %>
 
