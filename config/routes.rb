@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # 管理者
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
@@ -23,5 +22,7 @@ Rails.application.routes.draw do
     patch "users/:account_name",      to: "users#update",               as: :update_user_profile
     get   "confirm_deactivation",     to: "users#confirm_deactivation", as: :confirm_deactivation
     patch "deactivate",               to: "users#deactivate",           as: :deactivate
+
+    resources :artworks
   end
 end
