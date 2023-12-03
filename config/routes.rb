@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   # 一般ユーザー
-  devise_for :user, skip: [:passwords], controllers: {
+  devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
