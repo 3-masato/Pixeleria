@@ -67,3 +67,4 @@ gem 'devise'
 gem 'enum_help'
 gem "tailwindcss-rails", "~> 2.0"
 gem "view_component"
+gem 'rails-i18n', '~> 6.0'
