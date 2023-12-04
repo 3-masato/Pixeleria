@@ -1,3 +1,3 @@
-[submodule "editor"]
+[submodule "app/javascript/module/editor"]
 	path = app/javascript/module/editor
 	url = https://github.com/3-masato/Pixeleria-Editor.git
