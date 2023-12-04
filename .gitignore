@@ -41,3 +41,6 @@ yarn-debug.log*
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
+# Ignore build product directories.
+/app/javascript/packs/dist
