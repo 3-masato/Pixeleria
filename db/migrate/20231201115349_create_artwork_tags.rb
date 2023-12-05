@@ -6,5 +6,6 @@ class CreateArtworkTags < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+    add_index :artwork_tags, [:artwork_id, :tag_id], unique: true
   end
 end
