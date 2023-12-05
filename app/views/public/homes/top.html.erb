@@ -1,4 +1,8 @@
 <div>
-  <h1 class="font-bold text-4xl">Public::Homes#top</h1>
-  <p>Find me in app/views/public/homes/top.html.erb</p>
+  <% if user_signed_in? %>
+    <%= link_to "描く", new_artwork_path %>
+  <% else %>
+    <%= link_to t("devise.shared.sign_in"), new_user_session_path %>
+    <%= link_to t("devise.shared.sign_up"), new_user_registration_path %>
+  <% end %>
 </div>
