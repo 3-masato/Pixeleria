@@ -26,6 +26,9 @@ ja:
         unlock_token: ロック解除用トークン
         updated_at: 更新日
         display_name: ユーザー名
+        account_name: アカウント名
+        introduction: 自己紹介
+        status: ステータス
       admin:
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
