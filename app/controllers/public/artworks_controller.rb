@@ -1,4 +1,6 @@
 class Public::ArtworksController < ApplicationController
+  before_action :authenticate_user!
+
   def index
   end
 
@@ -9,6 +11,7 @@ class Public::ArtworksController < ApplicationController
   end
 
   def new
+    @artwork = Artwork.new
   end
 
   def update
