@@ -27,6 +27,9 @@ class Public::ArtworksController < ApplicationController
   end
 
   def create
+    data = params[:artwork]
+    width = params[:width]
+    height = params[:height]
   end
 
   def destroy
