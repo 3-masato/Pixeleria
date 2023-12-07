@@ -1,1 +1,8 @@
-<pixeleria-editor></pixeleria-editor>
+<div id="editor-container">
+  <%= form_with url: initialize_editor_artworks_path, local: false, id: "size-form" do |f| %>
+    <%= f.label :size, 'Size:' %>
+    <%= f.select :size, artwork_size_options %>
+
+    <%= f.submit 'Create' %>
+  <% end %>
+</div>

@@ -1,0 +1,35 @@
+console.log("initialize_editor");
+$("#editor-container").html(`
+<pixeleria-editor
+  id="pixeleria-editor"
+  artwidth="<%= @width %>"
+  artheight="<%= @height %>"
+  dotsize="<%= @dotsize %>"
+></pixeleria-editor>`);
+$("#pixeleria-editor").on("save", function(event) {
+  const data = event.detail; // イベントからデータを取得
+  const url = "/artworks"; // POSTリクエストのURL
+  const method = data.id ? "PUT" : "POST"; // IDがあれば更新、なければ新規作成
+
+  console.log(event.detail);
+
+  /*
+  $.ajax({
+    url: url,
+    type: method,
+    contentType: 'application/json',
+    data: JSON.stringify({ artwork: data }), // データをJSON形式に変換
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') // CSRFトークン
+    },
+    success: function(response) {
+      // 成功した場合の処理
+      console.log('Artwork saved successfully', response);
+    },
+    error: function(xhr, status, error) {
+      // エラー処理
+      console.error('Error saving artwork', xhr, status, error);
+    }
+  });
+  */
+})
