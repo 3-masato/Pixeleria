@@ -13,4 +13,8 @@ class User < ApplicationRecord
 
   validates :display_name, presence: true
   validates :account_name, presence: true
+
+  def get_profile_image
+    (profile_image.attached?) ? profile_image : "default-user-icon.jpeg"
+  end
 end

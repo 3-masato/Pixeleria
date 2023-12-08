@@ -6,12 +6,7 @@
   </div>
   <nav class="w-64">
     <ul class="flex justify-evenly items-center">
-      <li>
-        <%= link_to t("devise.shared.sign_in"), new_user_session_path %>
-      </li>
-      <li>
-        <%= link_to t("devise.shared.sign_up"), new_user_registration_path %>
-      </li>
+      <%= render partial: "layouts/nav-item", collection: nav_items, as: :item %>
     </ul>
   </nav>
 </header>
