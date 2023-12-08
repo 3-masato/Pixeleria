@@ -1,0 +1,9 @@
+<div class="flex w-full flex-wrap">
+  <% artworks.each do |artwork| %>
+    <div class="w-96 break-words">
+      <%= link_to artwork_path(artwork), class: "hover:underline" do %>
+        <%= artwork.pixel_data %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -1,4 +1,38 @@
-<div>
-  <h1 class="font-bold text-4xl">Public::Artworks#show</h1>
-  <p>Find me in app/views/public/artworks/show.html.erb</p>
-</div>
+<section class="m-4">
+  <div>
+    <%= @artwork.pixel_data %>
+  </div>
+  <div>
+    <div class="font-medium text-lg">
+      <%= @artwork.title %>
+    </div>
+    <div>
+      <% @artwork.tags.each do |tag| %>
+        <span><%= tag %></span>
+      <% end %>
+    </div>
+  </div>
+  <p>
+    <%= @artwork.description %>
+  </p>
+</section>
+
+<section class="m-4">
+  <div>
+    <div>
+      <%= image_tag "" %>
+      <div>
+        <!-- フォローボタン -->
+      </div>
+    </div>
+    <div>
+      <%= link_to user_profile_path(@author.account_name), class: "hover:underline" do %>
+        <%= @author.display_name %>
+      <% end %>
+    </div>
+    <p>
+      <%= @author.introduction %>
+    </p>
+  </div>
+  <%= render "list", artworks: @author.artworks %>
+</section>
