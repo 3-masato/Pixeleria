@@ -8,4 +8,8 @@ class Artwork < ApplicationRecord
 
   # Artworkレコードを取得する際、デフォルトで新しい作品が先頭に来るようにする。
   default_scope { order(created_at: :desc) }
+
+  def liked_by?(user)
+    likes.any? { |like| like.user_id == user.id }
+  end
 end
