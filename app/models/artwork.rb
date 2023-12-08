@@ -5,4 +5,7 @@ class Artwork < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :artwork_tags, dependent: :destroy
   has_many :tags, through: :artwork_tags
+
+  # Artworkレコードを取得する際、デフォルトで新しい作品が先頭に来るようにする。
+  default_scope { order(created_at: :desc) }
 end
