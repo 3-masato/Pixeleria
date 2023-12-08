@@ -7,3 +7,7 @@ ja:
     followers: フォロワー
     followed: フォロー
     artworks: 作品
+  messages:
+    user:
+      profile:
+        update_success: "プロフィールを更新しました"

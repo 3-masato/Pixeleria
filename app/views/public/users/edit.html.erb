@@ -1,4 +1,22 @@
-<div>
-  <h1 class="font-bold text-4xl">Public::Users#update</h1>
-  <p>Find me in app/views/public/users/update.html.erb</p>
-</div>
+<section>
+  <div>user edit</div>
+  <%= form_with model: @user, url: update_user_profile_path, local: true do |f| %>
+    <fieldset>
+      <%= f.file_field :profile_image, accept: "image/*" %>
+    </fieldset>
+    <fieldset>
+      <%= f.label t("activerecord.attributes.user.display_name") %>
+      <%= f.text_field :display_name, class: "block" %>
+    </fieldset>
+    <fieldset>
+      <%= f.label t("activerecord.attributes.user.account_name") %>
+      <%= f.text_field :account_name, class: "block" %>
+    </fieldset>
+    <fieldset>
+      <%= f.label t("activerecord.attributes.user.introduction") %>
+      <%= f.text_area :introduction, class: "block" %>
+    </fieldset>
+
+    <%= f.submit "Save" %>
+  <% end %>
+</section>

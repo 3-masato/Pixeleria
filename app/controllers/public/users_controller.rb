@@ -1,17 +1,37 @@
 class Public::UsersController < ApplicationController
+  before_action :set_user, only: %i[edit show update]
+
   def edit
   end
 
   def show
-    @user = User.find_by(account_name: params[:account_name])
   end
 
   def update
+    if @user.update(user_params)
+      redirect_to user_profile_path(@user.account_name), notice: t("message.user.profile.update_success")
+    else
+      render :edit
+    end
   end
 
   def confirm_deactivation
   end
 
   def deactivate
+  end
+
+  private
+  def set_user
+    @user = User.find_by(account_name: params[:account_name])
+  end
+
+  def user_params
+    params.require(:user).permit(
+      :display_name,
+      :account_name,
+      :introduction,
+      :profile_image
+    )
   end
 end
