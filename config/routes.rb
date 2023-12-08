@@ -23,6 +23,10 @@ Rails.application.routes.draw do
     get   "confirm_deactivation",     to: "users#confirm_deactivation", as: :confirm_deactivation
     patch "deactivate",               to: "users#deactivate",           as: :deactivate
 
-    resources :artworks
+    resources :artworks do
+      collection do
+        post :initialize_editor, defaults: { format: "js" }
+      end
+    end
   end
 end
