@@ -1,9 +1,15 @@
 ja:
   user:
     edit: 編集
+    save: 保存
+    edit_heading: プロフィール編集
     follow: フォロー
     unfollow: フォロー解除
     following: フォロー中
     followers: フォロワー
     followed: フォロー
     artworks: 作品
+  messages:
+    user:
+      profile:
+        update_success: "プロフィールを更新しました"
