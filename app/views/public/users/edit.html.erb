@@ -1,22 +1,23 @@
 <section>
-  <div>user edit</div>
+  <%= tag.h2 t("user.edit_heading"), class: "text-2xl" %>
+
   <%= form_with model: @user, url: update_user_profile_path, local: true do |f| %>
-    <fieldset>
+    <fieldset class="my-2">
       <%= f.file_field :profile_image, accept: "image/*" %>
     </fieldset>
-    <fieldset>
-      <%= f.label t("activerecord.attributes.user.display_name") %>
+    <fieldset class="my-2">
+      <%= f.label t("activerecord.attributes.user.display_name"), class: "font-bold" %>
       <%= f.text_field :display_name, class: "block" %>
     </fieldset>
-    <fieldset>
-      <%= f.label t("activerecord.attributes.user.account_name") %>
+    <fieldset class="my-2">
+      <%= f.label t("activerecord.attributes.user.account_name"), class: "font-bold" %>
       <%= f.text_field :account_name, class: "block" %>
     </fieldset>
-    <fieldset>
-      <%= f.label t("activerecord.attributes.user.introduction") %>
+    <fieldset class="my-2">
+      <%= f.label t("activerecord.attributes.user.introduction"), class: "font-bold" %>
       <%= f.text_area :introduction, class: "block" %>
     </fieldset>
 
-    <%= f.submit "Save" %>
+    <%= f.submit t("user.save") %>
   <% end %>
 </section>

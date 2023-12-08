@@ -1,6 +1,8 @@
 ja:
   user:
     edit: 編集
+    save: 保存
+    edit_heading: プロフィール編集
     follow: フォロー
     unfollow: フォロー解除
     following: フォロー中

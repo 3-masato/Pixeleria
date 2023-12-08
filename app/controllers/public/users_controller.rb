@@ -9,7 +9,7 @@ class Public::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to user_profile_path(@user.account_name), notice: t("message.user.profile.update_success")
+      redirect_to user_profile_path(@user.account_name), notice: t("messages.user.profile.update_success")
     else
       render :edit
     end
