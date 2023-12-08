@@ -5,4 +5,7 @@
     <%= link_to t("devise.shared.sign_in"), new_user_session_path %>
     <%= link_to t("devise.shared.sign_up"), new_user_registration_path %>
   <% end %>
+  <div>
+    <%= render "public/artworks/list", artworks: @artworks %>
+  </div>
 </div>
