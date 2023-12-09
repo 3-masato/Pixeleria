@@ -4,6 +4,9 @@
       <%= link_to artwork_path(artwork), class: "hover:underline" do %>
         <%= artwork.pixel_data %>
       <% end %>
+      <%= tag.div id: "like-#{artwork.id}" do %>
+        <%= render "public/likes/btn", artwork: artwork %>
+      <% end %>
     </div>
   <% end %>
 </div>

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       collection do
         post :initialize_editor, defaults: { format: "js" }
       end
+      resource :likes, only: [:create, :destroy], defaults: { format: "js" }
     end
   end
 end
