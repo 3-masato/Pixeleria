@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     get   "confirm_deactivation",     to: "users#confirm_deactivation", as: :confirm_deactivation
     patch "deactivate",               to: "users#deactivate",           as: :deactivate
 
+    post  "users/:account_name/relationships", to: "relationships#create", as: :user_follow
+    delete "users/:account_name/relationships", to: "relationships#destroy", as: :user_unfollow
+
     resources :artworks do
       collection do
         post :initialize_editor, defaults: { format: "js" }

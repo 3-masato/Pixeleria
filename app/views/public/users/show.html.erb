@@ -2,11 +2,15 @@
   <div class="grid grid-cols-1 items-center md:grid-cols-3">
     <div class="grid grid-cols-3 text-center">
       <div class="mx-2">
-        <%= tag.div "00", class: "font-bold text-gray-700 text-xl" %>
+        <%= tag.div class: "font-bold text-gray-700 text-xl" do %>
+          <%= tag.span @user.followers.size, id: "followers-count-of-#{@user.account_name}" %>
+        <% end %>
         <%= tag.div t("user.followers"), class: "text-gray-400" %>
       </div>
       <div class="mx-2">
-        <%= tag.div "00", class: "font-bold text-gray-700 text-xl" %>
+        <%= tag.div class: "font-bold text-gray-700 text-xl" do %>
+          <%= tag.span @user.followings.size, id: "followings-count-of-#{@user.account_name}" %>
+        <% end %>
         <%= tag.div t("user.followed"), class: "text-gray-400" %>
       </div class="mx-2">
       <div>
@@ -22,7 +26,9 @@
       <% if @user == current_user %>
         <%= link_to t("user.edit"), edit_user_profile_path(@user.account_name) %>
       <% else %>
-        <%= tag.button t("user.follow") %>
+        <%= tag.div id: "follow-of-#{@user.account_name}" do %>
+          <%= render "public/relationships/btn", user: @user %>
+        <% end %>
       <% end %>
     </div>
   </div>
