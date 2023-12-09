@@ -1,5 +1,5 @@
 class Public::ArtworksController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[index show]
 
   # ドット絵のサイズいずれでも割り切れるきりの良い数
   BASE_CANVAS_SIZE = 768
