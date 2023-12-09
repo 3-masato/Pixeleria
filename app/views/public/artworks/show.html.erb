@@ -1,6 +1,6 @@
 <section class="m-4">
   <div>
-    <%= @artwork.artwork_canvas.pixel_data %>
+    <%= image_tag @artwork.image, size: "256x256", style: "image-rendering: pixelated" %>
   </div>
   <div>
     <div class="font-medium text-lg">
