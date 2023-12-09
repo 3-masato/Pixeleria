@@ -28,7 +28,7 @@
 ## 設計書
 
 - **ER図**
-![PixeleriaのER図](https://raw.githubusercontent.com/3-masato/Pixeleria/develop/application_spec/assets/Pixeleria_ER_diagram.png "ER図")
+![PixeleriaのER図](https://raw.githubusercontent.com/3-masato/Pixeleria/develop/application_spec/assets/Pixeleria_ER_diagram_v2.png "ER図")
 - **[テーブル定義書](https://docs.google.com/spreadsheets/d/1xWy6rZxsIf4pC3hYB7mgbS08VbB5X4NBR46rrtVov-A/edit#gid=0)**
 
 ## 開発環境
