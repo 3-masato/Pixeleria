@@ -3,7 +3,7 @@ class Artwork < ApplicationRecord
 
   has_one_attached :image
 
-  has_one :artwork_canvas
+  has_one :artwork_canvas, dependent: :destroy
 
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
