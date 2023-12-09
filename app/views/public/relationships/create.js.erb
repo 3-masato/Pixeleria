@@ -1,0 +1,16 @@
+{
+  const followButton = $("#follow-of-<%= @user.account_name %>");
+  followButton.html(`<%= j(render "public/relationships/btn", user: @user) %>`);
+
+  const followersCount = $("#followers-count-of-<%= @user.account_name %>");
+  followersCount.text("<%= @user.followers.size %>");
+
+  const followingsCount = $("#followings-count-of-<%= @user.account_name %>");
+  followingsCount.text("<%= @user.followings.size %>");
+
+  const myFollowersCount = $("#followers-count-of-<%= current_user.account_name %>");
+  myFollowersCount.text("<%= current_user.followers.size %>");
+
+  const myFollowingsCount = $("#followings-count-of-<%= current_user.account_name %>");
+  myFollowingsCount.text("<%= current_user.followings.size %>");
+}

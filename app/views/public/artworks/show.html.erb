@@ -16,22 +16,29 @@
 </section>
 
 <section class="my-6 p-6 bg-white shadow-xl rounded-sm">
-  <div class="mb-4">
-    <div>
-      <%= image_tag @author.get_profile_image, size: "64x64" %>
-      <div>
-        <!-- フォローボタン -->
+  <section class="border-b border-gray-300">
+    <div class="flex justify-between items-center m-4">
+      <div class="flex items-center">
+        <div class="flex justify-center items-center p-4">
+          <%= image_tag @author.get_profile_image, size: "64x64", class: "rounded-full shadow-xl" %>
+        </div>
+        <div class="ml-2 space-y-2">
+          <div class="flex justify-center items-center">
+            <%= tag.span @author.display_name, class: "text-2xl font-bold text-gray-700 mr-1" %>
+            <%= tag.span "@" + @author.account_name, class: "text-lg font-normal text-gray-400" %>
+          </div>
+          <%= tag.p @author.introduction %>
+        </div>
+      </div>
+      <div class="flex justify-center items-center">
+        <% unless @author == current_user %>
+          <%= tag.div id: "follow-of-#{@author.account_name}" do %>
+            <%= render "public/relationships/btn", user: @author %>
+          <% end %>
+        <% end %>
       </div>
     </div>
-    <div>
-      <%= link_to user_profile_path(@author.account_name), class: "hover:underline" do %>
-        <%= @author.display_name %>
-      <% end %>
-    </div>
-    <p>
-      <%= @author.introduction %>
-    </p>
-  </div>
+  </section>
   <div>
     <%= render "list", artworks: @authors_other_artworks %>
   </div>
