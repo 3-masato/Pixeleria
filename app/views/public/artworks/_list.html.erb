@@ -2,7 +2,7 @@
   <% artworks.each do |artwork| %>
     <div class="w-96 break-words">
       <%= link_to artwork_path(artwork), class: "hover:underline" do %>
-        <%= artwork %>
+        <%= image_tag artwork.image, size: "128x128", style: "image-rendering: pixelated" %>
       <% end %>
       <%= tag.div id: "like-#{artwork.id}" do %>
         <%= render "public/likes/btn", artwork: artwork %>

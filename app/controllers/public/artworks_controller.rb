@@ -2,7 +2,6 @@ class Public::ArtworksController < ApplicationController
   before_action :authenticate_user!
 
   # ドット絵のサイズいずれでも割り切れるきりの良い数
-  # 256x256 のドット絵なら 1ドットが3px
   BASE_CANVAS_SIZE = 768
 
   def index
@@ -32,7 +31,10 @@ class Public::ArtworksController < ApplicationController
   end
 
   def create
-    data = params[:artwork]
+    image_data = params[:image_data]
+    decoded_image = decode_image(image_data)
+
+    pixel_data = params[:pixel_data]
     width = params[:width]
     height = params[:height]
 
@@ -41,10 +43,11 @@ class Public::ArtworksController < ApplicationController
       :is_public => true
     )
     @artwork.user = current_user
+    @artwork.image.attach(io: decoded_image, filename: 'canvas_image.png')
 
     if @artwork.save
       @artwork_canvas = ArtworkCanvas.new(
-        :pixel_data => data,
+        :pixel_data => pixel_data,
         :width => width,
         :height => height,
         :artwork => @artwork
@@ -70,5 +73,13 @@ class Public::ArtworksController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+  def decode_image(data)
+    # Base64のプレフィックスを削除し、デコードする
+    base64_image = data.sub(/^data:image\/\w+;base64,/, "")
+    decoded_image = Base64.decode64(base64_image)
+    StringIO.new(decoded_image)
   end
 end

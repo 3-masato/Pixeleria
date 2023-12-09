@@ -1,11 +1,17 @@
 module Public::ArtworksHelper
   def artwork_size_options
-    options_for_select([
-      ['Extra Small (16x16)', '16x16'],
-      ['Small (32x32)', '32x32'],
-      ['Medium (64x64)', '64x64'],
-      ['Large (128x128)', '128x128'],
-      ['Extra Large (256x256)', '256x256'],
-    ])
+    sizes = [
+      { key: 'xs', width: 8, height: 8 },
+      { key: 'sm', width: 16, height: 16 },
+      { key: 'md', width: 32, height: 32 },
+      { key: 'lg', width: 64, height: 64 },
+      { key: 'xl', width: 128, height: 128 }
+    ]
+
+    options_for_select(sizes.map do |size|
+      size_name = t("artwork.sizes.#{size[:key]}")
+      size_value = "#{size[:width]}x#{size[:height]}"
+      ["#{size_name} (#{size_value})", size_value]
+    end)
   end
 end

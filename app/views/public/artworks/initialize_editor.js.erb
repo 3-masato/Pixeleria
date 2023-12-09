@@ -5,6 +5,7 @@ $("#editor-container").html(`
   artheight="<%= @height %>"
   dotsize="<%= @dotsize %>"
 ></pixeleria-editor>`);
+
 $("#pixeleria-editor").on("save", function(e) {
   const detail = e.detail;
   const url = "/artworks";
@@ -13,6 +14,11 @@ $("#pixeleria-editor").on("save", function(e) {
     url: url,
     type: "POST",
     contentType: "application/json",
-    data: JSON.stringify({ artwork: detail.join(","), width: <%= @width %>, height: <%= @height %> })
+    data: JSON.stringify({
+      image_data: detail.imageData,
+      pixel_data: detail.pixelData.join(","),
+      width: <%= @width %>,
+      height: <%= @height %>,
+    })
   });
 });

@@ -9,6 +9,13 @@ ja:
     followers: フォロワー
     followed: フォロー
     artworks: 作品
+  artwork:
+    sizes:
+      xs: 小さい
+      sm: やや小さい
+      md: 中
+      lg: やや大きい
+      xl: 大きい
   messages:
     user:
       profile:
