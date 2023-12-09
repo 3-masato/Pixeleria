@@ -38,18 +38,34 @@ class Public::ArtworksController < ApplicationController
 
     @artwork = Artwork.new(
       :title => "test",
-      :is_public => true,
-      :pixel_data => data,
-      :width => width,
-      :height => height,
-      :user_id => current_user.id
+      :is_public => true
     )
+    @artwork.user = current_user
 
     if @artwork.save
-      redirect_to artwork_path(@artwork), notice: "saved"
+      @artwork_canvas = ArtworkCanvas.new(
+        :pixel_data => data,
+        :width => width,
+        :height => height,
+        :artwork => @artwork
+      )
+
+      if @artwork_canvas.save
+        p "--------"
+        p "saved"
+        p "--------"
+        redirect_to artwork_path(@artwork), notice: "Artwork was successfully created."
+      else
+        p "--------"
+        p "failed to save of artwork_canvas"
+        p "--------"
+        render :new
+      end
     else
-      # TODO
-      # render :new
+      p "--------"
+      p "failed to save of artwork "
+      p "--------"
+      render :new
     end
   end
 
