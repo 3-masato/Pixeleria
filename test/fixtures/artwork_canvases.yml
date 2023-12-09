@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  artwork: one
+  pixel_data: MyText
+  width: 1
+  height: 1
+
+two:
+  artwork: two
+  pixel_data: MyText
+  width: 1
+  height: 1
