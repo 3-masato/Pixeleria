@@ -10,6 +10,7 @@ class Public::ArtworksController < ApplicationController
   def show
     @artwork = Artwork.find(params[:id])
     @author = @artwork.user
+    @authors_other_artworks = @author.artworks.with_details.where.not(id: @artwork.id)
   end
 
   def edit

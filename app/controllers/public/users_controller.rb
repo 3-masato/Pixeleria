@@ -5,6 +5,7 @@ class Public::UsersController < ApplicationController
   end
 
   def show
+    @user_artworks = @user.artworks.with_details
   end
 
   def update
