@@ -1,12 +1,14 @@
-<div class="flex w-full flex-wrap">
+<div class="w-full flex flex-wrap">
   <% artworks.each do |artwork| %>
-    <div class="w-96 break-words">
-      <%= link_to artwork_path(artwork), class: "hover:underline" do %>
-        <%= image_tag artwork.image, size: "128x128", style: "image-rendering: pixelated" %>
-      <% end %>
-      <%= tag.div id: "like-#{artwork.id}" do %>
-        <%= render "public/likes/btn", artwork: artwork %>
-      <% end %>
+    <div class="w-48 flex justify-center items-center flex-col gap-2">
+      <div>
+        <%= link_to artwork_path(artwork), class: "hover:underline" do %>
+          <%= image_tag artwork.image, size: "128x128", style: "image-rendering: pixelated" %>
+        <% end %>
+        <%= tag.div id: "like-#{artwork.id}" do %>
+          <%= render "public/likes/btn", artwork: artwork %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
