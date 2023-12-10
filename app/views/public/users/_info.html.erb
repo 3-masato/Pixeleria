@@ -1,0 +1,21 @@
+<section class="my-6 p-6 bg-white shadow-xl rounded-sm">
+  <div class="flex justify-between items-center">
+    <%= link_to user_profile_path(user.account_name), class: "flex items-center" do %>
+      <%= image_tag user.get_profile_image, size: "48x48", class: "m-4 rounded-full shadow-xl" %>
+      <div class="flex justify-center items-center">
+        <%= tag.span user.display_name, class: "text-xl font-bold text-gray-700 mr-1" %>
+        <%= tag.span "@" + user.account_name, class: "text-md font-normal text-gray-400" %>
+      </div>
+    <% end %>
+    <div class="flex justify-center items-center">
+      <% unless user == current_user %>
+        <%= tag.div id: "follow-of-#{user.account_name}" do %>
+          <%= render "public/relationships/btn", user: user %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="my-4">
+    <%= render "list", artworks: artworks %>
+  </div>
+</section>
