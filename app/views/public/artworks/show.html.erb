@@ -1,6 +1,8 @@
-<section class="my-6 p-6 bg-white shadow-xl flex justify-center rounded-sm">
-  <div class="space-y-2">
-    <%= image_tag @artwork.image, size: "512x512", style: "image-rendering: pixelated" %>
+<section class="my-6 p-6 bg-white shadow-xl rounded-sm lg:flex">
+  <div class="grow grid justify-center space-y-2">
+    <div>
+      <%= image_tag @artwork.image, size: "512x512", style: "image-rendering: pixelated" %>
+    </div>
     <div>
       <%= tag.div @artwork.title, class: "font-medium text-lg" %>
       <div>
@@ -12,6 +14,13 @@
     <p>
       <%= @artwork.description %>
     </p>
+  </div>
+
+  <div class="w-full lg:w-96">
+    <%= render "public/comments/form", artwork: @artwork, comment: Comment.new %>
+    <%= tag.div id: "comment-list-of-#{@artwork.id}" do %>
+      <%= render "public/comments/list", comments: @artwork_comments %>
+    <% end %>
   </div>
 </section>
 

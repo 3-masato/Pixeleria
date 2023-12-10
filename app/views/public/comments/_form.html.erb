@@ -1,0 +1,27 @@
+<div class="w-full">
+  <% if user_signed_in? %>
+    <%= form_with model: [artwork, comment], local: false do |f| %>
+      <div class="flex items-center space-x-2">
+        <%= tag.div class: "grow", id: "comment-input-of-#{artwork.id}" do %>
+          <%= render Shared::TextFieldComponent.new(
+            form: f,
+            field_type: :text_field,
+            field_name: :content
+          ) %>
+        <% end %>
+        <%= render Shared::ButtonComponent.new(
+          style: :solid,
+          color: :sky,
+          type: "submit",
+          class: "w-20 h-10"
+        ) do %>
+          <%= t("artwork.send_comment") %>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="text-sm text-gray-500">
+      コメントを投稿するにはログインもしくはアカウント新規登録をしてください
+    </div>
+  <% end %>
+</div>

@@ -16,6 +16,9 @@ ja:
       md: 中
       lg: やや大きい
       xl: 大きい
+    comment: コメント
+    comment_list: コメント一覧
+    send_comment: 送信
   messages:
     user:
       auth:

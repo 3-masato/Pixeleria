@@ -1,0 +1,19 @@
+<div class="my-3 space-y-4 max-h-[512px] overflow-y-auto">
+  <% comments.each do |comment| %>
+    <% user = comment.user%>
+    <div class="flex space-x-2">
+      <div class="min-w-[32px]">
+        <%= image_tag user.get_profile_image, size: "32x32", class: "rounded-full" %>
+      </div>
+      <div class="grow">
+        <div>
+          <span class="font-bold font-sm"><%= user.display_name %></span>
+          <span class="text-gray-500 font-xs"><%= "@" + user.account_name %></span>
+        </div>
+        <div class="font-sm">
+          <%= comment.content %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
