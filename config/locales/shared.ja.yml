@@ -18,5 +18,9 @@ ja:
       xl: 大きい
   messages:
     user:
+      auth:
+        registration_guide:
+          before: "アカウントをお持ちでない方は"
+          after: "をお願いします。"
       profile:
         update_success: "プロフィールを更新しました"
