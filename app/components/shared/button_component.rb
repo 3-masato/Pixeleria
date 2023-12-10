@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Shared::ButtonComponent < ViewComponent::Base
+  attr_reader :style, :color, :options
+
   def initialize(style:, color:, options: {})
     @style = style
     @color = color
