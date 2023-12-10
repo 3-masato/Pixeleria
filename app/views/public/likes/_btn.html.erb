@@ -1,6 +1,6 @@
 <%
   like_count = artwork.likes.size
-  is_liked = artwork.liked_by?(current_user)
+  is_liked = current_user && artwork.liked_by?(current_user)
 
   group_class = "group text-inherit duration-100 transition-[color] hover:text-rose-500"
 
