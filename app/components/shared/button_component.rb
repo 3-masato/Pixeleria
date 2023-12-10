@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ButtonComponent < ViewComponent::Base
+class Shared::ButtonComponent < ViewComponent::Base
   def initialize(style:, color:, options: {})
     @style = style
     @color = color
