@@ -19,8 +19,7 @@ ja:
   messages:
     user:
       auth:
-        registration_guide:
-          before: "アカウントをお持ちでない方は"
-          after: "をお願いします。"
+        registration_guide: "アカウントをお持ちでない方はこちら"
+        session_guide: "既にアカウントをお持ちの方はこちら"
       profile:
         update_success: "プロフィールを更新しました"
