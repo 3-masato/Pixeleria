@@ -10,9 +10,7 @@ class Public::CommentsController < ApplicationController
 
   def destroy
     comment = Comment.find(params[:id])
-
-    # `@comment` が見つからなかったとき際に `NoMethodError` エラーが発生するため、ぼっち演算子を用いて対策する
-    comment&.destroy
+    comment.destroy
   end
 
   private
