@@ -1,6 +1,6 @@
 {
   const followButton = $("#follow-of-<%= @user.account_name %>");
-  followButton.html(`<%= j(render "public/relationships/btn", user: @user) %>`);
+  followButton.html(`<%= j(render Interaction::FollowButtonComponent.new(user: @user, current_user: current_user)) %>`);
 
   const followersCount = $("#followers-count-of-<%= @user.account_name %>");
   followersCount.text("<%= @user.followers.size %>");
