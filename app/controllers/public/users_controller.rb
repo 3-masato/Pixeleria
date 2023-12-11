@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
-  before_action :set_user, only: %i[edit show update]
+  before_action :set_user, only: %i[edit show update artworks liked_artworks]
 
   def edit
   end
@@ -20,6 +20,14 @@ class Public::UsersController < ApplicationController
   end
 
   def deactivate
+  end
+
+  def artworks
+    @user_artworks = @user.artworks.with_details
+  end
+
+  def liked_artworks
+    @user_liked_artworks = @user.liked_artworks.with_details
   end
 
   private

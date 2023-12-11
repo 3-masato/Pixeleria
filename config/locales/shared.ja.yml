@@ -18,6 +18,8 @@ ja:
       lg: やや大きい
       xl: 大きい
     comments: コメント
+    list: 作品一覧
+    liked_list: いいねした作品
   comment:
     list: コメント一覧
     send: 送信
