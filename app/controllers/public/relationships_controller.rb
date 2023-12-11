@@ -10,11 +10,11 @@ class Public::RelationshipsController < ApplicationController
   end
 
   def followings
-    @users = @user.followings
+    @followings = @user.followings
   end
 
   def followers
-    @users = @user.followers
+    @followers = @user.followers
   end
 
   def set_user

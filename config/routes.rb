@@ -23,8 +23,10 @@ Rails.application.routes.draw do
     get   "confirm_deactivation",     to: "users#confirm_deactivation", as: :confirm_deactivation
     patch "deactivate",               to: "users#deactivate",           as: :deactivate
 
-    post   "users/:account_name/relationships", to: "relationships#create",   as: :user_follow
-    delete "users/:account_name/relationships", to: "relationships#destroy",  as: :user_unfollow
+    post    "users/:account_name/relationships",  to: "relationships#create",     as: :user_follow
+    delete  "users/:account_name/relationships",  to: "relationships#destroy",    as: :user_unfollow
+    get     "users/:account_name/followings",     to: "relationships#followings", as: :user_followings
+    get     "users/:account_name/followers",      to: "relationships#followers",  as: :user_followers
 
     resources :artworks do
       collection do

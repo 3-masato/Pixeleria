@@ -6,6 +6,7 @@ ja:
     follow: フォロー
     unfollow: フォロー解除
     following: フォロー中
+    followings: フォロー中
     followers: フォロワー
     followed: フォロー
     artworks: 作品
@@ -28,3 +29,6 @@ ja:
         session_guide: "既にアカウントをお持ちの方はこちら"
       profile:
         update_success: "プロフィールを更新しました"
+      relationships:
+        no_followings: "フォローユーザーはいません"
+        no_followers: "フォロワーはいません"
