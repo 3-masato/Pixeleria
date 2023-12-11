@@ -8,7 +8,7 @@ class Shared::ButtonComponent < ViewComponent::Base
     @color = color
     @options = options
 
-    common_classes = "m-2 p-2 no-underline flex justify-center items-center border rounded-sm disabled:opacity-50 disabled:pointer-events-none focus:ring-2 focus:outline-none"
+    common_classes = "m-2 p-2 no-underline flex justify-center items-center border rounded-sm duration-50 transition-colors disabled:opacity-50 disabled:pointer-events-none focus:ring-2 focus:outline-none"
     color_classes = @style == :outline ? outline_colors[@color] : @style == :solid ? solid_colors[@color] : ""
     @options[:class] = "#{common_classes} #{color_classes} #{@options[:class]}"
   end
@@ -16,28 +16,28 @@ class Shared::ButtonComponent < ViewComponent::Base
   private
   def outline_colors
     {
-      slate: "border-slate-500 text-slate-500 hover:border-slate-400 hover:text-slate-400 focus:ring-slate-500/50",
-      gray: "border-gray-500 text-gray-500 hover:border-gray-400 hover:text-gray-400 focus:ring-gray-500/50",
-      zinc: "border-zinc-500 text-zinc-500 hover:border-zinc-400 hover:text-zinc-400 focus:ring-zinc-500/50",
-      neutral: "border-neutral-500 text-neutral-500 hover:border-neutral-400 hover:text-neutral-400 focus:ring-neutral-500/50",
-      stone: "border-stone-500 text-stone-500 hover:border-stone-400 hover:text-stone-400 focus:ring-stone-500/50",
-      red: "border-red-500 text-red-500 hover:border-red-400 hover:text-red-400 focus:ring-red-500/50",
-      orange: "border-orange-500 text-orange-500 hover:border-orange-400 hover:text-orange-400 focus:ring-orange-500/50",
-      amber: "border-amber-500 text-amber-500 hover:border-amber-400 hover:text-amber-400 focus:ring-amber-500/50",
-      yellow: "border-yellow-500 text-yellow-500 hover:border-yellow-400 hover:text-yellow-400 focus:ring-yellow-500/50",
-      lime: "border-lime-500 text-lime-500 hover:border-lime-400 hover:text-lime-400 focus:ring-lime-500/50",
-      green: "border-green-500 text-green-500 hover:border-green-400 hover:text-green-400 focus:ring-green-500/50",
-      emerald: "border-emerald-500 text-emerald-500 hover:border-emerald-400 hover:text-emerald-400 focus:ring-emerald-500/50",
-      teal: "border-teal-500 text-teal-500 hover:border-teal-400 hover:text-teal-400 focus:ring-teal-500/50",
-      cyan: "border-cyan-500 text-cyan-500 hover:border-cyan-400 hover:text-cyan-400 focus:ring-cyan-500/50",
-      sky: "border-sky-500 text-sky-500 hover:border-sky-400 hover:text-sky-400 focus:ring-sky-500/50",
-      blue: "border-blue-500 text-blue-500 hover:border-blue-400 hover:text-blue-400 focus:ring-blue-500/50",
-      indigo: "border-indigo-500 text-indigo-500 hover:border-indigo-400 hover:text-indigo-400 focus:ring-indigo-500/50",
-      violet: "border-violet-500 text-violet-500 hover:border-violet-400 hover:text-violet-400 focus:ring-violet-500/50",
-      purple: "border-purple-500 text-purple-500 hover:border-purple-400 hover:text-purple-400 focus:ring-purple-500/50",
-      fuchsia: "border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-400 hover:text-fuchsia-400 focus:ring-fuchsia-500/50",
-      pink: "border-pink-500 text-pink-500 hover:border-pink-400 hover:text-pink-400 focus:ring-pink-500/50",
-      rose: "border-rose-500 text-rose-500 hover:border-rose-400 hover:text-rose-400 focus:ring-rose-500/50",
+      slate:    "border-slate-500  text-slate-500 hover:bg-slate-500 hover:text-white focus:ring-slate-500/50",
+      gray:     "border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white focus:ring-gray-500/50",
+      zinc:     "border-zinc-500 text-zinc-500 hover:bg-zinc-500 hover:text-white focus:ring-zinc-500/50",
+      neutral:  "border-neutral-500  text-neutral-500 hover:bg-neutral-500 hover:text-white focus:ring-neutral-500/50",
+      stone:    "border-stone-500  text-stone-500 hover:bg-stone-500 hover:text-white focus:ring-stone-500/50",
+      red:      "border-red-500  text-red-500 hover:bg-red-500 hover:text-white focus:ring-red-500/50",
+      orange:   "border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white focus:ring-orange-500/50",
+      amber:    "border-amber-500  text-amber-500 hover:bg-amber-500 hover:text-white focus:ring-amber-500/50",
+      yellow:   "border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white focus:ring-yellow-500/50",
+      lime:     "border-lime-500 text-lime-500 hover:bg-lime-500 hover:text-white focus:ring-lime-500/50",
+      green:    "border-green-500  text-green-500 hover:bg-green-500 hover:text-white focus:ring-green-500/50",
+      emerald:  "border-emerald-500  text-emerald-500 hover:bg-emerald-500 hover:text-white focus:ring-emerald-500/50",
+      teal:     "border-teal-500 text-teal-500 hover:bg-teal-500 hover:text-white focus:ring-teal-500/50",
+      cyan:     "border-cyan-500 text-cyan-500 hover:bg-cyan-500 hover:text-white focus:ring-cyan-500/50",
+      sky:      "border-sky-500  text-sky-500 hover:bg-sky-500 hover:text-white focus:ring-sky-500/50",
+      blue:     "border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white focus:ring-blue-500/50",
+      indigo:   "border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white focus:ring-indigo-500/50",
+      violet:   "border-violet-500 text-violet-500 hover:bg-violet-500 hover:text-white focus:ring-violet-500/50",
+      purple:   "border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white focus:ring-purple-500/50",
+      fuchsia:  "border-fuchsia-500  text-fuchsia-500 hover:bg-fuchsia-500 hover:text-white focus:ring-fuchsia-500/50",
+      pink:     "border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white focus:ring-pink-500/50",
+      rose:     "border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white focus:ring-rose-500/50",
     }
   end
 
