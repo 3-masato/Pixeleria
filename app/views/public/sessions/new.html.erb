@@ -40,10 +40,8 @@
       <%= render Shared::ButtonComponent.new(
         style: :solid,
         color: :sky,
-        options: {
-          type: "submit",
-          class: "w-36 h-10"
-        }
+        type: "submit",
+        class: "w-36 h-10"
       ) do %>
         <%= t("devise.shared.sign_in") %>
       <% end %>

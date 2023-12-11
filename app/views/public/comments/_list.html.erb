@@ -1,0 +1,22 @@
+<div class="my-3 space-y-4 max-h-[512px] overflow-y-auto">
+  <% comments.each do |comment| %>
+    <% user = comment.user %>
+    <div class="flex space-x-2">
+      <div class="min-w-[32px]">
+        <%= image_tag user.get_profile_image, size: "32x32", class: "rounded-full" %>
+      </div>
+      <div class="grow">
+        <div>
+          <%= link_to user.display_name, user_profile_path(user.account_name), class: "font-bold font-sm hover:text-blue-500" %>
+          <span class="text-gray-500 font-xs"><%= "@" + user.account_name %></span>
+        </div>
+        <div class="font-sm">
+          <%= comment.content %>
+        </div>
+      </div>
+      <% if comment.user == current_user %>
+        <%= link_to t("comment.delete"), artwork_comment_path(@artwork, comment), method: :delete, remote: true, class: "text-red-500" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

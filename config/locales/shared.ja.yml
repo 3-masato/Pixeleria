@@ -16,6 +16,11 @@ ja:
       md: 中
       lg: やや大きい
       xl: 大きい
+    comments: コメント
+  comment:
+    list: コメント一覧
+    send: 送信
+    delete: 削除
   messages:
     user:
       auth:
