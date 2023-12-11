@@ -3,8 +3,8 @@
     <%= link_to user_profile_path(user.account_name), class: "flex items-center" do %>
       <%= image_tag user.get_profile_image, size: "48x48", class: "m-4 rounded-full shadow-xl" %>
       <div class="flex justify-center items-center">
-        <%= tag.span user.display_name, class: "text-xl font-bold text-gray-700 mr-1" %>
-        <%= tag.span "@" + user.account_name, class: "text-md font-normal text-gray-400" %>
+        <%= tag.span user.display_name, class: "text-lg font-bold text-gray-700 mr-1" %>
+        <%= tag.span "@" + user.account_name, class: "text-sm font-normal text-gray-400" %>
       </div>
     <% end %>
     <div class="flex justify-center items-center">
@@ -16,6 +16,6 @@
     </div>
   </div>
   <div class="my-4">
-    <%= render "list", artworks: artworks %>
+    <%= render "public/artworks/list", artworks: artworks %>
   </div>
 </section>
