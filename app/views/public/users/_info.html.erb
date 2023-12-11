@@ -10,7 +10,7 @@
     <div class="flex justify-center items-center">
       <% unless user == current_user %>
         <%= tag.div id: "follow-of-#{user.account_name}" do %>
-          <%= render "public/relationships/btn", user: user %>
+          <%= render Interaction::FollowButtonComponent.new(user: user, current_user: current_user) %>
         <% end %>
       <% end %>
     </div>

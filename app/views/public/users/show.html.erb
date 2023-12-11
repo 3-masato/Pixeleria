@@ -34,7 +34,7 @@
           <%= link_to t("user.edit"), edit_user_profile_path(@user.account_name) %>
         <% else %>
           <%= tag.div id: "follow-of-#{@user.account_name}" do %>
-            <%= render "public/relationships/btn", user: @user %>
+            <%= render Interaction::FollowButtonComponent.new(user: @user, current_user: current_user) %>
           <% end %>
         <% end %>
       </div>
