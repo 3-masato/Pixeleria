@@ -13,7 +13,14 @@
     ]
   %>
   <div>
-    <%= link_to path, method: method, remote: true do %>
+    <%= render Shared::ButtonComponent.new(
+      style: :outline,
+      color: is_following ? :red : :sky,
+      path: path,
+      method: method,
+      remote: true,
+      class: "px-4 text-sm"
+    ) do %>
       <%= tag.span text %>
     <% end %>
   </div>
