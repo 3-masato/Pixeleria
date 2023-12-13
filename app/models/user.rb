@@ -9,7 +9,8 @@ class User < ApplicationRecord
   has_many :artworks, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :reports, dependent: :destroy
+
+  has_many :reports, as: :reportable
 
   has_many :liked_artworks, through: :likes, source: :artwork
 
@@ -39,5 +40,25 @@ class User < ApplicationRecord
 
   def following?(user)
     followings.include?(user)
+  end
+
+  def guest_user?
+    email == GUEST_USER_EMAIL
+  end
+
+  def self.guest
+    guest_email = "guest_#{SecureRandom.hex(10)}@example.com"
+    guest_account_name = "guest_#{SecureRandom.alphanumeric(16)}"
+
+    create!(
+      email: guest_email,
+      account_name: guest_account_name,
+      password: SecureRandom.urlsafe_base64,
+      is_guest: true
+    ) do |user|
+      user.display_name = "ゲストユーザー"
+      user.introduction = "ゲストユーザーです。"
+      user.status = 0
+    end
   end
 end

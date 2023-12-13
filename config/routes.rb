@@ -19,8 +19,13 @@ Rails.application.routes.draw do
     sessions: "public/sessions"
   }
 
+  devise_scope :user do
+    post "guest_sign_in", to: "public/sessions#guest_sign_in"
+  end
+
   scope module: :public do
     root "homes#top"
+
     get "about" => "homes#about"
 
     get     "users/:account_name",                to: "users#show",                 as: :user_profile
