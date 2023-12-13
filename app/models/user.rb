@@ -40,4 +40,21 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
+
+  def guest_user?
+    email == GUEST_USER_EMAIL
+  end
+
+  def self.guest
+    guest_email = "guest_#{SecureRandom.hex(10)}@example.com"
+    guest_account_name = "guest_#{SecureRandom.alphanumeric(16)}"
+
+    create!(email: guest_email, account_name: guest_account_name, password: SecureRandom.urlsafe_base64) do |user|
+      # 他の必要な初期設定、例えば:
+      user.display_name = "ゲストユーザー"
+      user.introduction = "ゲストユーザーです。"
+      user.status = 0
+      user.is_guest = true
+    end
+  end
 end
