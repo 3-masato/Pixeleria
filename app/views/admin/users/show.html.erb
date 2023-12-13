@@ -38,36 +38,5 @@
     <% end %>
   <% end %>
 
-  <%= render Shared::TableSectionComponent.new(title: t("artwork.list")) do %>
-    <%= render Shared::TableComponent.new do %>
-      <%= render Shared::TableHeaderComponent.new(headers: [
-        "#",
-        t("models.artwork.image"),
-        t("models.artwork.title"),
-        t("models.artwork.description"),
-        t("models.artwork.tag")
-      ]) %>
-      <%= render Shared::TableBodyComponent.new do %>
-        <% @user.artworks.each do |artwork| %>
-          <%= render Shared::TableRowComponent.new do %>
-            <%= render Shared::TableCellComponent.new(is_header: true) do %>
-              <%= artwork.id %>
-            <% end %>
-            <%= render Shared::TableCellComponent.new do %>
-              <%= image_tag artwork.image, size: "32x32", style: "image-rendering: pixelated;" %>
-            <% end %>
-            <%= render Shared::TableCellComponent.new do %>
-              <%= artwork.title %>
-            <% end %>
-            <%= render Shared::TableCellComponent.new do %>
-              <%= artwork.description %>
-            <% end %>
-            <%= render Shared::TableCellComponent.new do %>
-              <%= artwork.tags %>
-            <% end %>
-          <% end %>
-        <% end %>
-      <% end %>
-    <% end %>
-  <% end %>
+  <%= render "admin/artworks/list", artworks: @user.artworks, show_author: false %>
 </div>
