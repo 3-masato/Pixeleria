@@ -21,8 +21,12 @@ module ApplicationHelper
   def admin_nav_items
     [
       {
+        path: admin_root_path,
+        text: "Home",
+      },
+      {
         path: destroy_admin_session_path,
-        text: "ログアウト",
+        text: t("devise.shared.sign_out"),
         method: :delete
       }
     ]
