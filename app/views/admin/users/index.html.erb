@@ -1,45 +1,38 @@
 <div>
-  <div class="bg-white border border-gray-200 rounded shadow-xl overflow-hidden">
-    <div class="px-6 py-4 border-b border-gray-200">
-      <h2 class="text-xl font-semibold text-gray-800">
-        <%= t("user.list") %>
-      </h2>
-    </div>
-    <div class="overflow-auto">
-      <%= render Shared::TableComponent.new do %>
-        <%= render Shared::TableHeaderComponent.new(headers: [
-          "#",
-          t("activerecord.attributes.user.prifile_image"),
-          t("activerecord.attributes.user.display_name"),
-          t("activerecord.attributes.user.account_name"),
-          t("activerecord.attributes.user.introduction"),
-          t("activerecord.attributes.user.status")
-        ]) %>
-        <%= render Shared::TableBodyComponent.new do %>
-          <% @users.each do |user| %>
-            <%= render Shared::TableRowComponent.new do %>
-              <%= render Shared::TableCellComponent.new(is_header: true) do %>
-                <%= user.id %>
-              <% end %>
-              <%= render Shared::TableCellComponent.new(is_header: true) do %>
-                <%= image_tag user.get_profile_image, size: "32x32" %>
-              <% end %>
-              <%= render Shared::TableCellComponent.new do %>
-                <%= link_to user.display_name, admin_user_path(user.account_name), class: "font-bold text-blue-500 hover:underline" %>
-              <% end %>
-              <%= render Shared::TableCellComponent.new do %>
-                <%= user.account_name %>
-              <% end %>
-              <%= render Shared::TableCellComponent.new do %>
-                <%= user.introduction %>
-              <% end %>
-              <%= render Shared::TableCellComponent.new do %>
-                <%= user.status %>
-              <% end %>
+  <%= render Shared::TableSectionComponent.new(title: t("user.list")) do %>
+    <%= render Shared::TableComponent.new do %>
+      <%= render Shared::TableHeaderComponent.new(headers: [
+        "#",
+        t("activerecord.attributes.user.prifile_image"),
+        t("activerecord.attributes.user.display_name"),
+        t("activerecord.attributes.user.account_name"),
+        t("activerecord.attributes.user.introduction"),
+        t("activerecord.attributes.user.status")
+      ]) %>
+      <%= render Shared::TableBodyComponent.new do %>
+        <% @users.each do |user| %>
+          <%= render Shared::TableRowComponent.new do %>
+            <%= render Shared::TableCellComponent.new(is_header: true) do %>
+              <%= user.id %>
+            <% end %>
+            <%= render Shared::TableCellComponent.new(is_header: true) do %>
+              <%= image_tag user.get_profile_image, size: "32x32" %>
+            <% end %>
+            <%= render Shared::TableCellComponent.new do %>
+              <%= link_to user.display_name, admin_user_path(user.account_name), class: "font-bold text-blue-500 hover:underline" %>
+            <% end %>
+            <%= render Shared::TableCellComponent.new do %>
+              <%= user.account_name %>
+            <% end %>
+            <%= render Shared::TableCellComponent.new do %>
+              <%= user.introduction %>
+            <% end %>
+            <%= render Shared::TableCellComponent.new do %>
+              <%= user.status %>
             <% end %>
           <% end %>
         <% end %>
       <% end %>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 </div>
