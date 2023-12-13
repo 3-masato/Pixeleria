@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
+    root "homes#top"
   end
 
   # 一般ユーザー
