@@ -20,7 +20,17 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
 
   validates :display_name, presence: true
-  validates :account_name, presence: true
+  validates(
+    :account_name,
+    presence: true,
+    uniqueness: {
+      case_sensitive: false
+    },
+    format: {
+      with: /\A[\w]+\z/,
+      message: :invalid
+    }
+  )
 
   def get_profile_image
     (profile_image.attached?) ? profile_image : "default-user-icon.jpeg"

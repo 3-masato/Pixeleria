@@ -2,6 +2,9 @@
   const commentList = $("#comment-list-of-<%= @artwork.id %>");
   commentList.html("<%= j(render "public/comments/list", comments: @artwork.comments) %>");
 
+  const commentCount = $("#comment-count-<%= @artwork.id %>");
+  commentCount.html("<%= j(render Interaction::CommentCountComponent.new(count: @artwork_comments.size)) %>");
+
   const commentInput = $("#comment-input-of-<%= @artwork.id %> input");
   commentInput.val("");
 }
