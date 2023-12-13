@@ -10,6 +10,7 @@ ja:
     followers: フォロワー
     followed: フォロー
     artworks: 作品
+    list: ユーザー一覧
   artwork:
     sizes:
       xs: 小さい

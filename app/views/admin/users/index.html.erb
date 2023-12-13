@@ -1,70 +1,45 @@
 <div>
-  <h1 class="font-bold text-4xl">Admin::Users#index</h1>
-  <p>Find me in app/views/admin/users/index.html.erb</p>
-  <div class="overflow-auto">
-    <table class="min-w-full divide-y divide-gray-200">
-      <thead class="bg-gray-200">
-        <tr>
-          <th scope="col" class="px-6 py-2 text-start whitespace-nowrap">
-            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800">
-              <%= "#" %>
-            </span>
-          </th>
-          <th scope="col" class="px-6 py-2 text-start whitespace-nowrap">
-            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800">
-              <%= t("activerecord.attributes.user.display_name") %>
-            </span>
-          </th>
-          <th scope="col" class="px-6 py-2 text-start whitespace-nowrap">
-            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800">
-              <%= t("activerecord.attributes.user.account_name") %>
-            </span>
-          </th>
-          <th scope="col" class="px-6 py-2 text-start whitespace-nowrap">
-            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800">
-              <%= t("activerecord.attributes.user.introduction") %>
-            </span>
-          </th>
-          <th scope="col" class="px-6 py-2 text-start whitespace-nowrap">
-            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800">
-              <%= t("activerecord.attributes.user.status") %>
-            </span>
-          </th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-200">
-        <% @users.each do |user| %>
-          <tr>
-            <th class="h-px w-px whitespace-nowrap px-6 py-2">
-              <span class="text-sm text-gray-800">
+  <div class="bg-white border border-gray-200 rounded shadow-xl overflow-hidden">
+    <div class="px-6 py-4 border-b border-gray-200">
+      <h2 class="text-xl font-semibold text-gray-800">
+        <%= t("user.list") %>
+      </h2>
+    </div>
+    <div class="overflow-auto">
+      <%= render Shared::TableComponent.new do %>
+        <%= render Shared::TableHeaderComponent.new(headers: [
+          "#",
+          t("activerecord.attributes.user.prifile_image"),
+          t("activerecord.attributes.user.display_name"),
+          t("activerecord.attributes.user.account_name"),
+          t("activerecord.attributes.user.introduction"),
+          t("activerecord.attributes.user.status")
+        ]) %>
+        <%= render Shared::TableBodyComponent.new do %>
+          <% @users.each do |user| %>
+            <%= render Shared::TableRowComponent.new do %>
+              <%= render Shared::TableCellComponent.new(is_header: true) do %>
                 <%= user.id %>
-              </span>
-            </th>
-            <td class="h-px w-px whitespace-nowrap px-6 py-2">
-              <span class="text-sm text-gray-800">
-                <%= link_to admin_user_path(user.account_name), class: "font-bold text-blue-500 hover:underline" do %>
-                  <%= user.display_name %>
-                <% end %>
-              </span>
-            </td>
-            <td class="h-px w-px whitespace-nowrap px-6 py-2">
-              <span class="text-sm text-gray-800">
+              <% end %>
+              <%= render Shared::TableCellComponent.new(is_header: true) do %>
+                <%= image_tag user.get_profile_image, size: "32x32" %>
+              <% end %>
+              <%= render Shared::TableCellComponent.new do %>
+                <%= link_to user.display_name, admin_user_path(user.account_name), class: "font-bold text-blue-500 hover:underline" %>
+              <% end %>
+              <%= render Shared::TableCellComponent.new do %>
                 <%= user.account_name %>
-              </span>
-            </td>
-            <td class="h-px w-px whitespace-nowrap px-6 py-2">
-              <span class="text-sm text-gray-800">
+              <% end %>
+              <%= render Shared::TableCellComponent.new do %>
                 <%= user.introduction %>
-              </span>
-            </td>
-            <td class="h-px w-px whitespace-nowrap px-6 py-2">
-              <span class="text-sm text-gray-800">
+              <% end %>
+              <%= render Shared::TableCellComponent.new do %>
                 <%= user.status %>
-              </span>
-            </td>
-          </tr>
+              <% end %>
+            <% end %>
+          <% end %>
         <% end %>
-      </tbody>
-    </table>
+      <% end %>
+    </div>
   </div>
 </div>
