@@ -1,65 +1,73 @@
 <div>
-  <table>
-    <tbody>
-      <tr>
-        <th><%= t("activerecord.attributes.user.display_name") %></th>
-        <td><%= @user.display_name %></td>
-      </tr>
-      <tr>
-        <th><%= t("activerecord.attributes.user.account_name") %></th>
-        <td><%= @user.account_name %></td>
-      </tr>
-      <tr>
-        <th><%= t("activerecord.attributes.user.introduction") %></th>
-        <td><%= @user.introduction %></td>
-      </tr>
-      <tr>
-        <th><%= t("activerecord.attributes.user.status") %></th>
-        <td><%= @user.status %></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="my-4">
-    <div>
-      <%= t("artwork.list") %>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>
-            <%= t("models.artwork.image") %>
-          </th>
-          <th>
-            <%= t("models.artwork.title") %>
-          </th>
-          <th>
-            <%= t("models.artwork.description") %>
-          </th>
-          <th>
-            <%= t("models.artwork.tag") %>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @user.artworks.each do |artwork| %>
-        <tr>
-          <td>
-            <%= artwork.id %>
-          </td>
-          <td>
-            <%= image_tag artwork.image, size: "32x32", style: "image-rendering: pixelated;" %>
-          </td>
-          <td>
-            <%= artwork.title %>
-          </td>
-          <td>
-            <%= artwork.description %>
-          </td>
-        </tr>
+  <%= render Shared::TableSectionComponent.new(title: t("user.details")) do %>
+    <%= render Shared::TableComponent.new do %>
+      <%= render Shared::TableBodyComponent.new do %>
+        <%= render Shared::TableRowComponent.new do %>
+          <%= render Shared::TableCellComponent.new(is_header: true) do %>
+            <%= t("activerecord.attributes.user.display_name") %>
+          <% end %>
+          <%= render Shared::TableCellComponent.new do %>
+            <%= @user.display_name %>
+          <% end %>
         <% end %>
-      </tbody>
-    </table>
-  </div>
+        <%= render Shared::TableRowComponent.new do %>
+          <%= render Shared::TableCellComponent.new(is_header: true) do %>
+            <%= t("activerecord.attributes.user.account_name") %>
+          <% end %>
+          <%= render Shared::TableCellComponent.new do %>
+            <%=  @user.account_name %>
+          <% end %>
+        <% end %>
+        <%= render Shared::TableRowComponent.new do %>
+          <%= render Shared::TableCellComponent.new(is_header: true) do %>
+            <%= t("activerecord.attributes.user.introduction") %>
+          <% end %>
+          <%= render Shared::TableCellComponent.new do %>
+            <%= @user.introduction %>
+          <% end %>
+        <% end %>
+        <%= render Shared::TableRowComponent.new do %>
+          <%= render Shared::TableCellComponent.new(is_header: true) do %>
+            <%= t("activerecord.attributes.user.status") %>
+          <% end %>
+          <%= render Shared::TableCellComponent.new do %>
+            <%= @user.status %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= render Shared::TableSectionComponent.new(title: t("artwork.list")) do %>
+    <%= render Shared::TableComponent.new do %>
+      <%= render Shared::TableHeaderComponent.new(headers: [
+        "#",
+        t("models.artwork.image"),
+        t("models.artwork.title"),
+        t("models.artwork.description"),
+        t("models.artwork.tag")
+      ]) %>
+      <%= render Shared::TableBodyComponent.new do %>
+        <% @user.artworks.each do |artwork| %>
+          <%= render Shared::TableRowComponent.new do %>
+            <%= render Shared::TableCellComponent.new(is_header: true) do %>
+              <%= artwork.id %>
+            <% end %>
+            <%= render Shared::TableCellComponent.new do %>
+              <%= image_tag artwork.image, size: "32x32", style: "image-rendering: pixelated;" %>
+            <% end %>
+            <%= render Shared::TableCellComponent.new do %>
+              <%= artwork.title %>
+            <% end %>
+            <%= render Shared::TableCellComponent.new do %>
+              <%= artwork.description %>
+            <% end %>
+            <%= render Shared::TableCellComponent.new do %>
+              <%= artwork.tags %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
