@@ -15,7 +15,7 @@
             <%= render Shared::TableCellComponent.new(is_header: true) do %>
               <%= user.id %>
             <% end %>
-            <%= render Shared::TableCellComponent.new(is_header: true) do %>
+            <%= render Shared::TableCellComponent.new do %>
               <%= image_tag user.get_profile_image, size: "32x32" %>
             <% end %>
             <%= render Shared::TableCellComponent.new do %>

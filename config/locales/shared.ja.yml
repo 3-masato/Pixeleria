@@ -11,6 +11,7 @@ ja:
     followed: フォロー
     artworks: 作品
     list: ユーザー一覧
+    details: ユーザー詳細
   artwork:
     sizes:
       xs: 小さい
