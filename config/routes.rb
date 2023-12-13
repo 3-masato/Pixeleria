@@ -6,8 +6,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "homes#top"
+
     get     "users", to: "users#index", as: :users
     get     "users/:account_name", to: "users#show", as: :user
+
+    resources :artworks, only: %i[index show]
   end
 
   # 一般ユーザー
@@ -36,8 +39,8 @@ Rails.application.routes.draw do
       collection do
         post :initialize_editor, defaults: { format: "js" }
       end
-      resource  :likes,     only: [:create, :destroy], defaults: { format: "js" }
-      resources :comments,  only: [:create, :destroy], defaults: { format: "js" }
+      resource  :likes,     only: %i[create destroy], defaults: { format: "js" }
+      resources :comments,  only: %i[create destroy], defaults: { format: "js" }
     end
   end
 end
