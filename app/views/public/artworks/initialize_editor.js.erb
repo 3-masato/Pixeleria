@@ -4,21 +4,42 @@ $("#editor-container").html(`
   artwidth="<%= @width %>"
   artheight="<%= @height %>"
   dotsize="<%= @dotsize %>"
-></pixeleria-editor>`);
+></pixeleria-editor>
+<div>
+  
+</div>
+`);
 
-$("#pixeleria-editor").on("save", function(e) {
-  const detail = e.detail;
-  const url = "/artworks";
+{
+  let artworkId = null;
 
-  $.ajax({
-    url: url,
-    type: "POST",
-    contentType: "application/json",
-    data: JSON.stringify({
-      image_data: detail.imageData,
-      pixel_data: detail.pixelData.join(","),
-      width: <%= @width %>,
-      height: <%= @height %>,
-    })
+  $("#pixeleria-editor").on("save", function(e) {
+    const detail = e.detail;
+
+    $.ajax({
+      url: "/artworks/save",
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({
+        artworkId: artworkId,
+        image_data: detail.imageData,
+        pixel_data: detail.pixelData.join(","),
+        width: <%= @width %>,
+        height: <%= @height %>,
+      }),
+      success(data) {
+        if (data.status === "ok") {
+          if (!artworkId) {
+            artworkId = data.artwork_id;
+          }
+          alert("保存しました");
+        } else {
+          alert("保存に失敗しました");
+        }
+      },
+      error() {
+        alert("通信エラーが発生しました");
+      }
+    });
   });
-});
+}

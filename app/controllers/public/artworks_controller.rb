@@ -29,10 +29,82 @@ class Public::ArtworksController < ApplicationController
     @dotsize = BASE_CANVAS_SIZE / dot_ratio
   end
 
+  def save
+    id = params[:artworkId]
+
+    if id == nil
+      image_data = params[:image_data]
+      decoded_image = decode_image(image_data)
+
+      @artwork = Artwork.new(
+        :title => "",
+        :is_public => false,
+        :user => current_user
+      )
+      @artwork.image.attach(io: decoded_image, filename: "canvas_image.png")
+
+      unless @artwork.save
+        render json: { status: "error" } and return
+      end
+
+      pixel_data = params[:pixel_data]
+      width = params[:width]
+      height = params[:height]
+
+      @artwork_canvas = ArtworkCanvas.new(
+        :pixel_data => pixel_data,
+        :width => width,
+        :height => height,
+        :artwork => @artwork
+      )
+
+      unless @artwork_canvas.save
+        render json: { status: "error" } and return
+      end
+
+      p "--------"
+      p "saved"
+      p "--------"
+
+      render json: { status: "ok", artwork_id: @artwork.id }
+    else
+      image_data = params[:image_data]
+      decoded_image = decode_image(image_data)
+
+      @artwork = Artwork.find(id)
+      @artwork.image.attach(io: decoded_image, filename: "canvas_image.png")
+
+      unless @artwork.save
+        render json: { status: "error" } and return
+      end
+
+      pixel_data = params[:pixel_data]
+      width = params[:width]
+      height = params[:height]
+
+      @artwork_canvas = @artwork.artwork_canvas
+
+      unless @artwork_canvas.update(:pixel_data => pixel_data)
+        render json: { status: "error" } and return
+      end
+
+      p "--------"
+      p "updated"
+      p "--------"
+
+      render json: { status: "ok" }
+    end
+  end
+
+  def confirm_upload
+  end
+
   def update
   end
 
   def create
+    return
+
     image_data = params[:image_data]
     decoded_image = decode_image(image_data)
 
