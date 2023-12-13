@@ -4,5 +4,8 @@ class Admin::ArtworksController < ApplicationController
   end
 
   def show
+    @artwork = Artwork.find(params[:id])
+    @author = @artwork.user
+    @author_artworks = @author.artworks.with_details
   end
 end

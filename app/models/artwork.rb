@@ -18,4 +18,12 @@ class Artwork < ApplicationRecord
   def liked_by?(user)
     likes.any? { |like| like.user_id == user.id }
   end
+
+  def width_px
+    "#{artwork_canvas.width}px"
+  end
+
+  def height_px
+    "#{artwork_canvas.height}px"
+  end
 end
