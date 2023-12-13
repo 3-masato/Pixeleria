@@ -4,5 +4,9 @@ ja:
       iamge: 画像
       title: タイトル
       description: 説明
-      tag: タグ
+      tags: タグ
+      is_public: 公開ステータス
       author: 作者
+    artwork_canvas:
+      width: 横幅
+      height: 高さ

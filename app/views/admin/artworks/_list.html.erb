@@ -20,7 +20,9 @@
             <% end %>
           <% end %>
           <%= render Shared::TableCellComponent.new do %>
-            <%= image_tag artwork.image, size: "32x32", style: "image-rendering: pixelated;" %>
+            <% link_to admin_artwork_path(artwork) do %>
+              <%= image_tag artwork.image, size: "32x32", style: "image-rendering: pixelated;" %>
+            <% end %>
           <% end %>
           <%= render Shared::TableCellComponent.new do %>
             <%= artwork.title %>
