@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
+    root "homes#top"
+    get     "users", to: "users#index", as: :users
+    get     "users/:account_name", to: "users#show", as: :user
   end
 
   # 一般ユーザー
