@@ -9,7 +9,8 @@ class User < ApplicationRecord
   has_many :artworks, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :reports, dependent: :destroy
+
+  has_many :reports, as: :reportable
 
   has_many :liked_artworks, through: :likes, source: :artwork
 
@@ -49,12 +50,15 @@ class User < ApplicationRecord
     guest_email = "guest_#{SecureRandom.hex(10)}@example.com"
     guest_account_name = "guest_#{SecureRandom.alphanumeric(16)}"
 
-    create!(email: guest_email, account_name: guest_account_name, password: SecureRandom.urlsafe_base64) do |user|
-      # 他の必要な初期設定、例えば:
+    create!(
+      email: guest_email,
+      account_name: guest_account_name,
+      password: SecureRandom.urlsafe_base64,
+      is_guest: true
+    ) do |user|
       user.display_name = "ゲストユーザー"
       user.introduction = "ゲストユーザーです。"
       user.status = 0
-      user.is_guest = true
     end
   end
 end
