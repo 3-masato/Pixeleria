@@ -42,7 +42,9 @@
             </th>
             <td class="h-px w-px whitespace-nowrap px-6 py-2">
               <span class="text-sm text-gray-800">
-                <%= user.display_name %>
+                <%= link_to admin_user_path(user.account_name), class: "font-bold text-blue-500 hover:underline" do %>
+                  <%= user.display_name %>
+                <% end %>
               </span>
             </td>
             <td class="h-px w-px whitespace-nowrap px-6 py-2">
