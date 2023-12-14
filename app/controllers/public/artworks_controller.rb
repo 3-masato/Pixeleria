@@ -147,6 +147,9 @@ class Public::ArtworksController < ApplicationController
   end
 
   def destroy
+    @artwork = Artwork.find(params[:id])
+    @artwork.destroy
+    redirect_to root_path
   end
 
   private
