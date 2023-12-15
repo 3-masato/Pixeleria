@@ -6,35 +6,63 @@ $("#editor-container").html(`
   dotsize="<%= @dotsize %>"
 ></pixeleria-editor>
 <div>
-  
-</div>
-`);
+  <button id="save-artwork-button">
+    <%= t("artwork.save") %>
+  </button>
+  <button id="post-artwork-button">
+    <%= t("artwork.submit") %>
+  </button>
+</div>`);
+
 
 {
   let artworkId = null;
-
-  $("#pixeleria-editor").on("save", function(e) {
-    const detail = e.detail;
+  const editor = document.getElementById("pixeleria-editor");
+  
+  $(document.body).append("<%= j(render "public/artworks/save_from", artwork: @artwork) %>");
+  
+  const modal = $("#save-form-modal");
+  const modalBackdrop = $("#save-form-modal-backdrop");
+  const closeButton = $("#save-form-close-button");
+  
+  const toggleVisibility = (visibility) => {
+    const value = visibility ? "visible" : "hidden";
+    
+    modal.attr("data-visibility", value);
+    modalBackdrop.attr("data-visibility", value);
+  };
+  
+  closeButton.on("click", () => {
+    toggleVisibility(false);
+  });
+  
+  $("#post-artwork-button").on("click", () => {
+    const detail = editor.getDetails();
+    toggleVisibility(true);
+  });
+  
+  $("#save-artwork-button").on("click", () => {
+    const detail = editor.getDetails();
 
     $.ajax({
       url: "/artworks/save",
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify({
-        artworkId: artworkId,
+        artwork_id: artworkId,
         image_data: detail.imageData,
         pixel_data: detail.pixelData.join(","),
         width: <%= @width %>,
         height: <%= @height %>,
       }),
       success(data) {
-        if (data.status === "ok") {
+        if (data.status === "error") {
+          alert("保存に失敗しました");
+        } else {
           if (!artworkId) {
             artworkId = data.artwork_id;
           }
           alert("保存しました");
-        } else {
-          alert("保存に失敗しました");
         }
       },
       error() {
