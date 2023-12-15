@@ -3,19 +3,37 @@
     <div class="self-center">
       <%= image_tag @artwork.image, size: "512x512", style: "image-rendering: pixelated" %>
     </div>
-    <div>
-      <%= tag.div @artwork.title, class: "font-medium text-lg" %>
+    <div class="flex">
+      <div class="grow">
+        <div>
+          <%= tag.div @artwork.title, class: "font-medium text-lg" %>
+          <div>
+            <% @artwork.tags.each do |tag| %>
+              <span><%= tag %></span>
+            <% end %>
+          </div>
+        </div>
+        <p class="min-h-[3rem]">
+          <%= @artwork.description %>
+        </p>
+      </div>
       <div>
-        <% @artwork.tags.each do |tag| %>
-          <span><%= tag %></span>
+        <% if @author == current_user %>
+          <%= render Shared::KebabComponent.new do %>
+            <menu class="text-sm">
+              <li>
+                <%= link_to artwork_path(@artwork), method: :delete, "data-confirm" => "Are you sure?", class: "block text-red-500 font-bold py-2 px-7 duration-50 transition-colors hover:bg-red-400/10" do %>
+                  <span class="whitespace-nowrap"><i class="fa-solid fa-trash-can mr-2"></i>Delete</span>
+                <% end %>
+              </li>
+              <li></li>
+              <li></li>
+            </menu>
+          <% end %>
         <% end %>
       </div>
     </div>
-    <p>
-      <%= @artwork.description %>
-    </p>
-    <hr>
-    <div class="py-1 flex justify-evenly">
+    <div class="py-3 flex justify-evenly border-y">
       <%= tag.div id: "like-#{@artwork.id}" do %>
         <%= render Interaction::LikeButtonComponent.new(
           artwork: @artwork,
@@ -26,7 +44,6 @@
         <%= render Interaction::CommentCountComponent.new(count: @artwork_comments.size) %>
       <% end %>
     </div>
-    <hr>
   </div>
 
   <div class="w-full mt-3 lg:w-96 lg:mt-0">
