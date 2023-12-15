@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     resources :artworks do
       collection do
         post :initialize_editor,  defaults: { format: "js" }
-        post :save
+        post :save,               defaults: { format: "json" }
         post :confirm_upload,     defaults: { format: "js" }
       end
       resource  :likes,     only: %i[create destroy], defaults: { format: "js" }

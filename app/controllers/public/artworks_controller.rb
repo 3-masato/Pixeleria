@@ -11,7 +11,7 @@ class Public::ArtworksController < ApplicationController
     @artwork = Artwork.find(params[:id])
     @artwork_comments = @artwork.comments.with_user_profile_images
     @author = @artwork.user
-    @authors_other_artworks = @author.artworks.with_details.where.not(id: @artwork.id)
+    @authors_other_artworks = @author.artworks.with_publication.where.not(id: @artwork.id)
   end
 
   def edit

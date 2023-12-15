@@ -35,6 +35,10 @@ module ApplicationHelper
   def user_nav_items
     [
       {
+        path: user_profile_path(current_user.account_name),
+        text: "mypage"
+      },
+      {
         path: destroy_user_session_path,
         text: t("devise.shared.sign_out"),
         method: :delete

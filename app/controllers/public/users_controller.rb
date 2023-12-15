@@ -2,10 +2,11 @@ class Public::UsersController < ApplicationController
   before_action :set_user, only: %i[edit show update artworks liked_artworks]
 
   def edit
+    @artworks = @user.artworks.with_details
   end
 
   def show
-    @user_artworks = @user.artworks.with_details
+    @user_artworks = @user.artworks.with_publication
   end
 
   def update
@@ -23,11 +24,11 @@ class Public::UsersController < ApplicationController
   end
 
   def artworks
-    @user_artworks = @user.artworks.with_details
+    @user_artworks = @user.artworks.with_publication
   end
 
   def liked_artworks
-    @user_liked_artworks = @user.liked_artworks.with_details
+    @user_liked_artworks = @user.liked_artworks.with_publication
   end
 
   private
