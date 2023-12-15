@@ -2,6 +2,7 @@ class Public::UsersController < ApplicationController
   before_action :set_user, only: %i[edit show update artworks liked_artworks]
 
   def edit
+    @artworks = @user.artworks.with_details
   end
 
   def show
