@@ -5,6 +5,13 @@ class Public::ArtworksController < ApplicationController
   BASE_CANVAS_SIZE = 768
 
   def index
+    @query = params[:query] || ""
+    @artworks = @query != "" ? Artwork.search(@query) : Artwork.with_publication
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
@@ -37,7 +44,7 @@ class Public::ArtworksController < ApplicationController
     width = params[:width]
     height = params[:height]
     decoded_image = decode_image(image_data)
-  
+
     if id.nil?
       @artwork = create_new_artwork(decoded_image)
       @artwork_canvas = create_new_artwork_canvas(pixel_data, width, height, @artwork)
@@ -47,11 +54,11 @@ class Public::ArtworksController < ApplicationController
       @artwork_canvas = update_existing_artwork_canvas(@artwork, pixel_data)
       log_action("updated")
     end
-  
+
     unless @artwork.valid? && @artwork_canvas.valid?
       render json: { status: "error" } and return
     end
-  
+
     render json: { status: "ok", artwork_id: @artwork.id }
   end
 
@@ -62,7 +69,7 @@ class Public::ArtworksController < ApplicationController
     width = params[:width]
     height = params[:height]
     decoded_image = decode_image(image_data)
-    
+
     if id.nil?
       @artwork = create_new_artwork(decoded_image)
       @artwork_canvas = create_new_artwork_canvas(pixel_data, width, height, @artwork)
@@ -72,10 +79,10 @@ class Public::ArtworksController < ApplicationController
       @artwork_canvas = update_existing_artwork_canvas(@artwork, pixel_data)
       log_action("updated")
     end
-  
+
     unless @artwork.valid? && @artwork_canvas.valid?
       render json: { status: "error" } and return
-    end  
+    end
   end
 
   def update
@@ -142,38 +149,38 @@ class Public::ArtworksController < ApplicationController
   def artwork_params
     params.require(:artwork).permit(:title, :description, :is_public)
   end
-  
+
   def decode_image(data)
     # Base64のプレフィックスを削除し、デコードする
     base64_image = data.sub(/^data:image\/\w+;base64,/, "")
     decoded_image = Base64.decode64(base64_image)
     StringIO.new(decoded_image)
   end
-  
+
   def create_new_artwork(decoded_image)
     artwork = Artwork.new(title: "", is_public: false, user: current_user)
     artwork.image.attach(io: decoded_image, filename: "canvas_image.png")
     artwork.save
     artwork
   end
-  
+
   def create_new_artwork_canvas(pixel_data, width, height, artwork)
     ArtworkCanvas.create(pixel_data: pixel_data, width: width, height: height, artwork: artwork)
   end
-  
+
   def update_existing_artwork(id, decoded_image)
     artwork = Artwork.find(id)
     artwork.image.attach(io: decoded_image, filename: "canvas_image.png")
     artwork.save
     artwork
   end
-  
+
   def update_existing_artwork_canvas(artwork, pixel_data)
     artwork_canvas = artwork.artwork_canvas
     artwork_canvas.update(pixel_data: pixel_data)
     artwork_canvas
   end
-  
+
   def log_action(action)
     p "--------"
     p "#{action}"
