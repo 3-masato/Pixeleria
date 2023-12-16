@@ -5,7 +5,7 @@ ja:
       title: タイトル
       description: 説明
       tags: タグ
-      is_public: 公開ステータス
+      is_public: 公開
       author: 作者
     artwork_canvas:
       width: 横幅

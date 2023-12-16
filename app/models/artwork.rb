@@ -22,6 +22,27 @@ class Artwork < ApplicationRecord
   def liked_by?(user)
     likes.any? { |like| like.user_id == user.id }
   end
+  
+  def save_tags(tags)
+    # タグの名前を配列として取得（タグがない場合は空の配列を使用）
+    current_tags = self.tags.pluck(:name) || []
+  
+    # 現在取得したタグから送られてきたタグを除いて古いタグを特定
+    old_tags = current_tags - tags
+    # 送信されてきたタグから現在存在するタグを除いたタグを新しいタグとして特定
+    new_tags = tags - current_tags
+  
+    # 古いタグを削除
+    old_tags.each do |old_name|
+      self.tags.delete(Tag.find_by(name: old_name))
+    end
+  
+    # 新しいタグを追加
+    new_tags.each do |new_name|
+      tag = Tag.find_or_create_by(name: new_name)
+      self.tags << tag unless self.tags.exists?(name: new_name)
+    end
+  end
 
   def width_px
     "#{artwork_canvas.width}px"

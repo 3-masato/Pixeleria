@@ -23,6 +23,9 @@ ja:
     list: 作品一覧
     details: 作品詳細
     liked_list: いいねした作品
+    save: 保存
+    submit: 投稿
+    submit_form_title: ドット絵を投稿/保存する
   comment:
     list: コメント一覧
     send: 送信

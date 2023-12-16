@@ -29,7 +29,8 @@
           <div class="mt-2 text-sm">
             <%= render Shared::CheckboxComponent.new(
               form: f,
-              field_name: :remember_me
+              field_name: :remember_me,
+              label_text: :remember_me
             ) %>
           </div>
         <% end %>
