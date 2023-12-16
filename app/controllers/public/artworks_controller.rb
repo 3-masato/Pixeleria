@@ -22,14 +22,23 @@ class Public::ArtworksController < ApplicationController
   end
 
   def edit
+    @artwork = Artwork.find(params[:id])
+  end
+
+  def setup_editor
+    @artwork = Artwork.find(params[:artwork_id])
+    @artwork_canvas = @artwork.artwork_canvas
+    @width = @artwork_canvas.width
+    @height = @artwork_canvas.height
+    dot_ratio = [@width, @height].max
+    @dotsize = BASE_CANVAS_SIZE / dot_ratio
   end
 
   def new
-    @artwork = Artwork.new
   end
 
   def initialize_editor
-    @artwork = Artwork.new
+    @artwork_id = nil
     size = params[:size].split("x")
     @width = size[0].to_i
     @height = size[1].to_i
@@ -87,55 +96,11 @@ class Public::ArtworksController < ApplicationController
 
   def update
     tag_list = params[:artwork][:tag_list]
-    p tag_list
     @artwork = Artwork.find(params[:id])
+
     if @artwork.update(artwork_params)
       @artwork.save_tags(tag_list.split(",").map(&:strip))
       redirect_to artwork_path(@artwork.id)
-    end
-  end
-
-  def create
-    return
-
-    image_data = params[:image_data]
-    decoded_image = decode_image(image_data)
-
-    pixel_data = params[:pixel_data]
-    width = params[:width]
-    height = params[:height]
-
-    @artwork = Artwork.new(
-      :title => "test",
-      :is_public => true
-    )
-    @artwork.user = current_user
-    @artwork.image.attach(io: decoded_image, filename: 'canvas_image.png')
-
-    if @artwork.save
-      @artwork_canvas = ArtworkCanvas.new(
-        :pixel_data => pixel_data,
-        :width => width,
-        :height => height,
-        :artwork => @artwork
-      )
-
-      if @artwork_canvas.save
-        p "--------"
-        p "saved"
-        p "--------"
-        redirect_to artwork_path(@artwork), notice: "Artwork was successfully created."
-      else
-        p "--------"
-        p "failed to save of artwork_canvas"
-        p "--------"
-        render :new
-      end
-    else
-      p "--------"
-      p "failed to save of artwork "
-      p "--------"
-      render :new
     end
   end
 
