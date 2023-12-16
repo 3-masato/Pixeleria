@@ -1,0 +1,18 @@
+<%= form_with url: artworks_path, method: :get, local: false do |f| %>
+  <div class="flex justify-center items-center mx-auto">
+    <%= render Shared::TextFieldComponent.new(
+      form: f,
+      field_type: :text_field,
+      field_name: :query,
+      size: :small,
+      value: @query
+    ) %>
+    <%= render Shared::ButtonComponent.new(
+      style: :solid,
+      color: :sky,
+      type: :submit,
+    ) do %>
+      探す
+    <% end %>
+  </div>
+<% end %>

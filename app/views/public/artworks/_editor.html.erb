@@ -1,26 +1,67 @@
-<div id="choose-size-form">
-  <%= form_with url: initialize_editor_artworks_path, local: false, id: "size-form" do |f| %>
-    <div class="grid gap-y-4">
-      <div class="mx-auto flex items-center space-x-4">
-        <%= f.label :size, t("artwork.choose_size"), class: "w-40 font-sm font-bold inline-block" %>
-        <%= render Shared::SelectComponent.new(
-          form: f,
-          field_name: :size,
-          choices: artwork_size_options,
-          selected: 1,
-          size: :small
-        ) %>
-        <%= render Shared::ButtonComponent.new(
-          style: :solid,
-          color: :sky,
-          type: :submit,
-          class: "w-36 h-10"
-        ) do %>
-          <%= t("artwork.create") %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-</div>
-<div id="editor-container" class="mt-10">
-</div>
+{
+  $("#editor-container").html(`
+  <pixeleria-editor
+    id="pixeleria-editor"
+    artwidth="<%= width %>"
+    artheight="<%= height %>"
+    dotsize="<%= dotsize %>"
+  ></pixeleria-editor>
+  <div>
+    <button id="save-artwork-button">
+      <%= t("artwork.save") %>
+    </button>
+    <button id="post-artwork-button">
+      <%= t("artwork.submit") %>
+    </button>
+  </div>`);
+
+  let artworkId = <%= artwork_id.nil? ? "null" : artwork_id.to_i %>;
+  console.log(artworkId);
+  const editor = document.getElementById("pixeleria-editor");
+
+  $(document.body).append(`<div id="artwork-confirm"></div>`);
+
+  const onClickHandler = (url, callback = () => {}) => () => {
+    const detail = editor.getDetails();
+
+    $.ajax({
+      url: url,
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({
+        artwork_id: artworkId,
+        image_data: detail.imageData,
+        pixel_data: detail.pixelData.join(","),
+        width: <%= width %>,
+        height: <%= height %>,
+      }),
+      success(data) {
+        if (data.status === "error") {
+          alert("保存に失敗しました");
+        } else {
+          callback(data);
+        }
+      },
+      error() {
+        alert("通信エラーが発生しました");
+      }
+    });
+  };
+
+  $("#post-artwork-button").on(
+    "click",
+    onClickHandler("/artworks/confirm_upload")
+  );
+
+  $("#save-artwork-button").on(
+    "click",
+    onClickHandler("/artworks/save", (data) => {
+      if (data !== "error" && !artworkId) {
+        artworkId = data.artwork_id;
+      }
+    })
+  );
+
+
+  $("#choose-size-form").remove();
+}
