@@ -1,4 +1,4 @@
-<div>
+<%= render "admin/layouts/frame" do %>
   <%= render Shared::TableSectionComponent.new(title: t("user.list")) do %>
     <%= render Shared::TableComponent.new do %>
       <%= render Shared::TableHeaderComponent.new(headers: [
@@ -35,4 +35,4 @@
       <% end %>
     <% end %>
   <% end %>
-</div>
+<% end %>

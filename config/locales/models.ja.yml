@@ -1,4 +1,10 @@
 ja:
+  model:
+    user: ユーザー
+    artwork: 作品
+    comment: コメント
+    like: いいね
+    tag: タグ
   models:
     artwork:
       iamge: 画像
