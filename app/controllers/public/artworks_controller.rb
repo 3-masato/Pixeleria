@@ -63,7 +63,6 @@ class Public::ArtworksController < ApplicationController
     height = params[:height]
     decoded_image = decode_image(image_data)
     
-  
     if id.nil?
       @artwork = create_new_artwork(decoded_image)
       @artwork_canvas = create_new_artwork_canvas(pixel_data, width, height, @artwork)
@@ -80,7 +79,10 @@ class Public::ArtworksController < ApplicationController
   end
 
   def update
-    puts params
+    @artwork = Artwork.find(params[:id])
+    if @artwork.update(artwork_params)
+      redirect_to artwork_path(@artwork.id)
+    end
   end
 
   def create
@@ -134,6 +136,10 @@ class Public::ArtworksController < ApplicationController
   end
 
   private
+  def artwork_params
+    params.require(:artwork).permit(:title, :description, :is_public)
+  end
+  
   def decode_image(data)
     # Base64のプレフィックスを削除し、デコードする
     base64_image = data.sub(/^data:image\/\w+;base64,/, "")

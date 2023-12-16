@@ -14,38 +14,17 @@ $("#editor-container").html(`
   </button>
 </div>`);
 
-
 {
   let artworkId = null;
   const editor = document.getElementById("pixeleria-editor");
   
-  $(document.body).append("<%= j(render "public/artworks/save_from", artwork: @artwork) %>");
-  
-  const modal = $("#save-form-modal");
-  const modalBackdrop = $("#save-form-modal-backdrop");
-  const closeButton = $("#save-form-close-button");
-  
-  const toggleVisibility = (visibility) => {
-    const value = visibility ? "visible" : "hidden";
-    
-    modal.attr("data-visibility", value);
-    modalBackdrop.attr("data-visibility", value);
-  };
-  
-  closeButton.on("click", () => {
-    toggleVisibility(false);
-  });
-  
-  $("#post-artwork-button").on("click", () => {
-    const detail = editor.getDetails();
-    toggleVisibility(true);
-  });
-  
-  $("#save-artwork-button").on("click", () => {
-    const detail = editor.getDetails();
+  $(document.body).append(`<div id="artwork-confirm"></div>`);
 
+  const onClickHandler = (url, callback = () => {}) => () => {
+    const detail = editor.getDetails();
+    
     $.ajax({
-      url: "/artworks/save",
+      url: url,
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify({
@@ -59,15 +38,26 @@ $("#editor-container").html(`
         if (data.status === "error") {
           alert("保存に失敗しました");
         } else {
-          if (!artworkId) {
-            artworkId = data.artwork_id;
-          }
-          alert("保存しました");
+          callback(data);
         }
       },
       error() {
         alert("通信エラーが発生しました");
       }
     });
-  });
+  };
+
+  $("#post-artwork-button").on(
+    "click",
+    onClickHandler("/artworks/confirm_upload")
+  );
+
+  $("#save-artwork-button").on(
+    "click",
+    onClickHandler("/artworks/save", (data) => {
+      if (data !== "error" && !artworkId) {
+        artworkId = data.artwork_id;
+      }
+    })
+  );
 }

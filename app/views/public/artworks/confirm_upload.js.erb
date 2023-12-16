@@ -1,3 +1,17 @@
 {
-  console.log("confirm_upload");
+  const toggleVisibility = (visibility) => {
+    const value = visibility ? "visible" : "hidden";
+    $("#save-form-modal").attr("data-visibility", value);
+    $("#save-form-modal-backdrop").attr("data-visibility", value);
+  };
+  
+  $("#artwork-confirm").html("<%= j(render "public/artworks/save_from", artwork: @artwork) %>");
+  
+  $("#save-form-close-button").on("click", () => {
+    toggleVisibility(false);
+  });
+  
+  setTimeout(() => {
+    toggleVisibility(true);
+  }, 0);
 }

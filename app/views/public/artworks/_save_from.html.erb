@@ -24,10 +24,10 @@
         <i class="fa-solid fa-xmark" aria-hidden="true"></i>
       </button>
     </div>
-    <%= form_with model: artwork, local: false do |f| %>
+    <%= form_with model: artwork, local: true do |f| %>
       <div class="grid gap-y-4">
         <div>
-          <%= f.label t("models.artwork.title"), class: "block text-sm font-bold mb-2" %>
+          <%= f.label :title, t("models.artwork.title"), class: "block text-sm font-bold mb-2" %>
           <%= render Shared::TextFieldComponent.new(
             form: f,
             field_type: :text_field,
@@ -36,11 +36,21 @@
         </div>
         
         <div>
-          <%= f.label t("models.artwork.description"), class: "block text-sm font-bold mb-2" %>
-          <%= render Shared::TextFieldComponent.new(
+          <%= f.label :description, t("models.artwork.description"), class: "block text-sm font-bold mb-2" %>
+          <%= render Shared::TextAreaComponent.new(
             form: f,
-            field_type: :text_field,
-            field_name: :description
+            field_name: :description,
+            rows: 3,
+            placeholder: "",
+          ) %>
+        </div>
+        
+        <div>
+          <%= render Shared::CheckboxComponent.new(
+            form: f,
+            field_name: :is_public,
+            label_text: t("models.artwork.is_public"),
+            checked: true
           ) %>
         </div>
         
