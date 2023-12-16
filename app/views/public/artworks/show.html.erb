@@ -6,10 +6,10 @@
     <div class="flex">
       <div class="grow">
         <div>
-          <%= tag.div @artwork.title, class: "font-medium text-lg" %>
+          <%= tag.div @artwork.title, class: "font-bold text-lg" %>
           <div>
             <% @artwork.tags.each do |tag| %>
-              <span><%= tag %></span>
+              <span class="text-sm inline-block"><%= tag.name %></span>
             <% end %>
           </div>
         </div>

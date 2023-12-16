@@ -46,6 +46,15 @@
         </div>
         
         <div>
+          <%= f.label :tag_list, t("models.artwork.tags"), class: "block text-sm font-bold mb-2" %>
+          <%= render Shared::TextFieldComponent.new(
+            form: f,
+            field_type: :text_field,
+            field_name: :tag_list
+          ) %>
+        </div>
+
+        <div>
           <%= render Shared::CheckboxComponent.new(
             form: f,
             field_name: :is_public,

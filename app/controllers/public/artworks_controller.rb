@@ -79,8 +79,11 @@ class Public::ArtworksController < ApplicationController
   end
 
   def update
+    tag_list = params[:artwork][:tag_list]
+    p tag_list
     @artwork = Artwork.find(params[:id])
     if @artwork.update(artwork_params)
+      @artwork.save_tags(tag_list.split(",").map(&:strip))
       redirect_to artwork_path(@artwork.id)
     end
   end
