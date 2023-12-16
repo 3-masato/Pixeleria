@@ -7,7 +7,7 @@ ja:
     tag: タグ
   models:
     artwork:
-      iamge: 画像
+      image: 画像
       title: タイトル
       description: 説明
       tags: タグ

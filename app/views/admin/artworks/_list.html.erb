@@ -28,10 +28,16 @@
             <%= artwork.title %>
           <% end %>
           <%= render Shared::TableCellComponent.new do %>
-            <%= artwork.description %>
+            <div class="truncate max-w-[24rem]">
+              <%= artwork.description %>
+            </div>
           <% end %>
           <%= render Shared::TableCellComponent.new do %>
-            <%= artwork.tags %>
+            <% artwork.tags.each do |tag| %>
+              <span class="text-xs inline-block">
+                <%= tag.name %>
+              </span>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>

@@ -20,7 +20,9 @@
                 <%= t("models.artwork.description") %>
               <% end %>
               <%= render Shared::TableCellComponent.new do %>
-                <%=  @artwork.description %>
+                <div class="whitespace-normal max-w-[32rem]">
+                  <%= @artwork.description %>
+                </div>
               <% end %>
             <% end %>
             <%= render Shared::TableRowComponent.new do %>
@@ -28,7 +30,11 @@
                 <%= t("models.artwork.tags") %>
               <% end %>
               <%= render Shared::TableCellComponent.new do %>
-                <%= @artwork.tags %>
+                <% @artwork.tags.each do |tag| %>
+                  <span class="text-xs inline-block">
+                    <%= tag.name %>
+                  </span>
+                <% end %>
               <% end %>
             <% end %>
             <%= render Shared::TableRowComponent.new do %>
