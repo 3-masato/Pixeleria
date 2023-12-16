@@ -6,6 +6,6 @@ class Admin::ArtworksController < ApplicationController
   def show
     @artwork = Artwork.find(params[:id])
     @author = @artwork.user
-    @author_artworks = @author.artworks.with_details
+    @author_artworks = @author.artworks.with_details.page(params[:page])
   end
 end
