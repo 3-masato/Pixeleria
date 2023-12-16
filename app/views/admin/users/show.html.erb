@@ -1,4 +1,4 @@
-<div>
+<%= render "admin/layouts/frame" do %>
   <%= render Shared::TableSectionComponent.new(title: t("user.details")) do %>
     <%= render Shared::TableComponent.new do %>
       <%= render Shared::TableBodyComponent.new do %>
@@ -39,4 +39,4 @@
   <% end %>
 
   <%= render "admin/artworks/list", artworks: @user_artworks, show_author: false %>
-</div>
+<% end %>
