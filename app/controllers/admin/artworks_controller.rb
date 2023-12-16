@@ -1,6 +1,6 @@
 class Admin::ArtworksController < ApplicationController
   def index
-    @artworks = Artwork.with_details
+    @artworks = Artwork.with_details.page(params[:page])
   end
 
   def show
