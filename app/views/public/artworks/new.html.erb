@@ -1,26 +1,30 @@
-<div id="choose-size-form">
-  <%= form_with url: initialize_editor_artworks_path, local: false, id: "size-form" do |f| %>
-    <div class="grid gap-y-4">
-      <div class="mx-auto flex items-center space-x-4">
-        <%= f.label :size, t("artwork.choose_size"), class: "w-40 font-sm font-bold inline-block" %>
-        <%= render Shared::SelectComponent.new(
-          form: f,
-          field_name: :size,
-          choices: artwork_size_options,
-          selected: 1,
-          size: :small
-        ) %>
-        <%= render Shared::ButtonComponent.new(
-          style: :solid,
-          color: :sky,
-          type: :submit,
-          class: "w-36 h-10"
-        ) do %>
-          <%= t("artwork.create") %>
-        <% end %>
+<%= component "shared/card", class: "my-10 p-6" do %>
+  <div id="choose-size-form">
+    <%= form_with url: initialize_editor_artworks_path, local: false, id: "size-form" do |f| %>
+      <div class="grid gap-y-4">
+        <div class="mx-auto flex items-center space-x-4">
+          <%= f.label :size, t("artwork.choose_size"), class: "w-40 font-sm font-bold inline-block" %>
+          <%= component(
+            "shared/select",
+            form: f,
+            field_name: :size,
+            choices: artwork_size_options,
+            selected: 1,
+            size: :small
+          ) %>
+          <%= component(
+            "shared/button",
+            style: :solid,
+            color: :sky,
+            type: :submit,
+            class: "w-36 h-10"
+          ) do %>
+            <%= t("artwork.create") %>
+          <% end %>
+        </div>
       </div>
-    </div>
-  <% end %>
-</div>
-<div id="editor-container" class="mt-10">
-</div>
+    <% end %>
+  </div>
+  <div id="editor-container" class="mt-10">
+  </div>
+<% end %>
