@@ -1,32 +1,32 @@
-<%= render Shared::TableSectionComponent.new(title: t("user.list")) do %>
-  <%= render Shared::TableComponent.new do %>
-    <%= render Shared::TableHeaderComponent.new(headers: [
+<%= component "shared/table_section", title: t("user.list") do %>
+  <%= component "shared/table" do %>
+    <%= component "shared/table_header", headers: [
       "#",
       t("activerecord.attributes.user.prifile_image"),
       t("activerecord.attributes.user.display_name"),
       t("activerecord.attributes.user.account_name"),
       t("activerecord.attributes.user.introduction"),
       t("activerecord.attributes.user.status")
-    ]) %>
-    <%= render Shared::TableBodyComponent.new do %>
+    ] %>
+    <%= component "shared/table_body" do %>
       <% @users.each do |user| %>
-        <%= render Shared::TableRowComponent.new do %>
-          <%= render Shared::TableCellComponent.new(is_header: true) do %>
+        <%= component "shared/table_row" do %>
+          <%= component "shared/table_cell", is_header: true do %>
             <%= user.id %>
           <% end %>
-          <%= render Shared::TableCellComponent.new do %>
+          <%= component "shared/table_cell" do %>
             <%= image_tag user.get_profile_image, size: "32x32" %>
           <% end %>
-          <%= render Shared::TableCellComponent.new do %>
+          <%= component "shared/table_cell" do %>
             <%= link_to user.display_name, admin_user_path(user.account_name), class: "font-bold text-blue-500 hover:underline" %>
           <% end %>
-          <%= render Shared::TableCellComponent.new do %>
+          <%= component "shared/table_cell" do %>
             <%= user.account_name %>
           <% end %>
-          <%= render Shared::TableCellComponent.new do %>
+          <%= component "shared/table_cell" do %>
             <%= user.introduction %>
           <% end %>
-          <%= render Shared::TableCellComponent.new do %>
+          <%= component "shared/table_cell" do %>
             <%= user.status %>
           <% end %>
         <% end %>

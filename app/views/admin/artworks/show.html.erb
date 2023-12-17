@@ -70,6 +70,30 @@
           <% end %>
         <% end %>
       <% end %>
+      <div class="mt-10 flex justify-evenly">
+        <%= component(
+          "shared/button",
+          style: :outline,
+          color: :gray,
+          path: edit_admin_artwork_path(@artwork),
+          class: "w-32"
+        ) do %>
+          <i class="fa-solid fa-sliders"></i><span class="ml-2"><%= t("artwork.edit") %></span>
+        <% end %>
+        <%= component(
+          "shared/button",
+          style: :outline,
+          color: :red,
+          path: admin_artwork_path(@artwork),
+          method: :delete,
+          data: {
+            confirm: "Are you sure?"
+          },
+          class: "w-32"
+        ) do %>
+          <i class="fa-solid fa-trash-can"></i><span class="ml-2"><%= t("artwork.delete") %></span>
+        <% end %>
+      </div>
     </div>
   </div>
 <% end %>

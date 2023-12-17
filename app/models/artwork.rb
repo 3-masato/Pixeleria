@@ -52,6 +52,15 @@ class Artwork < ApplicationRecord
     "#{artwork_canvas.height}px"
   end
 
+  def tags=(tags_array)
+    self.tags.clear
+    tags_array.each do |tag_name|
+      next if tag_name.blank?
+      tag = Tag.find_or_create_by(name: tag_name.strip)
+      self.tags << tag unless self.tags.exists?(name: tag_name.strip)
+    end
+  end
+
   def self.search(query)
     where('title LIKE ? OR description LIKE ?', "%#{query}%", "%#{query}%").with_publication
   end
