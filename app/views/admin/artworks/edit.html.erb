@@ -1,1 +1,6 @@
-<%= @artwork.title %>
+<%= component "shared/card", class: "my-10 p-6" do %>
+  <%= tag.h2 t("user.edit_heading") %>
+  <%= form_with model: [:admin, @artwork] do |f| %>
+    <%= f.text_field :title %>
+  <% end %>
+<% end %>

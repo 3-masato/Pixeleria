@@ -1,79 +1,77 @@
-<%= render "admin/layouts/frame" do %>
-  <%= component "shared/table_section", title: t("artwork.details") do %>
-    <div class="p-6 flex flex-col gap-4 lg:flex-row">
-      <div class="flex justify-center">
-        <%= image_tag @artwork.image, size: "384x384", style: "image-rendering: pixelated" %>
-      </div>
-      <div class="overflow-auto grow">
-        <%= component "shared/table" do %>
-          <%= component "shared/table_body" do %>
-            <%= component "shared/table_row" do %>
-              <%= component "shared/table_cell", is_header: true do %>
-                <%= t("models.artwork.title") %>
-              <% end %>
-              <%= component "shared/table_cell" do %>
-                <%= @artwork.title %>
-              <% end %>
+<%= component "shared/table_section", title: t("artwork.details") do %>
+  <div class="p-6 flex flex-col gap-4 lg:flex-row">
+    <div class="flex justify-center">
+      <%= image_tag @artwork.image, size: "384x384", style: "image-rendering: pixelated" %>
+    </div>
+    <div class="overflow-auto grow">
+      <%= component "shared/table" do %>
+        <%= component "shared/table_body" do %>
+          <%= component "shared/table_row" do %>
+            <%= component "shared/table_cell", is_header: true do %>
+              <%= t("models.artwork.title") %>
             <% end %>
-            <%= component "shared/table_row" do %>
-              <%= component "shared/table_cell", is_header: true do %>
-                <%= t("models.artwork.description") %>
-              <% end %>
-              <%= component "shared/table_cell" do %>
-                <div class="whitespace-normal max-w-[32rem]">
-                  <%= @artwork.description %>
-                </div>
-              <% end %>
+            <%= component "shared/table_cell" do %>
+              <%= @artwork.title %>
             <% end %>
-            <%= component "shared/table_row" do %>
-              <%= component "shared/table_cell", is_header: true do %>
-                <%= t("models.artwork.tags") %>
-              <% end %>
-              <%= component "shared/table_cell" do %>
-                <% @artwork.tags.each do |tag| %>
-                  <span class="text-xs inline-block">
-                    <%= tag.name %>
-                  </span>
-                <% end %>
-              <% end %>
+          <% end %>
+          <%= component "shared/table_row" do %>
+            <%= component "shared/table_cell", is_header: true do %>
+              <%= t("models.artwork.description") %>
             <% end %>
-            <%= component "shared/table_row" do %>
-              <%= component "shared/table_cell", is_header: true do %>
-                <%= t("models.artwork.is_public") %>
-              <% end %>
-              <%= component "shared/table_cell" do %>
-                <%= @artwork.is_public %>
-              <% end %>
+            <%= component "shared/table_cell" do %>
+              <div class="whitespace-normal max-w-[32rem]">
+                <%= @artwork.description %>
+              </div>
             <% end %>
-            <%= component "shared/table_row" do %>
-              <%= component "shared/table_cell", is_header: true do %>
-                <%= t("models.artwork.author") %>
-              <% end %>
-              <%= component "shared/table_cell" do %>
-                <%= link_to @author.display_name, admin_user_path(@author.account_name), class: "font-bold text-blue-500 hover:underline" %>
-              <% end %>
+          <% end %>
+          <%= component "shared/table_row" do %>
+            <%= component "shared/table_cell", is_header: true do %>
+              <%= t("models.artwork.tags") %>
             <% end %>
-            <%= component "shared/table_row" do %>
-              <%= component "shared/table_cell", is_header: true do %>
-                <%= t("models.artwork_canvas.width") %>
-              <% end %>
-              <%= component "shared/table_cell" do %>
-                <%= @artwork.width_px %>
-              <% end %>
-            <% end %>
-            <%= component "shared/table_row" do %>
-              <%= component "shared/table_cell", is_header: true do %>
-                <%= t("models.artwork_canvas.height") %>
-              <% end %>
-              <%= component "shared/table_cell" do %>
-                <%= @artwork.height_px %>
+            <%= component "shared/table_cell" do %>
+              <% @artwork.tags.each do |tag| %>
+                <span class="text-xs inline-block">
+                  <%= tag.name %>
+                </span>
               <% end %>
             <% end %>
           <% end %>
+          <%= component "shared/table_row" do %>
+            <%= component "shared/table_cell", is_header: true do %>
+              <%= t("models.artwork.is_public") %>
+            <% end %>
+            <%= component "shared/table_cell" do %>
+              <%= @artwork.is_public %>
+            <% end %>
+          <% end %>
+          <%= component "shared/table_row" do %>
+            <%= component "shared/table_cell", is_header: true do %>
+              <%= t("models.artwork.author") %>
+            <% end %>
+            <%= component "shared/table_cell" do %>
+              <%= link_to @author.display_name, admin_user_path(@author.account_name), class: "font-bold text-blue-500 hover:underline" %>
+            <% end %>
+          <% end %>
+          <%= component "shared/table_row" do %>
+            <%= component "shared/table_cell", is_header: true do %>
+              <%= t("models.artwork_canvas.width") %>
+            <% end %>
+            <%= component "shared/table_cell" do %>
+              <%= @artwork.width_px %>
+            <% end %>
+          <% end %>
+          <%= component "shared/table_row" do %>
+            <%= component "shared/table_cell", is_header: true do %>
+              <%= t("models.artwork_canvas.height") %>
+            <% end %>
+            <%= component "shared/table_cell" do %>
+              <%= @artwork.height_px %>
+            <% end %>
+          <% end %>
         <% end %>
-      </div>
+      <% end %>
     </div>
-  <% end %>
-
-  <%= render "admin/artworks/list", artworks: @author_artworks, show_author: false %>
+  </div>
 <% end %>
+
+<%= render "admin/artworks/list", artworks: @author_artworks, show_author: false %>

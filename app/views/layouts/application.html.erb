@@ -14,10 +14,19 @@
 
   <body class="bg-slate-50">
     <%= render "layouts/header" %>
-    <main class="mx-auto max-w-[1920px] px-3">
-      <%= render "layouts/alert" %>
-      <%= yield %>
-    </main>
+    <%= render "layouts/alert" %>
+    <% if admin_signed_in? %>
+      <%= render "layouts/sidebar" %>
+      <div class="h-auto pt-20 lg:ml-64">
+        <main class="max-w-[1920px] mx-auto px-3">
+          <%= yield %>
+        </main>
+      </div>
+    <% else %>
+      <main class="max-w-[1920px] mx-auto px-3">
+        <%= yield %>
+      </main>
+    <% end %>
     <%= render "layouts/footer" %>
   </body>
 </html>
