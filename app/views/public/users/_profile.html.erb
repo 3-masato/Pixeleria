@@ -1,0 +1,51 @@
+<section class="border-b border-gray-300">
+  <div class="grid grid-cols-1 items-center md:grid-cols-3">
+    <div class="grid grid-cols-3 text-center">
+      <%= component(
+        "user/stat_link",
+        user: user,
+        stat_type: :followers,
+        count: user.followers.size
+      ) %>
+      <%= component(
+        "user/stat_link",
+        user: user,
+        stat_type: :followings,
+        count: user.followings.size
+      ) %>
+      <%= component(
+        "user/stat_link",
+        user: user,
+        stat_type: :artworks,
+        count: user_artworks.size
+      ) %>
+    </div>
+    <div class="flex justify-center items-center p-4">
+      <%= image_tag user.get_profile_image, size: "128x128", class: "rounded-full shadow-xl" %>
+    </div>
+    <div class="flex justify-center items-center">
+      <% if user == current_user %>
+        <%= component(
+          "shared/button",
+          style: :solid,
+          color: :gray,
+          path: edit_user_profile_path(user.account_name),
+          class: "w-32 text-sm"
+        ) do %>
+          <i class="fa-solid fa-user-pen"></i><span class="ml-2"><%= t("user.edit") %></span>
+        <% end %>
+      <% else %>
+        <%= tag.div id: "follow-of-#{user.account_name}" do %>
+          <%= component "interaction/follow_button", user: user, current_user: current_user %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="mt-16 text-center pb-12">
+    <div class="flex justify-center items-center">
+      <%= tag.span user.display_name, class: "text-2xl font-bold text-gray-700 mr-1" %>
+      <%= tag.span "@" + user.account_name, class: "text-lg font-normal text-gray-400" %>
+    </div>
+    <%= tag.p user.introduction %>
+  </div>
+</section>

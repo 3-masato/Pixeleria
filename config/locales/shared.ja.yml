@@ -12,6 +12,7 @@ ja:
     artworks: 作品
     list: ユーザー一覧
     details: ユーザー詳細
+    more_artworks: もっと見る
   artwork:
     sizes:
       xs: 小さい

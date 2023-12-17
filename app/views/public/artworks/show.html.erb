@@ -1,4 +1,4 @@
-<section class="my-6 p-6 bg-white shadow-xl rounded-sm lg:flex">
+<%= component "shared/card", class: "my-10 p-6 lg:flex" do %>
   <div class="grow flex justify-center flex-col space-y-2">
     <div class="self-center">
       <%= image_tag @artwork.image, size: "512x512", style: "image-rendering: pixelated" %>
@@ -39,23 +39,19 @@
     </div>
     <div class="py-3 flex justify-evenly border-y">
       <%= tag.div id: "like-#{@artwork.id}" do %>
-        <%= render Interaction::LikeButtonComponent.new(
-          artwork: @artwork,
-          current_user: current_user
-        ) %>
+        <%= component "interaction/like_button", artwork: @artwork, current_user: current_user %>
       <% end %>
       <%= tag.div id: "comment-count-#{@artwork.id}" do %>
-        <%= render Interaction::CommentCountComponent.new(count: @artwork_comments.size) %>
+        <%= component "interaction/comment_count", count: @artwork_comments.size %>
       <% end %>
     </div>
   </div>
-
   <div class="w-full mt-3 lg:w-96 lg:mt-0">
     <%= render "public/comments/form", artwork: @artwork, comment: Comment.new %>
     <%= tag.div id: "comment-list-of-#{@artwork.id}" do %>
       <%= render "public/comments/list", comments: @artwork_comments %>
     <% end %>
   </div>
-</section>
+<% end %>
 
 <%= render "public/users/info", user: @author, artworks: @authors_other_artworks %>
