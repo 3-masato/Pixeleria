@@ -1,43 +1,59 @@
-<%= render Shared::TableSectionComponent.new(title: t("artwork.list")) do %>
-  <%= render Shared::TableComponent.new do %>
-    <%= render Shared::TableHeaderComponent.new(headers: [
+<%= component "shared/table_section", title: t("artwork.list") do %>
+  <%= component "shared/table" do %>
+    <%= component "shared/table_header", headers: [
       "#",
       show_author ? t("models.artwork.author") : nil,
       t("models.artwork.image"),
       t("models.artwork.title"),
       t("models.artwork.description"),
-      t("models.artwork.tag")
-    ].compact) %>
-    <%= render Shared::TableBodyComponent.new do %>
+      t("models.artwork.tag"),
+      "",
+      ""
+    ].compact %>
+    <%= component "shared/table_body" do %>
       <% artworks.each do |artwork| %>
-        <%= render Shared::TableRowComponent.new do %>
-          <%= render Shared::TableCellComponent.new(is_header: true) do %>
+        <%= component "shared/table_row" do %>
+          <%= component "shared/table_cell", is_header: true do %>
             <%= artwork.id %>
           <% end %>
           <% if show_author %>
-            <%= render Shared::TableCellComponent.new do %>
+            <%= component "shared/table_cell" do %>
               <%= link_to artwork.user.display_name, admin_user_path(artwork.user.account_name), class: "font-bold text-blue-500 hover:underline" %>
             <% end %>
           <% end %>
-          <%= render Shared::TableCellComponent.new do %>
+          <%= component "shared/table_cell" do %>
             <% link_to admin_artwork_path(artwork) do %>
               <%= image_tag artwork.image, size: "32x32", style: "image-rendering: pixelated;" %>
             <% end %>
           <% end %>
-          <%= render Shared::TableCellComponent.new do %>
+          <%= component "shared/table_cell" do %>
             <%= artwork.title %>
           <% end %>
-          <%= render Shared::TableCellComponent.new do %>
+          <%= component "shared/table_cell" do %>
             <div class="truncate max-w-[24rem]">
               <%= artwork.description %>
             </div>
           <% end %>
-          <%= render Shared::TableCellComponent.new do %>
+          <%= component "shared/table_cell" do %>
             <% artwork.tags.each do |tag| %>
               <span class="text-xs inline-block">
                 <%= tag.name %>
               </span>
             <% end %>
+          <% end %>
+          <%= component "shared/table_cell" do %>
+            <div class="grid place-items-center">
+              <%= link_to edit_admin_artwork_path(artwork), class: "w-8 h-8 grid place-items-center rounded-sm transition-colors hover:bg-gray-200" do %>
+                <i class="fa-solid fa-sliders"></i>
+              <% end %>
+            </div>
+          <% end %>
+          <%= component "shared/table_cell" do %>
+            <div class="grid place-items-center">
+              <%= link_to admin_artwork_path(artwork), method: :delete, "data-confirm" => "Are you sure?", class: "w-8 h-8 grid place-items-center rounded-sm text-red-600 transition-colors hover:bg-red-100" do %>
+                <i class="fa-solid fa-trash-can"></i>
+              <% end %>
+            </div>
           <% end %>
         <% end %>
       <% end %>

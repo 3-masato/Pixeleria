@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     get "users",                to: "users#index",  as: :users
     get "users/:account_name",  to: "users#show",   as: :user
 
-    resources :artworks, only: %i[index show]
+    resources :artworks, only: %i[index show edit update destroy]
   end
 
   # 一般ユーザー

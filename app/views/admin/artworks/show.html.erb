@@ -1,35 +1,35 @@
 <%= render "admin/layouts/frame" do %>
-  <%= render Shared::TableSectionComponent.new(title: t("artwork.details")) do %>
+  <%= component "shared/table_section", title: t("artwork.details") do %>
     <div class="p-6 flex flex-col gap-4 lg:flex-row">
       <div class="flex justify-center">
         <%= image_tag @artwork.image, size: "384x384", style: "image-rendering: pixelated" %>
       </div>
       <div class="overflow-auto grow">
-        <%= render Shared::TableComponent.new do %>
-          <%= render Shared::TableBodyComponent.new do %>
-            <%= render Shared::TableRowComponent.new do %>
-              <%= render Shared::TableCellComponent.new(is_header: true) do %>
+        <%= component "shared/table" do %>
+          <%= component "shared/table_body" do %>
+            <%= component "shared/table_row" do %>
+              <%= component "shared/table_cell", is_header: true do %>
                 <%= t("models.artwork.title") %>
               <% end %>
-              <%= render Shared::TableCellComponent.new do %>
+              <%= component "shared/table_cell" do %>
                 <%= @artwork.title %>
               <% end %>
             <% end %>
-            <%= render Shared::TableRowComponent.new do %>
-              <%= render Shared::TableCellComponent.new(is_header: true) do %>
+            <%= component "shared/table_row" do %>
+              <%= component "shared/table_cell", is_header: true do %>
                 <%= t("models.artwork.description") %>
               <% end %>
-              <%= render Shared::TableCellComponent.new do %>
+              <%= component "shared/table_cell" do %>
                 <div class="whitespace-normal max-w-[32rem]">
                   <%= @artwork.description %>
                 </div>
               <% end %>
             <% end %>
-            <%= render Shared::TableRowComponent.new do %>
-              <%= render Shared::TableCellComponent.new(is_header: true) do %>
+            <%= component "shared/table_row" do %>
+              <%= component "shared/table_cell", is_header: true do %>
                 <%= t("models.artwork.tags") %>
               <% end %>
-              <%= render Shared::TableCellComponent.new do %>
+              <%= component "shared/table_cell" do %>
                 <% @artwork.tags.each do |tag| %>
                   <span class="text-xs inline-block">
                     <%= tag.name %>
@@ -37,35 +37,35 @@
                 <% end %>
               <% end %>
             <% end %>
-            <%= render Shared::TableRowComponent.new do %>
-              <%= render Shared::TableCellComponent.new(is_header: true) do %>
+            <%= component "shared/table_row" do %>
+              <%= component "shared/table_cell", is_header: true do %>
                 <%= t("models.artwork.is_public") %>
               <% end %>
-              <%= render Shared::TableCellComponent.new do %>
+              <%= component "shared/table_cell" do %>
                 <%= @artwork.is_public %>
               <% end %>
             <% end %>
-            <%= render Shared::TableRowComponent.new do %>
-              <%= render Shared::TableCellComponent.new(is_header: true) do %>
+            <%= component "shared/table_row" do %>
+              <%= component "shared/table_cell", is_header: true do %>
                 <%= t("models.artwork.author") %>
               <% end %>
-              <%= render Shared::TableCellComponent.new do %>
+              <%= component "shared/table_cell" do %>
                 <%= link_to @author.display_name, admin_user_path(@author.account_name), class: "font-bold text-blue-500 hover:underline" %>
               <% end %>
             <% end %>
-            <%= render Shared::TableRowComponent.new do %>
-              <%= render Shared::TableCellComponent.new(is_header: true) do %>
+            <%= component "shared/table_row" do %>
+              <%= component "shared/table_cell", is_header: true do %>
                 <%= t("models.artwork_canvas.width") %>
               <% end %>
-              <%= render Shared::TableCellComponent.new do %>
+              <%= component "shared/table_cell" do %>
                 <%= @artwork.width_px %>
               <% end %>
             <% end %>
-            <%= render Shared::TableRowComponent.new do %>
-              <%= render Shared::TableCellComponent.new(is_header: true) do %>
+            <%= component "shared/table_row" do %>
+              <%= component "shared/table_cell", is_header: true do %>
                 <%= t("models.artwork_canvas.height") %>
               <% end %>
-              <%= render Shared::TableCellComponent.new do %>
+              <%= component "shared/table_cell" do %>
                 <%= @artwork.height_px %>
               <% end %>
             <% end %>
