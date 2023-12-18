@@ -17,15 +17,17 @@
     <%= render "layouts/alert" %>
     <% if admin_signed_in? %>
       <%= render "layouts/sidebar" %>
-      <div class="h-auto pt-20 lg:ml-64">
+      <div class="pt-20 h-auto lg:ml-64">
         <main class="max-w-[1920px] mx-auto px-3">
           <%= yield %>
         </main>
       </div>
     <% else %>
-      <main class="max-w-[1920px] mx-auto px-3">
-        <%= yield %>
-      </main>
+      <div class="pt-20">
+        <main class="max-w-[1920px] mx-auto px-3">
+          <%= yield %>
+        </main>
+      </div>
     <% end %>
     <%= render "layouts/footer" %>
   </body>

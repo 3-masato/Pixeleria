@@ -5,7 +5,7 @@ class CreateArtworks < ActiveRecord::Migration[6.1]
       t.string      :title,       null: false
       t.text        :description, null: false
       t.boolean     :is_public,   null: false
-      t.text        :vector_data, null: false, default: true
+      t.text        :vector_data, null: false
       t.integer     :width,       null: false
       t.integer     :height,      null: false
 
