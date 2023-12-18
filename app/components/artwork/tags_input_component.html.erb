@@ -4,45 +4,34 @@
     <%= render Shared::ButtonComponent.new(
       style: :outline,
       color: :sky,
+      type: "button",
       id: "add_tag"
     ) do %>
       <i class="fa-solid fa-plus"></i>
     <% end %>
   </div>
   <div id="tags" class="space-y-4">
-    <% @tags.each do |tag| %>
-      <%= render Shared::TextFieldComponent.new(
-        form: @form,
-        field_type: :text_field,
-        field_name: "tags[]",
-        size: :small,
-        name: "artwork[tags][]",
-        id: nil,
-        value: tag,
-      ) %>
-    <% end %>
-    <% if @tags.empty? %>
-      <%= render Shared::TextFieldComponent.new(
-        form: @form,
-        field_type: :text_field,
-        field_name: "tags[]",
-        size: :small,
-        name: "artwork[tags][]",
-        id: nil
-      ) %>
+    <% @tags.each_with_index do |tag, index| %>
+      <%= render Artwork::TagFieldComponent.new(form: @form, tag: tag, index: index) %>
     <% end %>
   </div>
 </div>
 
 <script>
   $("#add_tag").on("click", () => {
-    $("#tags").append("<%= j(render Shared::TextFieldComponent.new(
-      form: @form,
-      field_type: :text_field,
-      field_name: "tags[]",
-      size: :small,
-      name: "artwork[tags][]",
-      id: nil,
-    )) %>");
+    const tags = $("#tags");
+    const uniqueIndex = Date.now();
+    // `uniqueIndex` はJavaScript側のコードのため、コンポーネントに直接 `index` を渡せない。
+    // コンポーネントを文字列として `fieldTemplate` に定義し、`replaceAll` でindexを置き換える。
+    const fieldTemplate = "<%= j(
+      render Artwork::TagFieldComponent.new(form: @form, value: "", index: "%%index%%")
+    ) %>";
+    const newFieldHtml = fieldTemplate.replaceAll("%%index%%", uniqueIndex).trim();
+
+    tags.append(newFieldHtml);
+  });
+
+  $(document).on("click", ".remove-tag", (e) => {
+    e.currentTarget.closest(".tag-field").remove();
   });
 </script>
