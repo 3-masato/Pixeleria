@@ -11,23 +11,9 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="bg-slate-50">
-    <%= render "layouts/header" %>
-    <%= render "layouts/alert" %>
-    <% if admin_signed_in? %>
-      <%= render "layouts/sidebar" %>
-      <div class="pt-20 h-auto lg:ml-64">
-        <main class="max-w-[1920px] mx-auto px-3">
-          <%= yield %>
-        </main>
-      </div>
-    <% else %>
-      <div class="pt-20">
-        <main class="max-w-[1920px] mx-auto px-3">
-          <%= yield %>
-        </main>
-      </div>
+  <body class="bg-slate-50 min-h-screen relative">
+    <%= render "layouts/app_shell" do %>
+      <%= yield %>
     <% end %>
-    <%= render "layouts/footer" %>
   </body>
 </html>

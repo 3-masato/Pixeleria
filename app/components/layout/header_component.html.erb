@@ -1,0 +1,31 @@
+<% if @admin_signed_in %>
+  <header class="w-full h-20 px-6 bg-fuchsia-300 flex justify-between items-center fixed top-0 z-50">
+    <div class="">
+      <%= link_to admin_root_path, class: "text-xl", aria: { label: "Pixeleria admin" } do %>
+        Pixeleria<span class="text-sm ml-2">admin</span>
+      <% end %>
+    </div>
+    <nav class="w-64">
+      <ul class="flex justify-evenly items-center">
+        <% @nav_items.each do |item| %>
+          <%= render Layout::NavItemComponent.new(item: item) %>
+        <% end %>
+      </ul>
+    </nav>
+  </header>
+<% else %>
+  <header class="w-full h-20 px-6 bg-sky-300 flex justify-between items-center">
+    <div class="">
+      <%= link_to root_path, class: "text-xl", aria: { label: "Pixeleria" } do %>
+        Pixeleria
+      <% end %>
+    </div>
+    <nav class="w-64">
+      <ul class="flex justify-evenly items-center">
+        <% @nav_items.each do |item| %>
+          <%= render Layout::NavItemComponent.new(item: item) %>
+        <% end %>
+      </ul>
+    </nav>
+  </header>
+<% end %>

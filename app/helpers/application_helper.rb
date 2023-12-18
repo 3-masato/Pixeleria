@@ -17,7 +17,25 @@ module ApplicationHelper
     end
   end
 
+  ##
+  # サイドバーの各項目の配列を返します。
+  # 現在のところは、管理者がサインインしている場合にのみサイドバー項目を生成します。
+  #
+  # @return [Array<Hash>] サイドバー項目の配列
+  #   @option (Hash) :path [String] サイドバー項目のURLパス。
+  #   @option (Hash) :text [String] サイドバー項目の表示テキスト。
+  #   @option (Hash) :fa_class [String] 項目のアイコンに使用するFont Awesomeのクラス。
+  def sidebar_items
+    if admin_signed_in?
+      admin_sidebar_items
+    end
+  end
+
   private
+  # ================
+  # nav items
+  # ================
+
   def admin_nav_items
     [
       {
@@ -55,6 +73,25 @@ module ApplicationHelper
       {
         path: new_user_registration_path,
         text: t("devise.shared.sign_up")
+      }
+    ]
+  end
+
+  # ================
+  # sidebar items
+  # ================
+
+  def admin_sidebar_items
+    [
+      {
+        path: admin_users_path,
+        text: t("model.user"),
+        fa_class: "fa-solid fa-users"
+      },
+      {
+        path: admin_artworks_path,
+        text: t("model.artwork"),
+        fa_class: "fa-solid fa-palette"
       }
     ]
   end
