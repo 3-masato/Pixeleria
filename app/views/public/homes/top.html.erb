@@ -1,36 +1,38 @@
-<%= component "shared/card", class: "my-10 p-2 sticky top-0 bg-slate-50 z-10" do %>
-  <div class="flex justify-center items-center">
-    <% if user_signed_in? %>
-      <%= component(
-        "shared/button",
-        style: :solid,
-        color: :sky,
-        path: new_artwork_path,
-        class: "w-32"
-      ) do %>
-        描く
+<% unless admin_signed_in? %>
+  <%= component "shared/card", class: "my-10 p-2 sticky top-0 bg-slate-50 z-10" do %>
+    <div class="flex justify-center items-center">
+      <% if user_signed_in? %>
+        <%= component(
+          "shared/button",
+          style: :solid,
+          color: :sky,
+          path: new_artwork_path,
+          class: "w-32"
+        ) do %>
+          描く
+        <% end %>
+      <% else %>
+        <%= component(
+          "shared/button",
+          style: :outline,
+          color: :sky,
+          path: new_user_session_path,
+          class: "w-32"
+        ) do %>
+          <%= t("devise.shared.sign_in") %>
+        <% end %>
+        <%= component(
+          "shared/button",
+          style: :outline,
+          color: :green,
+          path: new_user_registration_path,
+          class: "w-32"
+        ) do %>
+          <%= t("devise.shared.sign_up") %>
+        <% end %>
       <% end %>
-    <% else %>
-      <%= component(
-        "shared/button",
-        style: :outline,
-        color: :sky,
-        path: new_user_session_path,
-        class: "w-32"
-      ) do %>
-        <%= t("devise.shared.sign_in") %>
-      <% end %>
-      <%= component(
-        "shared/button",
-        style: :outline,
-        color: :green,
-        path: new_user_registration_path,
-        class: "w-32"
-      ) do %>
-        <%= t("devise.shared.sign_up") %>
-      <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 <% end %>
 
 <%= component "shared/card", class: "my-10 p-6" do %>

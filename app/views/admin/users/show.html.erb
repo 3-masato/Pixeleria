@@ -1,42 +1,40 @@
-<%= render "admin/layouts/frame" do %>
-  <%= render Shared::TableSectionComponent.new(title: t("user.details")) do %>
-    <%= render Shared::TableComponent.new do %>
-      <%= render Shared::TableBodyComponent.new do %>
-        <%= render Shared::TableRowComponent.new do %>
-          <%= render Shared::TableCellComponent.new(is_header: true) do %>
-            <%= t("activerecord.attributes.user.display_name") %>
-          <% end %>
-          <%= render Shared::TableCellComponent.new do %>
-            <%= @user.display_name %>
-          <% end %>
+<%= component "shared/table_section", title: t("user.details") do %>
+  <%= component "shared/table" do %>
+    <%= component "shared/table_body" do %>
+      <%= component "shared/table_row" do %>
+        <%= component "shared/table_cell", is_header: true do %>
+          <%= t("activerecord.attributes.user.display_name") %>
         <% end %>
-        <%= render Shared::TableRowComponent.new do %>
-          <%= render Shared::TableCellComponent.new(is_header: true) do %>
-            <%= t("activerecord.attributes.user.account_name") %>
-          <% end %>
-          <%= render Shared::TableCellComponent.new do %>
-            <%=  @user.account_name %>
-          <% end %>
+        <%= component "shared/table_cell" do %>
+          <%= @user.display_name %>
         <% end %>
-        <%= render Shared::TableRowComponent.new do %>
-          <%= render Shared::TableCellComponent.new(is_header: true) do %>
-            <%= t("activerecord.attributes.user.introduction") %>
-          <% end %>
-          <%= render Shared::TableCellComponent.new do %>
-            <%= @user.introduction %>
-          <% end %>
+      <% end %>
+      <%= component "shared/table_row" do %>
+        <%= component "shared/table_cell", is_header: true do %>
+          <%= t("activerecord.attributes.user.account_name") %>
         <% end %>
-        <%= render Shared::TableRowComponent.new do %>
-          <%= render Shared::TableCellComponent.new(is_header: true) do %>
-            <%= t("activerecord.attributes.user.status") %>
-          <% end %>
-          <%= render Shared::TableCellComponent.new do %>
-            <%= @user.status %>
-          <% end %>
+        <%= component "shared/table_cell" do %>
+          <%=  @user.account_name %>
+        <% end %>
+      <% end %>
+      <%= component "shared/table_row" do %>
+        <%= component "shared/table_cell", is_header: true do %>
+          <%= t("activerecord.attributes.user.introduction") %>
+        <% end %>
+        <%= component "shared/table_cell" do %>
+          <%= @user.introduction %>
+        <% end %>
+      <% end %>
+      <%= component "shared/table_row" do %>
+        <%= component "shared/table_cell", is_header: true do %>
+          <%= t("activerecord.attributes.user.status") %>
+        <% end %>
+        <%= component "shared/table_cell" do %>
+          <%= @user.status %>
         <% end %>
       <% end %>
     <% end %>
   <% end %>
-
-  <%= render "admin/artworks/list", artworks: @user_artworks, show_author: false %>
 <% end %>
+
+<%= render "admin/artworks/list", artworks: @user_artworks, show_author: false %>

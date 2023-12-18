@@ -13,7 +13,7 @@ class Artwork < ApplicationRecord
   # Artworkレコードを取得する際、デフォルトで新しい作品が先頭に来るようにする。
   default_scope { order(created_at: :desc) }
 
-  scope :with_details, -> { includes(:likes, :comments, image_attachment: :blob, user: { profile_image_attachment: :blob }) }
+  scope :with_details, -> { includes(:likes, :comments, :tags, image_attachment: :blob, user: { profile_image_attachment: :blob }) }
 
   scope :publication, -> { with_details.where(is_public: true) }
 
@@ -50,6 +50,15 @@ class Artwork < ApplicationRecord
 
   def height_px
     "#{artwork_canvas.height}px"
+  end
+
+  def tags=(tags_array)
+    self.tags.clear
+    tags_array.each do |tag_name|
+      next if tag_name.blank?
+      tag = Tag.find_or_create_by(name: tag_name.strip)
+      self.tags << tag unless self.tags.exists?(name: tag_name.strip)
+    end
   end
 
   def self.search(query)

@@ -28,6 +28,9 @@ ja:
     create: 作成
     save: 保存
     submit: 投稿
+    delete: 削除
+    edit: 編集
+    edit_heading: 作品情報編集
     submit_form_title: ドット絵を投稿/保存する
   comment:
     list: コメント一覧
@@ -43,3 +46,7 @@ ja:
       relationships:
         no_followings: "フォローユーザーはいません"
         no_followers: "フォロワーはいません"
+    admin:
+      artwork:
+        update_success: "作品「%{title}」の情報を更新しました"
+        destroy_success: "作品「%{title}」を削除しました"

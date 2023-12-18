@@ -1,0 +1,48 @@
+<div>
+  <div class="flex justify-between items-center">
+    <%= @form.label :tags, @label, class: "block text-sm font-bold mb-2" %>
+    <%= render Shared::ButtonComponent.new(
+      style: :outline,
+      color: :sky,
+      id: "add_tag"
+    ) do %>
+      <i class="fa-solid fa-plus"></i>
+    <% end %>
+  </div>
+  <div id="tags" class="space-y-4">
+    <% @tags.each do |tag| %>
+      <%= render Shared::TextFieldComponent.new(
+        form: @form,
+        field_type: :text_field,
+        field_name: "tags[]",
+        size: :small,
+        name: "artwork[tags][]",
+        id: nil,
+        value: tag,
+      ) %>
+    <% end %>
+    <% if @tags.empty? %>
+      <%= render Shared::TextFieldComponent.new(
+        form: @form,
+        field_type: :text_field,
+        field_name: "tags[]",
+        size: :small,
+        name: "artwork[tags][]",
+        id: nil
+      ) %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $("#add_tag").on("click", () => {
+    $("#tags").append("<%= j(render Shared::TextFieldComponent.new(
+      form: @form,
+      field_type: :text_field,
+      field_name: "tags[]",
+      size: :small,
+      name: "artwork[tags][]",
+      id: nil,
+    )) %>");
+  });
+</script>
