@@ -6,7 +6,8 @@
       t("activerecord.attributes.user.display_name"),
       t("activerecord.attributes.user.account_name"),
       t("activerecord.attributes.user.introduction"),
-      t("activerecord.attributes.user.status")
+      t("activerecord.attributes.user.status"),
+      ""
     ] %>
     <%= component "shared/table_body" do %>
       <% users.each do |user| %>
@@ -27,7 +28,14 @@
             <%= user.introduction %>
           <% end %>
           <%= component "shared/table_cell" do %>
-            <%= user.status %>
+            <%= component "user/status_label", status: 0, text: user.status_i18n %>
+          <% end %>
+          <%= component "shared/table_cell" do %>
+            <div class="grid place-items-center">
+              <%= link_to admin_edit_user_path(user), class: "w-8 h-8 grid place-items-center rounded-sm transition-colors hover:bg-gray-200" do %>
+                <i class="fa-solid fa-sliders"></i>
+              <% end %>
+            </div>
           <% end %>
         <% end %>
       <% end %>
