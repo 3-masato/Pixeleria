@@ -40,6 +40,23 @@
         ) %>
       </fieldset>
 
+      <fieldset class="my-2">
+        <%= component "shared/label", form: f, field: :status %>
+        <div class="flex items-center gap-4">
+          <% User.statuses.keys.each do |status_key| %>
+            <%= component(
+              "shared/radio",
+              form: f,
+              field_name: :status,
+              value: status_key,
+              label_field: "status_#{status_key}",
+              label_text: t("enums.user.status.#{status_key}"),
+              checked: @user.status == status_key
+            ) %>
+          <% end %>
+        </div>
+      </fieldset>
+
       <div class="mt-4 flex justify-center items-center">
         <%= component(
           "shared/button",
