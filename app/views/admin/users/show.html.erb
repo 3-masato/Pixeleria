@@ -35,7 +35,7 @@
               <%= t("activerecord.attributes.user.status") %>
             <% end %>
             <%= component "shared/table_cell" do %>
-              <%= @user.status %>
+              <%= component "user/status_label", status: @user.status_before_type_cast, text: @user.status_i18n %>
             <% end %>
           <% end %>
         <% end %>
