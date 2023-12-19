@@ -1,6 +1,15 @@
 <div>
-  <div class="flex justify-between items-center">
-    <%= @form.label :tags, @label, class: "block text-sm font-bold mb-2" %>
+  <%= @form.label :tags, @label, class: "block text-sm font-bold mb-2" %>
+  <div class="flex items-center mb-2">
+    <div class="grow">
+      <%= render Shared::TextFieldComponent.new(
+        form: @form,
+        field_type: :text_field,
+        field_name: :nil,
+        size: :small,
+        id: "tag_input"
+      ) %>
+    </div>
     <%= render Shared::ButtonComponent.new(
       style: :outline,
       color: :sky,
@@ -10,30 +19,51 @@
       <i class="fa-solid fa-plus"></i>
     <% end %>
   </div>
-  <div id="tags" class="space-y-4">
+  <div id="tags" class="flex flex-wrap gap-x-2 gap-y-3">
     <% @tags.each_with_index do |tag, index| %>
-      <%= render Artwork::TagFieldComponent.new(form: @form, tag: tag, index: index) %>
+      <%= render Artwork::TagFieldComponent.new(form: @form, value: tag, index: index) %>
     <% end %>
   </div>
 </div>
 
 <script>
-  const addTagButton = document.getElementById("add_tag");
-  addTagButton.addEventListener("click", () => {
+  {
+    const tagInput = document.getElementById("tag_input");
+    const addTagButton = document.getElementById("add_tag");
     const tags = document.getElementById("tags");
-    const uniqueIndex = Date.now();
-    // `uniqueIndex` はJavaScript側のコードのため、コンポーネントに直接 `index` を渡せない。
-    // コンポーネントを文字列として `fieldTemplate` に定義し、`replaceAll` でindexを置き換える。
-    const fieldTemplate = "<%= j(
-      render Artwork::TagFieldComponent.new(form: @form, value: "", index: "%%index%%")
-    ) %>";
-    const newFieldHtml = fieldTemplate.replaceAll("%%index%%", uniqueIndex).trim();
-    tags.insertAdjacentHTML("beforeend", newFieldHtml);
-  });
 
-  document.addEventListener("click", ({ target }) => {
-    if (target.closest(".remove-tag")) {
-      target.closest(".tag-field").remove();
-    }
-  }, { capture: true });
+    const addTag = () => {
+      const tagValue = tagInput.value.trim();
+
+      if (tagValue === "") return;
+
+      // `uniqueIndex` はJavaScript側のコードのため、コンポーネントに直接 `index` を渡せない。
+      // コンポーネントを文字列として `fieldTemplate` に定義し、`replaceAll` でindexを置き換える。
+      const fieldTemplate = "<%= j(
+        render Artwork::TagFieldComponent.new(form: @form, value: "%%value%%", index: "%%index%%")
+      ) %>";
+
+      const uniqueIndex = Date.now();
+      const newFieldHtml = fieldTemplate.replaceAll("%%index%%", uniqueIndex).replaceAll("%%value%%", tagValue).trim();
+
+      tags.insertAdjacentHTML("beforeend", newFieldHtml);
+      tagInput.value = "";
+    };
+
+    addTagButton.addEventListener("click", addTag);
+
+    // `tag_input` でのEnterキー押下でタグを追加し、フォームの送信を防止
+    tagInput.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        e.preventDefault(); // フォーム送信の防止
+        addTag();
+      }
+    });
+
+    document.addEventListener("click", ({ target }) => {
+      if (target.closest(".remove-tag")) {
+        target.closest(".tag-field").remove();
+      }
+    }, { capture: true });
+  }
 </script>
