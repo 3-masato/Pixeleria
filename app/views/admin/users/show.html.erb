@@ -45,7 +45,7 @@
           "shared/button",
           style: :outline,
           color: :gray,
-          path: admin_edit_user_path(@user),
+          path: admin_edit_user_path(@user.account_name),
           class: "w-32"
         ) do %>
           <i class="fa-solid fa-sliders"></i><span class="ml-2"><%= t("user.edit") %></span>

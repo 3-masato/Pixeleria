@@ -32,7 +32,7 @@
           <% end %>
           <%= component "shared/table_cell" do %>
             <div class="grid place-items-center">
-              <%= link_to admin_edit_user_path(user), class: "w-8 h-8 grid place-items-center rounded-sm transition-colors hover:bg-gray-200" do %>
+              <%= link_to admin_edit_user_path(user.account_name), class: "w-8 h-8 grid place-items-center rounded-sm transition-colors hover:bg-gray-200" do %>
                 <i class="fa-solid fa-sliders"></i>
               <% end %>
             </div>
