@@ -16,3 +16,9 @@ ja:
     artwork_canvas:
       width: 横幅
       height: 高さ
+  enums:
+    user:
+      status:
+        active: 有効
+        deactivated: 退会
+        suspended: 凍結

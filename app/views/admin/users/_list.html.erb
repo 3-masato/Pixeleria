@@ -1,0 +1,44 @@
+<%= component "shared/table_section", title: t("user.list") do %>
+  <%= component "shared/table" do %>
+    <%= component "shared/table_header", headers: [
+      "#",
+      t("activerecord.attributes.user.prifile_image"),
+      t("activerecord.attributes.user.display_name"),
+      t("activerecord.attributes.user.account_name"),
+      t("activerecord.attributes.user.introduction"),
+      t("activerecord.attributes.user.status"),
+      ""
+    ] %>
+    <%= component "shared/table_body" do %>
+      <% users.each do |user| %>
+        <%= component "shared/table_row" do %>
+          <%= component "shared/table_cell", is_header: true do %>
+            <%= user.id %>
+          <% end %>
+          <%= component "shared/table_cell" do %>
+            <%= image_tag user.get_profile_image, size: "32x32" %>
+          <% end %>
+          <%= component "shared/table_cell" do %>
+            <%= link_to user.display_name, admin_user_path(user.account_name), class: "font-bold text-blue-500 hover:underline" %>
+          <% end %>
+          <%= component "shared/table_cell" do %>
+            <%= user.account_name %>
+          <% end %>
+          <%= component "shared/table_cell" do %>
+            <%= user.introduction %>
+          <% end %>
+          <%= component "shared/table_cell" do %>
+            <%= component "user/status_label", status: 0, text: user.status_i18n %>
+          <% end %>
+          <%= component "shared/table_cell" do %>
+            <div class="grid place-items-center">
+              <%= link_to admin_edit_user_path(user), class: "w-8 h-8 grid place-items-center rounded-sm transition-colors hover:bg-gray-200" do %>
+                <i class="fa-solid fa-sliders"></i>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

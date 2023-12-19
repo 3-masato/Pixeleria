@@ -4,6 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  enum status: {
+    active: 0,
+    deactivated: 1,
+    suspended: 2
+  }
+
   has_one_attached :profile_image
 
   has_many :artworks, dependent: :destroy
