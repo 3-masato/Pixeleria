@@ -38,6 +38,10 @@ class User < ApplicationRecord
     }
   )
 
+  def active_for_authentication?
+    super && (status == "active")
+  end
+
   def get_profile_image
     (profile_image.attached?) ? profile_image : "default-user-icon.jpeg"
   end

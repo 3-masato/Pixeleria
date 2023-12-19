@@ -30,7 +30,8 @@ class Admin::UsersController < ApplicationController
       :display_name,
       :account_name,
       :introduction,
-      :profile_image
+      :profile_image,
+      :status
     )
   end
 end
