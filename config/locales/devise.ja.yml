@@ -74,6 +74,8 @@ ja:
       timeout: セッションがタイムアウトしました。もう一度ログインしてください。
       unauthenticated: ログインもしくはアカウント登録してください。
       unconfirmed: メールアドレスの本人確認が必要です。
+      deactivated: このアカウントは退会済みです。新しく登録してください。
+      suspended: アカウントが凍結されています。
     mailer:
       confirmation_instructions:
         action: メールアドレスの確認
