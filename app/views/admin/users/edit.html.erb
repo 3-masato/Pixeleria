@@ -3,7 +3,8 @@
   <div class="mt-6 mx-auto w-96">
     <%= form_with model: @user, url: admin_update_user_path(@user.account_name), local: true do |f| %>
       <fieldset class="my-2">
-        <%= f.file_field :profile_image, accept: "image/*" %>
+        <%= component "shared/label", form: f, field: :profile_image %>
+        <%= component "shared/file_input", form: f, field_name: :profile_image, accept: "image/*" %>
       </fieldset>
 
       <fieldset class="my-2">
