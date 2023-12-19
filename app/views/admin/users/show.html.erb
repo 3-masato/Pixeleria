@@ -1,40 +1,58 @@
 <%= component "shared/table_section", title: t("user.details") do %>
-  <%= component "shared/table" do %>
-    <%= component "shared/table_body" do %>
-      <%= component "shared/table_row" do %>
-        <%= component "shared/table_cell", is_header: true do %>
-          <%= t("activerecord.attributes.user.display_name") %>
-        <% end %>
-        <%= component "shared/table_cell" do %>
-          <%= @user.display_name %>
+  <div class="p-6 flex flex-col gap-4 lg:flex-row">
+    <div class="flex justify-center">
+      <%= image_tag @user.get_profile_image, size: "256x256", style: "image-rendering: pixelated" %>
+    </div>
+    <div class="overflow-auto grow">
+      <%= component "shared/table" do %>
+        <%= component "shared/table_body" do %>
+          <%= component "shared/table_row" do %>
+            <%= component "shared/table_cell", is_header: true do %>
+              <%= t("activerecord.attributes.user.display_name") %>
+            <% end %>
+            <%= component "shared/table_cell" do %>
+              <%= @user.display_name %>
+            <% end %>
+          <% end %>
+          <%= component "shared/table_row" do %>
+            <%= component "shared/table_cell", is_header: true do %>
+              <%= t("activerecord.attributes.user.account_name") %>
+            <% end %>
+            <%= component "shared/table_cell" do %>
+              <%=  @user.account_name %>
+            <% end %>
+          <% end %>
+          <%= component "shared/table_row" do %>
+            <%= component "shared/table_cell", is_header: true do %>
+              <%= t("activerecord.attributes.user.introduction") %>
+            <% end %>
+            <%= component "shared/table_cell" do %>
+              <%= @user.introduction %>
+            <% end %>
+          <% end %>
+          <%= component "shared/table_row" do %>
+            <%= component "shared/table_cell", is_header: true do %>
+              <%= t("activerecord.attributes.user.status") %>
+            <% end %>
+            <%= component "shared/table_cell" do %>
+              <%= component "user/status_label", status: @user.status_before_type_cast, text: @user.status_i18n %>
+            <% end %>
+          <% end %>
         <% end %>
       <% end %>
-      <%= component "shared/table_row" do %>
-        <%= component "shared/table_cell", is_header: true do %>
-          <%= t("activerecord.attributes.user.account_name") %>
+      <div class="mt-10 flex justify-evenly">
+        <%= component(
+          "shared/button",
+          style: :outline,
+          color: :gray,
+          path: admin_edit_user_path(@user),
+          class: "w-32"
+        ) do %>
+          <i class="fa-solid fa-sliders"></i><span class="ml-2"><%= t("user.edit") %></span>
         <% end %>
-        <%= component "shared/table_cell" do %>
-          <%=  @user.account_name %>
-        <% end %>
-      <% end %>
-      <%= component "shared/table_row" do %>
-        <%= component "shared/table_cell", is_header: true do %>
-          <%= t("activerecord.attributes.user.introduction") %>
-        <% end %>
-        <%= component "shared/table_cell" do %>
-          <%= @user.introduction %>
-        <% end %>
-      <% end %>
-      <%= component "shared/table_row" do %>
-        <%= component "shared/table_cell", is_header: true do %>
-          <%= t("activerecord.attributes.user.status") %>
-        <% end %>
-        <%= component "shared/table_cell" do %>
-          <%= @user.status %>
-        <% end %>
-      <% end %>
-    <% end %>
-  <% end %>
+      </div>
+    </div>
+  </div>
 <% end %>
 
 <%= render "admin/artworks/list", artworks: @user_artworks, show_author: false %>

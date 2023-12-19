@@ -28,7 +28,7 @@
             <%= user.introduction %>
           <% end %>
           <%= component "shared/table_cell" do %>
-            <%= component "user/status_label", status: 0, text: user.status_i18n %>
+            <%= component "user/status_label", status: user.status_before_type_cast, text: user.status_i18n %>
           <% end %>
           <%= component "shared/table_cell" do %>
             <div class="grid place-items-center">
