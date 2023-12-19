@@ -18,8 +18,9 @@
 </div>
 
 <script>
-  $("#add_tag").on("click", () => {
-    const tags = $("#tags");
+  const addTagButton = document.getElementById("add_tag");
+  addTagButton.addEventListener("click", () => {
+    const tags = document.getElementById("tags");
     const uniqueIndex = Date.now();
     // `uniqueIndex` はJavaScript側のコードのため、コンポーネントに直接 `index` を渡せない。
     // コンポーネントを文字列として `fieldTemplate` に定義し、`replaceAll` でindexを置き換える。
@@ -27,11 +28,12 @@
       render Artwork::TagFieldComponent.new(form: @form, value: "", index: "%%index%%")
     ) %>";
     const newFieldHtml = fieldTemplate.replaceAll("%%index%%", uniqueIndex).trim();
-
-    tags.append(newFieldHtml);
+    tags.insertAdjacentHTML("beforeend", newFieldHtml);
   });
 
-  $(document).on("click", ".remove-tag", (e) => {
-    e.currentTarget.closest(".tag-field").remove();
-  });
+  document.addEventListener("click", ({ target }) => {
+    if (target.closest(".remove-tag")) {
+      target.closest(".tag-field").remove();
+    }
+  }, { capture: true });
 </script>
