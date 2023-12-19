@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   namespace :admin do
     root "homes#top"
 
-    get "users",                    to: "users#index",  as: :users
-    get "users/:account_name",      to: "users#show",   as: :user
-    get "users/:account_name/edit", to: "users#edit",   as: :edit_user
+    get   "users",                    to: "users#index",  as: :users
+    get   "users/:account_name",      to: "users#show",   as: :user
+    get   "users/:account_name/edit", to: "users#edit",   as: :edit_user
+    patch "users/:account_name",      to: "users#update", as: :update_user
 
     resources :artworks, only: %i[index show edit update destroy]
   end

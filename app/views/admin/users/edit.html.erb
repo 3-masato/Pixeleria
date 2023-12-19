@@ -1,4 +1,56 @@
-<div>
-  <h1 class="font-bold text-4xl">Admin::Users#edit</h1>
-  <p>Find me in app/views/admin/users/edit.html.erb</p>
-</div>
+<%= component "shared/card", class: "my-10 p-6" do %>
+  <%= tag.h2 t("user.edit_heading"), class: "text-2xl font-bold" %>
+  <div class="mt-6 mx-auto w-96">
+    <%= form_with model: @user, url: admin_update_user_path(@user.account_name), local: true do |f| %>
+      <fieldset class="my-2">
+        <%= component "shared/label", form: f, field: :profile_image %>
+        <%= component "shared/file_input", form: f, field_name: :profile_image, accept: "image/*" %>
+      </fieldset>
+
+      <fieldset class="my-2">
+        <%= component "shared/label", form: f, field: :display_name %>
+        <%= component(
+          "shared/text_field",
+          form: f,
+          field_type: :text_field,
+          field_name: :display_name,
+          size: :small
+        ) %>
+      </fieldset>
+
+      <fieldset class="my-2">
+        <%= component "shared/label", form: f, field: :account_name %>
+        <%= component(
+          "shared/text_field",
+          form: f,
+          field_type: :text_field,
+          field_name: :account_name,
+          size: :small
+        ) %>
+       </fieldset>
+
+      <fieldset class="my-2">
+        <%= component "shared/label", form: f, field: :introduction %>
+        <%= component(
+          "shared/text_area",
+          form: f,
+          field_name: :introduction,
+          rows: 3,
+          placeholder: "",
+        ) %>
+      </fieldset>
+
+      <div class="mt-4 flex justify-center items-center">
+        <%= component(
+          "shared/button",
+          style: :outline,
+          color: :sky,
+          type: :submit,
+          class: "w-36 h-10"
+        ) do %>
+          <%= t("user.update") %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
