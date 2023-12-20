@@ -8,6 +8,6 @@ class Admin::CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to request.referer
+    redirect_to request.referer, notice: t("messages.admin.comment.destroy_success")
   end
 end

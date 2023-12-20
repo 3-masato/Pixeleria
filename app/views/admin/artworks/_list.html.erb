@@ -8,6 +8,8 @@
       t("models.artwork.description"),
       t("models.artwork.tags"),
       "",
+      "",
+      "",
       ""
     ].compact %>
     <%= component "shared/table_body" do %>
@@ -33,11 +35,19 @@
             </div>
           <% end %>
           <%= component "shared/table_cell" do %>
-            <% artwork.tags.each do |tag| %>
-              <span class="text-xs inline-block">
-                <%= tag.name %>
-              </span>
-            <% end %>
+            <div class="truncate max-w-[24rem]">
+              <% artwork.tags.each do |tag| %>
+                <span class="text-xs inline-block">
+                  <%= tag.name %>
+                </span>
+              <% end %>
+            </div>
+          <% end %>
+          <%= component "shared/table_cell" do %>
+            <%= component "interaction/like_count", count: artwork.likes.size %>
+          <% end %>
+          <%= component "shared/table_cell" do %>
+            <%= component "interaction/comment_count", count: artwork.comments.size %>
           <% end %>
           <%= component "shared/table_cell" do %>
             <div class="grid place-items-center">

@@ -48,8 +48,11 @@ ja:
         no_followings: "フォローユーザーはいません"
         no_followers: "フォロワーはいません"
     admin:
+      user:
+        update_success: "ユーザー情報を更新しました"
       artwork:
         update_success: "作品「%{title}」の情報を更新しました"
         destroy_success: "作品「%{title}」を削除しました"
-      user:
-        update_success: "プロフィールを更新しました"
+      comment:
+        destroy_success: "コメントを削除しました"
+
