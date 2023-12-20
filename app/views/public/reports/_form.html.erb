@@ -1,0 +1,45 @@
+<%= form_with model: report, local: false do |f| %>
+  <div class="grid gap-y-4">
+    <%= f.hidden_field :target, value: @target %>
+    <%= f.hidden_field :target_id, value: @target_id %>
+    <div>
+      <%= component "shared/label", form: f, field: :reason, text: t("models.report.reason") %>
+      <div class="flex flex-col gap-2">
+        <% Report.reasons.keys.each_with_index do |reason_key, index| %>
+          <%= component(
+            "shared/radio",
+            form: f,
+            field_name: :reason,
+            value: reason_key,
+            label_field: "reason_#{reason_key}",
+            label_text: t("enums.report.reason.#{reason_key}"),
+            checked: index == 0
+          ) %>
+        <% end %>
+      </div>
+    </div>
+
+    <div>
+      <%= component "shared/label", form: f, field: :description, text: t("models.report.description") %>
+      <%= component(
+        "shared/text_area",
+        form: f,
+        field_name: :description,
+        rows: 3,
+        placeholder: "",
+      ) %>
+    </div>
+
+    <div class="mt-4 flex justify-center items-center">
+      <%= component(
+        "shared/button",
+        style: :outline,
+        color: :red,
+        type: :submit,
+        class: "w-36 h-10"
+      ) do %>
+        <%= t("report.submit") %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -37,6 +37,12 @@ ja:
     list: コメント一覧
     send: 送信
     delete: 削除
+  report:
+    headings:
+      user: "ユーザーを通報する"
+      artwork: "投稿作品を通報する"
+      comment: "コメントを通報する"
+    submit: 通報する
   messages:
     user:
       auth:
@@ -55,4 +61,3 @@ ja:
         destroy_success: "作品「%{title}」を削除しました"
       comment:
         destroy_success: "コメントを削除しました"
-

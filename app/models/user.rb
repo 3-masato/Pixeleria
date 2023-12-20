@@ -12,18 +12,16 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
-  has_many :artworks, dependent: :destroy
-  has_many :likes, dependent: :destroy
-  has_many :comments, dependent: :destroy
+  has_many :artworks,       dependent: :destroy
+  has_many :likes,          dependent: :destroy
+  has_many :comments,       dependent: :destroy
+  has_many :liked_artworks, through:   :likes,     source: :artwork
+  has_many :reports,        as:        :reportable
 
-  has_many :reports, as: :reportable
-
-  has_many :liked_artworks, through: :likes, source: :artwork
-
-  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :active_relationships,  class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
-  has_many :followings, through: :active_relationships, source: :followed
-  has_many :followers, through: :passive_relationships, source: :follower
+  has_many :followings,            through: :active_relationships,  source: :followed
+  has_many :followers,             through: :passive_relationships, source: :follower
 
   validates :display_name, presence: true
   validates(

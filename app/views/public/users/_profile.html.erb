@@ -1,5 +1,18 @@
 <section class="border-b border-gray-300">
-  <div class="grid grid-cols-1 items-center md:grid-cols-3">
+  <div class="flex justify-end lg:h-0">
+    <%= render Shared::KebabComponent.new do %>
+      <menu class="text-sm">
+        <li>
+          <div class="block py-2 px-7 duration-50 transition-colors hover:bg-gray-400/10">
+            <%= button_to url_for({ action: :make, controller: :reports }), method: :post, remote: true, params: { target: :user, target_id: user.id } do %>
+              <span class="whitespace-nowrap"><i class="fa-regular fa-flag mr-2"></i>通報</span>
+            <% end %>
+          </div>
+        </li>
+      </menu>
+    <% end %>
+  </div>
+  <div class="grid grid-cols-1 items-center lg:grid-cols-3">
     <div class="grid grid-cols-3 text-center">
       <%= component(
         "user/stat_link",
@@ -40,6 +53,7 @@
         <% end %>
       <% end %>
     </div>
+
   </div>
   <div class="mt-16 text-center pb-12">
     <div class="flex justify-center items-center">

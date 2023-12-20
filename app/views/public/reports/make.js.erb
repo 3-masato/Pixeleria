@@ -1,0 +1,22 @@
+{
+  const toggleVisibility = (visibility) => {
+    const value = visibility ? "visible" : "hidden";
+    $("#form-modal").attr("data-visibility", value);
+    $("#form-modal-backdrop").attr("data-visibility", value);
+  };
+
+  const close = () => {
+    toggleVisibility(false);
+  };
+
+  // イベントが重複して登録されるのを防止。
+  $("#modal-close-button").one("click", close);
+
+  setTimeout(() => {
+    toggleVisibility(true);
+  }, 0);
+
+
+  $("#modal-title").html("<%= j(t("report.headings.#{@target}")) %>");
+  $("#modal-content").html("<%= j(render "public/reports/form", report: @report) %>");
+}
