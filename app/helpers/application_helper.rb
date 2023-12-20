@@ -92,6 +92,11 @@ module ApplicationHelper
         path: admin_artworks_path,
         text: t("model.artwork"),
         fa_class: "fa-solid fa-palette"
+      },
+      {
+        path: admin_comments_path,
+        text: t("model.comment"),
+        fa_class: "fa-solid fa-comments"
       }
     ]
   end

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     patch "users/:account_name",      to: "users#update", as: :update_user
 
     resources :artworks, only: %i[index show edit update destroy]
+    resources :comments, only: %i[index destroy]
   end
 
   # 一般ユーザー

@@ -16,6 +16,8 @@ ja:
     artwork_canvas:
       width: 横幅
       height: 高さ
+    comment:
+      content: 内容
   enums:
     user:
       status:
