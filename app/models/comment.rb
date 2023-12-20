@@ -6,6 +6,7 @@ class Comment < ApplicationRecord
   default_scope { order(created_at: :desc) }
 
   scope :with_user_profile_images, -> { includes(user: { profile_image_attachment: :blob }) }
+  scope :with_artwork_images, -> { includes(:artwork => {image_attachment: :blob}) }
 
   validates :content, presence: true
 end

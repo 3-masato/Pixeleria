@@ -8,6 +8,9 @@ class Admin::ArtworksController < ApplicationController
   def show
     @author = @artwork.user
     @author_artworks = @author.artworks.with_details.page(params[:page])
+    @artwork_comments = @artwork.comments.page(params[:page])
+      .with_user_profile_images
+      .with_artwork_images
   end
 
   def edit
