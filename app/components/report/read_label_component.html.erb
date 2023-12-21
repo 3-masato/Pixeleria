@@ -1,0 +1,5 @@
+<%= render Shared::BadgeComponent.new(color: badge_color, large: false, border: false, rounded: false) do %>
+  <%= render Utils::IconTextComponent.new(fa_class: fa_class) do %>
+    <%= label_text %>
+  <% end %>
+<% end %>
