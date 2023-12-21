@@ -5,6 +5,7 @@ ja:
     comment: コメント
     like: いいね
     tag: タグ
+    report: 通報
   models:
     artwork:
       image: 画像
@@ -18,9 +19,20 @@ ja:
       height: 高さ
     comment:
       content: 内容
+    report:
+      reason: 通報理由
+      description: 通報内容
   enums:
     user:
       status:
         active: 有効
         deactivated: 退会
         suspended: 凍結
+    report:
+      reason:
+        malicious_expression: 悪意のある表現
+        inappropriate_content: 不適切なコンテンツ
+        misinformation: 誤った情報
+        commercial_purposes: 商業目的
+        spam: スパム
+        other: その他

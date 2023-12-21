@@ -55,5 +55,11 @@ Rails.application.routes.draw do
       resource  :likes,     only: %i[create destroy], defaults: { format: "js" }
       resources :comments,  only: %i[create destroy], defaults: { format: "js" }
     end
+
+    resources :reports, only: :create do
+      collection do
+        post :make, defaults: { format: "js" }
+      end
+    end
   end
 end
