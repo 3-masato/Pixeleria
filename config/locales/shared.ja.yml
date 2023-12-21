@@ -43,6 +43,13 @@ ja:
       artwork: "投稿作品を通報する"
       comment: "コメントを通報する"
     submit: 通報する
+    list: 通報一覧
+    target:
+      user: ユーザー
+      artwork: 投稿作品
+      comment: コメント
+    read: 既読
+    unread: 未読
   messages:
     user:
       auth:

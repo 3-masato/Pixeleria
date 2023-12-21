@@ -97,6 +97,11 @@ module ApplicationHelper
         path: admin_comments_path,
         text: t("model.comment"),
         fa_class: "fa-solid fa-comments"
+      },
+      {
+        path: admin_reports_path,
+        text: t("model.report"),
+        fa_class: "fa-solid fa-flag"
       }
     ]
   end

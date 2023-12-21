@@ -20,8 +20,11 @@ ja:
     comment:
       content: 内容
     report:
+      reportable_type: 通報対象
+      reported_by_user_id: 通報者
       reason: 通報理由
       description: 通報内容
+      status: ステータス
   enums:
     user:
       status:
@@ -36,3 +39,7 @@ ja:
         commercial_purposes: 商業目的
         spam: スパム
         other: その他
+      status:
+        pending: 未着手
+        processing: 対応中
+        resolved: 解決済
