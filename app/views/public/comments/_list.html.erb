@@ -4,12 +4,12 @@
       <% user = comment.user %>
       <div class="flex space-x-2">
         <div class="min-w-[32px]">
-          <%= image_tag user.get_profile_image, size: "32x32", class: "rounded-full" %>
+          <%= image_tag user.get_profile_image, width: 32, height: 32, class: "m-0 rounded-full" %>
         </div>
         <div class="grow">
           <div>
-            <%= link_to user.display_name, user_profile_path(user.account_name), class: "font-bold font-sm hover:text-blue-500" %>
-            <span class="text-gray-500 font-xs"><%= "@" + user.account_name %></span>
+            <%= link_to user.display_name, user_profile_path(user.account_name), class: "font-bold text-md no-underline hover:text-blue-500 hover:underline" %>
+            <span class="text-gray-500 text-xs"><%= "@" + user.account_name %></span>
           </div>
           <div class="font-sm">
             <%= comment.content %>
