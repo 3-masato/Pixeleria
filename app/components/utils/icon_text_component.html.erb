@@ -1,0 +1,5 @@
+<%= tag.span class: @base_class do %>
+  <%= tag.i class: @fa_class if @position == :left %>
+  <%= tag.span content, class: content_class %>
+  <%= tag.i class: @fa_class if @position == :right %>
+<% end %>
