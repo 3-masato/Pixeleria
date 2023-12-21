@@ -1,0 +1,6 @@
+{
+  const statusLabel = document.getElementById("status-label");
+  statusLabel.innerHTML = `<%=
+    j(component "report/status_label", report: @report, type: :selecting)
+  %>`;
+}

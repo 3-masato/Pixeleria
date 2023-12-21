@@ -36,7 +36,7 @@
             </div>
           <% end %>
           <%= component "shared/table_cell" do %>
-            <%= component "report/status_label", status: report.status_before_type_cast, text: report.status_i18n %>
+            <%= component "report/status_label", report: report %>
           <% end %>
         <% end %>
       <% end %>

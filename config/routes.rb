@@ -14,7 +14,11 @@ Rails.application.routes.draw do
 
     resources :artworks, only: %i[index show edit update destroy]
     resources :comments, only: %i[index destroy]
-    resources :reports,  only: %i[index show edit update]
+    resources :reports,  only: %i[index show edit update] do
+      member do
+        post :update_status
+      end
+    end
   end
 
   # 一般ユーザー

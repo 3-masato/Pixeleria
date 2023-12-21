@@ -1,5 +1,5 @@
 class Admin::ReportsController < ApplicationController
-  before_action :set_report, only: %i[show edit update]
+  before_action :set_report, only: %i[show edit update update_status]
 
   def index
     @reports = Report.page(params[:page])
@@ -15,6 +15,16 @@ class Admin::ReportsController < ApplicationController
   def update
     if @report.update(report_params)
     else
+    end
+  end
+
+  def update_status
+    if @report.update(status: params[:status])
+      respond_to do |format|
+        format.js
+      end
+    else
+
     end
   end
 
