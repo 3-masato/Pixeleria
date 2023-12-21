@@ -4,14 +4,12 @@
       <%= image_tag @artwork.image, size: "512x512", style: "image-rendering: pixelated" %>
     </div>
     <div class="flex">
-      <div class="grow">
-        <div>
-          <%= tag.div @artwork.title, class: "font-bold text-lg" %>
-          <div>
-            <% @artwork.tags.each do |tag| %>
-              <span class="text-sm inline-block"><%= tag.name %></span>
-            <% end %>
-          </div>
+      <div class="grow space-y-2">
+        <%= tag.div @artwork.title, class: "font-bold text-lg" %>
+        <div class="flex gap-2">
+          <% @artwork.tags.each do |tag| %>
+            <%= component "artwork/tag", tag: tag, path: artworks_path(tag: tag.name) %>
+          <% end %>
         </div>
         <p class="min-h-[3rem]">
           <%= @artwork.description %>

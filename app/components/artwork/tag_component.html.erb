@@ -1,0 +1,5 @@
+<%= link_to @path do %>
+  <%= render Shared::BadgeComponent.new(color: :sky, large: false, border: false, rounded: false) do %>
+    <%= @tag.name %>
+  <% end %>
+<% end %>

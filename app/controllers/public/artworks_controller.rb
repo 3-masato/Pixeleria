@@ -5,8 +5,13 @@ class Public::ArtworksController < ApplicationController
   BASE_CANVAS_SIZE = 768
 
   def index
-    @query = params[:query] || ""
-    @artworks = @query != "" ? Artwork.search(@query) : Artwork.with_publication
+    if params[:tag].present?
+      @tag = Tag.find_by(name: params[:tag])
+      @artworks = @artworks = @tag.artworks.with_publication
+    else
+      @query = params[:query] || ""
+      @artworks = @query != "" ? Artwork.search(@query) : Artwork.with_publication
+    end
 
     respond_to do |format|
       format.html
