@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class Report::StatusLabelComponent < ViewComponent::Base
-  def initialize(status:, text:)
-    @status = status
-    @text = text
+  def initialize(report:, type: :static)
+    @report = report
+    @type = type
   end
 
   def per_status_badge
-    case @status
+    case @report.status_before_type_cast
     when 0
       # pending / 未着手
       # 注意や待機を表すため `yellow` を使う
@@ -24,6 +24,25 @@ class Report::StatusLabelComponent < ViewComponent::Base
       # other
       # エラー防止用、通常は使用しない
       Shared::BadgeComponent.new(color: :none, large: false, border: true, rounded: true)
+    end
+  end
+
+  def fa_class
+    case @report.status_before_type_cast
+    when 0
+      "fa-regular fa-hourglass-half"
+    when 1
+      "fa-solid fa-arrows-spin"
+    when 2
+      "fa-solid fa-check"
+    else
+      "fa-solid fa-minus"
+    end
+  end
+
+  def report_status_options
+    Report.statuses.map do |key, _value|
+      [t("enums.report.status.#{key}"), key]
     end
   end
 end

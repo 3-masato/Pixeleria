@@ -1,3 +1,31 @@
-<%= render per_status_badge do %>
-  <%= @text %>
-<% end %>
+<div class="w-20 flex" data-controller="report-status" data-report-status-id-value="<%= @report.id %>">
+  <%= render per_status_badge do %>
+    <% if @type == :selecting %>
+      <%= form_with model: [:admin, @report], local: false do |f| %>
+        <%= f.label :status do %>
+          <span class="-mr-4 ml-1">
+            <%= tag.i class: fa_class %>
+          </span>
+          <%= f.select(
+            :status,
+            report_status_options,
+            { selected: @report.status },
+            {
+              id: "report-status-select",
+              remote: true,
+              data: {
+                "report-status-target": "select",
+                "action": "report-status#change",
+              },
+              class: "text-xs py-0.5 px-6 bg-transparent bg-[right_0_center] border-0 outline-0 focus:ring-0"
+            }
+          ) %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= render Utils::IconTextComponent.new(fa_class: fa_class) do %>
+        <%= @report.status_i18n %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
