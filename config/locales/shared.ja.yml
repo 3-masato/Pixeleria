@@ -37,12 +37,25 @@ ja:
     list: コメント一覧
     send: 送信
     delete: 削除
+    details: コメント詳細
   report:
     headings:
       user: "ユーザーを通報する"
       artwork: "投稿作品を通報する"
       comment: "コメントを通報する"
     submit: 通報する
+    list: 通報一覧
+    details: 通報詳細
+    target:
+      user: ユーザー
+      artwork: 投稿作品
+      comment: コメント
+    target_details:
+      reported_user_details: 通報されたユーザーの詳細
+      reported_artwork_details: 通報された投稿作品の詳細
+      reported_comment_details: 通報されたコメントの詳細
+    read: 既読
+    unread: 未読
   messages:
     user:
       auth:

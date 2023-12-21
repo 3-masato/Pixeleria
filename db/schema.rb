@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 2023_12_20_140610) do
     t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_read", default: false
     t.index ["reportable_type", "reportable_id"], name: "index_reports_on_reportable"
   end
 
