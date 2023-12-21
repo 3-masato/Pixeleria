@@ -60,10 +60,6 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-  def guest_user?
-    email == GUEST_USER_EMAIL
-  end
-
   def self.guest
     guest_email = "guest_#{SecureRandom.hex(10)}@example.com"
     guest_account_name = "guest_#{SecureRandom.alphanumeric(16)}"

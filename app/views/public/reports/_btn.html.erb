@@ -1,0 +1,11 @@
+<%= button_to(
+  url_for({ action: :make, controller: :reports }),
+  method: :post,
+  remote: true,
+  params: { target: target, target_id: target_id },
+  form_class: "grid"
+) do %>
+  <%= component "utils/icon_text", fa_class: "fa-regular fa-flag", class: "py-2 px-3" do %>
+    <%= t("model.report") %>
+  <% end %>
+<% end %>

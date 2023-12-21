@@ -5,6 +5,7 @@ ja:
     comment: コメント
     like: いいね
     tag: タグ
+    report: 通報
   models:
     artwork:
       image: 画像

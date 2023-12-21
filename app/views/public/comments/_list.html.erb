@@ -1,22 +1,50 @@
-<div class="my-3 space-y-4 max-h-[512px] overflow-y-auto">
-  <% comments.each do |comment| %>
-    <% user = comment.user %>
-    <div class="flex space-x-2">
-      <div class="min-w-[32px]">
-        <%= image_tag user.get_profile_image, size: "32x32", class: "rounded-full" %>
-      </div>
-      <div class="grow">
+<div class="my-3 max-h-[512px] h-[512px] overflow-y-auto">
+  <div class="space-y-4">
+    <% comments.each do |comment| %>
+      <% user = comment.user %>
+      <div class="flex space-x-2">
+        <div class="min-w-[32px]">
+          <%= image_tag user.get_profile_image, size: "32x32", class: "rounded-full" %>
+        </div>
+        <div class="grow">
+          <div>
+            <%= link_to user.display_name, user_profile_path(user.account_name), class: "font-bold font-sm hover:text-blue-500" %>
+            <span class="text-gray-500 font-xs"><%= "@" + user.account_name %></span>
+          </div>
+          <div class="font-sm">
+            <%= comment.content %>
+          </div>
+        </div>
         <div>
-          <%= link_to user.display_name, user_profile_path(user.account_name), class: "font-bold font-sm hover:text-blue-500" %>
-          <span class="text-gray-500 font-xs"><%= "@" + user.account_name %></span>
-        </div>
-        <div class="font-sm">
-          <%= comment.content %>
+          <% if user == current_user %>
+            <%= render Shared::KebabComponent.new do %>
+              <menu class="py-1 text-sm">
+                <li>
+                  <div class="block w-32 duration-50 transition-colors hover:bg-gray-400/10 text-red-500 hover:bg-red-400/10">
+                    <%= link_to artwork_comment_path(@artwork, comment), method: :delete, remote: true, class: "grid items-center w-full h-full" do %>
+                      <%= component "utils/icon_text", fa_class: "fa-solid fa-trash-can", class: "py-2 px-3" do %>
+                        <%= t("comment.delete") %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </li>
+              </menu>
+            <% end %>
+          <% elsif current_user&.is_guest == false %>
+            <%= render Shared::KebabComponent.new do %>
+              <menu class="py-1 text-sm">
+                <li>
+                  <div class="block w-32 duration-50 transition-colors hover:bg-gray-400/10">
+                    <%= render "public/reports/btn", target: :comment, target_id: comment.id %>
+                  </div>
+                </li>
+              </menu>
+            <% end %>
+          <% end %>
         </div>
       </div>
-      <% if comment.user == current_user %>
-        <%= link_to t("comment.delete"), artwork_comment_path(@artwork, comment), method: :delete, remote: true, class: "text-red-500" %>
-      <% end %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
+  <div class="my-12">
+  </div>
 </div>
