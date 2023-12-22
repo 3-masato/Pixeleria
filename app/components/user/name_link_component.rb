@@ -23,6 +23,8 @@ class User::NameLinkComponent < ViewComponent::Base
   private
   def text_sizes
     case @size
+    when :xxl
+      ["text-2xl", "text-xl"]
     when :xl
       ["text-xl", "text-lg"]
     when :lg

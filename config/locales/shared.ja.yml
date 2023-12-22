@@ -67,6 +67,8 @@ ja:
       relationships:
         no_followings: "フォローユーザーはいません"
         no_followers: "フォロワーはいません"
+      artworks:
+        no_artworks: "投稿作品はありません"
     comment:
       required_sign_in: "コメントを投稿するにはログインもしくはアカウント新規登録をしてください"
     admin:

@@ -36,6 +36,8 @@ class User < ApplicationRecord
     }
   )
 
+  scope :with_details, -> { includes(:followings, :followers, profile_image_attachment: :blob) }
+
   def active_for_authentication?
     super && (status == "active")
   end
@@ -45,19 +47,15 @@ class User < ApplicationRecord
   end
 
   def follow(user)
-    unless following?(user)
-      active_relationships.create(followed_id: user.id)
-    end
+    active_relationships.create(followed_id: user.id) unless following?(user)
   end
 
   def unfollow(user)
-    if following?(user)
-      active_relationships.find_by(followed_id: user.id).destroy
-    end
+    active_relationships.find_by(followed_id: user.id)&.destroy
   end
 
   def following?(user)
-    followings.include?(user)
+    active_relationships.exists?(followed_id: user.id)
   end
 
   def self.guest

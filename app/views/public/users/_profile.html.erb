@@ -34,7 +34,7 @@
       ) %>
     </div>
     <div class="flex justify-center items-center p-4">
-      <%= image_tag user.get_profile_image, size: "128x128", class: "rounded-full shadow-xl" %>
+      <%= component "user/avatar", user: user, size: :xl %>
     </div>
     <div class="flex justify-center items-center">
       <% if user == current_user %>
@@ -55,12 +55,7 @@
     </div>
   </div>
   <div class="mt-16 text-center pb-12">
-    <div class="flex justify-center items-center">
-      <%= tag.span user.display_name, class: "text-2xl font-bold text-gray-700 mr-1" %>
-      <%= tag.span "@" + user.account_name, class: "text-lg font-normal text-gray-400" %>
-    </div>
-    <p class="mx-auto w-[48rem] max-w-full whitespace-pre-line text-left">
-      <%= user.introduction %>
-    </p>
+    <%= component "user/name_link", user: user, size: :xxl %>
+    <%= tag.p user.introduction, class: "mx-auto w-[44rem] max-w-full text-left whitespace-pre-line" %>
   </div>
 </section>
