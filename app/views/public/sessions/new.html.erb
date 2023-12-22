@@ -1,6 +1,4 @@
-<%= render Layout::AuthFormComponent.new(
-  heading: t("devise.shared.sign_in")
-) do %>
+<%= component "layout/auth/form", heading: t("devise.shared.sign_in") do %>
   <%= form_with(
     model: resource,
     url: session_path(resource_name),
@@ -8,26 +6,32 @@
   ) do |f| %>
     <div class="grid gap-y-4">
       <div>
-        <%= f.label :email, class: "block text-sm font-bold mb-2" %>
-        <%= render Shared::TextFieldComponent.new(
+        <%= component "shared/form/label", form: f, field: :email %>
+        <%= component(
+          "shared/form/text_field",
           form: f,
           field_type: :email_field,
           field_name: :email,
           autofocus: true,
-          autocomplete: "email"
+          autocomplete: "email",
+          placeholder: t("placeholder.email"),
+          model: resource
         ) %>
       </div>
       <div>
-        <%= f.label :password, class: "block text-sm font-bold mb-2" %>
-        <%= render Shared::TextFieldComponent.new(
+        <%= component "shared/form/label", form: f, field: :password %>
+        <%= component(
+          "shared/form/text_field",
           form: f,
           field_type: :password_field,
           field_name: :password,
-          autocomplete: "current-password"
+          autocomplete: "current-password",
+          model: resource
         ) %>
         <% if devise_mapping.rememberable? %>
           <div class="mt-2 text-sm">
-            <%= render Shared::CheckboxComponent.new(
+            <%= component(
+              "shared/form/checkbox",
               form: f,
               field_name: :remember_me,
               label_text: t("activerecord.attributes.user.remember_me")
@@ -38,7 +42,8 @@
     </div>
 
     <div class="mt-4 flex justify-center items-center">
-      <%= render Shared::ButtonComponent.new(
+      <%= component(
+        "shared/button",
         style: :solid,
         color: :sky,
         type: "submit",
@@ -49,21 +54,7 @@
     </div>
   <% end %>
 
-  <div class="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ms-6">or</div>
-
-  <div class="flex justify-center items-center">
-    <%= render Shared::ButtonComponent.new(
-      style: :solid,
-      color: :slate,
-      path: guest_sign_in_path,
-      method: :post,
-      class: "w-36 h-10"
-    ) do %>
-      <%= t("devise.shared.guest_sign_in") %>
-    <% end %>
-  </div>
-
-  <p class="mt-4 text-gray-600 text-sm">
-    <%= link_to t("messages.user.auth.registration_guide"), new_registration_path(resource_name), class: "text-blue-600 font-bold hover:underline" %>
-  </p>
+  <%= component "layout/auth/divider_or" %>
+  <%= component "layout/auth/guest", path: guest_sign_in_path %>
+  <%= component "layout/auth/guide_link", text: t("messages.user.auth.registration_guide"), path: new_registration_path(resource_name) %>
 <% end %>

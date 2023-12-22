@@ -1,6 +1,4 @@
-<%= component "shared/card", class: "my-10 p-6" do %>
-  <%= tag.h2 t("artwork.list"), class: "text-xl font-bold" %>
-  <div class="my-2">
-    <%= render "public/artworks/list", artworks: @user_artworks %>
-  </div>
-<% end %>
+<%= tag.h2 t("artwork.list"), class: "text-xl font-bold" %>
+<div class="my-2">
+  <%= render "public/artworks/list", artworks: @user_artworks %>
+</div>

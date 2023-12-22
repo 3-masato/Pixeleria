@@ -1,0 +1,16 @@
+<div class="relative">
+  <%= form.send(field_type, field_name, **options) %>
+  <% if errors.present? %>
+    <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3 text-red-500">
+      <i class="fa-solid fa-circle-exclamation"></i>
+    </div>
+  <% end %>
+</div>
+<% if errors.present? %>
+  <div class="text-xs text-red-600 mt-2">
+    <% errors.each do |error| %>
+      <%= tag.p error, class: "my-1" %>
+    <% end %>
+  </div>
+<% end %>
+

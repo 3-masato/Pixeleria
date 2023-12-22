@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Layout::AuthFormComponent < ViewComponent::Base
+class Layout::Auth::FormComponent < ViewComponent::Base
   def initialize(heading:)
     @heading = heading
   end
