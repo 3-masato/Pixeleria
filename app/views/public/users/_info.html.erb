@@ -2,9 +2,8 @@
   <div class="space-y-6">
     <div class="flex justify-between items-center">
       <div class="flex justify-center items-center space-x-2">
-        <%= image_tag user.get_profile_image, size: "48x48", class: "m-0 rounded-full" %>
-        <%= link_to user.display_name, user_profile_path(user.account_name), class: "font-bold text-md no-underline hover:text-blue-500 hover:underline" %>
-        <%= tag.span "@" + user.account_name, class: "font-normal text-gray-500 text-sm" %>
+        <%= component "user/avatar", user: user, size: :md %>
+        <%= component "user/name_link", user: user, size: :md %>
       </div>
       <div class="flex justify-center items-center">
         <% unless user == current_user %>

@@ -9,7 +9,7 @@ class Shared::Form::TextFieldComponent < ViewComponent::Base
     @field_name = field_name
     @size = size
     @model = model
-    @errors = model.errors.full_messages_for(field_name)
+    @errors = model.nil? ? nil : model.errors.full_messages_for(field_name)
     @options = options.merge(class: base_class)
   end
 
@@ -17,7 +17,7 @@ class Shared::Form::TextFieldComponent < ViewComponent::Base
 
   def base_class
     classes = "block w-full border-gray-200 rounded-sm text-sm disabled:opacity-50 disabled:pointer-events-none"
-    classes += @errors.present? ? " outline-red-500 focus:border-red-500 focus:ring-red-500" : "focus:border-blue-500 focus:ring-blue-500"
+    classes += @errors.present? ? " outline-red-500 focus:border-red-500 focus:ring-red-500" : " focus:border-blue-500 focus:ring-blue-500"
     classes += " py-3 px-4" if @size == :default
     classes += " sm:p-5" if @size == :large
     classes += " py-2 px-3" if @size == :small
