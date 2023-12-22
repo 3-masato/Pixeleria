@@ -59,6 +59,8 @@
       <%= tag.span user.display_name, class: "text-2xl font-bold text-gray-700 mr-1" %>
       <%= tag.span "@" + user.account_name, class: "text-lg font-normal text-gray-400" %>
     </div>
-    <%= tag.p user.introduction %>
+    <p class="mx-auto w-[48rem] max-w-full whitespace-pre-line text-left">
+      <%= user.introduction %>
+    </p>
   </div>
 </section>

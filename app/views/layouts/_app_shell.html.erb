@@ -4,7 +4,7 @@
   items: sidebar_items
 ) %>
 <%= tag.main class: ("pt-20 h-auto lg:ml-64" if admin_signed_in?) do %>
-  <div class="max-w-[1920px] mx-auto px-3">
+  <div class="prose max-w-[1920px] mx-auto px-3">
     <%= yield %>
   </div>
 <% end %>

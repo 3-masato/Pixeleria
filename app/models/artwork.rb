@@ -45,14 +45,6 @@ class Artwork < ApplicationRecord
     end
   end
 
-  def width_px
-    "#{artwork_canvas.width}px"
-  end
-
-  def height_px
-    "#{artwork_canvas.height}px"
-  end
-
   def tags=(tags_array)
     self.tags.clear
     tags_array.each do |tag_name|
@@ -60,6 +52,14 @@ class Artwork < ApplicationRecord
       tag = Tag.find_or_create_by(name: tag_name.strip)
       self.tags << tag unless self.tags.exists?(name: tag_name.strip)
     end
+  end
+
+  def width_px
+    "#{artwork_canvas.width}px"
+  end
+
+  def height_px
+    "#{artwork_canvas.height}px"
   end
 
   def self.search(query)

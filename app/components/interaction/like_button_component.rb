@@ -15,7 +15,7 @@ class Interaction::LikeButtonComponent < ViewComponent::Base
   end
 
   def group_class
-    "group text-inherit duration-100 transition-[color] hover:text-rose-500"
+    "group text-inherit no-underline duration-100 transition-[color] hover:text-rose-500"
   end
 
   def heart_class
