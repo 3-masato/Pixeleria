@@ -1,18 +1,14 @@
-<div>
-  <%= tag.h2 t("user.followers"), class: "text-xl font-bold" %>
-  <div class="flex items-center">
-    <%= image_tag @user.get_profile_image, size: "32x32", class: "m-4 rounded-full shadow-xl" %>
-    <div class="flex justify-center items-center">
-      <%= tag.span @user.display_name, class: "text-sm font-bold text-gray-700 mr-1" %>
-      <%= tag.span "@" + @user.account_name, class: "text-xs font-normal text-gray-400" %>
-    </div>
+<%= component "shared/card", class: "my-10 px-6" do %>
+  <%= tag.h2 t("user.followers") %>
+  <div class="flex items-center space-x-2">
+    <%= component "user/avatar", user: @user, size: :sm %>
+    <%= component "user/name_link", user: @user, size: :sm %>
   </div>
-</div>
-
-<div>
-  <% if @followers.size == 0 %>
-    <%= tag.p t("messages.user.relationships.no_followers"), class: "m-5 text-center text-gray-500 text-sm" %>
-  <% else %>
-    <%= render "public/users/list", users: @followers %>
-  <% end %>
-</div>
+  <section class="py-6 px-2">
+    <% if @followers.size > 0 %>
+      <%= render "public/users/list", users: @followers %>
+    <% else %>
+      <%= tag.p t("messages.user.relationships.no_followers"), class: "m-5 text-center text-gray-500 text-sm" %>
+    <% end %>
+  </section>
+<% end %>

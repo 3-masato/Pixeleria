@@ -1,9 +1,9 @@
 <section class="border-b border-gray-300">
-  <% if current_user&.is_guest == false && current_user != user %>
+  <% if current_user.present? && current_user != user %>
     <div class="flex justify-end lg:h-0">
       <%= render Shared::KebabComponent.new do %>
         <menu class="py-1 text-sm">
-          <li>
+          <li class="my-0">
             <div class="block py-2 px-3 w-32 duration-50 transition-colors hover:bg-gray-400/10">
               <%= render "public/reports/btn", target: :user, target_id: user.id %>
             </div>
@@ -37,7 +37,7 @@
       <%= component "user/avatar", user: user, size: :xl %>
     </div>
     <div class="flex justify-center items-center">
-      <% if user == current_user %>
+      <% if current_user == user %>
         <%= component(
           "shared/button",
           style: :solid,
