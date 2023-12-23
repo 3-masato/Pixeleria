@@ -2,8 +2,7 @@ class Public::ArtworksController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_artwork, only: %i[show edit update destroy]
 
-  # ドット絵のサイズいずれでも割り切れるきりの良い数
-  BASE_CANVAS_SIZE = 640
+  BASE_CANVAS_SIZE = 512
 
   def index
     if params[:tag].present?

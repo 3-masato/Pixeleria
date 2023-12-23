@@ -1,6 +1,6 @@
 <div class="w-full grid justify-items-center gap-x-2 gap-y-12 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
   <% artworks.each do |artwork| %>
-    <div class="relative w-48 flex bg-slate-50 justify-center items-center flex-col gap-2 shadow hover:shadow-lg">
+    <div class="relative w-48 flex bg-slate-50 justify-center items-center flex-col gap-2 shadow transition-shadow hover:shadow-lg">
       <div class="py-6">
         <%= link_to artwork_path(artwork), class: "hover:underline w-32 h-32" do %>
           <%= image_tag artwork.image, width: 128, height: 128, class: "m-0 rendering-pixelated" %>
