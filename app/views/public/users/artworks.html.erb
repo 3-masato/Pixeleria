@@ -1,6 +1,14 @@
-<%= component "shared/card", class: "my-10 p-6" do %>
-  <%= tag.h2 t("artwork.list"), class: "text-xl font-bold" %>
-  <div class="my-2">
-    <%= render "public/artworks/list", artworks: @user_artworks %>
+<%= component "shared/card", class: "my-10 px-6" do %>
+  <%= tag.h2 t("artwork.list") %>
+  <div class="flex items-center space-x-2">
+    <%= component "user/avatar", user: @user, size: :sm %>
+    <%= component "user/name_link", user: @user, size: :sm %>
   </div>
+  <section class="py-6 px-2">
+    <% if @user_artworks.size > 0 %>
+      <%= render "public/artworks/list", artworks: @user_artworks %>
+    <% else %>
+      <%= tag.p t("messages.user.artworks.no_artworks"), class: "m-5 text-center text-gray-500 text-sm" %>
+    <% end %>
+  </section>
 <% end %>

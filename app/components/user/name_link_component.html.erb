@@ -1,0 +1,4 @@
+<div class="leading-6">
+  <%= link_to user.display_name, user_profile_path(user.account_name), class: display_name_class %>
+  <%= tag.span "@" + user.account_name, class: account_name_class %>
+</div>

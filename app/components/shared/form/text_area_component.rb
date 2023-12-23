@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class Shared::TextAreaComponent < ViewComponent::Base
+class Shared::Form::TextAreaComponent < ViewComponent::Base
   attr_reader :form, :field_name, :rows, :placeholder, :readonly, :disabled
-  
+
   def initialize(form:, field_name:, rows:, placeholder:, size: :default, readonly: false, disabled: false)
     @form = form
     @field_name = field_name

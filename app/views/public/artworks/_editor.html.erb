@@ -1,0 +1,19 @@
+<div>
+  <pixeleria-editor
+    id="pixeleria-editor"
+    artwidth="<%= width %>"
+    artheight="<%= height %>"
+    dotsize="<%= dotsize %>"
+  ></pixeleria-editor>
+  <div class="flex justify-evenly items-center mt-7">
+    <%= component(
+      "shared/button",
+      style: :solid,
+      color: :sky,
+      class: "w-36 h-10",
+      id: "post-button"
+    ) do %>
+      <%= t("artwork.submit") %>
+    <% end %>
+  </div>
+</div>

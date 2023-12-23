@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-class Shared::RadioComponent < ViewComponent::Base
+class Shared::Form::RadioComponent < ViewComponent::Base
+  attr_reader :form, :field_name, :value, :label_field, :label_text, :checked
+
   def initialize(form:, field_name:, value:, label_field:, label_text:, checked: false)
     @form = form
     @field_name = field_name

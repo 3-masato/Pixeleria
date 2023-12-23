@@ -6,6 +6,8 @@ class Public::UsersController < ApplicationController
   end
 
   def show
+    @followers
+    @followings
     @user_artworks = @user.artworks.with_publication
   end
 

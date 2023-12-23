@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Shared::CheckboxComponent < ViewComponent::Base
+class Shared::Form::CheckboxComponent < ViewComponent::Base
   attr_reader :form, :field_name, :label_text, :options
 
   def initialize(form:, field_name:, label_text:, **options)

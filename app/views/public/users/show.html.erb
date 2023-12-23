@@ -1,13 +1,19 @@
 <%= component "shared/card", class: "my-10 p-6" do %>
   <%= render "public/users/profile", user: @user, user_artworks: @user_artworks %>
   <section class="py-6 px-2">
-    <%= render "public/artworks/list", artworks: @user_artworks.limit(artworks_display_limit) %>
-    <% if @user_artworks.size > artworks_display_limit %>
-      <div class="text-right mt-4 mr-2">
-        <%= link_to user_artworks_path(@user.account_name), class: "text-blue-500 hover:underline inline-flex items-center" do %>
-          <%= t("user.more_artworks") %><span class="ml-1 text-xs"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></span>
-        <% end %>
-      </div>
+    <% if @user_artworks.size > 0 %>
+      <%= render "public/artworks/list", artworks: @user_artworks.limit(artworks_display_limit) %>
+      <% if @user_artworks.size > artworks_display_limit %>
+        <div class="text-right mt-4 mr-2">
+          <%= link_to user_artworks_path(@user.account_name), class: "inline-block text-sm text-blue-500 no-underline hover:underline" do %>
+            <%= component "utils/icon_text", fa_class: "fa-solid fa-chevron-right", position: :right do %>
+              <%= t("user.more_artworks") %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <%= tag.p t("messages.user.artworks.no_artworks"), class: "m-5 text-center text-gray-500 text-sm" %>
     <% end %>
   </section>
 <% end %>

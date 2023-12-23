@@ -1,13 +1,19 @@
 <div class="w-full">
   <% if user_signed_in? %>
     <%= form_with model: [artwork, comment], local: false do |f| %>
-      <div class="flex items-center space-x-2">
-        <%= tag.div class: "grow", id: "comment-input-of-#{artwork.id}" do %>
+      <div class="flex items-center space-x-2" data-controller="input">
+        <%= tag.div class: "grow" do %>
           <%= component(
-            "shared/text_field",
+            "shared/form/text_field",
             form: f,
             field_type: :text_field,
-            field_name: :content
+            field_name: :content,
+            id: "comment-input-of-#{artwork.id}",
+            required: true,
+            data: {
+              "input-target": "input",
+              action: "input#checkBlank"
+            }
           ) %>
         <% end %>
         <%= component(
@@ -15,7 +21,8 @@
           style: :solid,
           color: :sky,
           type: "submit",
-          class: "w-20 h-10"
+          class: "w-20 h-10",
+          data: { "input-target": "submit" }
         ) do %>
           <%= t("comment.send") %>
         <% end %>

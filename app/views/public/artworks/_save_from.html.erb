@@ -1,79 +1,56 @@
-<%
-  base_class = "w-full h-full fixed top-0 left-0"
-  easing_class = "ease-out transition-all duration-50"
-  visibility_class = "-z-50 opacity-0 invisible data-[visibility=visible]:z-50 data-[visibility=visible]:opacity-100 data-[visibility=visible]:visible"
-%>
-<%= tag.div(
-  id: "save-form-modal-backdrop",
-  class: "#{base_class} #{easing_class} #{visibility_class} backdrop-brightness-50",
-  data: {
-    visibility: "hidden"
-  }
-) %>
-<%= tag.div(
-  id: "save-form-modal",
-  class: "#{base_class} #{easing_class} #{visibility_class} -translate-y-4 data-[visibility=visible]:translate-y-0",
-  data: {
-    visibility: "hidden"
-  }
-) do %>
-  <div class="p-4 max-w-full w-[512px] flex flex-col bg-white border shadow-lg rounded-sm absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
-    <div class="flex justify-between items-center mb-4">
-      <h3 class="font-bold text-gray-800"><%= t("artwork.submit_form_title") %></h3>
-      <button id="save-form-close-button" class="grid place-items-center w-7 h-7 rounded-full bg-transparent transition-colors hover:bg-gray-500/10 active:bg-gray-500/20">
-        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-      </button>
+<%= form_with model: artwork, local: true do |f| %>
+  <% tags = artwork&.tags.present? ? artwork.tags : [] %>
+  <div class="grid gap-y-4">
+    <div>
+      <%= component "shared/form/label", form: f, field: :title, text: t("models.artwork.title") %>
+      <%= component(
+        "shared/form/text_field",
+        form: f,
+        field_type: :text_field,
+        field_name: :title
+      ) %>
     </div>
-    <%= form_with model: artwork, local: true do |f| %>
-      <div class="grid gap-y-4">
-        <div>
-          <%= f.label :title, t("models.artwork.title"), class: "block text-sm font-bold mb-2" %>
-          <%= render Shared::TextFieldComponent.new(
-            form: f,
-            field_type: :text_field,
-            field_name: :title
-          ) %>
-        </div>
-        
-        <div>
-          <%= f.label :description, t("models.artwork.description"), class: "block text-sm font-bold mb-2" %>
-          <%= render Shared::TextAreaComponent.new(
-            form: f,
-            field_name: :description,
-            rows: 3,
-            placeholder: "",
-          ) %>
-        </div>
-        
-        <div>
-          <%= f.label :tag_list, t("models.artwork.tags"), class: "block text-sm font-bold mb-2" %>
-          <%= render Shared::TextFieldComponent.new(
-            form: f,
-            field_type: :text_field,
-            field_name: :tag_list
-          ) %>
-        </div>
 
-        <div>
-          <%= render Shared::CheckboxComponent.new(
-            form: f,
-            field_name: :is_public,
-            label_text: t("models.artwork.is_public"),
-            checked: true
-          ) %>
-        </div>
-        
-        <div class="mt-4 flex justify-center items-center">
-          <%= render Shared::ButtonComponent.new(
-            style: :outline,
-            color: :sky,
-            type: :submit,
-            class: "w-36 h-10"
-          ) do %>
-            <%= t("artwork.submit") %>
-          <% end %>
-        </div>
-      </div>
+    <div>
+      <%= component "shared/form/label", form: f, field: :description, text: t("models.artwork.description") %>
+      <%= component(
+        "shared/form/text_area",
+        form: f,
+        field_name: :description,
+        rows: 3,
+        placeholder: "",
+      ) %>
+    </div>
+
+    <%= component "artwork/tags_input", form: f, tags: tags, label: t("models.artwork.tags") %>
+
+    <div>
+      <%= component(
+        "shared/form/checkbox",
+        form: f,
+        field_name: :is_public,
+        label_text: t("models.artwork.is_public"),
+        checked: true
+      ) %>
+    </div>
+
+    <%= f.hidden_field :image_data, id: "image_data" %>
+    <%= f.fields_for :artwork_canvas do |canvas_form| %>
+      <%= canvas_form.hidden_field :pixel_data, id: "pixel_data" %>
+      <%= canvas_form.hidden_field :width, id: "width" %>
+      <%= canvas_form.hidden_field :height, id: "height" %>
     <% end %>
+
+    <div class="mt-4 flex justify-center items-center">
+      <%= component(
+        "shared/button",
+        style: :outline,
+        color: :sky,
+        type: :submit,
+        class: "w-36 h-10"
+      ) do %>
+        <%= t("artwork.submit") %>
+      <% end %>
+    </div>
   </div>
 <% end %>

@@ -5,7 +5,7 @@
         <div class="mx-auto flex items-center space-x-4">
           <%= f.label :size, t("artwork.choose_size"), class: "w-40 font-sm font-bold inline-block" %>
           <%= component(
-            "shared/select",
+            "shared/form/select",
             form: f,
             field_name: :size,
             choices: artwork_size_options,

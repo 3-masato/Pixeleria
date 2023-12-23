@@ -1,4 +1,4 @@
-<div>
+<div class="my-5 space-y-32">
   <% users.each do |user| %>
     <%= render "public/users/info", user: user, artworks: user.artworks.with_details.limit(4) %>
   <% end %>

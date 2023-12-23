@@ -11,7 +11,7 @@
             <%= component "artwork/tag", tag: tag, path: artworks_path(tag: tag.name) %>
           <% end %>
         </div>
-        <p class="min-h-[3rem]">
+        <p class="min-h-[5rem]">
           <%= @artwork.description %>
         </p>
       </div>
@@ -73,4 +73,6 @@
   </div>
 <% end %>
 
-<%= render "public/users/info", user: @author, artworks: @authors_other_artworks %>
+<%= component "shared/card", class: "my-10 p-6" do %>
+  <%= render "public/users/info", user: @author, artworks: @authors_other_artworks %>
+<% end %>

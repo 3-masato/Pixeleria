@@ -2,6 +2,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 import { safeEval } from "../utils/safe-eval.ts";
+import { fetchWithCsrf } from "../utils/fetch.ts";
 
 export default class extends Controller {
   static targets = ["select"];
@@ -25,25 +26,14 @@ export default class extends Controller {
    * サーバーへの非同期リクエストを処理
    */
   async _fetchAndUpdate(url, data) {
-    const response = await fetch(url, {
+    const response = await fetchWithCsrf(url, {
       method: "POST",
-      headers: this._headers(),
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" }
     });
 
     return response.ok && response.headers.get("Content-Type").includes("javascript")
       ? await response.text()
       : null;
-  }
-
-  /**
-   * @private
-   * CSRFトークンを含む標準ヘッダーを生成
-   */
-  _headers() {
-    return {
-      "Content-Type": "application/json",
-      "X-CSRF-Token": document.querySelector("[name='csrf-token']").content
-    };
   }
 }
