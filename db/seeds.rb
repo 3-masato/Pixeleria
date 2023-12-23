@@ -17,18 +17,20 @@ Seeds::Admins.create(
   DEV_ADMIN_PASSWORD,
 )
 
+# ユーザーのSeed作成
 require_relative "seeds/user"
 
 DEV_USER_EMAIL = "dev@example.com"
 DEV_USER_PASSWORD = "password"
 
-users = Seeds::Users.create_dev_user(
+Seeds::Users.create_dev_user(
   DEV_USER_EMAIL,
   DEV_USER_PASSWORD
 )
-users = Seeds::Users.create(3)
+users = Seeds::Users.create(10)
 
+# ドット絵のSeed作成
 require_relative "seeds/artwork"
 users.each do |user|
-  Seeds::Artworks.create_artwork_canvases(user, 3)
+  Seeds::Artworks.create_artwork_canvases(user, 10)
 end
