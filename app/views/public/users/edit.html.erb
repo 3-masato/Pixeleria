@@ -1,25 +1,63 @@
-<section>
-  <%= tag.h2 t("user.edit_heading"), class: "text-2xl" %>
+<%= component "shared/card", class: "my-10 p-6" do %>
+  <div class="mt-6 mx-auto max-w-[32rem]">
+    <%= tag.h2 t("user.edit_heading")%>
 
-  <%= form_with model: @user, url: update_user_profile_path, local: true do |f| %>
-    <fieldset class="my-2">
-      <%= f.file_field :profile_image, accept: "image/*" %>
-    </fieldset>
-    <fieldset class="my-2">
-      <%= f.label t("activerecord.attributes.user.display_name"), class: "font-bold" %>
-      <%= f.text_field :display_name, class: "block" %>
-    </fieldset>
-    <fieldset class="my-2">
-      <%= f.label t("activerecord.attributes.user.account_name"), class: "font-bold" %>
-      <%= f.text_field :account_name, class: "block" %>
-    </fieldset>
-    <fieldset class="my-2">
-      <%= f.label t("activerecord.attributes.user.introduction"), class: "font-bold" %>
-      <%= f.text_area :introduction, class: "block" %>
-    </fieldset>
+    <%= form_with model: @user, url: update_user_profile_path, local: true do |f| %>
+      <div class="grid gap-y-4">
+        <div>
+          <%= component "shared/form/label", form: f, field: :profile_image %>
+          <%= component "shared/form/file_input", form: f, field_name: :profile_image, image: @user.profile_image %>
+        </div>
 
-    <%= f.submit t("user.save") %>
-  <% end %>
-</section>
+        <div>
+          <%= component "shared/form/label", form: f, field: :display_name %>
+          <%= component(
+            "shared/form/text_field",
+            form: f,
+            field_type: :text_field,
+            field_name: :display_name,
+            size: :small,
+            model: @user,
+            placeholder: t("placeholder.display_name")
+          ) %>
+        </div>
 
-<%= render "public/artworks/list", artworks: @artworks %>
+        <div>
+          <%= component "shared/form/label", form: f, field: :account_name %>
+          <%= component(
+            "shared/form/text_field",
+            form: f,
+            field_type: :text_field,
+            field_name: :account_name,
+            size: :small,
+            model: @user,
+            placeholder: t("placeholder.account_name")
+          ) %>
+        </div>
+
+        <div>
+          <%= component "shared/form/label", form: f, field: :introduction %>
+          <%= component(
+            "shared/form/text_area",
+            form: f,
+            field_name: :introduction,
+            rows: 12,
+            placeholder: t("placeholder.introduction")
+          ) %>
+        </div>
+
+        <div class="mt-4 flex justify-center items-center">
+          <%= component(
+            "shared/button",
+            style: :outline,
+            color: :sky,
+            type: :submit,
+            class: "w-36 h-10"
+          ) do %>
+            <%= t("user.save") %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

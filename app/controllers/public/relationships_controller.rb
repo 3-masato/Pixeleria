@@ -10,11 +10,11 @@ class Public::RelationshipsController < ApplicationController
   end
 
   def followings
-    @followings = @user.followings
+    @followings = @user.followings.page(params[:page]).includes(artworks: :image_attachment)
   end
 
   def followers
-    @followers = @user.followers
+    @followers = @user.followers.page(params[:page]).includes(artworks: :image_attachment)
   end
 
   def set_user

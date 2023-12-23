@@ -12,7 +12,7 @@
   $("#modal-close-button").on("click", close);
 
   $("#modal-title").html("<%= j(t("artwork.submit_form_title")) %>");
-  $("#modal-content").html("<%= j(render "public/artworks/save_from", artwork: @artwork) %>");
+  $("#modal-content").html("<%= j(render "public/artworks/save_form", artwork: @artwork, text: t("artwork.submit")) %>");
 
   $("#editor-container").html("<%= j(
     render "public/artworks/editor", artwork_id: @artwork_id, width: @width, height: @height, dotsize: @dotsize

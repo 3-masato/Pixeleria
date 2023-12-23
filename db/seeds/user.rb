@@ -1,6 +1,4 @@
 module Seeds
-  CHARS = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a + ['_']
-
   class Users
     def self.create_dev_user(email, password)
       User.create!(
@@ -14,13 +12,13 @@ module Seeds
 
     def self.create(count)
       count.times.map do |i|
-        name = "ユーザー#{i}"
+        name = "ユーザー#{i + 1}"
 
         user = User.create!(
-          email: "test-user-#{i}@fake",
-          password: generate_random_string(24),
+          email: "#{SecureRandom.hex(10)}@fake",
+          password: SecureRandom.urlsafe_base64,
           display_name: name,
-          account_name: generate_random_string(12),
+          account_name: SecureRandom.alphanumeric(12),
           introduction: "#{name}の自己紹介文。",
         )
 
@@ -28,11 +26,6 @@ module Seeds
 
         user
       end
-    end
-
-    private
-    def self.generate_random_string(length)
-      length.times.map { CHARS.sample }.join
     end
   end
 end

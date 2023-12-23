@@ -1,0 +1,11 @@
+<li class="my-0">
+  <% if @path.nil? %>
+    <%= tag.div class: base_class, **@options do %>
+      <%= content %>
+    <% end %>
+  <% else %>
+    <%= link_to @path, class: base_class, **@options do %>
+      <%= content %>
+    <% end %>
+  <% end %>
+</li>

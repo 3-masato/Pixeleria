@@ -1,8 +1,13 @@
-<div>
-  <div>
+<%= component "shared/card", class: "my-10 p-6" do %>
+  <div class="mb-12">
     <%= render "public/artworks/search_form", artworks: @artworks %>
   </div>
-  <div id="artworks" class="mt-10">
-    <%= render "public/artworks/list", artworks: @artworks %>
+  <div id="artworks">
+    <% if @message.present? %>
+      <%= tag.p @message, class: "m-5 text-center text-gray-500 text-sm" %>
+    <% else %>
+      <%= render "public/artworks/list", artworks: @artworks %>
+      <%= paginate @artworks %>
+    <% end %>
   </div>
-</div>
+<% end %>

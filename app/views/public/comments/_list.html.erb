@@ -8,34 +8,24 @@
         </div>
         <div class="grow">
           <%= component "user/name_link", user: user, size: :sm %>
-          <div class="font-sm">
+          <div class="text-sm">
             <%= comment.content %>
           </div>
         </div>
         <div>
           <% if user == current_user %>
-            <%= render Shared::KebabComponent.new do %>
-              <menu class="py-1 text-sm">
-                <li>
-                  <div class="block w-32 duration-50 transition-colors hover:bg-gray-400/10 text-red-500 hover:bg-red-400/10">
-                    <%= link_to artwork_comment_path(@artwork, comment), method: :delete, remote: true, class: "grid items-center w-full h-full" do %>
-                      <%= component "utils/icon_text", fa_class: "fa-solid fa-trash-can", class: "py-2 px-3" do %>
-                        <%= t("comment.delete") %>
-                      <% end %>
-                    <% end %>
-                  </div>
-                </li>
-              </menu>
+            <%= component "shared/kebab/base" do %>
+              <%= component "shared/kebab/menu_item", path: artwork_comment_path(@artwork, comment), color: :red, method: :delete, "data-confirm" => "Are you sure?" do %>
+                <%= component "utils/icon_text", fa_class: "fa-solid fa-trash-can", class: "py-2 px-3" do %>
+                  <%= t("comment.delete") %>
+                <% end %>
+              <% end %>
             <% end %>
           <% elsif current_user&.is_guest == false %>
-            <%= render Shared::KebabComponent.new do %>
-              <menu class="py-1 text-sm">
-                <li>
-                  <div class="block w-32 duration-50 transition-colors hover:bg-gray-400/10">
-                    <%= render "public/reports/btn", target: :comment, target_id: comment.id %>
-                  </div>
-                </li>
-              </menu>
+            <%= component "shared/kebab/base" do %>
+              <%= component "shared/kebab/menu_item", path: nil do %>
+                <%= render "public/reports/btn", target: :comment, target_id: comment.id %>
+              <% end %>
             <% end %>
           <% end %>
         </div>
