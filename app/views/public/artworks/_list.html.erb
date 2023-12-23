@@ -3,7 +3,7 @@
     <div class="relative w-48 flex bg-slate-50 justify-center items-center flex-col gap-2 shadow transition-shadow hover:shadow-lg">
       <div class="py-6">
         <%= link_to artwork_path(artwork), class: "hover:underline w-32 h-32" do %>
-          <%= image_tag artwork.image, width: 128, height: 128, class: "m-0 rendering-pixelated" %>
+          <%= component "artwork/image", artwork: artwork, size: :sm %>
         <% end %>
       </div>
       <div class="py-4 flex justify-evenly border-t w-full text-sm">

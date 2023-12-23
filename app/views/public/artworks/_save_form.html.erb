@@ -30,7 +30,7 @@
         form: f,
         field_name: :is_public,
         label_text: t("models.artwork.is_public"),
-        checked: true
+        checked: artwork.is_public.nil? ? true : artwork.is_public
       ) %>
     </div>
 
@@ -44,10 +44,10 @@
     <div class="mt-4 flex justify-center items-center">
       <%= component(
         "shared/button",
-        style: :outline,
+        style: :solid,
         color: :sky,
         type: :submit,
-        class: "w-36 h-10"
+        class: "w-32 h-10"
       ) do %>
         <%= text %>
       <% end %>

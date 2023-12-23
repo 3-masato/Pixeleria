@@ -79,13 +79,14 @@ ja:
     admin:
       user:
         update_success: "ユーザー情報を更新しました"
-      artwork:
-        update_success: "作品「%{title}」の情報を更新しました"
-        destroy_success: "作品「%{title}」を削除しました"
       comment:
         destroy_success: "コメントを削除しました"
     artwork:
+      update_success: "作品「%{title}」の情報を更新しました"
+      destroy_success: "作品「%{title}」を削除しました"
       recent: "最近投稿された作品"
+    artwork_canvas:
+      update_success: "作品「%{title}」のドット絵を更新しました"
     search:
       no_results_for: "「%{query}」の検索結果は見つかりませんでした"
       required_enter_query: "検索ワードを入力してください"

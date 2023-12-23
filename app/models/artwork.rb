@@ -40,6 +40,10 @@ class Artwork < ApplicationRecord
     end
   end
 
+  def decode_and_attach_image(image_data)
+    decoded_image = decode_image(image_data)
+    image.attach(io: decoded_image, filename: "#{title}.png")
+  end
 
   def width_px
     "#{artwork_canvas.width}px"
@@ -51,5 +55,13 @@ class Artwork < ApplicationRecord
 
   def self.search(query)
     where('title LIKE ? OR description LIKE ?', "%#{query}%", "%#{query}%").with_publication
+  end
+
+  private
+  def decode_image(data)
+    # Base64のプレフィックスを削除し、デコードする
+    base64_image = data.sub(/^data:image\/\w+;base64,/, "")
+    decoded_image = Base64.decode64(base64_image)
+    StringIO.new(decoded_image)
   end
 end

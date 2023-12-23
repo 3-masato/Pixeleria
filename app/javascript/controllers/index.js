@@ -7,7 +7,9 @@ import { application } from "./application";
 import ReportStatus from "./report-status_controller";
 import Input from "./input_controller";
 import Tag from "./tag_controller";
+import Editor from "./editor_controller";
 
 application.register("report-status", ReportStatus);
 application.register("input", Input);
 application.register("tag", Tag);
+application.register("editor", Editor);

@@ -1,6 +1,7 @@
 class Public::ArtworksController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
-  before_action :set_artwork, only: %i[show edit update destroy]
+  before_action :set_artwork, only: %i[show edit update destroy editor update_canvas setup_editor]
+  before_action :set_artwork_canvas, only: %i[editor update_canvas setup_editor]
 
   BASE_CANVAS_SIZE = 512
 
@@ -25,57 +26,69 @@ class Public::ArtworksController < ApplicationController
     @authors_other_artworks = @author.artworks.with_publication.where.not(id: @artwork.id).limit(6)
   end
 
-  def edit
-  end
-
-  def setup_editor
-    @artwork = Artwork.find(params[:artwork_id])
-    @artwork_canvas = @artwork.artwork_canvas
-    @width = @artwork_canvas.width
-    @height = @artwork_canvas.height
-    dot_ratio = [@width, @height].max
-    @dotsize = BASE_CANVAS_SIZE / dot_ratio
-  end
-
   def new
   end
 
+  def edit
+  end
+
+  def initialize_editor
+    @artwork = Artwork.new
+    @artwork.build_artwork_canvas
+
+    size = params[:size].split("x")
+    @width = size[0].to_i
+    @height = size[1].to_i
+    @dotsize = calc_dotsize(@width, @height)
+  end
+
+  def editor
+    @width = @artwork_canvas.width
+    @height = @artwork_canvas.height
+    @dotsize = calc_dotsize(@width, @height)
+  end
+
+  def update_canvas
+    title = @artwork.title
+    pixel_data = params[:artwork_canvas][:pixel_data]
+    image_data = params[:artwork_canvas][:image_data]
+
+    @artwork.decode_and_attach_image(image_data)
+
+    # decoded_image = decode_image(image_data)
+    # @artwork.image.attach(io: decoded_image, filename: "#{@artwork.title}.png")
+
+    if @artwork.save && @artwork_canvas.update(pixel_data: pixel_data)
+      redirect_to artwork_path(@artwork), notice: t("messages.artwork_canvas.update_success", title: title)
+    end
+  end
+
   def create
-    image_data = params[:artwork][:image_data]
-    decoded_image = decode_image(image_data)
     unique_tags = params[:artwork][:tags]&.uniq || []
+    image_data = params[:artwork][:image_data]
+
     @artwork = Artwork.new(artwork_params)
     @artwork.tags = unique_tags
     @artwork.user = current_user
-    @artwork.image.attach(io: decoded_image, filename: "#{@artwork.title}.png")
+
+    @artwork.decode_and_attach_image(image_data)
+
+    # decoded_image = decode_image(image_data)
+    # @artwork.image.attach(io: decoded_image, filename: "#{@artwork.title}.png")
 
     if @artwork.save
-      p "saved"
       redirect_to artwork_path(@artwork)
     else
-      p "failed"
-      p @artwork.errors
+      "failed"
+      render artwork.errors
       # render :new
     end
   end
 
-  def initialize_editor
-    @artwork_id = nil
-    size = params[:size].split("x")
-    @width = size[0].to_i
-    @height = size[1].to_i
-    dot_ratio = [@width, @height].max
-    @dotsize = BASE_CANVAS_SIZE / dot_ratio
-    @artwork = Artwork.new
-    @artwork.build_artwork_canvas
-  end
-
   def update
-    p params
-    p artwork_params
     title = @artwork.title
     if @artwork.update(artwork_params)
-      redirect_to artwork_path(@artwork), notice: t("messages.admin.artwork.update_success", title: title)
+      redirect_to artwork_path(@artwork), notice: t("messages.artwork.update_success", title: title)
     else
       render :new
     end
@@ -91,6 +104,21 @@ class Public::ArtworksController < ApplicationController
     @artwork = Artwork.find(params[:id])
   end
 
+  def set_artwork_canvas
+    @artwork_canvas = @artwork.artwork_canvas
+  end
+
+  def calc_dotsize(width, height)
+    dot_ratio = [width, height].max
+    dotsize = BASE_CANVAS_SIZE / dot_ratio
+  end
+
+  def update_artwork_and_canvas(pixel_data, image_data)
+    decoded_image = decode_image(image_data)
+    @artwork.image.attach(io: decoded_image, filename: "#{@artwork.title}.png")
+    @artwork_canvas.update(pixel_data: pixel_data) && @artwork.save
+  end
+
   def artwork_params
     params.require(:artwork).permit(
       :title,
@@ -101,10 +129,10 @@ class Public::ArtworksController < ApplicationController
     )
   end
 
-  def decode_image(data)
-    # Base64のプレフィックスを削除し、デコードする
-    base64_image = data.sub(/^data:image\/\w+;base64,/, "")
-    decoded_image = Base64.decode64(base64_image)
-    StringIO.new(decoded_image)
-  end
+  # def decode_image(data)
+  #   # Base64のプレフィックスを削除し、デコードする
+  #   base64_image = data.sub(/^data:image\/\w+;base64,/, "")
+  #   decoded_image = Base64.decode64(base64_image)
+  #   StringIO.new(decoded_image)
+  # end
 end

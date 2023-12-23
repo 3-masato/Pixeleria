@@ -1,0 +1,27 @@
+<%= component "shared/card", class: "my-10 p-6" do %>
+  <div id="editor-container" class="mt-6 py-1" data-controller="editor">
+    <pixeleria-editor
+      id="pixeleria-editor"
+      artwidth="<%= @width %>"
+      artheight="<%= @height %>"
+      dotsize="<%= @dotsize %>"
+      data-editor-target="editor"
+    ></pixeleria-editor>
+    <div class="flex justify-evenly items-center mt-6">
+      <%= form_with model: @artwork_canvas, url: update_canvas_artwork_path, local: true, data: { "editor-target": "form" } do |f| %>
+        <%= f.hidden_field :pixel_data, "data-editor-target": "pixelData", value: @artwork_canvas.pixel_data %>
+        <%= f.hidden_field :image_data, "data-editor-target": "imageData", value: "" %>
+        <%= component(
+          "shared/button",
+          style: :solid,
+          color: :pink,
+          type: :submit,
+          class: "w-32 h-8 text-sm",
+          data: { "action": "editor#beforeSave" }
+        ) do %>
+          <%= t("artwork.save") %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

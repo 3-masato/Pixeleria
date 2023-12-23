@@ -1,36 +1,21 @@
 <%= component "shared/card", class: "my-10 p-6" do %>
   <%= tag.h2 t("artwork.edit_heading") %>
-  <div class="mt-6 flex justify-center flex-col lg:justify-evenly lg:flex-row">
-    <div class="flex justify-center items-center">
-      <%= image_tag @artwork.image, size: "256x256", style: "image-rendering: pixelated" %>
+  <div class="mt-6 flex justify-center flex-col gap-y-8 lg:justify-evenly lg:flex-row lg:gap-0">
+    <div class="flex justify-evenly items-center flex-col h-96">
+      <%= component "artwork/image", artwork: @artwork, size: :lg %>
+      <%= component(
+        "shared/button",
+        style: :outline,
+        color: :pink,
+        path: editor_artwork_path(@artwork),
+        class: "text-sm py-1 px-6",
+        data: { turbolinks: false }
+      ) do %>
+        <%= t("artwork.edit") %>
+      <% end %>
     </div>
     <div class="self-center w-96">
       <%= render "public/artworks/save_form", artwork: @artwork, text: t("artwork.update") %>
     </div>
   </div>
-  <div id="editor-container" class="mt-10">
-  </div>
 <% end %>
-
-<div id="editor-container">
-</div>
-<div id="laoding" class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-  <%= component "svg/bubble_loading", width: 128, height: 128 %>
-</div>
-
-<script id="load-canvas">
-  /*
-  $.ajax({
-    url: "<%= setup_editor_artworks_path %>",
-    type: "POST",
-    contentType: "application/json",
-    data: JSON.stringify({
-      artwork_id: "<%= @artwork.id %>"
-    }),
-    success() {
-      $("#laoding").remove();
-    }
-  });
-  $("load-canvas").remove();
-  */
-</script>

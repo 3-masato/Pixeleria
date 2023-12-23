@@ -48,8 +48,11 @@ Rails.application.routes.draw do
     patch   "deactivate",                         to: "users#deactivate",           as: :deactivate
 
     resources :artworks do
+      member do
+        get   :editor
+        patch :update_canvas
+      end
       collection do
-        post :setup_editor,       defaults: { format: "js" }
         post :initialize_editor,  defaults: { format: "js" }
       end
 
