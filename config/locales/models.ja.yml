@@ -7,13 +7,6 @@ ja:
     tag: タグ
     report: 通報
   models:
-    artwork:
-      image: 画像
-      title: タイトル
-      description: 説明
-      tags: タグ
-      is_public: 公開
-      author: 作者
     artwork_canvas:
       width: 横幅
       height: 高さ

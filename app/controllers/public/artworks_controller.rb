@@ -83,7 +83,7 @@ class Public::ArtworksController < ApplicationController
     if @artwork.update(artwork_params)
       redirect_to artwork_path(@artwork), notice: t("messages.artwork.update_success", title: title)
     else
-      render :new
+      render :edit
     end
   end
 

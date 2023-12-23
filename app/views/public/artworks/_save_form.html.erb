@@ -2,35 +2,37 @@
   <% tags = artwork&.tags.present? ? artwork.tags.map(&:name) : [] %>
   <div class="grid gap-y-4">
     <div>
-      <%= component "shared/form/label", form: f, field: :title, text: t("models.artwork.title") %>
+      <%= component "shared/form/label", form: f, field: :title %>
       <%= component(
         "shared/form/text_field",
         form: f,
         field_type: :text_field,
-        field_name: :title
+        field_name: :title,
+        model: artwork,
       ) %>
     </div>
 
     <div>
-      <%= component "shared/form/label", form: f, field: :description, text: t("models.artwork.description") %>
+      <%= component "shared/form/label", form: f, field: :description %>
       <%= component(
         "shared/form/text_area",
         form: f,
         field_name: :description,
         rows: 3,
         placeholder: "",
+        model: artwork,
       ) %>
     </div>
 
-    <%= component "artwork/tags_input", form: f, tags: tags, label: t("models.artwork.tags") %>
+    <%= component "artwork/tags_input", form: f, tags: tags, label: t("activerecord.attributes.artwork.tags") %>
 
     <div>
       <%= component(
         "shared/form/checkbox",
         form: f,
         field_name: :is_public,
-        label_text: t("models.artwork.is_public"),
-        checked: artwork.is_public.nil? ? true : artwork.is_public
+        label_text: t("activerecord.attributes.artwork.is_public"),
+        checked: artwork.is_public.nil? ? true : artwork.is_public,
       ) %>
     </div>
 
