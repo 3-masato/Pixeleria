@@ -71,6 +71,7 @@ ja:
         no_followers: "フォロワーはいません"
       artworks:
         no_artworks: "投稿作品はありません"
+        no_my_artworks: "投稿した作品はありません"
         no_liked_artworks: "いいねした作品はありません"
     comment:
       required_sign_in: "コメントを投稿するにはログインもしくはアカウント新規登録をしてください"

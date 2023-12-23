@@ -3,10 +3,9 @@
   <section class="py-6 px-2">
     <% if @artworks.size > 0 %>
       <%= render "public/artworks/list", artworks: @artworks %>
+      <%= paginate @artworks %>
     <% else %>
-      <%= tag.p t("messages.user.artworks.no_liked_artworks"), class: "m-5 text-center text-gray-500 text-sm" %>
+      <%= tag.p t("messages.user.artworks.no_my_artworks"), class: "m-5 text-center text-gray-500 text-sm" %>
     <% end %>
-
-    <%= paginate @artworks %>
   </section>
 <% end %>

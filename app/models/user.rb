@@ -60,7 +60,7 @@ class User < ApplicationRecord
 
   def self.guest
     guest_email = "guest_#{SecureRandom.hex(10)}@example.com"
-    guest_account_name = "guest_#{SecureRandom.alphanumeric(16)}"
+    guest_account_name = "guest_#{SecureRandom.alphanumeric(12)}"
 
     create!(
       email: guest_email,

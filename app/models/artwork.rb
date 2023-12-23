@@ -22,7 +22,7 @@ class Artwork < ApplicationRecord
 
   scope :with_details, -> { includes(:likes, :comments, :tags, image_attachment: :blob, user: { profile_image_attachment: :blob }) }
 
-  scope :publication, -> { with_details.where(is_public: true) }
+  scope :publication, -> { where(is_public: true) }
 
   scope :with_publication, -> { with_details.publication }
 

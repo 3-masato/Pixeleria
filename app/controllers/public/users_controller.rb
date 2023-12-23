@@ -6,7 +6,7 @@ class Public::UsersController < ApplicationController
   end
 
   def show
-    @user_artworks = @user.artworks.with_publication
+    @user_artworks = @user.artworks.with_publication.page(params[:page])
   end
 
   def update
@@ -28,11 +28,11 @@ class Public::UsersController < ApplicationController
   end
 
   def artworks
-    @user_artworks = @user.artworks.with_publication
+    @user_artworks = @user.artworks.with_publication.page(params[:page])
   end
 
   def liked_artworks
-    @user_liked_artworks = @user.liked_artworks.with_publication
+    @user_liked_artworks = @user.liked_artworks.with_publication.page(params[:page])
   end
 
   private
