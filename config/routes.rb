@@ -34,13 +34,12 @@ Rails.application.routes.draw do
   scope module: :public do
     root "homes#top"
 
-    get "about" => "homes#about"
-
     get     "users/:account_name",                to: "users#show",                 as: :user_profile
     get     "users/:account_name/edit",           to: "users#edit",                 as: :edit_user_profile
     patch   "users/:account_name",                to: "users#update",               as: :update_user_profile
     get     "users/:account_name/artworks",       to: "users#artworks",             as: :user_artworks
     get     "users/:account_name/liked_artworks", to: "users#liked_artworks",       as: :user_liked_artworks
+    get     "users/:account_name/my_artworks",    to: "users#my_artworks",          as: :user_my_artworks
     post    "users/:account_name/relationships",  to: "relationships#create",       as: :user_follow
     delete  "users/:account_name/relationships",  to: "relationships#destroy",      as: :user_unfollow
     get     "users/:account_name/followings",     to: "relationships#followings",   as: :user_followings

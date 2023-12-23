@@ -1,14 +1,10 @@
 <section class="border-b border-gray-300">
   <% if current_user.present? && current_user != user %>
     <div class="flex justify-end lg:h-0">
-      <%= render Shared::KebabComponent.new do %>
-        <menu class="py-1 text-sm">
-          <li class="my-0">
-            <div class="block py-2 px-3 w-32 duration-50 transition-colors hover:bg-gray-400/10">
-              <%= render "public/reports/btn", target: :user, target_id: user.id %>
-            </div>
-          </li>
-        </menu>
+      <%= component "shared/kebab/base" do %>
+        <%= component "shared/kebab/menu_item", path: nil do %>
+          <%= render "public/reports/btn", target: :user, target_id: user.id %>
+        <% end %>
       <% end %>
     </div>
   <% end %>
@@ -45,7 +41,20 @@
           path: edit_user_profile_path(user.account_name),
           class: "w-32 text-sm"
         ) do %>
-          <i class="fa-solid fa-user-pen"></i><span class="ml-2"><%= t("user.edit") %></span>
+          <% component "utils/icon_text", fa_class: "fa-solid fa-user-pen" do %>
+            <%= t("user.edit") %>
+          <% end %>
+        <% end %>
+        <%= component(
+          "shared/button",
+          style: :solid,
+          color: :gray,
+          path: :user_my_artworks,
+          class: "w-32 text-sm"
+        ) do %>
+          <% component "utils/icon_text", fa_class: "fa-solid fa-palette" do %>
+            <%= t("user.my_artworks") %>
+          <% end %>
         <% end %>
       <% else %>
         <%= tag.div id: "follow-of-#{user.account_name}" do %>

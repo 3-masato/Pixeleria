@@ -1,0 +1,12 @@
+<%= component "shared/card", class: "my-10 px-6" do %>
+  <%= tag.h2 t("user.my_artworks") %>
+  <section class="py-6 px-2">
+    <% if @artworks.size > 0 %>
+      <%= render "public/artworks/list", artworks: @artworks %>
+    <% else %>
+      <%= tag.p t("messages.user.artworks.no_liked_artworks"), class: "m-5 text-center text-gray-500 text-sm" %>
+    <% end %>
+
+    <%= paginate @artworks %>
+  </section>
+<% end %>

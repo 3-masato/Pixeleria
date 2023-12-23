@@ -1,11 +1,9 @@
 <% if options[:path] %>
-  <%= link_to options.delete(:path),
-      **options do %>
+  <%= link_to options.delete(:path), **options do %>
     <%= content %>
   <% end %>
 <% else %>
-  <%= button_tag type: (options[:type] || "button"),
-      **options do %>
+  <%= button_tag type: (options[:type] || "button"), name: nil, **options do %>
     <%= content %>
   <% end %>
 <% end %>

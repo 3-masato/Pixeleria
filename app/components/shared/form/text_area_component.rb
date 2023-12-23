@@ -3,14 +3,12 @@
 class Shared::Form::TextAreaComponent < ViewComponent::Base
   attr_reader :form, :field_name, :rows, :placeholder, :readonly, :disabled
 
-  def initialize(form:, field_name:, rows:, placeholder:, size: :default, readonly: false, disabled: false)
+  def initialize(form:, field_name:, rows:, size: :default, **option)
     @form = form
     @field_name = field_name
     @rows = rows
-    @placeholder = placeholder
     @size = size
-    @readonly = readonly
-    @disabled = disabled
+    @option = option
   end
 
   def textarea_classes

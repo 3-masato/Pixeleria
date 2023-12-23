@@ -1,4 +1,6 @@
 class Artwork < ApplicationRecord
+  DESCRIPTION_MAX_LENGTH = 200
+
   belongs_to :user
 
   has_one_attached :image
@@ -13,7 +15,7 @@ class Artwork < ApplicationRecord
   has_many :reports,      as:        :reportable
 
   validates :title, presence: true
-  validates :description, length: { maximum: 200 }
+  validates :description, length: { maximum: DESCRIPTION_MAX_LENGTH }
 
   # Artworkレコードを取得する際、デフォルトで新しい作品が先頭に来るようにする。
   default_scope { order(created_at: :desc) }

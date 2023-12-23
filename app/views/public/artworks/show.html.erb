@@ -5,7 +5,14 @@
     </div>
     <div class="flex">
       <div class="grow space-y-2">
-        <%= tag.div @artwork.title, class: "font-bold text-lg" %>
+        <div class="flex items-center space-x-2">
+          <% if @artwork.is_public %>
+            <%= tag.div @artwork.title, class: "font-bold text-lg" %>
+          <% else %>
+            <i class="fa-solid fa-lock"></i>
+            <%= tag.div @artwork.title, class: "font-bold text-lg" %>
+          <% end %>
+        </div>
         <div class="flex gap-2">
           <% @artwork.tags.each do |tag| %>
             <%= component "artwork/tag", tag: tag, path: artworks_path(tag: tag.name) %>
@@ -17,37 +24,23 @@
       </div>
       <div>
         <% if @author == current_user %>
-          <%= render Shared::KebabComponent.new do %>
-            <menu class="py-1 text-sm">
-              <li>
-                <div class="block w-32 duration-50 transition-colors hover:bg-gray-400/10">
-                  <%= link_to edit_artwork_path(@artwork), class: "grid items-center w-full h-full" do %>
-                    <%= component "utils/icon_text", fa_class: "fa-solid fa-pen", class: "py-2 px-3" do %>
-                      <%= t("artwork.edit") %>
-                    <% end %>
-                  <% end %>
-                </div>
-              </li>
-              <li>
-                <div class="block w-32 duration-50 transition-colors hover:bg-gray-400/10 text-red-500 hover:bg-red-400/10">
-                  <%= link_to artwork_path(@artwork), method: :delete, "data-confirm" => "Are you sure?", class: "grid items-center w-full h-full" do %>
-                    <%= component "utils/icon_text", fa_class: "fa-solid fa-trash-can", class: "py-2 px-3" do %>
-                      <%= t("artwork.delete") %>
-                    <% end %>
-                  <% end %>
-                </div>
-              </li>
-            </menu>
+          <%= component "shared/kebab/base" do %>
+            <%= component "shared/kebab/menu_item", path: edit_artwork_path(@artwork) do %>
+              <%= component "utils/icon_text", fa_class: "fa-solid fa-pen", class: "py-2 px-3" do %>
+                <%= t("artwork.edit") %>
+              <% end %>
+            <% end %>
+            <%= component "shared/kebab/menu_item", path: artwork_path(@artwork), color: :red, method: :delete, "data-confirm" => "Are you sure?" do %>
+              <%= component "utils/icon_text", fa_class: "fa-solid fa-pen", class: "py-2 px-3" do %>
+                <%= t("artwork.delete") %>
+              <% end %>
+            <% end %>
           <% end %>
         <% elsif current_user&.is_guest == false %>
-          <%= render Shared::KebabComponent.new do %>
-            <menu class="py-1 text-sm">
-              <li>
-                <div class="block w-32 duration-50 transition-colors hover:bg-gray-400/10">
-                  <%= render "public/reports/btn", target: :artwork, target_id: @artwork.id %>
-                </div>
-              </li>
-            </menu>
+          <%= component "shared/kebab/base" do %>
+            <%= component "shared/kebab/menu_item", path: nil do %>
+              <%= render "public/reports/btn", target: :artwork, target_id: @artwork.id %>
+            <% end %>
           <% end %>
         <% end %>
       </div>
@@ -65,7 +58,7 @@
       <% end %>
     </div>
   </div>
-  <div class="w-full mt-6 lg:w-96 lg:mt-0">
+  <div class="w-full mt-6 lg:min-w-[24rem] lg:w-[24rem] lg:mt-0">
     <%= render "public/comments/form", artwork: @artwork, comment: Comment.new %>
     <%= tag.div id: "comment-list-of-#{@artwork.id}" do %>
       <%= render "public/comments/list", comments: @artwork_comments %>

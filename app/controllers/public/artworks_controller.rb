@@ -8,15 +8,15 @@ class Public::ArtworksController < ApplicationController
   def index
     if params[:tag].present?
       @tag = Tag.find_by(name: params[:tag])
-      @artworks = @artworks = @tag.artworks.with_publication
+      @artworks = @tag.artworks.with_publication.page(params[:page])
     else
       @query = params[:query] || ""
-      @artworks = @query != "" ? Artwork.search(@query) : Artwork.with_publication
-    end
-
-    respond_to do |format|
-      format.html
-      format.js
+      if @query == ""
+        @message = t("messages.search.required_enter_query")
+      else
+        @artworks = Artwork.search(@query).page(params[:page])
+        @message = t("messages.search.no_results_for", query: @query) if @artworks.size <= 0
+      end
     end
   end
 
@@ -44,7 +44,7 @@ class Public::ArtworksController < ApplicationController
   def create
     image_data = params[:artwork][:image_data]
     decoded_image = decode_image(image_data)
-    unique_tags = params[:artwork][:tags].uniq
+    unique_tags = params[:artwork][:tags]&.uniq || []
     @artwork = Artwork.new(artwork_params)
     @artwork.tags = unique_tags
     @artwork.user = current_user

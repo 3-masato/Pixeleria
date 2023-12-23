@@ -5,8 +5,10 @@
     id: "dropzone-file",
     **@options
   ) %>
-  <figure id="file-figure" class="mt-4">
-    <div id="file-preview" class="flex justify-center items-center"></div>
+  <figure id="file-figure" class="mt-4 flex justify-center items-center">
+    <div id="file-preview" class="max-w-[10rem]">
+      <%= image_tag @image if @image %>
+    </div>
   </figure>
 </div>
 
@@ -24,7 +26,9 @@
 
       preview.innerHTML = "";
 
-      if (!isImageFile(file)) return;
+      if (!isImageFile(file)) {
+        return;
+      }
 
       const img = document.createElement("img");
 

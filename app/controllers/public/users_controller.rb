@@ -1,13 +1,11 @@
 class Public::UsersController < ApplicationController
-  before_action :set_user, only: %i[edit show update artworks liked_artworks]
+  before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :set_user, only: %i[edit show update artworks my_artworks liked_artworks]
 
   def edit
-    @artworks = @user.artworks.with_details
   end
 
   def show
-    @followers
-    @followings
     @user_artworks = @user.artworks.with_publication
   end
 
@@ -17,6 +15,10 @@ class Public::UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def my_artworks
+    @artworks = @user.artworks.with_details.page(params[:page])
   end
 
   def confirm_deactivation
@@ -45,5 +47,12 @@ class Public::UsersController < ApplicationController
       :introduction,
       :profile_image
     )
+  end
+
+  def ensure_correct_user
+    user = User.find_by(account_name: params[:account_name])
+    unless user == current_user
+      redirect_to user_profile_path(user.account_name)
+    end
   end
 end
