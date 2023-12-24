@@ -1,48 +1,49 @@
 <%= component "shared/card", class: "my-10" do %>
   <h2 class="ml-6"><%= t("report.list") %></h2>
-  <%= component "shared/table/base" do %>
-    <%= component "shared/table/header", headers: [
-      "#",
-      "",
-      t("models.report.reported_by_user_id"),
-      t("models.report.reportable_type"),
-      t("models.report.reason"),
-      t("models.report.description"),
-      t("models.report.status"),
-    ].compact %>
-    <%= component "shared/table/body" do %>
-      <% reports.each do |report| %>
-        <%
-          reported_user = report.reported_by_user
-        %>
-        <%= component "shared/table/row" do %>
-          <%= component "shared/table/cell", is_header: true do %>
-            <%= report.id %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <%= component "report/read_label", is_read: report.is_read %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <%= link_to reported_user.display_name, admin_user_path(reported_user.account_name), class: "font-bold text-blue-500 hover:underline" %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <%= link_to t("report.target.#{report.reportable_type.downcase}"), admin_report_path(report.id), class: "font-bold text-blue-500 hover:underline" %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <%= report.reason_i18n %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <div class="truncate max-w-[24rem]">
-              <%= report.description %>
-            </div>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <%= component "report/status_label", report: report %>
+  <div class="overflow-auto">
+    <%= component "shared/table/base" do %>
+      <%= component "shared/table/header", headers: [
+        "#",
+        "",
+        t("models.report.reported_by_user_id"),
+        t("models.report.reportable_type"),
+        t("models.report.reason"),
+        t("models.report.description"),
+        t("models.report.status"),
+      ].compact %>
+      <%= component "shared/table/body" do %>
+        <% reports.each do |report| %>
+          <%
+            reported_user = report.reported_by_user
+          %>
+          <%= component "shared/table/row" do %>
+            <%= component "shared/table/cell", is_header: true do %>
+              <%= report.id %>
+            <% end %>
+            <%= component "shared/table/cell" do %>
+              <%= component "report/read_label", is_read: report.is_read %>
+            <% end %>
+            <%= component "shared/table/cell" do %>
+              <%= link_to reported_user.display_name, admin_user_path(reported_user.account_name), class: "font-bold text-blue-500 hover:underline" %>
+            <% end %>
+            <%= component "shared/table/cell" do %>
+              <%= link_to t("report.target.#{report.reportable_type.downcase}"), admin_report_path(report.id), class: "font-bold text-blue-500 hover:underline" %>
+            <% end %>
+            <%= component "shared/table/cell" do %>
+              <%= report.reason_i18n %>
+            <% end %>
+            <%= component "shared/table/cell" do %>
+              <div class="truncate max-w-[24rem]">
+                <%= report.description %>
+              </div>
+            <% end %>
+            <%= component "shared/table/cell" do %>
+              <%= component "report/status_label", report: report %>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>
     <% end %>
-  <% end %>
-
+  </div>
   <%= paginate reports %>
 <% end %>

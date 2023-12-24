@@ -90,7 +90,7 @@
         "shared/button",
         style: :outline,
         color: :red,
-        path: admin_artwork_path(artwork),
+        path: admin_artwork_path(artwork, return_to: request.referer),
         method: :delete,
         data: {
           confirm: "Are you sure?"

@@ -1,4 +1,9 @@
 class Admin::UsersController < ApplicationController
+  # `RedirectHandler` モジュールのインクルード
+  # このモジュールはリダイレクトに関する共通のメソッドを提供します。
+  # 特定のアクション実行後、元のページに戻るための処理をサポートします。
+  include RedirectHandler
+
   before_action :set_user, only: %i[show edit update]
   before_action :store_return_to, only: [:edit]
 
@@ -15,7 +20,10 @@ class Admin::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to determine_redirect_path, notice: t("messages.user.profile.update_success")
+      default_path = admin_user_path(@user.account_name)
+      notice = t("messages.user.profile.update_success")
+
+      redirect_to determine_redirect_path(default_path), notice: notice
     else
       render :edit
     end
@@ -34,18 +42,5 @@ class Admin::UsersController < ApplicationController
       :profile_image,
       :status
     )
-  end
-
-  def store_return_to
-    # `params[:return_to]` が提供されている場合、それをセッションに保存します。
-    # これは通常、特定のページから編集画面にリンクする際に設定されます。
-    session[:return_to] = params[:return_to] if params[:return_to].present?
-  end
-
-  def determine_redirect_path
-    # セッションに保存されたリダイレクト先が存在する場合は、そのパスを返します。
-    # 存在しない場合は、デフォルトでユーザーの詳細画面にリダイレクトします。
-    return session.delete(:return_to) if session[:return_to].present?
-    admin_user_path(@user.account_name)
   end
 end

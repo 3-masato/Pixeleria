@@ -1,4 +1,7 @@
 class Admin::ArtworksController < ApplicationController
+  # `RedirectHandler` モジュールのインクルード
+  # このモジュールはリダイレクトに関する共通のメソッドを提供します。
+  # 特定のアクション実行後、元のページに戻るための処理をサポートします。
   include RedirectHandler
 
   before_action :set_artwork, only: %i[show edit update destroy]
@@ -24,7 +27,10 @@ class Admin::ArtworksController < ApplicationController
   def update
     title = @artwork.title
     if @artwork.update(artwork_params)
-      redirect_to determine_redirect_path(admin_artwork_path(@artwork)), notice: t("messages.artwork.update_success", title: title)
+      default_path = admin_artwork_path(@artwork)
+      notice = t("messages.artwork.update_success", title: title)
+
+      redirect_to determine_redirect_path(default_path), notice: notice
     else
     end
   end
@@ -32,7 +38,11 @@ class Admin::ArtworksController < ApplicationController
   def destroy
     title = @artwork.title
     @artwork.destroy
-    redirect_to determine_redirect_path(admin_artworks_path), notice: t("messages.artwork.destroy_success", title: title)
+
+    default_path = admin_artworks_path
+    notice = t("messages.artwork.destroy_success", title: title)
+
+    redirect_to determine_redirect_path(default_path), notice: notice
   end
 
   private
