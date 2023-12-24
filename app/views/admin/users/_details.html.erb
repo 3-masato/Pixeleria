@@ -49,7 +49,9 @@
         path: admin_edit_user_path(user.account_name, return_to: request.path),
         class: "w-32"
       ) do %>
-        <i class="fa-solid fa-sliders"></i><span class="ml-2"><%= t("user.edit") %></span>
+        <%= component "utils/icon_text", fa_class: "fa-solid fa-sliders" do %>
+          <%= t("user.edit") %>
+        <% end %>
       <% end %>
     </div>
   </div>

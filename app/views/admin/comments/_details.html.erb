@@ -45,7 +45,9 @@
       },
       class: "w-32"
     ) do %>
-      <i class="fa-solid fa-trash-can"></i><span class="ml-2"><%= t("comment.delete") %></span>
+      <%= component "utils/icon_text", fa_class: "fa-solid fa-trash-can" do %>
+        <%= t("comment.delete") %>
+      <% end %>
     <% end %>
   </div>
 </div>

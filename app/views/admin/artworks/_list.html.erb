@@ -58,18 +58,28 @@
               <%= component "interaction/comment_count", count: artwork.comments.size %>
             <% end %>
             <%= component "shared/table/cell" do %>
-              <div class="grid place-items-center">
-                <%= link_to edit_admin_artwork_path(artwork), class: "w-8 h-8 grid place-items-center rounded-sm transition-colors hover:bg-gray-200" do %>
-                  <i class="fa-solid fa-sliders"></i>
-                <% end %>
-              </div>
+              <%= component(
+                "shared/button",
+                style: :outline,
+                color: :gray,
+                path: edit_admin_artwork_path(artwork),
+                class: "w-8 h-8 mx-auto"
+              ) do %>
+                <i class="fa-solid fa-sliders"></i>
+              <% end %>
             <% end %>
             <%= component "shared/table/cell" do %>
-              <div class="grid place-items-center">
-                <%= link_to admin_artwork_path(artwork), method: :delete, "data-confirm" => "Are you sure?", class: "w-8 h-8 grid place-items-center rounded-sm text-red-600 transition-colors hover:bg-red-100" do %>
-                  <i class="fa-solid fa-trash-can"></i>
-                <% end %>
-              </div>
+              <%= component(
+                "shared/button",
+                style: :outline,
+                color: :red,
+                path: admin_artwork_path(artwork),
+                method: :delete,
+                "data-confirm" => "Are you sure?",
+                class: "w-8 h-8 mx-auto"
+              ) do %>
+                <i class="fa-solid fa-trash-can"></i>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>

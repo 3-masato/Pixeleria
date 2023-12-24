@@ -84,7 +84,9 @@
         path: edit_admin_artwork_path(artwork, return_to: request.path),
         class: "w-32"
       ) do %>
-        <i class="fa-solid fa-sliders"></i><span class="ml-2"><%= t("artwork.edit") %></span>
+        <%= component "utils/icon_text", fa_class: "fa-solid fa-sliders" do %>
+          <%= t("artwork.edit") %>
+        <% end %>
       <% end %>
       <%= component(
         "shared/button",
@@ -97,7 +99,9 @@
         },
         class: "w-32"
       ) do %>
-        <i class="fa-solid fa-trash-can"></i><span class="ml-2"><%= t("artwork.delete") %></span>
+        <%= component "utils/icon_text", fa_class: "fa-solid fa-trash-can" do %>
+          <%= t("artwork.delete") %>
+        <% end %>
       <% end %>
     </div>
   </div>

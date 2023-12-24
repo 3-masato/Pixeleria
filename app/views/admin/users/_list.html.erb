@@ -33,11 +33,15 @@
               <%= component "user/status_label", status: user.status_before_type_cast, text: user.status_i18n %>
             <% end %>
             <%= component "shared/table/cell" do %>
-              <div class="grid place-items-center">
-                <%= link_to admin_edit_user_path(user.account_name), class: "w-8 h-8 grid place-items-center rounded-sm transition-colors hover:bg-gray-200" do %>
-                  <i class="fa-solid fa-sliders"></i>
-                <% end %>
-              </div>
+              <%= component(
+                "shared/button",
+                style: :outline,
+                color: :gray,
+                path: admin_edit_user_path(user.account_name),
+                class: "w-8 h-8 mx-auto"
+              ) do %>
+                <i class="fa-solid fa-sliders"></i>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
