@@ -13,6 +13,34 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      animation: {
+        "slide-left":
+          "slide-left 0.32s cubic-bezier(0.190, 1.000, 0.220, 1.000) 0.3s forwards",
+        "slide-out-top": "slide-out-top 0.16s cubic-bezier(0.550, 0.055, 0.675, 0.190) 6s both"
+      },
+      keyframes: {
+        "slide-left": {
+          "0%": {
+            transform: "translateX(100%)",
+            opacity: "0",
+          },
+          to: {
+            transform: "translateX(calc(-0.5rem + 0%))",
+            opacity: "1",
+          },
+        },
+        "slide-out-top": {
+          "0%": {
+            transform: "translateY(0)",
+            opacity: "1",
+          },
+          to: {
+            transform: "translateY(-0.25rem)",
+            opacity: "0",
+            display: "none"
+          },
+        },
+      },
     },
   },
   variants: {
