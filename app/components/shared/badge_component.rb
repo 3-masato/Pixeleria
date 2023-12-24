@@ -9,8 +9,8 @@ class Shared::BadgeComponent < ViewComponent::Base
   end
 
   def badge_class
-    classes = "font-medium inline-flex items-center justify-center px-2 py-1"
-    classes += " #{@large ? "text-sm" : "text-xs"}"
+    classes = "font-medium inline-flex items-center justify-center"
+    classes += " #{@large ? "px-2 py-1 text-sm" : "px-1 py-0.5 text-xs"}"
     classes += " #{@border ? "border #{bordered_colors[@color]}" : colors[@color]}"
     classes += " #{@rounded ? "rounded-full" : "rounded-sm"}"
     classes

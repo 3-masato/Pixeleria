@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Shared::TableComponent < ViewComponent::Base
+class Shared::Table::BaseComponent < ViewComponent::Base
   def initialize
   end
 end

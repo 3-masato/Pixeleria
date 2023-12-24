@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   before_action :store_return_to, only: [:edit]
 
   def index
-    @users = User.page(params[:page])
+    @users = User.with_attached_profile_image.page(params[:page])
   end
 
   def show
