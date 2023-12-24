@@ -1,4 +1,10 @@
-<%= link_to @path do %>
+<% if @path %>
+  <%= link_to @path, class: "no-underline" do %>
+    <%= render Shared::BadgeComponent.new(color: :sky, large: false, border: false, rounded: false) do %>
+      <%= @tag.name %>
+    <% end %>
+  <% end %>
+<% else %>
   <%= render Shared::BadgeComponent.new(color: :sky, large: false, border: false, rounded: false) do %>
     <%= @tag.name %>
   <% end %>

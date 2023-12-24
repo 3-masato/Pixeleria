@@ -2,11 +2,11 @@ class Admin::ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update update_status]
 
   def index
-    @reports = Report.page(params[:page])
+    @reports = Report.with_details.page(params[:page])
   end
 
   def show
-    # @report.update(is_read: true)
+    @report.update(is_read: true)
   end
 
   def edit

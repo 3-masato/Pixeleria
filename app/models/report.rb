@@ -11,4 +11,6 @@ class Report < ApplicationRecord
     other: 5
   }
   enum status: { pending: 0, processing: 1, resolved: 2 }
+
+  scope :with_details, -> { includes(:reported_by_user, :reportable) }
 end

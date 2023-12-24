@@ -5,8 +5,8 @@
         Pixeleria<span class="text-sm ml-2">admin</span>
       <% end %>
     </div>
-    <nav class="w-64">
-      <ul class="flex justify-evenly items-center">
+    <nav>
+      <ul class="flex justify-evenly items-center gap-x-6">
         <% @nav_items.each do |item| %>
           <%= render Layout::NavItemComponent.new(item: item) %>
         <% end %>
@@ -20,8 +20,8 @@
         Pixeleria
       <% end %>
     </div>
-    <nav class="w-64">
-      <ul class="flex justify-evenly items-center">
+    <nav>
+      <ul class="flex justify-evenly items-center gap-x-6">
         <% @nav_items.each do |item| %>
           <%= render Layout::NavItemComponent.new(item: item) %>
         <% end %>

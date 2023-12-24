@@ -12,7 +12,7 @@ class Artwork < ApplicationRecord
   has_many :comments,     dependent: :destroy
   has_many :artwork_tags, dependent: :destroy
   has_many :tags,         through:   :artwork_tags
-  has_many :reports,      as:        :reportable
+  has_many :reports,      as:        :reportable, dependent: :destroy
 
   validates :title, presence: true
   validates :description, length: { maximum: DESCRIPTION_MAX_LENGTH }
@@ -21,9 +21,7 @@ class Artwork < ApplicationRecord
   default_scope { order(created_at: :desc) }
 
   scope :with_details, -> { includes(:likes, :comments, :tags, image_attachment: :blob, user: { profile_image_attachment: :blob }) }
-
   scope :publication, -> { where(is_public: true) }
-
   scope :with_publication, -> { with_details.publication }
 
   def liked_by?(user)

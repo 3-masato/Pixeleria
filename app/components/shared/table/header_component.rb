@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Shared::TableHeaderComponent < ViewComponent::Base
+class Shared::Table::HeaderComponent < ViewComponent::Base
   def initialize(headers:)
     @headers = headers
   end
