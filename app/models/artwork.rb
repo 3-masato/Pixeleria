@@ -21,9 +21,7 @@ class Artwork < ApplicationRecord
   default_scope { order(created_at: :desc) }
 
   scope :with_details, -> { includes(:likes, :comments, :tags, image_attachment: :blob, user: { profile_image_attachment: :blob }) }
-
   scope :publication, -> { where(is_public: true) }
-
   scope :with_publication, -> { with_details.publication }
 
   def liked_by?(user)
