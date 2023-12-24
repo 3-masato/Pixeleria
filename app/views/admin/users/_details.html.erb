@@ -1,41 +1,41 @@
 <div class="p-6 flex flex-col gap-4 lg:flex-row">
-  <div class="flex justify-center">
-    <%= image_tag user.get_profile_image, size: "256x256" %>
+  <div class="flex justify-center mx-16">
+    <%= component "user/avatar", user: user, size: :xl %>
   </div>
   <div class="overflow-auto grow">
-    <%= component "shared/table" do %>
-      <%= component "shared/table_body" do %>
-        <%= component "shared/table_row" do %>
-          <%= component "shared/table_cell", is_header: true do %>
+    <%= component "shared/table/base" do %>
+      <%= component "shared/table/body" do %>
+        <%= component "shared/table/row" do %>
+          <%= component "shared/table/cell", is_header: true do %>
             <%= t("activerecord.attributes.user.display_name") %>
           <% end %>
-          <%= component "shared/table_cell" do %>
+          <%= component "shared/table/cell" do %>
             <%= user.display_name %>
           <% end %>
         <% end %>
-        <%= component "shared/table_row" do %>
-          <%= component "shared/table_cell", is_header: true do %>
+        <%= component "shared/table/row" do %>
+          <%= component "shared/table/cell", is_header: true do %>
             <%= t("activerecord.attributes.user.account_name") %>
           <% end %>
-          <%= component "shared/table_cell" do %>
+          <%= component "shared/table/cell" do %>
             <%=  user.account_name %>
           <% end %>
         <% end %>
-        <%= component "shared/table_row" do %>
-          <%= component "shared/table_cell", is_header: true do %>
+        <%= component "shared/table/row" do %>
+          <%= component "shared/table/cell", is_header: true do %>
             <%= t("activerecord.attributes.user.introduction") %>
           <% end %>
-          <%= component "shared/table_cell" do %>
+          <%= component "shared/table/cell" do %>
             <div class="whitespace-normal max-w-[32rem]">
               <%= user.introduction %>
             </div>
           <% end %>
         <% end %>
-        <%= component "shared/table_row" do %>
-          <%= component "shared/table_cell", is_header: true do %>
+        <%= component "shared/table/row" do %>
+          <%= component "shared/table/cell", is_header: true do %>
             <%= t("activerecord.attributes.user.status") %>
           <% end %>
-          <%= component "shared/table_cell" do %>
+          <%= component "shared/table/cell" do %>
             <%= component "user/status_label", status: user.status_before_type_cast, text: user.status_i18n %>
           <% end %>
         <% end %>
