@@ -1,18 +1,22 @@
-<%= form_with url: artworks_path, method: :get, local: true do |f| %>
-  <div class="flex justify-center items-center mx-auto">
-    <%= render Shared::Form::TextFieldComponent.new(
-      form: f,
-      field_type: :text_field,
-      field_name: :query,
-      size: :small,
-      value: @query
-    ) %>
-    <%= render Shared::ButtonComponent.new(
-      style: :solid,
-      color: :sky,
-      type: :submit,
-    ) do %>
-      <i class="fa-solid fa-magnifying-glass"></i>
-    <% end %>
-  </div>
-<% end %>
+<div class="my-6">
+  <%= form_with url: artworks_path, method: :get, local: true do |f| %>
+    <div class="flex justify-center items-center mx-auto">
+      <%= render Shared::Form::TextFieldComponent.new(
+        form: f,
+        field_type: :text_field,
+        field_name: :query,
+        size: :large,
+        value: @query,
+        placeholder: t("artwork.search")
+      ) %>
+      <%= render Shared::ButtonComponent.new(
+        style: :solid,
+        color: :sky,
+        type: :submit,
+        class: "text-lg p-3"
+      ) do %>
+        <i class="fa-solid fa-magnifying-glass"></i>
+      <% end %>
+    </div>
+  <% end %>
+</div>

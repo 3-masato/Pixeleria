@@ -49,6 +49,10 @@ module ApplicationHelper
   def user_nav_items
     [
       {
+        path: new_artwork_path,
+        text: t("artwork.draw")
+      },
+      {
         path: user_profile_path(current_user.account_name),
         text: t("user.mypage")
       },
