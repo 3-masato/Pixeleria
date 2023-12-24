@@ -36,7 +36,7 @@
             <% end %>
             <%= component "shared/table/cell" do %>
               <div class="grid place-items-center">
-                <%= link_to admin_comment_path(comment), method: :delete, "data-confirm" => "Are you sure?", class: "w-8 h-8 grid place-items-center rounded-sm text-red-600 transition-colors hover:bg-red-100" do %>
+                <%= link_to admin_comment_path(comment, return_to: request.path), method: :delete, "data-confirm" => "Are you sure?", class: "w-8 h-8 grid place-items-center rounded-sm text-red-600 transition-colors hover:bg-red-100" do %>
                   <i class="fa-solid fa-trash-can"></i>
                 <% end %>
               </div>

@@ -12,7 +12,7 @@ class Artwork < ApplicationRecord
   has_many :comments,     dependent: :destroy
   has_many :artwork_tags, dependent: :destroy
   has_many :tags,         through:   :artwork_tags
-  has_many :reports,      as:        :reportable
+  has_many :reports,      as:        :reportable, dependent: :destroy
 
   validates :title, presence: true
   validates :description, length: { maximum: DESCRIPTION_MAX_LENGTH }
