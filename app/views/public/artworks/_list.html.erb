@@ -1,9 +1,9 @@
-<div class="w-full grid justify-items-center gap-x-2 gap-y-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+<div class="w-full grid justify-items-center gap-x-2 gap-y-12 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
   <% artworks.each do |artwork| %>
-    <div class="w-48 flex justify-center items-center flex-col gap-2 hover:shadow">
+    <div class="relative w-48 flex bg-slate-50 justify-center items-center flex-col gap-2 shadow transition-shadow hover:shadow-lg">
       <div class="py-6">
         <%= link_to artwork_path(artwork), class: "hover:underline w-32 h-32" do %>
-          <%= image_tag artwork.image, width: 128, height: 128, class: "m-0 rendering-pixelated" %>
+          <%= component "artwork/image", artwork: artwork, size: :sm %>
         <% end %>
       </div>
       <div class="py-4 flex justify-evenly border-t w-full text-sm">
@@ -18,6 +18,11 @@
           <%= component "interaction/comment_count", count: artwork.comments.size %>
         <% end %>
       </div>
+      <% unless artwork.is_public %>
+        <div class="absolute top-2 left-2">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+      <% end %>
     </div>
   <% end %>
 </div>

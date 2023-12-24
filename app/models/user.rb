@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :likes,          dependent: :destroy
   has_many :comments,       dependent: :destroy
   has_many :liked_artworks, through:   :likes,     source: :artwork
-  has_many :reports,        as:        :reportable
+  has_many :reports,        as:        :reportable, dependent: :destroy
 
   has_many :active_relationships,  class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
@@ -36,6 +36,8 @@ class User < ApplicationRecord
     }
   )
 
+  scope :with_details, -> { includes(:followings, :followers, profile_image_attachment: :blob) }
+
   def active_for_authentication?
     super && (status == "active")
   end
@@ -45,24 +47,20 @@ class User < ApplicationRecord
   end
 
   def follow(user)
-    unless following?(user)
-      active_relationships.create(followed_id: user.id)
-    end
+    active_relationships.create(followed_id: user.id) unless following?(user)
   end
 
   def unfollow(user)
-    if following?(user)
-      active_relationships.find_by(followed_id: user.id).destroy
-    end
+    active_relationships.find_by(followed_id: user.id)&.destroy
   end
 
   def following?(user)
-    followings.include?(user)
+    active_relationships.exists?(followed_id: user.id)
   end
 
   def self.guest
     guest_email = "guest_#{SecureRandom.hex(10)}@example.com"
-    guest_account_name = "guest_#{SecureRandom.alphanumeric(16)}"
+    guest_account_name = "guest_#{SecureRandom.alphanumeric(12)}"
 
     create!(
       email: guest_email,

@@ -1,0 +1,48 @@
+<div>
+  <%= @form.file_field(
+    @field_name,
+    class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-sm cursor-pointer bg-gray-100 focus:outline-none file:bg-gray-50 file:border-0 file:bg-gray-100 file:me-4 file:py-3 file:px-4",
+    id: "dropzone-file",
+    **@options
+  ) %>
+  <figure id="file-figure" class="mt-4 flex justify-center items-center">
+    <div id="file-preview" class="max-w-[10rem]">
+      <%= image_tag @image if @image&.attached? %>
+    </div>
+  </figure>
+</div>
+
+<script>
+  {
+    const dropzoneFile = document.getElementById("dropzone-file");
+    const figure = document.getElementById("file-figure");
+    const preview = document.getElementById("file-preview");
+
+    const isImageFile = (file) => file.type.startsWith("image/");
+
+    dropzoneFile.addEventListener("change", async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      preview.innerHTML = "";
+
+      if (!isImageFile(file)) {
+        return;
+      }
+
+      const img = document.createElement("img");
+
+      preview.insertAdjacentHTML(
+        "beforeend",
+        `<%= j(render Svg::BubbleLoadingComponent.new(width: 128, height: 128)) %>`
+      );
+
+      img.src = URL.createObjectURL(file);
+      img.addEventListener("load", () => {
+        URL.revokeObjectURL(img.src);
+        preview.innerHTML = "";
+        preview.append(img);
+      }, { once: true });
+    });
+  }
+</script>

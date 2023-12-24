@@ -4,6 +4,8 @@ ja:
     save: 保存
     update: 更新
     edit_heading: プロフィール編集
+    mypage: マイページ
+    my_artworks: 自分の作品
     follow: フォロー
     unfollow: フォロー解除
     following: フォロー中
@@ -29,11 +31,13 @@ ja:
     create: 作成
     save: 保存
     submit: 投稿
+    update: 更新
     delete: 削除
     edit: 編集
     edit_heading: 作品情報編集
-    submit_form_title: ドット絵を投稿/保存する
-    list_by_tag: 
+    submit_form_title: ドット絵を保存する
+    published: 公開済み
+    private: 非公開
   comment:
     list: コメント一覧
     send: 送信
@@ -67,13 +71,30 @@ ja:
       relationships:
         no_followings: "フォローユーザーはいません"
         no_followers: "フォロワーはいません"
+      artworks:
+        no_artworks: "投稿作品はありません"
+        no_my_artworks: "投稿した作品はありません"
+        no_liked_artworks: "いいねした作品はありません"
     comment:
       required_sign_in: "コメントを投稿するにはログインもしくはアカウント新規登録をしてください"
     admin:
       user:
         update_success: "ユーザー情報を更新しました"
-      artwork:
-        update_success: "作品「%{title}」の情報を更新しました"
-        destroy_success: "作品「%{title}」を削除しました"
       comment:
         destroy_success: "コメントを削除しました"
+    artwork:
+      update_success: "作品「%{title}」の情報を更新しました"
+      destroy_success: "作品「%{title}」を削除しました"
+      recent: "最近投稿された作品"
+    artwork_canvas:
+      update_success: "作品「%{title}」のドット絵を更新しました"
+    tag:
+      empty: "タグはありません"
+    search:
+      no_results_for: "「%{query}」の検索結果は見つかりませんでした"
+      required_enter_query: "検索ワードを入力してください"
+  placeholder:
+    email: "sample@example.com"
+    display_name: ユーザー名を入力してください
+    account_name: 半角英数字とアンダースコアが使用できます
+    introduction: 自己紹介文を自由に入力してください

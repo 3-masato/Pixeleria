@@ -1,0 +1,5 @@
+<% if @is_header %>
+  <%= tag.th content, class: "h-px w-px whitespace-nowrap text-sm px-4 py-2 align-middle font-bold text-start", scope: "row" %>
+<% else %>
+  <%= tag.td content, class: "h-px w-px whitespace-nowrap text-sm px-4 py-2 align-middle" %>
+<% end %>

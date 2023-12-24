@@ -1,159 +1,124 @@
 class Public::ArtworksController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
+  before_action :set_artwork, only: %i[show edit update destroy editor update_canvas setup_editor]
+  before_action :set_artwork_canvas, only: %i[editor update_canvas setup_editor]
 
-  # ドット絵のサイズいずれでも割り切れるきりの良い数
-  BASE_CANVAS_SIZE = 768
+  BASE_CANVAS_SIZE = 512
 
   def index
     if params[:tag].present?
       @tag = Tag.find_by(name: params[:tag])
-      @artworks = @artworks = @tag.artworks.with_publication
+      @artworks = @tag.artworks.with_publication.page(params[:page])
     else
       @query = params[:query] || ""
-      @artworks = @query != "" ? Artwork.search(@query) : Artwork.with_publication
-    end
-
-    respond_to do |format|
-      format.html
-      format.js
+      if @query == ""
+        @message = t("messages.search.required_enter_query")
+      else
+        @artworks = Artwork.search(@query).page(params[:page])
+        @message = t("messages.search.no_results_for", query: @query) if @artworks.size <= 0
+      end
     end
   end
 
   def show
-    @artwork = Artwork.find(params[:id])
     @artwork_comments = @artwork.comments.with_user_profile_images
     @author = @artwork.user
-    @authors_other_artworks = @author.artworks.with_publication.where.not(id: @artwork.id)
-  end
-
-  def edit
-    @artwork = Artwork.find(params[:id])
-  end
-
-  def setup_editor
-    @artwork = Artwork.find(params[:artwork_id])
-    @artwork_canvas = @artwork.artwork_canvas
-    @width = @artwork_canvas.width
-    @height = @artwork_canvas.height
-    dot_ratio = [@width, @height].max
-    @dotsize = BASE_CANVAS_SIZE / dot_ratio
+    @authors_other_artworks = @author.artworks.with_publication.where.not(id: @artwork.id).limit(6)
   end
 
   def new
   end
 
+  def edit
+  end
+
   def initialize_editor
-    @artwork_id = nil
+    @artwork = Artwork.new
+    @artwork.build_artwork_canvas
+
     size = params[:size].split("x")
     @width = size[0].to_i
     @height = size[1].to_i
-    dot_ratio = [@width, @height].max
-    @dotsize = BASE_CANVAS_SIZE / dot_ratio
+    @dotsize = calc_dotsize(@width, @height)
   end
 
-  def save
-    id = params[:artwork_id]
-    image_data = params[:image_data]
-    pixel_data = params[:pixel_data]
-    width = params[:width]
-    height = params[:height]
-    decoded_image = decode_image(image_data)
-
-    if id.nil?
-      @artwork = create_new_artwork(decoded_image)
-      @artwork_canvas = create_new_artwork_canvas(pixel_data, width, height, @artwork)
-      log_action("saved")
-    else
-      @artwork = update_existing_artwork(id, decoded_image)
-      @artwork_canvas = update_existing_artwork_canvas(@artwork, pixel_data)
-      log_action("updated")
-    end
-
-    unless @artwork.valid? && @artwork_canvas.valid?
-      render json: { status: "error" } and return
-    end
-
-    render json: { status: "ok", artwork_id: @artwork.id }
+  def editor
+    @width = @artwork_canvas.width
+    @height = @artwork_canvas.height
+    @dotsize = calc_dotsize(@width, @height)
   end
 
-  def confirm_upload
-    id = params[:artwork_id]
-    image_data = params[:image_data]
-    pixel_data = params[:pixel_data]
-    width = params[:width]
-    height = params[:height]
-    decoded_image = decode_image(image_data)
+  def update_canvas
+    title = @artwork.title
+    pixel_data = params[:artwork_canvas][:pixel_data]
+    image_data = params[:artwork_canvas][:image_data]
 
-    if id.nil?
-      @artwork = create_new_artwork(decoded_image)
-      @artwork_canvas = create_new_artwork_canvas(pixel_data, width, height, @artwork)
-      log_action("saved")
-    else
-      @artwork = update_existing_artwork(id, decoded_image)
-      @artwork_canvas = update_existing_artwork_canvas(@artwork, pixel_data)
-      log_action("updated")
+    @artwork.decode_and_attach_image(image_data)
+
+    if @artwork.save && @artwork_canvas.update(pixel_data: pixel_data)
+      redirect_to artwork_path(@artwork), notice: t("messages.artwork_canvas.update_success", title: title)
     end
+  end
 
-    unless @artwork.valid? && @artwork_canvas.valid?
-      render json: { status: "error" } and return
+  def create
+    unique_tags = params[:artwork][:tags]&.uniq || []
+    image_data = params[:artwork][:image_data]
+
+    @artwork = Artwork.new(artwork_params)
+    @artwork.tags = unique_tags
+    @artwork.user = current_user
+
+    @artwork.decode_and_attach_image(image_data)
+
+    if @artwork.save
+      redirect_to artwork_path(@artwork)
+    else
+      "failed"
+      # render artwork.errors
     end
   end
 
   def update
-    tag_list = params[:artwork][:tag_list]
-    @artwork = Artwork.find(params[:id])
-
+    title = @artwork.title
     if @artwork.update(artwork_params)
-      @artwork.save_tags(tag_list.split(",").map(&:strip))
-      redirect_to artwork_path(@artwork.id)
+      redirect_to artwork_path(@artwork), notice: t("messages.artwork.update_success", title: title)
+    else
+      render :edit
     end
   end
 
   def destroy
-    @artwork = Artwork.find(params[:id])
     @artwork.destroy
     redirect_to root_path
   end
 
   private
+  def set_artwork
+    @artwork = Artwork.find(params[:id])
+  end
+
+  def set_artwork_canvas
+    @artwork_canvas = @artwork.artwork_canvas
+  end
+
+  def calc_dotsize(width, height)
+    dot_ratio = [width, height].max
+    dotsize = BASE_CANVAS_SIZE / dot_ratio
+  end
+
+  def update_artwork_and_canvas(pixel_data, image_data)
+    decoded_image = decode_image(image_data)
+    @artwork.image.attach(io: decoded_image, filename: "#{@artwork.title}.png")
+    @artwork_canvas.update(pixel_data: pixel_data) && @artwork.save
+  end
+
   def artwork_params
-    params.require(:artwork).permit(:title, :description, :is_public)
-  end
-
-  def decode_image(data)
-    # Base64のプレフィックスを削除し、デコードする
-    base64_image = data.sub(/^data:image\/\w+;base64,/, "")
-    decoded_image = Base64.decode64(base64_image)
-    StringIO.new(decoded_image)
-  end
-
-  def create_new_artwork(decoded_image)
-    artwork = Artwork.new(title: "", is_public: false, user: current_user)
-    artwork.image.attach(io: decoded_image, filename: "canvas_image.png")
-    artwork.save
-    artwork
-  end
-
-  def create_new_artwork_canvas(pixel_data, width, height, artwork)
-    ArtworkCanvas.create(pixel_data: pixel_data, width: width, height: height, artwork: artwork)
-  end
-
-  def update_existing_artwork(id, decoded_image)
-    artwork = Artwork.find(id)
-    artwork.image.attach(io: decoded_image, filename: "canvas_image.png")
-    artwork.save
-    artwork
-  end
-
-  def update_existing_artwork_canvas(artwork, pixel_data)
-    artwork_canvas = artwork.artwork_canvas
-    artwork_canvas.update(pixel_data: pixel_data)
-    artwork_canvas
-  end
-
-  def log_action(action)
-    p "--------"
-    p "#{action}"
-    p "--------"
+    params.require(:artwork).permit(
+      :title,
+      :description,
+      :is_public,
+      :artwork_canvas_attributes => %i[pixel_data width height],
+      :tags => []
+    )
   end
 end

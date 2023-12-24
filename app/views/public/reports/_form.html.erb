@@ -3,11 +3,11 @@
     <%= f.hidden_field :target, value: @target %>
     <%= f.hidden_field :target_id, value: @target_id %>
     <div>
-      <%= component "shared/label", form: f, field: :reason, text: t("models.report.reason") %>
+      <%= component "shared/form/label", form: f, field: :reason, text: t("models.report.reason") %>
       <div class="flex flex-col gap-2">
         <% Report.reasons.keys.each_with_index do |reason_key, index| %>
           <%= component(
-            "shared/radio",
+            "shared/form/radio",
             form: f,
             field_name: :reason,
             value: reason_key,
@@ -20,9 +20,9 @@
     </div>
 
     <div>
-      <%= component "shared/label", form: f, field: :description, text: t("models.report.description") %>
+      <%= component "shared/form/label", form: f, field: :description, text: t("models.report.description") %>
       <%= component(
-        "shared/text_area",
+        "shared/form/text_area",
         form: f,
         field_name: :description,
         rows: 3,

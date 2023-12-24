@@ -1,4 +1,14 @@
-<% flash.each do |message_type, message| %>
-  <%= tag.span message_type %>
-  <%= tag.span message %>
+<% flash.each do |key, value| %>
+  <div class="animate-slide-left fixed top-24 right-0 z-30 translate-x-full">
+    <% case key %>
+    <% when "notice" %>
+      <div class="animate-slide-out-top py-3 px-5 flex justify-center items-center shadow-lg rounded-sm border border-teal-200 text-teal-800 bg-teal-100">
+        <i class="fa-solid fa-check"></i><p class="ml-2 font-bold"><%= value %></p>
+      </div>
+    <% when "alert" %>
+      <div class="animate-slide-out-top py-3 px-5 flex justify-center items-center shadow-lg rounded-sm border border-yellow-200 text-yellow-800 bg-yellow-100">
+        <i class="fa-solid fa-circle-exclamation"></i><p class="ml-2 font-bold"><%= value %></p>
+      </div>
+    <% end %>
+  </div>
 <% end %>

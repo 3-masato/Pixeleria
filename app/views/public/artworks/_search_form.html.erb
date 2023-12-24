@@ -1,6 +1,6 @@
-<%= form_with url: artworks_path, method: :get, local: false do |f| %>
+<%= form_with url: artworks_path, method: :get, local: true do |f| %>
   <div class="flex justify-center items-center mx-auto">
-    <%= render Shared::TextFieldComponent.new(
+    <%= render Shared::Form::TextFieldComponent.new(
       form: f,
       field_type: :text_field,
       field_name: :query,
@@ -12,7 +12,7 @@
       color: :sky,
       type: :submit,
     ) do %>
-      探す
+      <i class="fa-solid fa-magnifying-glass"></i>
     <% end %>
   </div>
 <% end %>

@@ -1,9 +1,0 @@
-{
-  <%= render "public/artworks/editor", artwork_id: @artwork.id, width: @width, height: @height, dotsize: @dotsize %>
-  $(() => {
-    const editor = document.getElementById("pixeleria-editor");
-    const pixelData = "<%= @artwork_canvas.pixel_data %>".split(",");
-    console.log(pixelData);
-    editor.loadPixelData(pixelData);
-  });
-}

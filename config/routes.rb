@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
     resources :artworks, only: %i[index show edit update destroy]
     resources :comments, only: %i[index destroy]
-    resources :reports,  only: %i[index show edit update] do
+    resources :reports,  only: %i[index show update] do
       member do
         post :update_status
       end
@@ -34,13 +34,12 @@ Rails.application.routes.draw do
   scope module: :public do
     root "homes#top"
 
-    get "about" => "homes#about"
-
     get     "users/:account_name",                to: "users#show",                 as: :user_profile
     get     "users/:account_name/edit",           to: "users#edit",                 as: :edit_user_profile
     patch   "users/:account_name",                to: "users#update",               as: :update_user_profile
     get     "users/:account_name/artworks",       to: "users#artworks",             as: :user_artworks
     get     "users/:account_name/liked_artworks", to: "users#liked_artworks",       as: :user_liked_artworks
+    get     "users/:account_name/my_artworks",    to: "users#my_artworks",          as: :user_my_artworks
     post    "users/:account_name/relationships",  to: "relationships#create",       as: :user_follow
     delete  "users/:account_name/relationships",  to: "relationships#destroy",      as: :user_unfollow
     get     "users/:account_name/followings",     to: "relationships#followings",   as: :user_followings
@@ -48,12 +47,13 @@ Rails.application.routes.draw do
     get     "confirm_deactivation",               to: "users#confirm_deactivation", as: :confirm_deactivation
     patch   "deactivate",                         to: "users#deactivate",           as: :deactivate
 
-    resources :artworks, except: %i[create] do
+    resources :artworks do
+      member do
+        get   :editor
+        patch :update_canvas
+      end
       collection do
-        post :setup_editor,       defaults: { format: "js" }
         post :initialize_editor,  defaults: { format: "js" }
-        post :save,               defaults: { format: "json" }
-        post :confirm_upload,     defaults: { format: "js" }
       end
 
       resource  :likes,     only: %i[create destroy], defaults: { format: "js" }
