@@ -1,33 +1,35 @@
 <div class="w-full">
   <% if user_signed_in? %>
-    <%= form_with model: [artwork, comment], local: false do |f| %>
-      <div class="flex items-center space-x-2" data-controller="input">
-        <%= tag.div class: "grow" do %>
+    <div data-controller="input">
+      <%= form_with model: [artwork, comment], local: false, data: { "action": "input#preventMultiSubmit" } do |f| %>
+        <div class="flex items-center space-x-2">
+          <%= tag.div class: "grow" do %>
+            <%= component(
+              "shared/form/text_field",
+              form: f,
+              field_type: :text_field,
+              field_name: :content,
+              id: "comment-input-of-#{artwork.id}",
+              required: true,
+              data: {
+                "input-target": "input",
+                action: "input#checkBlank"
+              }
+            ) %>
+          <% end %>
           <%= component(
-            "shared/form/text_field",
-            form: f,
-            field_type: :text_field,
-            field_name: :content,
-            id: "comment-input-of-#{artwork.id}",
-            required: true,
-            data: {
-              "input-target": "input",
-              action: "input#checkBlank"
-            }
-          ) %>
-        <% end %>
-        <%= component(
-          "shared/button",
-          style: :solid,
-          color: :sky,
-          type: "submit",
-          class: "w-20 h-10",
-          data: { "input-target": "submit" }
-        ) do %>
-          <%= t("comment.send") %>
-        <% end %>
-      </div>
-    <% end %>
+            "shared/button",
+            style: :solid,
+            color: :sky,
+            type: "submit",
+            class: "w-20 h-10",
+            data: { "input-target": "submit" }
+          ) do %>
+            <%= t("comment.send") %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   <% else %>
     <div class="text-sm text-gray-500">
       <%= t("messages.comment.required_sign_in") %>

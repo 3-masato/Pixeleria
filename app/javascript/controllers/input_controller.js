@@ -19,6 +19,14 @@ export default class extends Controller {
   }
 
   /**
+   * 送信直後に送信ボタンを無効化して、同じ内容を連続で送信してしまうのを防ぎます。
+   * `setTimeout` で無効化するタイミングをほんの少し遅らせます。
+   */
+  preventMultiSubmit(e) {
+    setTimeout(() => this._setDisabledSubmit(true), 0);
+  }
+
+  /**
    * 送信ボタンの有効/無効状態を設定します。
    * @private
    * @param {boolean} disabled - 送信ボタンを無効化するかどうかの真偽値。
