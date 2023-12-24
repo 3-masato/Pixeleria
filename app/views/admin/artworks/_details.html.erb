@@ -1,69 +1,76 @@
 <div class="p-6 flex flex-col gap-4 lg:flex-row">
-  <div class="flex justify-center">
-    <%= image_tag artwork.image, size: "384x384", style: "image-rendering: pixelated" %>
+  <div class="flex justify-center mx-12">
+    <%= component "artwork/image", artwork: artwork, size: :xxl %>
   </div>
   <div class="overflow-auto grow">
-    <%= component "shared/table" do %>
-      <%= component "shared/table_body" do %>
-        <%= component "shared/table_row" do %>
-          <%= component "shared/table_cell", is_header: true do %>
-            <%= t("models.artwork.title") %>
+    <%= component "shared/table/base" do %>
+      <%= component "shared/table/body" do %>
+        <%= component "shared/table/row" do %>
+          <%= component "shared/table/cell", is_header: true do %>
+            <%= t("activerecord.attributes.artwork.title") %>
           <% end %>
-          <%= component "shared/table_cell" do %>
+          <%= component "shared/table/cell" do %>
             <%= artwork.title %>
           <% end %>
         <% end %>
-        <%= component "shared/table_row" do %>
-          <%= component "shared/table_cell", is_header: true do %>
-            <%= t("models.artwork.description") %>
+        <%= component "shared/table/row" do %>
+          <%= component "shared/table/cell", is_header: true do %>
+            <%= t("activerecord.attributes.artwork.description") %>
           <% end %>
-          <%= component "shared/table_cell" do %>
+          <%= component "shared/table/cell" do %>
             <div class="whitespace-normal max-w-[32rem]">
               <%= artwork.description %>
             </div>
           <% end %>
         <% end %>
-        <%= component "shared/table_row" do %>
-          <%= component "shared/table_cell", is_header: true do %>
-            <%= t("models.artwork.tags") %>
+        <%= component "shared/table/row" do %>
+          <%= component "shared/table/cell", is_header: true do %>
+            <%= t("activerecord.attributes.artwork.tags") %>
           <% end %>
-          <%= component "shared/table_cell" do %>
-            <% artwork.tags.each do |tag| %>
-              <span class="text-xs inline-block">
-                <%= tag.name %>
-              </span>
+          <%= component "shared/table/cell" do %>
+            <% if artwork.tags.empty? %>
+              <%= tag.span t("messages.tag.empty"), class: "text-xs text-gray-500" %>
+            <% else %>
+              <% artwork.tags.each do |tag| %>
+                <%= component "artwork/tag", tag: tag, path: nil %>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
-        <%= component "shared/table_row" do %>
-          <%= component "shared/table_cell", is_header: true do %>
-            <%= t("models.artwork.is_public") %>
+        <%= component "shared/table/row" do %>
+          <%= component "shared/table/cell", is_header: true do %>
+            <%= t("activerecord.attributes.artwork.is_public") %>
           <% end %>
-          <%= component "shared/table_cell" do %>
-            <%= artwork.is_public %>
+          <%= component "shared/table/cell" do %>
+            <% if artwork.is_public %>
+              <%= t("artwork.published") %>
+            <% else %>
+              <i class="fa-solid fa-lock"></i>
+              <%= t("artwork.private") %>
+            <% end %>
           <% end %>
         <% end %>
-        <%= component "shared/table_row" do %>
-          <%= component "shared/table_cell", is_header: true do %>
-            <%= t("models.artwork.author") %>
+        <%= component "shared/table/row" do %>
+          <%= component "shared/table/cell", is_header: true do %>
+            <%= t("activerecord.attributes.artwork.author") %>
           <% end %>
-          <%= component "shared/table_cell" do %>
+          <%= component "shared/table/cell" do %>
             <%= link_to author.display_name, admin_user_path(author.account_name), class: "font-bold text-blue-500 hover:underline" %>
           <% end %>
         <% end %>
-        <%= component "shared/table_row" do %>
-          <%= component "shared/table_cell", is_header: true do %>
-            <%= t("models.artwork_canvas.width") %>
+        <%= component "shared/table/row" do %>
+          <%= component "shared/table/cell", is_header: true do %>
+            <%= t("activerecord.attributes.artwork_canvas.width") %>
           <% end %>
-          <%= component "shared/table_cell" do %>
+          <%= component "shared/table/cell" do %>
             <%= artwork.width_px %>
           <% end %>
         <% end %>
-        <%= component "shared/table_row" do %>
-          <%= component "shared/table_cell", is_header: true do %>
-            <%= t("models.artwork_canvas.height") %>
+        <%= component "shared/table/row" do %>
+          <%= component "shared/table/cell", is_header: true do %>
+            <%= t("activerecord.attributes.artwork_canvas.height") %>
           <% end %>
-          <%= component "shared/table_cell" do %>
+          <%= component "shared/table/cell" do %>
             <%= artwork.height_px %>
           <% end %>
         <% end %>

@@ -1,16 +1,16 @@
 <%= component "shared/card", class: "my-10 p-6" do %>
-  <%= tag.h2 t("artwork.edit_heading"), class: "text-2xl font-bold" %>
-  <div class="mt-6 flex justify-center flex-col lg:justify-evenly lg:flex-row">
+  <%= tag.h2 t("artwork.edit_heading") %>
+  <div class="mt-6 flex justify-center flex-col gap-y-8 lg:justify-evenly lg:flex-row lg:gap-0">
     <div class="flex justify-center items-center">
-      <%= image_tag @artwork.image, size: "256x256", style: "image-rendering: pixelated" %>
+      <%= component "artwork/image", artwork: @artwork, size: :xxl %>
     </div>
     <div class="self-center w-96">
       <%= form_with model: [:admin, @artwork], local: true do |f| %>
         <div class="grid gap-y-4">
           <div>
-            <%= f.label :title, t("models.artwork.title"), class: "block text-sm font-bold mb-2" %>
+            <%= f.label :title, t("activerecord.attributes.artwork.title"), class: "block text-sm font-bold mb-2" %>
             <%= component(
-              "shared/text_field",
+              "shared/form/text_field",
               form: f,
               field_type: :text_field,
               field_name: :title
@@ -18,9 +18,9 @@
           </div>
 
           <div>
-            <%= f.label :description, t("models.artwork.description"), class: "block text-sm font-bold mb-2" %>
+            <%= f.label :description, t("activerecord.attributes.artwork.description"), class: "block text-sm font-bold mb-2" %>
             <%= component(
-              "shared/text_area",
+              "shared/form/text_area",
               form: f,
               field_name: :description,
               rows: 3,
@@ -28,14 +28,14 @@
             ) %>
           </div>
 
-          <%= component "artwork/tags_input", form: f, tags: @tag_array, label: t("models.artwork.tags") %>
+          <%= component "artwork/tags_input", form: f, tags: @tag_array, label: t("activerecord.attributes.artwork.tags") %>
 
           <div>
             <%= component(
-              "shared/checkbox",
+              "shared/form/checkbox",
               form: f,
               field_name: :is_public,
-              label_text: t("models.artwork.is_public"),
+              label_text: t("activerecord.attributes.artwork.is_public"),
               checked: true
             ) %>
           </div>
@@ -48,7 +48,7 @@
               type: :submit,
               class: "w-36 h-10"
             ) do %>
-              <%= t("artwork.save") %>
+              <%= t("artwork.update") %>
             <% end %>
           </div>
         </div>

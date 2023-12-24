@@ -35,8 +35,9 @@ ja:
     delete: 削除
     edit: 編集
     edit_heading: 作品情報編集
-    submit_form_title: ドット絵を投稿/保存する
-    list_by_tag:
+    submit_form_title: ドット絵を保存する
+    published: 公開済み
+    private: 非公開
   comment:
     list: コメント一覧
     send: 送信
@@ -87,6 +88,8 @@ ja:
       recent: "最近投稿された作品"
     artwork_canvas:
       update_success: "作品「%{title}」のドット絵を更新しました"
+    tag:
+      empty: "タグはありません"
     search:
       no_results_for: "「%{query}」の検索結果は見つかりませんでした"
       required_enter_query: "検索ワードを入力してください"

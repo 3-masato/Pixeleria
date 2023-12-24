@@ -26,7 +26,7 @@ class Admin::ArtworksController < ApplicationController
     if @artwork.update(artwork_params)
       # @artwork.save_tags(tag_list.split(",").map(&:strip))
       # @artwork.save_tags(tags)
-      redirect_to admin_artwork_path(@artwork), notice: t("messages.admin.artwork.update_success", title: title)
+      redirect_to admin_artwork_path(@artwork), notice: t("messages.artwork.update_success", title: title)
     else
     end
   end
@@ -34,7 +34,7 @@ class Admin::ArtworksController < ApplicationController
   def destroy
     title = @artwork.title
     @artwork.destroy
-    redirect_to admin_artworks_path, notice: t("messages.admin.artwork.destroy_success", title: title)
+    redirect_to admin_artworks_path, notice: t("messages.artwork.destroy_success", title: title)
   end
 
   private

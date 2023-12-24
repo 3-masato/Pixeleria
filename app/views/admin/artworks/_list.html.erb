@@ -42,8 +42,12 @@
             <% end %>
             <%= component "shared/table/cell" do %>
               <div class="truncate max-w-[24rem]">
-                <% artwork.tags.each do |tag| %>
-                  <%= component "artwork/tag", tag: tag, path: nil %>
+                <% if artwork.tags.empty? %>
+                  <%= tag.span t("messages.tag.empty"), class: "text-xs text-gray-500" %>
+                <% else %>
+                  <% artwork.tags.each do |tag| %>
+                    <%= component "artwork/tag", tag: tag, path: nil %>
+                  <% end %>
                 <% end %>
               </div>
             <% end %>
