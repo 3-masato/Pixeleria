@@ -1,11 +1,11 @@
 <% if @admin_signed_in %>
-  <aside class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 lg:translate-x-0">
-    <div class="overflow-y-auto py-6 px-3 h-full bg-white">
+  <aside class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-fuchsia-950 text-fuchsia-100 border-r border-fuchsia-200 lg:translate-x-0">
+    <div class="overflow-y-auto py-6 px-3 h-full">
       <ul class="space-y-2">
         <% @items.each do |item| %>
           <li>
-            <%= link_to item[:path], class: "flex items-center p-2 text-sm font-medium text-gray-900 rounded-sm hover:bg-gray-100 group" do %>
-              <span class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900">
+            <%= link_to item[:path], class: "flex items-center p-2 text-sm font-medium rounded-sm transition duration-75 hover:bg-fuchsia-900" do %>
+              <span class="w-6 h-6 grid place-items-center">
                 <%= tag.i class: item[:fa_class] %>
               </span>
               <%= tag.span item[:text], class: "ml-3" %>
