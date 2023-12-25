@@ -1,21 +1,24 @@
-<%= render Layout::HeaderComponent.new(admin_signed_in: admin_signed_in?, nav_items: nav_items) %>
-<%= render Layout::SidebarComponent.new(
-  admin_signed_in: admin_signed_in?,
-  items: sidebar_items
-) %>
-<% if admin_signed_in? %>
-  <main class="pt-20 h-auto lg:ml-64">
-    <div class="prose max-w-screen-2xl mx-auto px-3">
-      <%= yield %>
-    </div>
-  </main>
-<% else %>
-  <main>
-    <div class="prose max-w-screen-xl mx-auto px-3">
-      <%= yield %>
-    </div>
-  </main>
+<%
+  body_class, main_class, container_class =
+    admin_signed_in? ?
+    [
+      "bg-fuchsia-50 min-h-screen relative",
+      "pt-20 h-auto lg:ml-64",
+      "prose max-w-screen-2xl mx-auto px-3"
+    ] : [
+      "bg-sky-50 min-h-screen relative",
+      "",
+      "prose max-w-screen-xl mx-auto px-3"
+    ]
+%>
+
+<%= tag.body class: body_class do %>
+  <%= component "layout/header", admin_signed_in: admin_signed_in?, nav_items: nav_items %>
+  <%= component "layout/sidebar", admin_signed_in: admin_signed_in?, items: sidebar_items %>
+  <%= tag.main class: main_class do %>
+    <%= tag.div yield, class: container_class %>
+  <% end %>
+  <%= component "layout/footer" %>
+  <%= component "layout/alert", flash: flash %>
+  <%= component "layout/modal" %>
 <% end %>
-<%= render Layout::FooterComponent.new %>
-<%= render "layouts/alert" %>
-<%= render Layout::ModalComponent.new %>

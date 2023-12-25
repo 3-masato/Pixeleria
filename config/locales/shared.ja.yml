@@ -106,6 +106,8 @@ ja:
     search:
       no_results_for: "「%{query}」の検索結果は見つかりませんでした"
       required_enter_query: "検索ワードを入力してください"
+    report:
+      unread_notice: "未読の通報が%{count}件あります"
   placeholder:
     email: "sample@example.com"
     display_name: ユーザー名を入力してください

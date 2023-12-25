@@ -11,9 +11,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="bg-slate-50 min-h-screen relative">
-    <%= render "layouts/app_shell" do %>
-      <%= yield %>
-    <% end %>
-  </body>
+  <%= render "layouts/app_shell" do %>
+    <%= yield %>
+  <% end %>
 </html>
