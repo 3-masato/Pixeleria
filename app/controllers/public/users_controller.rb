@@ -1,5 +1,6 @@
 class Public::UsersController < ApplicationController
-  before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :ensure_correct_user, only: %i[edit update]
+  before_action :ensure_guest_user, only: %i[confirm_deactivation deactivate]
   before_action :set_user, only: %i[edit show update artworks my_artworks liked_artworks]
 
   def edit
@@ -22,9 +23,13 @@ class Public::UsersController < ApplicationController
   end
 
   def confirm_deactivation
+    @user = current_user
   end
 
   def deactivate
+    deactivate_related_content
+    reset_session
+    redirect_to root_path, notice: t("messages.user.delete_account.success")
   end
 
   def artworks
@@ -54,5 +59,24 @@ class Public::UsersController < ApplicationController
     unless user == current_user
       redirect_to user_profile_path(user.account_name)
     end
+  end
+
+  def ensure_guest_user
+    user = current_user
+    if user.is_guest
+      redirect_to user_profile_path(user.account_name)
+    end
+  end
+
+  # ユーザーステータスを `退会` にして、
+  # 投稿作品、いいね、コメント、フォロー・フォロワーを全て削除する
+  def deactivate_related_content
+    user = current_user
+    user.update(status: 1)
+    user.artworks.destroy_all
+    user.likes.destroy_all
+    user.comments.destroy_all
+    user.active_relationships.destroy_all
+    user.passive_relationships.destroy_all
   end
 end

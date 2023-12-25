@@ -13,9 +13,9 @@ class Shared::Form::TextAreaComponent < ViewComponent::Base
 
   def textarea_classes
     classes = "block py-2.5 px-3 w-full border-gray-200 rounded-sm text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-    classes += " text-lg" if @size == :large
-    classes += " text-md" if @size == :medium
-    classes += " text-sm" if @size == :small
+    classes += " text-md" if @size == :large
+    classes += " text-sm" if @size == :medium
+    classes += " text-xs" if @size == :small
     classes
   end
 end

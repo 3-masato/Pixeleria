@@ -18,9 +18,9 @@ class Shared::Form::TextFieldComponent < ViewComponent::Base
   def base_class
     classes = "block py-2.5 px-3 w-full border-gray-200 rounded-sm disabled:opacity-50 disabled:pointer-events-none"
     classes += @errors.present? ? " outline-red-500 focus:border-red-500 focus:ring-red-500" : " focus:border-blue-500 focus:ring-blue-500"
-    classes += " text-lg" if @size == :large
-    classes += " text-md" if @size == :medium
-    classes += " text-sm" if @size == :small
+    classes += " text-md" if @size == :large
+    classes += " text-sm" if @size == :medium
+    classes += " text-xs" if @size == :small
     classes
   end
 end
