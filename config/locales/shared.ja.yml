@@ -16,6 +16,8 @@ ja:
     list: ユーザー一覧
     details: ユーザー詳細
     more_artworks: もっと見る
+    cancel: キャンセル
+    delete: 削除する
   artwork:
     sizes:
       xs: 小さい
@@ -77,6 +79,16 @@ ja:
         no_artworks: "投稿作品はありません"
         no_my_artworks: "投稿した作品はありません"
         no_liked_artworks: "いいねした作品はありません"
+      delete_account:
+        heading: "アカウント削除"
+        confirm: "アカウントを削除すると、以下の情報がすべて失われます。"
+        list:
+          artworks: "投稿作品"
+          likes: "いいね"
+          comments: "コメント"
+          followings_followers: "フォロー・フォロワー"
+        success: "アカウントを削除しました"
+
     comment:
       required_sign_in: "コメントを投稿するにはログインもしくはアカウント新規登録をしてください"
     admin:
