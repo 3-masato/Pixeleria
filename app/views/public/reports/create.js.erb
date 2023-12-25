@@ -1,3 +1,4 @@
 {
   $("#modal-close-button").trigger("click");
+  $(document.body).append("<%= j(component "layout/alert", flash: flash) %>");
 }

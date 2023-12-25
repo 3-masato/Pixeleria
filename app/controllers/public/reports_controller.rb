@@ -20,6 +20,7 @@ class Public::ReportsController < ApplicationController
       @report.reported_by_user = current_user
 
       @report.save
+      flash.now[:notice] = t("messages.report.submit_success")
     end
   end
 
