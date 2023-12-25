@@ -1,0 +1,34 @@
+<div data-controller="tag" data-action="click->tag#removeTag">
+  <%= render Shared::Form::LabelComponent.new(form: @form, field: :tags, text: @label) %>
+  <div class="flex items-center mb-2">
+    <div class="grow">
+      <%= render Shared::Form::TextFieldComponent.new(
+        form: @form,
+        field_type: :text_field,
+        field_name: :nil,
+        size: :small,
+        id: "tag_input",
+        maxlength: 20,
+        value: "",
+        data: { "tag-target": "input", action: "keydown->tag#handleEnterKey" }
+      ) %>
+    </div>
+    <%= render Shared::ButtonComponent.new(
+      style: :outline,
+      color: :sky,
+      type: "button",
+      id: "add_tag",
+      data: { action: "tag#addTag" }
+    ) do %>
+      <i class="fa-solid fa-plus"></i>
+    <% end %>
+  </div>
+  <div id="tags" class="flex flex-wrap gap-x-2 gap-y-3" data-tag-target="tags">
+    <% @tags.each_with_index do |tag, index| %>
+      <%= render Artwork::TagFieldComponent.new(form: @form, value: tag, index: index) %>
+    <% end %>
+  </div>
+  <template id="new-tag-template" data-tag-target="template">
+    <%= render Artwork::TagFieldComponent.new(form: @form, value: "%%value%%", index: "%%index%%") %>
+  </template>
+</div>

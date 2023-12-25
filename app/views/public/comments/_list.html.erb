@@ -1,0 +1,37 @@
+<div class="my-3 max-h-[512px] h-[512px] overflow-y-auto">
+  <div class="space-y-6">
+    <% comments.each do |comment| %>
+      <% user = comment.user %>
+      <div class="flex space-x-2">
+        <div class="min-w-[32px]">
+          <%= component "user/avatar", user: user, size: :xs %>
+        </div>
+        <div class="grow">
+          <%= component "user/name_link", user: user, size: :sm %>
+          <div class="text-sm">
+            <%= comment.content %>
+          </div>
+        </div>
+        <div>
+          <% if user == current_user %>
+            <%= component "shared/kebab/base" do %>
+              <%= component "shared/kebab/menu_item", path: artwork_comment_path(@artwork, comment), color: :red, method: :delete, "data-confirm" => "Are you sure?" do %>
+                <%= component "utils/icon_text", fa_class: "fa-solid fa-trash-can", class: "py-2 px-3" do %>
+                  <%= t("comment.delete") %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% elsif current_user&.is_guest == false %>
+            <%= component "shared/kebab/base" do %>
+              <%= component "shared/kebab/menu_item", path: nil do %>
+                <%= render "public/reports/btn", target: :comment, target_id: comment.id %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="my-12">
+  </div>
+</div>

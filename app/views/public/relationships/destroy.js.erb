@@ -1,0 +1,26 @@
+{
+  const followButton = document.getElementById("follow-of-<%= @user.account_name %>");
+  if (followButton) {
+    followButton.innerHTML = `<%= j(component "interaction/follow_button", user: @user, current_user: current_user) %>`;
+  }
+
+  const followersCount = document.getElementById("followers-count-of-<%= @user.account_name %>");
+  if (followersCount) {
+    followersCount.innerText = "<%= @user.followers.size %>";
+  }
+
+  const followingsCount = document.getElementById("followings-count-of-<%= @user.account_name %>");
+  if (followingsCount) {
+    followingsCount.innerText = "<%= @user.followings.size %>";
+  }
+
+  const myFollowersCount = document.getElementById("followers-count-of-<%= current_user.account_name %>");
+  if (myFollowersCount) {
+    myFollowersCount.innerText = "<%= current_user.followers.size %>";
+  }
+
+  const myFollowingsCount = document.getElementById("followings-count-of-<%= current_user.account_name %>");
+  if (myFollowingsCount) {
+    myFollowingsCount.innerText = "<%= current_user.followings.size %>";
+  }
+}

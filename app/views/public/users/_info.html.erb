@@ -1,0 +1,23 @@
+<div class="space-y-6">
+  <div class="flex justify-between items-center">
+    <div class="flex justify-center items-center space-x-2">
+      <%= component "user/avatar", user: user, size: :xs %>
+      <%= component "user/name_link", user: user, size: :md %>
+    </div>
+    <div class="flex justify-center items-center">
+      <% unless user == current_user %>
+        <%= tag.div id: "follow-of-#{user.account_name}" do %>
+          <%= component "interaction/follow_button", user: user, current_user: current_user %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="py-6 px-2">
+    <% if artworks.size > 0 %>
+      <%= render "public/artworks/list", artworks: artworks %>
+    <% else %>
+      <%= tag.p t("messages.user.artworks.no_artworks"), class: "m-5 text-center text-gray-500 text-sm" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="modal fixed contents z-[65535]">
+  <%= tag.div(
+    id: "form-modal-backdrop",
+    class: backdrop_class,
+    data: {
+      visibility: "hidden"
+    }
+  ) %>
+  <%= tag.div(
+    id: "form-modal",
+    class: modal_class,
+    data: {
+      visibility: "hidden"
+    }
+  ) do %>
+    <div class="p-4 max-w-full w-[512px] flex flex-col bg-white border shadow-lg rounded-sm absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-bold text-gray-800"><span id="modal-title" class="contents"></span></h3>
+        <%= tag.button(
+          id: "modal-close-button",
+          class: "grid place-items-center w-7 h-7 rounded-full bg-transparent transition-colors hover:bg-gray-500/10 active:bg-gray-500/20"
+        ) do %>
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        <% end %>
+      </div>
+      <div id="modal-content" class="contents">
+      </div>
+    </div>
+  <% end %>
+</div>

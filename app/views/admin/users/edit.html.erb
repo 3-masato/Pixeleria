@@ -1,0 +1,91 @@
+<%= component "shared/card", class: "my-10 p-6" do %>
+  <%= tag.h2 t("user.edit_heading"), class: "text-2xl font-bold" %>
+  <div class="mt-6 mx-auto w-96">
+    <%= form_with model: @user, url: admin_update_user_path(@user.account_name), local: true do |f| %>
+      <div class="grid gap-y-4">
+        <div>
+          <%= component "shared/form/label", form: f, field: :profile_image %>
+          <%= image_tag @user.get_profile_image, size: "192x192", class: "mx-auto" %>
+        </div>
+
+        <div>
+          <%= component "shared/form/label", form: f, field: :display_name %>
+          <%= component(
+            "shared/form/text_field",
+            form: f,
+            field_type: :text_field,
+            field_name: :display_name,
+            size: :small
+          ) %>
+        </div>
+
+        <div>
+          <%= component "shared/form/label", form: f, field: :account_name %>
+          <%= component(
+            "shared/form/text_field",
+            form: f,
+            field_type: :text_field,
+            field_name: :account_name,
+            size: :small
+          ) %>
+         </div>
+
+        <div>
+          <%= component "shared/form/label", form: f, field: :introduction %>
+          <%= component(
+            "shared/form/text_area",
+            form: f,
+            field_name: :introduction,
+            rows: 3,
+            placeholder: "",
+          ) %>
+        </div>
+
+        <div>
+          <%= component "shared/form/label", form: f, field: :status %>
+          <div class="flex items-center gap-4">
+            <% User.statuses.keys.each do |status_key| %>
+              <%= component(
+                "shared/form/radio",
+                form: f,
+                field_name: :status,
+                value: status_key,
+                label_field: "status_#{status_key}",
+                label_text: t("enums.user.status.#{status_key}"),
+                checked: @user.status == status_key
+              ) %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="mt-4 flex justify-center items-center">
+          <%= component(
+            "shared/button",
+            style: :outline,
+            color: :sky,
+            type: :submit,
+            class: "w-36 h-10"
+          ) do %>
+            <%= t("user.update") %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="mt-4 pt-4 border-t border-gray-300 space-y-1">
+    <div>
+      <%= link_to admin_user_path(@user.account_name), class: "inline-flex items-center text-sm font-bold text-gray-600 transition-all no-underline hover:text-blue-500 hover:underline" do %>
+        <%= component "utils/icon_text", fa_class: "fa-solid fa-chevron-left text-xs" do %>
+          <%= t("user.details") %>
+        <% end %>
+      <% end %>
+    </div>
+    <div>
+      <%= link_to admin_users_path, class: "inline-flex items-center text-sm font-bold text-gray-600 transition-all no-underline hover:text-blue-500 hover:underline" do %>
+        <%= component "utils/icon_text", fa_class: "fa-solid fa-chevron-left text-xs" do %>
+          <%= t("user.list") %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,5 @@
+$("#like-<%= @artwork.id %>").html("<%= j(
+  render Interaction::LikeButtonComponent.new(
+    artwork: @artwork, current_user: current_user
+  )
+) %>");

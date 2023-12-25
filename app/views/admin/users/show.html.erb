@@ -1,0 +1,8 @@
+<%= component "shared/card", class: "my-10" do %>
+  <h2 class="ml-6"><%= t("user.details") %></h2>
+  <div class="overflow-auto">
+    <%= render "admin/users/details", user: @user %>
+  </div>
+<% end %>
+
+<%= render "admin/artworks/list", artworks: @user_artworks, show_author: false %>

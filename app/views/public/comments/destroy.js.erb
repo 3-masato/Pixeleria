@@ -1,0 +1,10 @@
+{
+  const commentList = document.getElementById("comment-list-of-<%= @artwork.id %>");
+  if (commentList) {
+    commentList.innerHTML = "<%= j(render 'public/comments/list', comments: @artwork_comments) %>";
+  }
+
+  const commentCount = document.getElementById("comment-count-<%= @artwork.id %>");
+  if (commentCount) {
+    commentCount.innerHTML = "<%= j(component 'interaction/comment_count', count: @artwork_comments.size) %>";
+}

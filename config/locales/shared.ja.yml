@@ -1,0 +1,115 @@
+ja:
+  user:
+    edit: 編集
+    save: 保存
+    update: 更新
+    edit_heading: プロフィール編集
+    mypage: マイページ
+    my_artworks: 自分の作品
+    follow: フォロー
+    unfollow: フォロー解除
+    following: フォロー中
+    followings: フォロー中
+    followers: フォロワー
+    followed: フォロー
+    artworks: 作品
+    list: ユーザー一覧
+    details: ユーザー詳細
+    more_artworks: もっと見る
+    cancel: キャンセル
+    delete: 削除する
+  artwork:
+    sizes:
+      xs: 小さい
+      sm: やや小さい
+      md: 中
+      lg: やや大きい
+      xl: 大きい
+    comments: コメント
+    list: 作品一覧
+    details: 作品詳細
+    liked_list: いいねした作品
+    choose_size: サイズ選択
+    search: 検索
+    draw: 描く
+    create: 作成
+    save: 保存
+    submit: 投稿
+    update: 更新
+    delete: 削除
+    edit: 編集
+    edit_heading: 作品情報編集
+    submit_form_title: ドット絵を保存する
+    published: 公開済み
+    private: 非公開
+  comment:
+    list: コメント一覧
+    send: 送信
+    delete: 削除
+    details: コメント詳細
+  report:
+    headings:
+      user: "ユーザーを通報する"
+      artwork: "投稿作品を通報する"
+      comment: "コメントを通報する"
+    submit: 通報する
+    list: 通報一覧
+    details: 通報詳細
+    target:
+      user: ユーザー
+      artwork: 投稿作品
+      comment: コメント
+    target_details:
+      reported_user_details: 通報されたユーザーの詳細
+      reported_artwork_details: 通報された投稿作品の詳細
+      reported_comment_details: 通報されたコメントの詳細
+    read: 既読
+    unread: 未読
+  messages:
+    user:
+      auth:
+        registration_guide: "アカウントをお持ちでない方はこちら"
+        session_guide: "既にアカウントをお持ちの方はこちら"
+      profile:
+        update_success: "プロフィールを更新しました"
+      relationships:
+        no_followings: "フォローユーザーはいません"
+        no_followers: "フォロワーはいません"
+      artworks:
+        no_artworks: "投稿作品はありません"
+        no_my_artworks: "投稿した作品はありません"
+        no_liked_artworks: "いいねした作品はありません"
+      delete_account:
+        heading: "アカウント削除"
+        confirm: "アカウントを削除すると、以下の情報がすべて失われます。"
+        list:
+          artworks: "投稿作品"
+          likes: "いいね"
+          comments: "コメント"
+          followings_followers: "フォロー・フォロワー"
+        success: "アカウントを削除しました"
+    comment:
+      required_sign_in: "コメントを投稿するにはログインもしくはアカウント新規登録をしてください"
+    admin:
+      user:
+        update_success: "ユーザー情報を更新しました"
+      comment:
+        destroy_success: "コメントを削除しました"
+    artwork:
+      update_success: "作品「%{title}」の情報を更新しました"
+      destroy_success: "作品「%{title}」を削除しました"
+      recent: "最近投稿された作品"
+    artwork_canvas:
+      update_success: "作品「%{title}」のドット絵を更新しました"
+    tag:
+      empty: "タグはありません"
+    search:
+      no_results_for: "「%{query}」の検索結果は見つかりませんでした"
+      required_enter_query: "検索ワードを入力してください"
+    report:
+      unread_notice: "未読の通報が%{count}件あります"
+  placeholder:
+    email: "sample@example.com"
+    display_name: ユーザー名を入力してください
+    account_name: 半角英数字とアンダースコアが使用できます
+    introduction: 自己紹介文を自由に入力してください

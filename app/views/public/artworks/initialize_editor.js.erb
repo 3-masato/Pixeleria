@@ -1,0 +1,37 @@
+{
+  const toggleVisibility = (visibility) => {
+    const value = visibility ? "visible" : "hidden";
+    $("#form-modal").attr("data-visibility", value);
+    $("#form-modal-backdrop").attr("data-visibility", value);
+  };
+
+  const close = () => {
+    toggleVisibility(false);
+  };
+
+  $("#modal-close-button").on("click", close);
+
+  $("#modal-title").html("<%= j(t("artwork.submit_form_title")) %>");
+  $("#modal-content").html("<%= j(render "public/artworks/save_form", artwork: @artwork, text: t("artwork.submit")) %>");
+
+  $("#editor-container").html("<%= j(
+    render "public/artworks/editor", artwork_id: @artwork_id, width: @width, height: @height, dotsize: @dotsize
+  ) %>");
+
+  $("#post-button").on("click", () => {
+    const editor = document.getElementById("pixeleria-editor");
+    const detail = editor.getDetails();
+
+    const image_data = document.getElementById("image_data");
+    const pixel_data = document.getElementById("pixel_data");
+    const width = document.getElementById("width");
+    const height = document.getElementById("height");
+
+    image_data.value = detail.imageData;
+    pixel_data.value = detail.pixelData.join(",");
+    width.value = "<%= @width %>";
+    height.value = "<%= @height %>";
+
+    toggleVisibility(true);
+  });
+}

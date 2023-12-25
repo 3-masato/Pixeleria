@@ -1,0 +1,38 @@
+ja:
+  model:
+    user: ユーザー
+    artwork: 作品
+    comment: コメント
+    like: いいね
+    tag: タグ
+    report: 通報
+  models:
+    artwork_canvas:
+      width: 横幅
+      height: 高さ
+    comment:
+      content: 内容
+    report:
+      reportable_type: 通報対象
+      reported_by_user_id: 通報者
+      reason: 通報理由
+      description: 通報内容
+      status: ステータス
+  enums:
+    user:
+      status:
+        active: 有効
+        deactivated: 退会
+        suspended: 凍結
+    report:
+      reason:
+        malicious_expression: 悪意のある表現
+        inappropriate_content: 不適切なコンテンツ
+        misinformation: 誤った情報
+        commercial_purposes: 商業目的
+        spam: スパム
+        other: その他
+      status:
+        pending: 未着手
+        processing: 対応中
+        resolved: 解決済

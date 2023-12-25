@@ -1,0 +1,36 @@
+<%= component "shared/card", class: "my-10 p-6" do %>
+  <div class="mx-auto max-w-[24rem] space-y-4">
+    <div class="text-red-500 text-5xl text-center"><i class="fa-solid fa-triangle-exclamation"></i></div>
+    <h2 class="text-center"><%= t("messages.user.delete_account.heading") %></h2>
+    <p><%= t("messages.user.delete_account.confirm") %></p>
+    <div class="p-6 rounded-sm text-sm bg-gray-100">
+      <ul>
+        <li><%= t("messages.user.delete_account.list.artworks") %></li>
+        <li><%= t("messages.user.delete_account.list.likes") %></li>
+        <li><%= t("messages.user.delete_account.list.comments") %></li>
+        <li><%= t("messages.user.delete_account.list.followings_followers") %></li>
+      </ul>
+    </div>
+    <div class="flex justify-around items-center py-4">
+      <%= component(
+        "shared/button",
+        style: :outline,
+        color: :gray,
+        path: user_profile_path(@user.account_name),
+        class: "py-2 px-6 text-sm"
+      ) do %>
+        <%= t("user.cancel") %>
+      <% end %>
+      <%= component(
+        "shared/button",
+        style: :solid,
+        color: :red,
+        path: deactivate_path,
+        method: :patch,
+        class: "py-2 px-6 text-sm"
+      ) do %>
+        <%= t("user.delete") %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

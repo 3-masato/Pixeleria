@@ -1,0 +1,87 @@
+<%= component "layout/auth/form", heading: t("devise.shared.sign_up") do %>
+  <%= form_with(
+    model: resource,
+    url: registration_path(resource_name),
+    local: true
+  ) do |f| %>
+    <div class="grid gap-y-4">
+      <div class="field">
+        <%= component "shared/form/label", form: f, field: :display_name %>
+        <%= component(
+          "shared/form/text_field",
+          form: f,
+          field_type: :text_field,
+          field_name: :display_name,
+          autofocus: true,
+          placeholder: t("placeholder.display_name"),
+          model: resource
+        ) %>
+      </div>
+
+      <div class="field">
+        <%= component "shared/form/label", form: f, field: :account_name %>
+        <%= component(
+          "shared/form/text_field",
+          form: f,
+          field_type: :text_field,
+          field_name: :account_name,
+          placeholder: t("placeholder.account_name"),
+          model: resource
+        ) %>
+      </div>
+
+      <div class="field">
+        <%= component "shared/form/label", form: f, field: :email %>
+        <%= component(
+          "shared/form/text_field",
+          form: f,
+          field_type: :email_field,
+          field_name: :email,
+          autocomplete: "email",
+          placeholder: t("placeholder.email"),
+          model: resource
+        ) %>
+      </div>
+
+      <div class="field">
+        <%= component "shared/form/label", form: f, field: :password %>
+        <%= component(
+          "shared/form/text_field",
+          form: f,
+          field_type: :password_field,
+          field_name: :password,
+          autocomplete: "new-password",
+          model: resource
+        ) %>
+      </div>
+
+      <div class="field">
+        <%= component "shared/form/label", form: f, field: :password_confirmation %>
+        <%= component(
+          "shared/form/text_field",
+          form: f,
+          field_type: :password_field,
+          field_name: :password_confirmation,
+          autocomplete: "new-password",
+          model: resource
+        ) %>
+      </div>
+    </div>
+
+    <div class="mt-4 flex justify-center items-center">
+      <%= component(
+        "shared/button",
+        style: :solid,
+        color: :sky,
+        type: "submit",
+        class: "w-36 h-10"
+      ) do %>
+        <%= t("devise.shared.sign_up") %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= component "layout/auth/divider_or" %>
+  <%= component "layout/auth/guest", path: guest_sign_in_path %>
+  <%= component "layout/auth/guide_link", text: t("messages.user.auth.session_guide"), path: new_session_path(resource_name) %>
+<% end %>

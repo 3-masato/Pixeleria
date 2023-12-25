@@ -1,0 +1,99 @@
+Table "admins" {
+  "id" varchar
+  "email" string
+  "encrypted_password" string
+}
+
+Table "users" {
+  "id" varchar
+  "email" string
+  "encrypted_password" string
+  "display_name" string
+  "account_name" string
+  "introduction" text
+  "status" integer
+}
+
+Table "artworks" {
+  "id" varchar
+  "user_id" integer
+  "title" string
+  "description" text
+  "is_public" boolean
+}
+
+Table "artwork_canvases" {
+  "id" varchar
+  "artwork_id" integer
+  "pixel_data" text
+  "width" integer
+  "height" integer
+}
+
+Table "artwork_tags" {
+  "id" varchar
+  "artwork_id" integer
+  "tag_id" integer
+}
+
+Table "tags" {
+  "id" varchar
+  "name" string
+}
+
+Table "likes" {
+  "id" varchar
+  "user_id" integer
+  "artwork_id" integer
+}
+
+Table "comments" {
+  "id" varchar
+  "user_id" integer
+  "artwork_id" integer
+  "content" text
+}
+
+Table "relationships" {
+  "id" varchar
+  "follower_id" integer
+  "followed_id" integer
+}
+
+Table "reports" {
+  "id" varchar
+  "reportable_type" string
+  "reportable_id" integer
+  "reported_by_user_id" integer
+  "reason" integer
+  "description" text
+  "status" integer
+}
+
+Ref "fk_artwork_tags_artworks":"artwork_tags"."artwork_id" > "artworks"."id"
+
+Ref "fk_artwork_tags_tags":"artwork_tags"."tag_id" > "tags"."id"
+
+Ref "fk_artworks_users":"artworks"."user_id" > "users"."id"
+
+Ref "fk_artwork_canvases_artworks":"artwork_canvases"."artwork_id" - "artworks"."id"
+
+Ref "fk_comments_artworks":"comments"."artwork_id" > "artworks"."id"
+
+Ref "fk_comments_users":"comments"."user_id" > "users"."id"
+
+Ref "fk_likes_artworks":"likes"."artwork_id" > "artworks"."id"
+
+Ref "fk_likes_users":"likes"."user_id" > "users"."id"
+
+Ref "fk_relationships": "relationships"."follower_id" < "users"."id"
+
+Ref "fk__relationships": "relationships"."followed_id" < "users"."id"
+
+Ref "fk_reports_users": "reports"."reported_by_user_id" > "users"."id"
+
+Ref "polymorphic_reportsables": "reports"."reportable_id" > "users"."id"
+
+Ref "polymorphic_reportsables": "reports"."reportable_id" > "artworks"."id"
+
+Ref "polymorphic_reportsables": "reports"."reportable_id" > "comments"."id"

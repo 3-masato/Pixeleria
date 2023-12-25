@@ -1,0 +1,5 @@
+<%= component "shared/card", class: "my-10 p-6" do %>
+  <%= render "public/artworks/search_form" %>
+  <h2 class="text-center my-8"><%= t("messages.artwork.recent") %></h2>
+  <%= render "public/artworks/list", artworks: @artworks %>
+<% end %>

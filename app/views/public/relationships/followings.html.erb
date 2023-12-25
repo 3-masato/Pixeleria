@@ -1,0 +1,14 @@
+<%= component "shared/card", class: "my-10 px-6" do %>
+  <%= tag.h2 t("user.followings") %>
+  <div class="flex items-center space-x-2">
+    <%= component "user/avatar", user: @user, size: :xxs %>
+    <%= component "user/name_link", user: @user, size: :sm %>
+  </div>
+  <section class="py-6 px-2">
+    <% if @followings.size > 0 %>
+      <%= render "public/users/list", users: @followings %>
+    <% else %>
+      <%= tag.p t("messages.user.relationships.no_followings"), class: "m-5 text-center text-gray-500 text-sm" %>
+    <% end %>
+  </section>
+<% end %>

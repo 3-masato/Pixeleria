@@ -1,0 +1,14 @@
+<% if should_render? %>
+  <div>
+    <%= render Shared::ButtonComponent.new(
+      style: button_properties[:style],
+      color: button_properties[:color],
+      path: button_properties[:path],
+      method: button_properties[:method],
+      remote: true,
+      class: "px-4 text-sm"
+    ) do %>
+      <%= tag.span button_properties[:text] %>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,58 @@
+<%= form_with model: artwork, local: true do |f| %>
+  <% tags = artwork&.tags.present? ? artwork.tags.map(&:name) : [] %>
+  <div class="grid gap-y-4">
+    <div>
+      <%= component "shared/form/label", form: f, field: :title %>
+      <%= component(
+        "shared/form/text_field",
+        form: f,
+        field_type: :text_field,
+        field_name: :title,
+        model: artwork,
+      ) %>
+    </div>
+
+    <div>
+      <%= component "shared/form/label", form: f, field: :description %>
+      <%= component(
+        "shared/form/text_area",
+        form: f,
+        field_name: :description,
+        rows: 3,
+        placeholder: "",
+        model: artwork,
+      ) %>
+    </div>
+
+    <%= component "artwork/tags_input", form: f, tags: tags, label: t("activerecord.attributes.artwork.tags") %>
+
+    <div>
+      <%= component(
+        "shared/form/checkbox",
+        form: f,
+        field_name: :is_public,
+        label_text: t("activerecord.attributes.artwork.is_public"),
+        checked: artwork.is_public.nil? ? true : artwork.is_public,
+      ) %>
+    </div>
+
+    <%= f.hidden_field :image_data, id: "image_data" %>
+    <%= f.fields_for :artwork_canvas do |canvas_form| %>
+      <%= canvas_form.hidden_field :pixel_data, id: "pixel_data" %>
+      <%= canvas_form.hidden_field :width, id: "width" %>
+      <%= canvas_form.hidden_field :height, id: "height" %>
+    <% end %>
+
+    <div class="mt-4 flex justify-center items-center">
+      <%= component(
+        "shared/button",
+        style: :solid,
+        color: :sky,
+        type: :submit,
+        class: "w-32 h-10"
+      ) do %>
+        <%= text %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
