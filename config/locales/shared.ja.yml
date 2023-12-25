@@ -88,7 +88,6 @@ ja:
           comments: "コメント"
           followings_followers: "フォロー・フォロワー"
         success: "アカウントを削除しました"
-
     comment:
       required_sign_in: "コメントを投稿するにはログインもしくはアカウント新規登録をしてください"
     admin:

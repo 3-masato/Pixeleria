@@ -27,8 +27,7 @@ class Public::UsersController < ApplicationController
   end
 
   def deactivate
-    user = current_user
-    user.update(status: 1)
+    deactivate_related_content
     reset_session
     redirect_to root_path, notice: t("messages.user.delete_account.success")
   end
@@ -67,5 +66,17 @@ class Public::UsersController < ApplicationController
     if user.is_guest
       redirect_to user_profile_path(user.account_name)
     end
+  end
+
+  # ユーザーステータスを `退会` にして、
+  # 投稿作品、いいね、コメント、フォロー・フォロワーを全て削除する
+  def deactivate_related_content
+    user = current_user
+    user.update(status: 1)
+    user.artworks.destroy_all
+    user.likes.destroy_all
+    user.comments.destroy_all
+    user.active_relationships.destroy_all
+    user.passive_relationships.destroy_all
   end
 end
