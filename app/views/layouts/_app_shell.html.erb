@@ -3,10 +3,18 @@
   admin_signed_in: admin_signed_in?,
   items: sidebar_items
 ) %>
-<%= tag.main class: ("pt-20 h-auto lg:ml-64" if admin_signed_in?) do %>
-  <div class="prose max-w-[1920px] mx-auto px-3">
-    <%= yield %>
-  </div>
+<% if admin_signed_in? %>
+  <main class="pt-20 h-auto lg:ml-64">
+    <div class="prose max-w-screen-2xl mx-auto px-3">
+      <%= yield %>
+    </div>
+  </main>
+<% else %>
+  <main>
+    <div class="prose max-w-screen-xl mx-auto px-3">
+      <%= yield %>
+    </div>
+  </main>
 <% end %>
 <%= render Layout::FooterComponent.new %>
 <%= render "layouts/alert" %>

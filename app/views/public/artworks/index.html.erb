@@ -1,6 +1,6 @@
 <%= component "shared/card", class: "my-10 p-6" do %>
   <div class="mb-12">
-    <%= render "public/artworks/search_form", artworks: @artworks %>
+    <%= render "public/artworks/search_form" %>
   </div>
   <div id="artworks">
     <% if @message.present? %>

@@ -1,10 +1,10 @@
 <div class="my-3 max-h-[512px] h-[512px] overflow-y-auto">
-  <div class="space-y-4">
+  <div class="space-y-6">
     <% comments.each do |comment| %>
       <% user = comment.user %>
       <div class="flex space-x-2">
         <div class="min-w-[32px]">
-          <%= component "user/avatar", user: user, size: :sm %>
+          <%= component "user/avatar", user: user, size: :xs %>
         </div>
         <div class="grow">
           <%= component "user/name_link", user: user, size: :sm %>
