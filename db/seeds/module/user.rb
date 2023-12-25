@@ -20,11 +20,14 @@ module Seeds
         email = "#{SecureRandom.hex(10)}@fake"
         name = "ユーザー#{i + 1}"
         user = User.find_or_create_by!(email: email) do |user|
+          random_time = rand(1.year.ago..Time.current)
 
           user.password = SecureRandom.urlsafe_base64
           user.display_name = name
           user.account_name = SecureRandom.alphanumeric(12)
           user.introduction = "#{name}の自己紹介文。"
+          user.created_at = random_time
+          user.updated_at = random_time
 
         end
         Chalk.info("Created User #{name}.")

@@ -16,11 +16,15 @@ module Seeds
       create_tags
 
       count.times do |i|
+        random_time = rand(1.year.ago..Time.current)
+
         artwork = Artwork.create!(
           user_id: user.id,
           title: "Artwork Title #{i}",
           description: "Description for artwork #{i}",
-          is_public: [true, false].sample
+          is_public: [true, false].sample,
+          created_at: random_time,
+          updated_at: random_time
         )
 
         # 描画データの生成

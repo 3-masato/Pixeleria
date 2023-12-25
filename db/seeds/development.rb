@@ -18,6 +18,10 @@ module Seeds
     Artworks.create_artwork_canvases(user, 50)
   end
 
+  # コメントのSeed作成
+  require_relative "module/comment"
+  Comments.create
+
   users.each do |user|
     dev_user.follow(user)
     user.follow(dev_user)
