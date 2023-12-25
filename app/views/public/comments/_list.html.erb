@@ -15,7 +15,7 @@
         <div>
           <% if user == current_user %>
             <%= component "shared/kebab/base" do %>
-              <%= component "shared/kebab/menu_item", path: artwork_comment_path(@artwork, comment), color: :red, method: :delete, "data-confirm" => "Are you sure?" do %>
+              <%= component "shared/kebab/menu_item", path: artwork_comment_path(@artwork, comment), color: :red, method: :delete, "data-confirm" => "Are you sure?", remote: true do %>
                 <%= component "utils/icon_text", fa_class: "fa-solid fa-trash-can", class: "py-2 px-3" do %>
                   <%= t("comment.delete") %>
                 <% end %>

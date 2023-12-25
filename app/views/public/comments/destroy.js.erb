@@ -7,4 +7,5 @@
   const commentCount = document.getElementById("comment-count-<%= @artwork.id %>");
   if (commentCount) {
     commentCount.innerHTML = "<%= j(component 'interaction/comment_count', count: @artwork_comments.size) %>";
+  }
 }
