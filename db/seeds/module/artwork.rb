@@ -1,5 +1,5 @@
 require "chunky_png"
-
+require_relative "../util/chalk"
 module Seeds
   class Artworks
     TAG_NAMES = ["Landscape", "Portrait", "Abstract", "Modern", "Classical", "Surreal", "Minimal"]
@@ -7,6 +7,7 @@ module Seeds
     def self.create_tags
       TAG_NAMES.each do |name|
         Tag.find_or_create_by!(name: name)
+        Chalk.info("Created Tag \"#{name}.\"")
       end
     end
 
@@ -15,11 +16,15 @@ module Seeds
       create_tags
 
       count.times do |i|
+        random_time = rand(1.year.ago..Time.current)
+
         artwork = Artwork.create!(
           user_id: user.id,
           title: "Artwork Title #{i}",
           description: "Description for artwork #{i}",
-          is_public: [true, false].sample
+          is_public: [true, false].sample,
+          created_at: random_time,
+          updated_at: random_time
         )
 
         # 描画データの生成
@@ -42,7 +47,7 @@ module Seeds
         # ランダムな数のタグをArtworkに関連付ける
         attach_random_tags(artwork)
 
-        p "#{user.display_name}の作品「#{artwork.title}」を作成しました。"
+        Chalk.info("Created Artwork \"#{artwork.title}\" by \"#{user.display_name}\"")
       end
     end
 
