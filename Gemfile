@@ -51,8 +51,6 @@ group :development do
   gem 'rubocop-minitest', require: false
   gem 'rubocop-packaging', require: false
   gem 'rubocop-rspec'
-
-  gem 'chunky_png'
 end
 
 group :test do
@@ -73,6 +71,8 @@ gem "view_component"
 gem "rails-i18n", "~> 6.0"
 gem "kaminari"
 gem "stimulus-rails"
+
+gem "chunky_png"
 
 gem "whenever", require: false
 
