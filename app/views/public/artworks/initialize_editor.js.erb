@@ -35,3 +35,22 @@
     toggleVisibility(true);
   });
 }
+
+{
+  const postArtworkButton = document.getElementById("post-artwork-button");
+  const postArtworkTitleField = document.getElementById("post-artwork-title-filed");
+
+  const isBlank = () => {
+    return postArtworkTitleField.value === "";
+  };
+  const setDisabled = (disabled) => {
+    postArtworkButton.disabled = disabled;
+  };
+
+  console.log(postArtworkButton, postArtworkTitleField);
+  postArtworkTitleField.addEventListener("input", () => {
+    setDisabled(isBlank());
+  });
+
+  setDisabled(true);
+}

@@ -96,6 +96,7 @@ ja:
       comment:
         destroy_success: "コメントを削除しました"
     artwork:
+      create_succses: "作品「%{title}」を投稿しました"
       update_success: "作品「%{title}」の情報を更新しました"
       destroy_success: "作品「%{title}」を削除しました"
       recent: "最近投稿された作品"

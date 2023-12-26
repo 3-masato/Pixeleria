@@ -70,11 +70,9 @@ class Public::ArtworksController < ApplicationController
 
     @artwork.decode_and_attach_image(image_data)
 
+    title = @artwork.title
     if @artwork.save
-      redirect_to artwork_path(@artwork)
-    else
-      "failed"
-      # render artwork.errors
+      redirect_to artwork_path(@artwork), notice: t("messages.artwork.create_succses", title: title)
     end
   end
 
