@@ -2,24 +2,11 @@ Table "admins" {
   "id" varchar
   "email" string
   "encrypted_password" string
-}
-
-Table "users" {
-  "id" varchar
-  "email" string
-  "encrypted_password" string
-  "display_name" string
-  "account_name" string
-  "introduction" text
-  "status" integer
-}
-
-Table "artworks" {
-  "id" varchar
-  "user_id" integer
-  "title" string
-  "description" text
-  "is_public" boolean
+  "reset_password_token" string
+  "reset_password_sent_at" datetime
+  "remember_created_at" datetime
+  "created_at" datetime
+  "updated_at" datetime
 }
 
 Table "artwork_canvases" {
@@ -28,23 +15,26 @@ Table "artwork_canvases" {
   "pixel_data" text
   "width" integer
   "height" integer
+  "created_at" datetime
+  "updated_at" datetime
 }
 
 Table "artwork_tags" {
   "id" varchar
   "artwork_id" integer
   "tag_id" integer
+  "created_at" datetime
+  "updated_at" datetime
 }
 
-Table "tags" {
-  "id" varchar
-  "name" string
-}
-
-Table "likes" {
+Table "artworks" {
   "id" varchar
   "user_id" integer
-  "artwork_id" integer
+  "title" string
+  "description" text
+  "is_public" boolean
+  "created_at" datetime
+  "updated_at" datetime
 }
 
 Table "comments" {
@@ -52,12 +42,24 @@ Table "comments" {
   "user_id" integer
   "artwork_id" integer
   "content" text
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "likes" {
+  "id" varchar
+  "user_id" integer
+  "artwork_id" integer
+  "created_at" datetime
+  "updated_at" datetime
 }
 
 Table "relationships" {
   "id" varchar
   "follower_id" integer
   "followed_id" integer
+  "created_at" datetime
+  "updated_at" datetime
 }
 
 Table "reports" {
@@ -68,6 +70,32 @@ Table "reports" {
   "reason" integer
   "description" text
   "status" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "is_read" boolean
+}
+
+Table "tags" {
+  "id" varchar
+  "name" string
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "users" {
+  "id" varchar
+  "email" string
+  "encrypted_password" string
+  "display_name" string
+  "account_name" string
+  "introduction" text
+  "status" integer
+  "reset_password_token" string
+  "reset_password_sent_at" datetime
+  "remember_created_at" datetime
+  "created_at" datetime
+  "updated_at" datetime
+  "is_guest" boolean
 }
 
 Ref "fk_artwork_tags_artworks":"artwork_tags"."artwork_id" > "artworks"."id"
@@ -88,7 +116,7 @@ Ref "fk_likes_users":"likes"."user_id" > "users"."id"
 
 Ref "fk_relationships": "relationships"."follower_id" < "users"."id"
 
-Ref "fk__relationships": "relationships"."followed_id" < "users"."id"
+Ref "fk_relationships": "relationships"."followed_id" < "users"."id"
 
 Ref "fk_reports_users": "reports"."reported_by_user_id" > "users"."id"
 
