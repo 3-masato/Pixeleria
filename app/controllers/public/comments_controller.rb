@@ -1,4 +1,5 @@
 class Public::CommentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :ensure_correct_user, only: :destroy
   before_action :set_artwork_and_comments, only: %i[create destroy]
 
@@ -25,8 +26,6 @@ class Public::CommentsController < ApplicationController
 
   def ensure_correct_user
     user = Comment.find(params[:id]).user
-    unless user == current_user
-      redirect_to request.referer
-    end
+    redirect_to request.referer unless user == current_user
   end
 end

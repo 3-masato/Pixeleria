@@ -1,7 +1,8 @@
 class Public::UsersController < ApplicationController
-  before_action :ensure_correct_user, only: %i[edit update]
-  before_action :ensure_guest_user, only: %i[confirm_deactivation deactivate]
-  before_action :set_user, only: %i[edit show update artworks my_artworks liked_artworks]
+  before_action :authenticate_user!,  except: %i[index show artworks]
+  before_action :ensure_correct_user, only: %i[edit update my_artworks]
+  before_action :ensure_guest_user,   only: %i[confirm_deactivation deactivate]
+  before_action :set_user,            only: %i[edit show update artworks my_artworks liked_artworks]
 
   def edit
   end
@@ -43,6 +44,7 @@ class Public::UsersController < ApplicationController
   private
   def set_user
     @user = User.find_by(account_name: params[:account_name])
+    record_not_found if @user.nil?
   end
 
   def user_params
@@ -56,16 +58,16 @@ class Public::UsersController < ApplicationController
 
   def ensure_correct_user
     user = User.find_by(account_name: params[:account_name])
-    unless user == current_user
-      redirect_to user_profile_path(user.account_name)
-    end
+    redirect_to user_profile_path(user.account_name) unless user == current_user
   end
 
   def ensure_guest_user
     user = current_user
-    if user.is_guest
-      redirect_to user_profile_path(user.account_name)
-    end
+    redirect_to user_profile_path(user.account_name) if user.is_guest
+  end
+
+  def record_not_found
+    redirect_to root_path
   end
 
   # ユーザーステータスを `退会` にして、

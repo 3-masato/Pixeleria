@@ -1,4 +1,6 @@
 class Public::ReportsController < ApplicationController
+  before_action :authenticate_user!
+
   def make
     target = params[:target]
     unless target == "user" || target == "artwork" || target == "comment"

@@ -18,7 +18,9 @@
               <%= user.id %>
             <% end %>
             <%= component "shared/table/cell" do %>
-              <%= component "user/avatar", user: user, size: :xxs %>
+              <div class="min-w-[32px]">
+                <%= component "user/avatar", user: user, size: :xxs %>
+              </div>
             <% end %>
             <%= component "shared/table/cell" do %>
               <%= link_to user.display_name, admin_user_path(user.account_name), class: "font-bold text-blue-500 hover:underline" %>

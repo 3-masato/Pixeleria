@@ -25,6 +25,10 @@ class Admin::UsersController < ApplicationController
 
       redirect_to determine_redirect_path(default_path), notice: notice
     else
+      # `account_name` がバリデーションエラーで空になったときに
+      # `ActionController::UrlGenerationError` が発生するため、
+      # 明示的に `set_user` を呼び出してエラーを回避する
+      set_user
       render :edit
     end
   end

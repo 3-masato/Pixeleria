@@ -8,7 +8,7 @@
         </div>
         <div class="grow">
           <%= component "user/name_link", user: user, size: :sm %>
-          <div class="text-sm">
+          <div class="text-sm break-all">
             <%= comment.content %>
           </div>
         </div>
@@ -21,7 +21,7 @@
                 <% end %>
               <% end %>
             <% end %>
-          <% elsif current_user&.is_guest == false %>
+          <% else %>
             <%= component "shared/kebab/base" do %>
               <%= component "shared/kebab/menu_item", path: nil do %>
                 <%= render "public/reports/btn", target: :comment, target_id: comment.id %>

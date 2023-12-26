@@ -8,9 +8,9 @@
         field_name: :nil,
         size: :small,
         id: "tag_input",
-        maxlength: 20,
+        maxlength: Tag.max_name_length,
         value: "",
-        data: { "tag-target": "input", action: "keydown->tag#handleEnterKey" }
+        data: { "tag-target": "input", action: "keydown->tag#handleEnterKey" },
       ) %>
     </div>
     <%= render Shared::ButtonComponent.new(

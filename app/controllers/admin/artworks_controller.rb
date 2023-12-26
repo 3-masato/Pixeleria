@@ -20,8 +20,7 @@ class Admin::ArtworksController < ApplicationController
   end
 
   def edit
-    @tag_array = @artwork.tags.map(&:name)
-    @tag_list = @artwork.tags.map(&:name).join(",")
+    set_tag_array
   end
 
   def update
@@ -32,6 +31,8 @@ class Admin::ArtworksController < ApplicationController
 
       redirect_to determine_redirect_path(default_path), notice: notice
     else
+      set_tag_array
+      render :edit
     end
   end
 
@@ -48,6 +49,10 @@ class Admin::ArtworksController < ApplicationController
   private
   def set_artwork
     @artwork = Artwork.find(params[:id])
+  end
+
+  def set_tag_array
+    @tag_array = @artwork.tags.map(&:name)
   end
 
   def artwork_params

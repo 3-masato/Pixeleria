@@ -1,11 +1,13 @@
 <%= component "shared/card", class: "my-10 p-6" do %>
   <%= tag.h2 t("user.edit_heading"), class: "text-2xl font-bold" %>
   <div class="mt-6 mx-auto w-96">
-    <%= form_with model: @user, url: admin_update_user_path(@user.account_name), local: true do |f| %>
+    <%= form_with model: [:admin, @user], url: admin_update_user_path(@user.account_name), local: true do |f| %>
       <div class="grid gap-y-4">
         <div>
           <%= component "shared/form/label", form: f, field: :profile_image %>
-          <%= image_tag @user.get_profile_image, size: "192x192", class: "mx-auto" %>
+          <div class="flex justify-center items-center">
+            <%= component "user/avatar", user: @user, size: :xl %>
+          </div>
         </div>
 
         <div>
@@ -15,7 +17,10 @@
             form: f,
             field_type: :text_field,
             field_name: :display_name,
-            size: :small
+            size: :small,
+            model: @user,
+            placeholder: t("placeholder.display_name"),
+            maxlength: User.max_display_name_length
           ) %>
         </div>
 
@@ -26,7 +31,10 @@
             form: f,
             field_type: :text_field,
             field_name: :account_name,
-            size: :small
+            size: :small,
+            model: @user,
+            placeholder: t("placeholder.account_name"),
+            maxlength: User.max_account_name_length,
           ) %>
          </div>
 
@@ -37,7 +45,9 @@
             form: f,
             field_name: :introduction,
             rows: 3,
-            placeholder: "",
+            model: @user,
+            placeholder: t("placeholder.introduction"),
+            maxlength: User.max_introduction_length
           ) %>
         </div>
 
