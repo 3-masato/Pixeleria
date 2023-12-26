@@ -1,5 +1,6 @@
 class Artwork < ApplicationRecord
-  DESCRIPTION_MAX_LENGTH = 200
+  MAX_TITLE_LENGTH = 24
+  MAX_DESCRIPTION_LENGTH = 200
 
   belongs_to :user
 
@@ -14,8 +15,9 @@ class Artwork < ApplicationRecord
   has_many :tags,         through:   :artwork_tags
   has_many :reports,      as:        :reportable, dependent: :destroy
 
-  validates :title, presence: true
-  validates :description, length: { maximum: DESCRIPTION_MAX_LENGTH }
+  validates :title, presence: true, length: { maximum: MAX_TITLE_LENGTH }
+  validates :description, length: { maximum: MAX_DESCRIPTION_LENGTH }
+  validates :is_public, inclusion: [true, false]
 
   # Artworkレコードを取得する際、デフォルトで新しい作品が先頭に来るようにする。
   default_scope { order(created_at: :desc) }
@@ -49,6 +51,14 @@ class Artwork < ApplicationRecord
 
   def height_px
     "#{artwork_canvas.height}px"
+  end
+
+  def self.max_title_length
+    MAX_TITLE_LENGTH
+  end
+
+  def self.max_description_length
+    MAX_DESCRIPTION_LENGTH
   end
 
   def self.search(query)

@@ -30,7 +30,7 @@
       ) %>
     </div>
     <div class="flex justify-center items-center p-4">
-      <%= component "user/avatar", user: user, size: :xl %>
+      <%= component "user/avatar", user: user, size: :lg %>
     </div>
     <div class="flex justify-center items-center">
       <% if current_user == user %>
@@ -65,6 +65,6 @@
   </div>
   <div class="mt-16 text-center pb-12">
     <%= component "user/name_link", user: user, size: :xxl %>
-    <%= tag.p user.introduction, class: "mx-auto w-[44rem] max-w-full text-left whitespace-pre-line" %>
+    <%= tag.p user.introduction, class: "mx-auto w-[32rem] max-w-full text-left whitespace-pre-line" %>
   </div>
 </section>

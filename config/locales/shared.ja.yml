@@ -96,6 +96,7 @@ ja:
       comment:
         destroy_success: "コメントを削除しました"
     artwork:
+      create_succses: "作品「%{title}」を投稿しました"
       update_success: "作品「%{title}」の情報を更新しました"
       destroy_success: "作品「%{title}」を削除しました"
       recent: "最近投稿された作品"
@@ -107,6 +108,7 @@ ja:
       no_results_for: "「%{query}」の検索結果は見つかりませんでした"
       required_enter_query: "検索ワードを入力してください"
     report:
+      submit_success: "通報を受け付けました。ご協力ありがとうございます"
       unread_notice: "未読の通報が%{count}件あります"
   placeholder:
     email: "sample@example.com"

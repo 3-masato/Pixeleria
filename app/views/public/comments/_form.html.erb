@@ -3,7 +3,7 @@
     <div data-controller="input">
       <%= form_with model: [artwork, comment], local: false, data: { "action": "input#preventMultiSubmit" } do |f| %>
         <div class="flex items-center space-x-2">
-          <%= tag.div class: "grow" do %>
+          <div class="grow">
             <%= component(
               "shared/form/text_field",
               form: f,
@@ -11,22 +11,25 @@
               field_name: :content,
               id: "comment-input-of-#{artwork.id}",
               required: true,
+              maxlength: Comment.max_content_length,
               data: {
                 "input-target": "input",
                 action: "input#checkBlank"
-              }
+              },
             ) %>
-          <% end %>
-          <%= component(
-            "shared/button",
-            style: :solid,
-            color: :sky,
-            type: "submit",
-            class: "w-20 h-10",
-            data: { "input-target": "submit" }
-          ) do %>
-            <%= t("comment.send") %>
-          <% end %>
+          </div>
+          <div class="shrink-0">
+            <%= component(
+              "shared/button",
+              style: :solid,
+              color: :sky,
+              type: "submit",
+              class: "w-20 h-10",
+              data: { "input-target": "submit" }
+            ) do %>
+              <%= t("comment.send") %>
+            <% end %>
+          </div>
         </div>
       <% end %>
     </div>

@@ -8,8 +8,10 @@ import ReportStatus from "./report-status_controller";
 import Input from "./input_controller";
 import Tag from "./tag_controller";
 import Editor from "./editor_controller";
+import Kebab from "./kebab_controller";
 
 application.register("report-status", ReportStatus);
 application.register("input", Input);
 application.register("tag", Tag);
 application.register("editor", Editor);
+application.register("kebab", Kebab);

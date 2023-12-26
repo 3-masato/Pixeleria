@@ -13,7 +13,9 @@
               "shared/form/text_field",
               form: f,
               field_type: :text_field,
-              field_name: :title
+              field_name: :title,
+              model: @artwork,
+              maxlength: Artwork.max_title_length,
             ) %>
           </div>
 
@@ -25,6 +27,8 @@
               field_name: :description,
               rows: 3,
               placeholder: "",
+              model: @artwork,
+              maxlength: Artwork.max_description_length,
             ) %>
           </div>
 

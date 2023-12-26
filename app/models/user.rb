@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  MAX_DISPLAY_NAME_LENGTH = 24
+  MAX_ACCOUNT_NAME_LENGTH = 24
+  MAX_INTRODUCTION_LENGTH = 240
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -23,7 +27,7 @@ class User < ApplicationRecord
   has_many :followings,            through: :active_relationships,  source: :followed
   has_many :followers,             through: :passive_relationships, source: :follower
 
-  validates :display_name, presence: true
+  validates :display_name, presence: true, length: { maximum: MAX_DISPLAY_NAME_LENGTH }
   validates(
     :account_name,
     presence: true,
@@ -33,8 +37,12 @@ class User < ApplicationRecord
     format: {
       with: /\A[\w]+\z/,
       message: :invalid
+    },
+    length: {
+      maximum: MAX_ACCOUNT_NAME_LENGTH
     }
   )
+  validates :introduction, length: { maximum: MAX_INTRODUCTION_LENGTH }
 
   scope :with_details, -> { includes(:followings, :followers, profile_image_attachment: :blob) }
 
@@ -56,6 +64,18 @@ class User < ApplicationRecord
 
   def following?(user)
     active_relationships.exists?(followed_id: user.id)
+  end
+
+  def self.max_display_name_length
+    MAX_DISPLAY_NAME_LENGTH
+  end
+
+  def self.max_account_name_length
+    MAX_ACCOUNT_NAME_LENGTH
+  end
+
+  def self.max_introduction_length
+    MAX_INTRODUCTION_LENGTH
   end
 
   def self.guest

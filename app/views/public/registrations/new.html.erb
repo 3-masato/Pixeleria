@@ -14,7 +14,8 @@
           field_name: :display_name,
           autofocus: true,
           placeholder: t("placeholder.display_name"),
-          model: resource
+          model: resource,
+          maxlength: User.max_display_name_length
         ) %>
       </div>
 
@@ -26,7 +27,8 @@
           field_type: :text_field,
           field_name: :account_name,
           placeholder: t("placeholder.account_name"),
-          model: resource
+          model: resource,
+          maxlength: User.max_account_name_length
         ) %>
       </div>
 

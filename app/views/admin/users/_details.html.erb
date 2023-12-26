@@ -1,5 +1,5 @@
 <div class="p-6 flex flex-col gap-4 lg:flex-row">
-  <div class="flex justify-center mx-16">
+  <div class="flex justify-center items-center mx-16 shrink-0">
     <%= component "user/avatar", user: user, size: :xl %>
   </div>
   <div class="overflow-auto grow">
@@ -46,7 +46,7 @@
         "shared/button",
         style: :outline,
         color: :gray,
-        path: admin_edit_user_path(user.account_name, return_to: request.path),
+        path: admin_edit_user_path(user.account_name),
         class: "w-32"
       ) do %>
         <%= component "utils/icon_text", fa_class: "fa-solid fa-sliders" do %>

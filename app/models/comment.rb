@@ -1,4 +1,6 @@
 class Comment < ApplicationRecord
+   MAX_CONTENT_LENGTH = 120
+
   belongs_to :user
   belongs_to :artwork
 
@@ -10,5 +12,9 @@ class Comment < ApplicationRecord
   scope :with_user_profile_images, -> { includes(user: { profile_image_attachment: :blob }) }
   scope :with_artwork_images, -> { includes(:artwork => { image_attachment: :blob }) }
 
-  validates :content, presence: true
+  validates :content, presence: true, length: { maximum: MAX_CONTENT_LENGTH }
+
+  def self.max_content_length
+    MAX_CONTENT_LENGTH
+  end
 end

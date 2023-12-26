@@ -1,7 +1,10 @@
 class Public::ArtworksController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show]
-  before_action :set_artwork, only: %i[show edit update destroy editor update_canvas setup_editor]
-  before_action :set_artwork_canvas, only: %i[editor update_canvas setup_editor]
+  before_action :authenticate_user!,  except: %i[index show]
+  before_action :ensure_correct_user, only: %i[edit destroy editor update_canvas]
+  before_action :set_artwork,         only: %i[show edit update destroy editor update_canvas]
+  before_action :set_artwork_canvas,  only: %i[editor update_canvas]
+
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   BASE_CANVAS_SIZE = 512
 
@@ -70,11 +73,9 @@ class Public::ArtworksController < ApplicationController
 
     @artwork.decode_and_attach_image(image_data)
 
+    title = @artwork.title
     if @artwork.save
-      redirect_to artwork_path(@artwork)
-    else
-      "failed"
-      # render artwork.errors
+      redirect_to artwork_path(@artwork), notice: t("messages.artwork.create_succses", title: title)
     end
   end
 
@@ -88,8 +89,9 @@ class Public::ArtworksController < ApplicationController
   end
 
   def destroy
+    title = @artwork.title
     @artwork.destroy
-    redirect_to root_path
+    redirect_to root_path, notice: t("messages.artwork.destroy_success", title: title)
   end
 
   private
@@ -101,6 +103,27 @@ class Public::ArtworksController < ApplicationController
     @artwork_canvas = @artwork.artwork_canvas
   end
 
+  def artwork_params
+    params.require(:artwork).permit(
+      :title,
+      :description,
+      :is_public,
+      :artwork_canvas_attributes => %i[pixel_data width height],
+      :tags => []
+    )
+  end
+
+  def ensure_correct_user
+    user = Artwork.find(params[:id]).user
+    unless user == current_user
+      redirect_to artwork_path(params[:id])
+    end
+  end
+
+  def record_not_found
+    redirect_to root_path
+  end
+
   def calc_dotsize(width, height)
     dot_ratio = [width, height].max
     dotsize = BASE_CANVAS_SIZE / dot_ratio
@@ -110,15 +133,5 @@ class Public::ArtworksController < ApplicationController
     decoded_image = decode_image(image_data)
     @artwork.image.attach(io: decoded_image, filename: "#{@artwork.title}.png")
     @artwork_canvas.update(pixel_data: pixel_data) && @artwork.save
-  end
-
-  def artwork_params
-    params.require(:artwork).permit(
-      :title,
-      :description,
-      :is_public,
-      :artwork_canvas_attributes => %i[pixel_data width height],
-      :tags => []
-    )
   end
 end

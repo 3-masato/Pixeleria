@@ -1,4 +1,6 @@
 class Public::ReportsController < ApplicationController
+  before_action :authenticate_user!
+
   def make
     target = params[:target]
     unless target == "user" || target == "artwork" || target == "comment"
@@ -20,6 +22,7 @@ class Public::ReportsController < ApplicationController
       @report.reported_by_user = current_user
 
       @report.save
+      flash.now[:notice] = t("messages.report.submit_success")
     end
   end
 

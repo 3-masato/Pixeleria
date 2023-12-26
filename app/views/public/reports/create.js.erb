@@ -1,3 +1,8 @@
 {
-  $("#modal-close-button").trigger("click");
+  const closeButton = document.getElementById("modal-close-button");
+  if (closeButton) {
+    closeButton.dispatchEvent(new Event("click"));
+  }
+
+  document.body.insertAdjacentHTML("beforeend", "<%= j(component "layout/alert", flash: flash) %>");
 }
