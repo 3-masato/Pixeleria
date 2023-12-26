@@ -1,5 +1,5 @@
 <%= component "shared/card", class: "my-10 p-6 lg:flex" do %>
-  <div class="grow flex justify-center flex-col space-y-2 mx-0 lg:mx-24 xl:mx-32 2xl:mx-40">
+  <div class="grow flex justify-center flex-col space-y-2 mx-0">
     <div class="self-center">
       <%= component "artwork/image", artwork: @artwork, size: :xxxxl %>
     </div>
@@ -36,7 +36,7 @@
               <% end %>
             <% end %>
           <% end %>
-        <% elsif current_user&.is_guest == false %>
+        <% else %>
           <%= component "shared/kebab/base" do %>
             <%= component "shared/kebab/menu_item", path: nil do %>
               <%= render "public/reports/btn", target: :artwork, target_id: @artwork.id %>
