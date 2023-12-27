@@ -25,7 +25,7 @@ module.exports = {
             opacity: "0",
           },
           to: {
-            transform: "translateX(calc(-0.5rem + 0%))",
+            transform: "translateX(calc(0%))",
             opacity: "1",
           },
         },
