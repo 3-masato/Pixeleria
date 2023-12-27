@@ -2,6 +2,7 @@
   <div class="mb-12">
     <%= render "public/artworks/search_form" %>
   </div>
+  <h3><%= @heading %></h3>
   <div id="artworks">
     <% if @message.present? %>
       <%= tag.p @message, class: "m-5 text-center text-gray-500 text-sm" %>
