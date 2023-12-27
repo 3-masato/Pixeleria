@@ -1,5 +1,5 @@
-<div class="w-full max-w-md mx-auto mt-20 p-6">
-  <%= render Shared::CardComponent.new class: "mt-7 p-4 bg-white border border-gray-200 rounded-sm shadow-sm sm:p-7" do %>
+<div class="w-full max-w-md mx-auto h-full grid place-items-center py-4">
+  <%= render Shared::CardComponent.new class: "p-6 max-w-[24rem] w-full bg-white border border-gray-200 rounded-sm shadow-sm" do %>
     <%= tag.h2 @heading, class: "block mb-4 mt-0 font-bold text-2xl text-center tracking-wider" %>
     <%= content %>
   <% end %>
