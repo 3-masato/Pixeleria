@@ -20,7 +20,7 @@ class Interaction::LikeButtonComponent < ViewComponent::Base
 
   def heart_class
     heart_base_class = "relative inline-grid place-items-center"
-    heart_after_class = "after:absolute after:w-8 after:h-8 after:z-[-1] after:rounded-full after:bg-transparent after:duration-200 after:transition-[background-color]"
+    heart_after_class = "after:absolute after:w-8 after:h-8 after:rounded-full after:bg-transparent after:duration-200 after:transition-[background-color]"
     heart_action_class = "group-hover:after:bg-rose-500/10 group-active:after:bg-rose-500/20"
 
     [
