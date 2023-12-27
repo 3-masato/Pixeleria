@@ -21,11 +21,11 @@ module.exports = {
       keyframes: {
         "slide-left": {
           "0%": {
-            transform: "translateX(100%)",
+            transform: "translateX(calc(100% + 1rem))",
             opacity: "0",
           },
           to: {
-            transform: "translateX(calc(-0.5rem + 0%))",
+            transform: "translateX(calc(0%))",
             opacity: "1",
           },
         },
