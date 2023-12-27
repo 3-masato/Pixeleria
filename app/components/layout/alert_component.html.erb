@@ -1,5 +1,5 @@
 <% @flash.each do |key, value| %>
-  <div class="animate-slide-left fixed top-24 right-0 mx-4 z-30 translate-x-full" role="alert">
+  <div class="animate-slide-left fixed top-24 right-0 mx-4 z-30 translate-x-[calc(100%_+_1rem)]" role="alert">
     <div class="animate-slide-out-top py-3 px-5 flex justify-center items-center shadow-lg rounded-sm border <%= message_type_class(key) %>">
       <i class="<%= icon_class(key) %>"></i><p class="ml-2 font-bold"><%= value %></p>
     </div>
