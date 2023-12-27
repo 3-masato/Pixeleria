@@ -105,6 +105,8 @@ ja:
     tag:
       empty: "タグはありません"
     search:
+      result: "「%{query}」の検索結果"
+      tags: "タグ「%{tag}」を含む作品"
       no_results_for: "「%{query}」の検索結果は見つかりませんでした"
       required_enter_query: "検索ワードを入力してください"
     report:

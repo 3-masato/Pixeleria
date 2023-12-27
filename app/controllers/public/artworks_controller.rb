@@ -12,6 +12,7 @@ class Public::ArtworksController < ApplicationController
     if params[:tag].present?
       @tag = Tag.find_by(name: params[:tag])
       @artworks = @tag.artworks.with_publication.page(params[:page])
+      @heading = t("messages.search.tags", tag: @tag.name);
     else
       @query = params[:query] || ""
       if @query == ""
@@ -19,6 +20,7 @@ class Public::ArtworksController < ApplicationController
       else
         @artworks = Artwork.search(@query).page(params[:page])
         @message = t("messages.search.no_results_for", query: @query) if @artworks.size <= 0
+        @heading = t("messages.search.result", query: @query);
       end
     end
   end
