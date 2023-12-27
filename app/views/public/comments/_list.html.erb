@@ -21,7 +21,7 @@
                 <% end %>
               <% end %>
             <% end %>
-          <% else %>
+          <% elsif user_signed_in? %>
             <%= component "shared/kebab/base" do %>
               <%= component "shared/kebab/menu_item", path: nil do %>
                 <%= render "public/reports/btn", target: :comment, target_id: comment.id %>

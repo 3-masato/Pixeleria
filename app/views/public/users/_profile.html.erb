@@ -1,5 +1,5 @@
 <section class="border-b border-gray-300">
-  <% if current_user.present? && current_user != user %>
+  <% if user_signed_in? && current_user != user %>
     <div class="flex justify-end lg:h-0">
       <%= component "shared/kebab/base" do %>
         <%= component "shared/kebab/menu_item", path: nil do %>
