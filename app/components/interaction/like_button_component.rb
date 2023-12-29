@@ -10,6 +10,10 @@ class Interaction::LikeButtonComponent < ViewComponent::Base
     @artwork.likes.size
   end
 
+  def is_static
+    @current_user.nil?
+  end
+
   def is_liked
     @current_user && @artwork.liked_by?(@current_user)
   end
