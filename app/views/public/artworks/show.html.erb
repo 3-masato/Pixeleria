@@ -47,11 +47,7 @@
     </div>
     <div class="py-3 flex justify-evenly border-y">
       <%= tag.div id: "like-#{@artwork.id}" do %>
-        <% if user_signed_in? %>
-          <%= component "interaction/like_button", artwork: @artwork, current_user: current_user %>
-        <% else %>
-          <%= component "interaction/like_count", count: @artwork.likes.size %>
-        <% end %>
+        <%= component "interaction/like_button", artwork: @artwork, current_user: current_user %>
       <% end %>
       <%= tag.div id: "comment-count-#{@artwork.id}" do %>
         <%= component "interaction/comment_count", count: @artwork_comments.size %>
