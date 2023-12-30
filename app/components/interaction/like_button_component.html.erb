@@ -1,6 +1,13 @@
-<div class="whitespace-nowrap <%= is_liked ? "text-rose-500" : "text-black" %>">
-  <%= link_to artwork_likes_path(@artwork), method: is_liked ? :delete : :post, remote: true, class: group_class do %>
-    <%= tag.i class: heart_class, aria: { hidden: true } %>
+<% if is_static %>
+  <div class="whitespace-nowrap cursor-default">
+    <%= tag.i class: "fa-regular fa-heart", aria: { hidden: true } %>
     <%= tag.span like_count %>
+  </div>
+<% else %>
+  <%= tag.div class: "whitespace-nowrap #{is_liked ? "text-rose-500" : "text-black"}" do %>
+    <%= link_to artwork_likes_path(@artwork), method: is_liked ? :delete : :post, remote: true, class: group_class do %>
+      <%= tag.i class: heart_class, aria: { hidden: true } %>
+      <%= tag.span like_count %>
+    <% end %>
   <% end %>
-</div>
+<% end %>

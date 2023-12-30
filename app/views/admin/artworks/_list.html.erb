@@ -52,7 +52,7 @@
               </div>
             <% end %>
             <%= component "shared/table/cell" do %>
-              <%= component "interaction/like_count", count: artwork.likes.size %>
+              <%= component "interaction/like_button", artwork: artwork, current_user: nil %>
             <% end %>
             <%= component "shared/table/cell" do %>
               <%= component "interaction/comment_count", count: artwork.comments.size %>

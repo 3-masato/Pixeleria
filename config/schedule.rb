@@ -19,6 +19,11 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day, at: "2:00 am" do
-  runner "GuestUserCleanupJob.perform_later"
+env :PATH, ENV["PATH"]
+set :output, "log/cron_log.log"
+
+# 日本時間で午前2時に実行
+# UTC 5:00 pm -> JST 2:00 am
+every 1.day, at: "5:00 pm" do
+  runner "GuestUserCleanupJob.perform_now"
 end

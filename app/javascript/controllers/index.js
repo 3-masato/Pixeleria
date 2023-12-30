@@ -2,16 +2,19 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application";
+import { application } from "./application"
 
-import ReportStatus from "./report-status_controller";
-import Input from "./input_controller";
-import Tag from "./tag_controller";
-import Editor from "./editor_controller";
-import Kebab from "./kebab_controller";
+import EditorController from "./editor_controller"
+application.register("editor", EditorController)
 
-application.register("report-status", ReportStatus);
-application.register("input", Input);
-application.register("tag", Tag);
-application.register("editor", Editor);
-application.register("kebab", Kebab);
+import InputController from "./input_controller"
+application.register("input", InputController)
+
+import KebabController from "./kebab_controller"
+application.register("kebab", KebabController)
+
+import ReportStatusController from "./report_status_controller"
+application.register("report-status", ReportStatusController)
+
+import TagController from "./tag_controller"
+application.register("tag", TagController)
