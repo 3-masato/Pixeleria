@@ -44,6 +44,8 @@ class User < ApplicationRecord
   )
   validates :introduction, length: { maximum: MAX_INTRODUCTION_LENGTH }
 
+  # Userレコードを取得する際、デフォルトで新しい作品が先頭に来るようにする。
+  default_scope { order(created_at: :desc) }
   scope :with_details, -> { includes(:followings, :followers, profile_image_attachment: :blob) }
 
   def active_for_authentication?
