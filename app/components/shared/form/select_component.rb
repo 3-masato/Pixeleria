@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class Shared::Form::SelectComponent < ViewComponent::Base
-  attr_reader :form, :field_name, :choices, :selected, :size, :disabled
+  attr_reader :form, :field_name, :choices, :selected, :size, :disabled, :include_blank
 
-  def initialize(form:, field_name:, choices:, selected: nil, size: :medium, disabled: false)
+  def initialize(form:, field_name:, choices:, selected: nil, include_blank: nil, size: :medium, disabled: false)
     @form = form
     @field_name = field_name
     @choices = choices
+    @include_blank = include_blank
     @selected = selected
     @size = size
     @disabled = disabled
