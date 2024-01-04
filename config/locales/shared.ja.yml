@@ -23,6 +23,7 @@ ja:
       query: キーワード
       query_placeholder: ユーザー名、自己紹介
       search: 検索
+      heading: ユーザー検索
   artwork:
     sizes:
       xs: 小さい
