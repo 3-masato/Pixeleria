@@ -18,6 +18,12 @@ ja:
     more_artworks: もっと見る
     cancel: キャンセル
     delete: 削除する
+    searches:
+      status: ステータス
+      query: キーワード
+      query_placeholder: ユーザー名、自己紹介
+      search: 検索
+      heading: ユーザー検索
   artwork:
     sizes:
       xs: 小さい
@@ -65,6 +71,8 @@ ja:
       reported_comment_details: 通報されたコメントの詳細
     read: 既読
     unread: 未読
+  shared:
+    all: 全て
   messages:
     user:
       auth:
