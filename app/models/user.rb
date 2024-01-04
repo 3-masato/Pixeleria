@@ -60,7 +60,11 @@ class User < ApplicationRecord
   end
 
   def get_profile_image
-    (profile_image.attached?) ? profile_image : "default-user-icon.jpeg"
+    if profile_image.attached?
+      "https://img-files-resize-53317.s3-ap-northeast-1.amazonaws.com/#{profile_image.key}-thumbnail.#{profile_image.content_type.split('/').pop}"
+    else
+      "default-user-icon.jpeg"
+    end
   end
 
   def follow(user)
