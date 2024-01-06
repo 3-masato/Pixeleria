@@ -1,0 +1,6 @@
+{
+  const usersTable = document.getElementById("users");
+  if (usersTable) {
+    usersTable.innerHTML = "<%= j(render "admin/users/table", users: @users) %>";
+  }
+}
