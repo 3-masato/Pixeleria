@@ -1,8 +1,11 @@
 <%= component "shared/card", class: "my-10" do %>
   <h2 class="ml-6"><%= t("artwork.details") %></h2>
-  <div class="overflow-auto">
+  <div class="overflow-auto p-6">
     <%= render "admin/artworks/details", artwork: @artwork, author: @author %>
   </div>
 <% end %>
 
-<%= render "admin/comments/list", comments: @artwork_comments %>
+<%= component "shared/card", class: "my-10" do %>
+  <h2 class="ml-6"><%= t("comment.list") %></h2>
+  <%= render "admin/comments/table", comments: @artwork_comments %>
+<% end %>

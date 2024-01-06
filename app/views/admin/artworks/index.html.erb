@@ -1,1 +1,4 @@
-<%= render "admin/artworks/list", artworks: @artworks, show_author: true %>
+<%= component "shared/card", class: "my-10" do %>
+  <h2 class="ml-6"><%= t("artwork.list") %></h2>
+  <%= render "admin/artworks/table", artworks: @artworks, show_author: true %>
+<% end %>

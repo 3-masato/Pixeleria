@@ -1,1 +1,4 @@
-<%= render "admin/comments/list", comments: @comments %>
+<%= component "shared/card", class: "my-10" do %>
+  <h2 class="ml-6"><%= t("comment.list") %></h2>
+  <%= render "admin/comments/table", comments: @comments %>
+<% end %>
