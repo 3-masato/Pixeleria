@@ -8,7 +8,9 @@ class Admin::ArtworksController < ApplicationController
   before_action :store_return_to, only: %i[edit destroy]
 
   def index
-    @artworks = Artwork.with_details.page(params[:page])
+    @query = params[:query]
+    @public_status = params[:public_status]
+    @artworks = Artwork.search(@query, @public_status).with_details.page(params[:page])
   end
 
   def show

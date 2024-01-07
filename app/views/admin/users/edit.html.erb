@@ -1,5 +1,5 @@
 <%= component "shared/card", class: "my-10 p-6" do %>
-  <%= tag.h2 t("user.edit_heading"), class: "text-2xl font-bold" %>
+  <%= tag.h2 t("user.edit_heading") %>
   <div class="mt-6 mx-auto w-96">
     <%= form_with model: [:admin, @user], url: admin_update_user_path(@user.account_name), local: true do |f| %>
       <div class="grid gap-y-4">

@@ -1,3 +1,9 @@
-<%= render "admin/users/search_form" %>
-
-<%= render "admin/users/list", users: @users %>
+<%= component "shared/card", class: "my-10" do %>
+  <%= render "admin/users/search_form" %>
+<% end %>
+<%= component "shared/card", class: "my-10" do %>
+  <h2 class="ml-6"><%= t("user.list") %></h2>
+  <div id="users" class="contents">
+    <%= render "admin/users/table", users: @users %>
+  </div>
+<% end %>

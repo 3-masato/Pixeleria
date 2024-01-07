@@ -48,6 +48,15 @@ ja:
     submit_form_title: ドット絵を保存する
     published: 公開済み
     private: 非公開
+    searches:
+      public_status: 公開ステータス
+      all: 全て
+      public: 公開
+      private: 非公開
+      query: キーワード
+      query_placeholder: タイトル、説明文
+      search: 検索
+      heading: 作品検索
   comment:
     list: コメント一覧
     send: 送信

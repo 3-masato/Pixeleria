@@ -1,0 +1,6 @@
+{
+  const artworksTable = document.getElementById("artworks");
+  if (artworksTable) {
+    artworksTable.innerHTML = "<%= j(render "admin/artworks/table", artworks: @artworks, show_author: true) %>";
+  }
+}
