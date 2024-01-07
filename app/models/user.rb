@@ -44,7 +44,16 @@ class User < ApplicationRecord
   )
   validates :introduction, length: { maximum: MAX_INTRODUCTION_LENGTH }
 
+  # Userレコードを取得する際、デフォルトで新しい作品が先頭に来るようにする。
+  default_scope { order(created_at: :desc) }
   scope :with_details, -> { includes(:followings, :followers, profile_image_attachment: :blob) }
+  # Userの検索
+  scope :search, -> (query, status) {
+    users = all
+    users = users.where("display_name LIKE ? OR introduction LIKE ?", "%#{query}%", "%#{query}%") if query.present?
+    users = users.where(status: status) if status.present?
+    users
+  }
 
   def active_for_authentication?
     super && (status == "active")
