@@ -18,7 +18,7 @@ class Public::ArtworksController < ApplicationController
       if @query == ""
         @message = t("messages.search.required_enter_query")
       else
-        @artworks = Artwork.search(@query).page(params[:page])
+        @artworks = Artwork.search(@query, nil).with_publication.page(params[:page])
         @message = t("messages.search.no_results_for", query: @query) if @artworks.size <= 0
         @heading = t("messages.search.result", query: @query);
       end

@@ -24,7 +24,17 @@ class Artwork < ApplicationRecord
 
   scope :with_details, -> { includes(:likes, :comments, :tags, image_attachment: :blob, user: { profile_image_attachment: :blob }) }
   scope :publication, -> { where(is_public: true) }
+  scope :unpublication, -> { where(is_public: false) }
   scope :with_publication, -> { with_details.publication }
+  scope :search, -> (query, public_status) {
+    artworks = all
+    artworks = artworks.where('title LIKE ? OR description LIKE ?', "%#{query}%", "%#{query}%") if query.present?
+    p public_status
+    artworks = artworks.publication if public_status == "public"
+    artworks = artworks.unpublication if public_status == "private"
+    artworks
+  }
+
 
   def liked_by?(user)
     likes.any? { |like| like.user_id == user.id }
@@ -61,9 +71,9 @@ class Artwork < ApplicationRecord
     MAX_DESCRIPTION_LENGTH
   end
 
-  def self.search(query)
-    where('title LIKE ? OR description LIKE ?', "%#{query}%", "%#{query}%").with_publication
-  end
+  # def self.search(query)
+  #   where('title LIKE ? OR description LIKE ?', "%#{query}%", "%#{query}%").with_publication
+  # end
 
   private
   def decode_image(data)
