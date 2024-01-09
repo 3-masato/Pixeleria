@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 class User::AvatarComponent < ViewComponent::Base
-  attr_reader :user
-
   def initialize(user:, size:)
     @user = user
     @size = size
+  end
+
+  def image_src
+    image = @user.get_profile_image
+    image || "default-user-icon.jpeg"
   end
 
   def image_attributes

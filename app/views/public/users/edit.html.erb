@@ -6,7 +6,7 @@
       <div class="grid gap-y-4">
         <div>
           <%= component "shared/form/label", form: f, field: :profile_image %>
-          <%= component "shared/form/file_input", form: f, field_name: :profile_image, image: @user.profile_image %>
+          <%= component "shared/form/file_input", form: f, field_name: :profile_image, image: @user.get_profile_image %>
         </div>
 
         <div>
