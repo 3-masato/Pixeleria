@@ -3,8 +3,9 @@ class Artwork < ApplicationRecord
   MAX_DESCRIPTION_LENGTH = 200
 
   belongs_to :user
-
-  has_one_attached :image
+  
+  # 保存先のサービスをここで指定する。
+  has_one_attached :image, service: :amazon_artwork_images
 
   has_one :artwork_canvas, dependent: :destroy
   accepts_nested_attributes_for :artwork_canvas
