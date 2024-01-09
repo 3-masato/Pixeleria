@@ -4,7 +4,8 @@ class Artwork < ApplicationRecord
 
   belongs_to :user
 
-  has_one_attached :image
+  # 保存先のサービスをここで指定する。
+  has_one_attached :image, service: :amazon_artwork_images
 
   has_one :artwork_canvas, dependent: :destroy
   accepts_nested_attributes_for :artwork_canvas
@@ -35,6 +36,10 @@ class Artwork < ApplicationRecord
     artworks
   }
 
+
+  def get_image
+    "https://pixeleria-public-images.s3-ap-northeast-1.amazonaws.com/#{image.key}"
+  end
 
   def liked_by?(user)
     likes.any? { |like| like.user_id == user.id }

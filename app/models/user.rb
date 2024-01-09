@@ -14,7 +14,8 @@ class User < ApplicationRecord
     suspended: 2
   }
 
-  has_one_attached :profile_image
+  # 保存先のサービスをここで指定する。
+  has_one_attached :profile_image, service: :amazon_profile_images
 
   has_many :artworks,       dependent: :destroy
   has_many :likes,          dependent: :destroy
@@ -60,7 +61,11 @@ class User < ApplicationRecord
   end
 
   def get_profile_image
-    (profile_image.attached?) ? profile_image : "default-user-icon.jpeg"
+    if profile_image.attached?
+      "https://pixeleria-public-images.s3-ap-northeast-1.amazonaws.com/#{profile_image.key}-thumbnail.#{profile_image.content_type.split('/').pop}"
+    else
+      nil
+    end
   end
 
   def follow(user)
