@@ -9,8 +9,8 @@ local:
 # プロフィール画像とドット絵の保存バケットを分ける
 amazon: &amazon
   service: S3
-  access_key_id: <%= ENV["AWS_ACCESS_KEY_ID"] %>
-  secret_access_key: <%= ENV["AWS_SECRET_ACCESS_KEY"] %>
+  access_key_id: <%= ENV["AWS_IMAGES_ACCESS_KEY_ID"] %>
+  secret_access_key: <%= ENV["AWS_IMAGES_SECRET_ACCESS_KEY"] %>
   region: <%= ENV["AWS_REGION"] %>
 
 amazon_profile_images:
