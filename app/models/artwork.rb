@@ -4,7 +4,8 @@ class Artwork < ApplicationRecord
 
   belongs_to :user
 
-  has_one_attached :image
+  # 保存先のサービスをここで指定する。
+  has_one_attached :image, service: :amazon_artwork_images
 
   has_one :artwork_canvas, dependent: :destroy
   accepts_nested_attributes_for :artwork_canvas
@@ -29,12 +30,15 @@ class Artwork < ApplicationRecord
   scope :search, -> (query, public_status) {
     artworks = all
     artworks = artworks.where('title LIKE ? OR description LIKE ?', "%#{query}%", "%#{query}%") if query.present?
-    p public_status
     artworks = artworks.publication if public_status == "public"
     artworks = artworks.unpublication if public_status == "private"
     artworks
   }
 
+
+  def get_image
+    "https://d39xcen2r68k3d.cloudfront.net/#{image.key}"
+  end
 
   def liked_by?(user)
     likes.any? { |like| like.user_id == user.id }
