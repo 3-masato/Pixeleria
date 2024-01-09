@@ -5,13 +5,13 @@ if defined?(AssetSync)
     config.aws_secret_access_key = ENV['AWS_ASSETS_SECRET_ACCESS_KEY']
     config.aws_session_token = ENV['AWS_SESSION_TOKEN'] if ENV.key?('AWS_SESSION_TOKEN')
     config.aws_iam_roles = true
-    
+
     config.fog_directory = ENV['FOG_DIRECTORY']
     config.fog_region = ENV['FOG_REGION']
-    
+
     config.enabled = false if Rails.env.development?
     config.fog_public = false
-    
+
     config.existing_remote_files = "keep"
 
     config.run_on_precompile = false
