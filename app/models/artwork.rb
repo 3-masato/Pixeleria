@@ -38,7 +38,6 @@ class Artwork < ApplicationRecord
 
 
   def get_image
-    # "https://pixeleria-public-images.s3-ap-northeast-1.amazonaws.com/#{image.key}"
     "https://d39xcen2r68k3d.cloudfront.net/#{image.key}"
   end
 
