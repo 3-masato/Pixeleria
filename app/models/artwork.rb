@@ -30,7 +30,6 @@ class Artwork < ApplicationRecord
   scope :search, -> (query, public_status) {
     artworks = all
     artworks = artworks.where('title LIKE ? OR description LIKE ?', "%#{query}%", "%#{query}%") if query.present?
-    p public_status
     artworks = artworks.publication if public_status == "public"
     artworks = artworks.unpublication if public_status == "private"
     artworks
