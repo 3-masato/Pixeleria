@@ -64,7 +64,7 @@ class User < ApplicationRecord
     if profile_image.attached?
       "https://pixeleria-public-images.s3-ap-northeast-1.amazonaws.com/#{profile_image.key}-thumbnail.#{profile_image.content_type.split('/').pop}"
     else
-      "default-user-icon.jpeg"
+      nil
     end
   end
 

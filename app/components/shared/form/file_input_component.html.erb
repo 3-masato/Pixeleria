@@ -7,7 +7,7 @@
   ) %>
   <figure id="file-figure" class="mt-4 flex justify-center items-center">
     <div id="file-preview" class="max-w-[10rem]">
-      <%= image_tag @image if @image&.attached? %>
+      <%= image_tag @image if @image&.present? %>
     </div>
   </figure>
 </div>

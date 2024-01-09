@@ -3,7 +3,7 @@ class Artwork < ApplicationRecord
   MAX_DESCRIPTION_LENGTH = 200
 
   belongs_to :user
-  
+
   # 保存先のサービスをここで指定する。
   has_one_attached :image, service: :amazon_artwork_images
 
@@ -26,6 +26,10 @@ class Artwork < ApplicationRecord
   scope :with_details, -> { includes(:likes, :comments, :tags, image_attachment: :blob, user: { profile_image_attachment: :blob }) }
   scope :publication, -> { where(is_public: true) }
   scope :with_publication, -> { with_details.publication }
+
+  def get_image
+    "https://pixeleria-public-images.s3-ap-northeast-1.amazonaws.com/#{image.key}"
+  end
 
   def liked_by?(user)
     likes.any? { |like| like.user_id == user.id }
