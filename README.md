@@ -46,8 +46,11 @@
 
 ## 設計書
 
-- **ER 図**
+- **ER図**
   ![PixeleriaのER図](https://raw.githubusercontent.com/3-masato/Pixeleria/main/application_spec/assets/Pixeleria_ER_diagram_v3.png "ER図")
+- **[インフラ設計書](https://docs.google.com/spreadsheets/d/1w5kE9Cck15UpGISQLlzqqJhV8B3wSsnTW6B9j5wE2uQ/edit#gid=0)**
+- **AWS構成図**
+  ![AWS構成図](https://raw.githubusercontent.com/3-masato/Pixeleria/main/application_spec/assets/AWS%20Network%20Diagram.png "AWS構成図")
 
 ## 機能
 
@@ -83,15 +86,13 @@
 - Stimulus
 - jQuery
 
-ドット絵エディタはサブモジュールとして別々に実装しています。
-[ドット絵エディタ](https://github.com/3-masato/Pixeleria-Editor)
+ドット絵エディタはサブモジュールとして別々に実装しています：
+[Pixeleria-Editor](https://github.com/3-masato/Pixeleria-Editor)
 
 ## 今後の課題
 
 - ドット絵エディタ使用中、ページ離脱時にアラートを出す
 - ドット絵エディタのサイズ変更時にアラートを出す
 - ドット絵エディタのレスポンシブ対応
-- 検索機能の強化
 - メインビジュアル
 - jQueryからStimulusへの移行
-- 画像表示のパフォーマンス最適化
