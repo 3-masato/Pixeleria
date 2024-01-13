@@ -7,6 +7,8 @@
       t("activerecord.attributes.user.account_name"),
       t("activerecord.attributes.user.introduction"),
       t("activerecord.attributes.user.status"),
+      t("activerecord.attributes.user.created_at"),
+      t("activerecord.attributes.user.updated_at"),
       ""
     ] %>
     <%= component "shared/table/body" do %>
@@ -31,6 +33,12 @@
           <% end %>
           <%= component "shared/table/cell" do %>
             <%= component "user/status_label", status: user.status_before_type_cast, text: user.status_i18n %>
+          <% end %>
+          <%= component "shared/table/cell" do %>
+            <%= tag.span created_at_in_words(user), class: "text-xs" %>
+          <% end %>
+          <%= component "shared/table/cell" do %>
+            <%= tag.span updated_at_in_words(user), class: "text-xs" %>
           <% end %>
           <%= component "shared/table/cell" do %>
             <%= component(

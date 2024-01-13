@@ -39,6 +39,26 @@
             <%= component "user/status_label", status: user.status_before_type_cast, text: user.status_i18n %>
           <% end %>
         <% end %>
+        <%= component "shared/table/row" do %>
+          <%= component "shared/table/cell", is_header: true do %>
+            <%= t("activerecord.attributes.user.created_at") %>
+          <% end %>
+          <%= component "shared/table/cell" do %>
+            <%= tag.span l(user.created_at) %><%= tag.span "(#{created_at_in_words(user)})", class: "text-gray-500 ml-1" %>
+          <% end %>
+        <% end %>
+        <%= component "shared/table/row" do %>
+          <%= component "shared/table/cell", is_header: true do %>
+            <%= t("activerecord.attributes.user.updated_at") %>
+          <% end %>
+          <%= component "shared/table/cell" do %>
+            <% if same_time?(user.created_at, user.updated_at, ignore_milliseconds: true) %>
+              <%= tag.span "-" %>
+            <% else %>
+              <%= tag.span l(user.updated_at) %><%= tag.span "(#{updated_at_in_words(user)})", class: "text-gray-500 ml-1" %>
+            <% end %>
+          <% end %>
+        <% end %>
       <% end %>
     <% end %>
     <div class="mt-10 flex justify-evenly">

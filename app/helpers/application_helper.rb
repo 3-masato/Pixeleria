@@ -31,6 +31,31 @@ module ApplicationHelper
     end
   end
 
+  # 二つの日時を比較し、同じかどうかを判定するメソッド
+  # ignore_milliseconds: ミリ秒以下を無視するかどうかのオプション (デフォルトは false)
+  def same_time?(time1, time2, ignore_milliseconds: false)
+    if ignore_milliseconds
+      time1.change(usec: 0) == time2.change(usec: 0)
+    else
+      time1 == time2
+    end
+  end
+
+  # 作成日時を「～前」という相対的な形式で表示するメソッド
+  def created_at_in_words(record)
+    time_ago_in_words(record.created_at)
+  end
+
+  # 更新日時を「～前」という相対的な形式で表示するメソッド
+  # 更新がない場合は"-"を表示する
+  def updated_at_in_words(record)
+    if same_time?(record.created_at, record.updated_at, ignore_milliseconds: true)
+      "-"
+    else
+      time_ago_in_words(record.updated_at)
+    end
+  end
+
   private
   # ================
   # nav items

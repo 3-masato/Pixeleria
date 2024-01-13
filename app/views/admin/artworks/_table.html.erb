@@ -8,8 +8,10 @@
       t("activerecord.attributes.artwork.title"),
       t("activerecord.attributes.artwork.description"),
       t("activerecord.attributes.artwork.tags"),
-      "",
-      "",
+      t("activerecord.attributes.artwork.likes"),
+      t("activerecord.attributes.artwork.comments"),
+      t("activerecord.attributes.artwork.created_at"),
+      t("activerecord.attributes.artwork.updated_at"),
       "",
       ""
     ].compact %>
@@ -54,6 +56,12 @@
           <% end %>
           <%= component "shared/table/cell" do %>
             <%= component "interaction/comment_count", count: artwork.comments.size %>
+          <% end %>
+          <%= component "shared/table/cell" do %>
+            <%= created_at_in_words(artwork) %>
+          <% end %>
+          <%= component "shared/table/cell" do %>
+            <%= updated_at_in_words(artwork) %>
           <% end %>
           <%= component "shared/table/cell" do %>
             <%= component(

@@ -17,19 +17,27 @@ ja:
         title: タイトル
         description: 説明
         tags: タグ
+        likes: いいね
+        comments: コメント
         is_public: 公開
         author: 作者
+        created_at: 作成日
+        updated_at: 更新日
       artwork_canvas:
         width: 横幅
         height: 高さ
       comment:
         content: 内容
+        created_at: 作成日
+        updated_at: 更新日
       report:
         reportable_type: 通報対象
         reported_by_user_id: 通報者
         reason: 通報理由
         description: 通報内容
         status: ステータス
+        created_at: 作成日
+        updated_at: 更新日
   date:
     abbr_day_names:
     - 日
@@ -85,19 +93,19 @@ ja:
     - :day
   datetime:
     distance_in_words:
-      about_x_hours: 約%{count}時間
-      about_x_months: 約%{count}ヶ月
-      about_x_years: 約%{count}年
-      almost_x_years: "%{count}年弱"
+      about_x_hours: 約%{count}時間前
+      about_x_months: 約%{count}ヶ月前
+      about_x_years: 約%{count}年前
+      almost_x_years: "%{count}年弱前"
       half_a_minute: 30秒前後
-      less_than_x_seconds: "%{count}秒未満"
-      less_than_x_minutes: "%{count}分未満"
-      over_x_years: "%{count}年以上"
-      x_seconds: "%{count}秒"
-      x_minutes: "%{count}分"
-      x_days: "%{count}日"
-      x_months: "%{count}ヶ月"
-      x_years: "%{count}年"
+      less_than_x_seconds: "%{count}秒未満前"
+      less_than_x_minutes: "%{count}分未満前"
+      over_x_years: "%{count}年以上前"
+      x_seconds: "%{count}秒前"
+      x_minutes: "%{count}分前"
+      x_days: "%{count}日前"
+      x_months: "%{count}ヶ月前"
+      x_years: "%{count}年前"
     prompts:
       second: 秒
       minute: 分
@@ -200,7 +208,7 @@ ja:
   time:
     am: 午前
     formats:
-      default: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
+      default: "%Y年%m月%d日(%a) %H時%M分%S秒"
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後

@@ -76,6 +76,26 @@
             <%= artwork.height_px %>
           <% end %>
         <% end %>
+        <%= component "shared/table/row" do %>
+          <%= component "shared/table/cell", is_header: true do %>
+            <%= t("activerecord.attributes.artwork.created_at") %>
+          <% end %>
+          <%= component "shared/table/cell" do %>
+            <%= tag.span l(artwork.created_at) %><%= tag.span "(#{created_at_in_words(artwork)})", class: "text-gray-500 ml-1" %>
+          <% end %>
+        <% end %>
+        <%= component "shared/table/row" do %>
+          <%= component "shared/table/cell", is_header: true do %>
+            <%= t("activerecord.attributes.artwork.updated_at") %>
+          <% end %>
+          <%= component "shared/table/cell" do %>
+            <% if same_time?(artwork.created_at, artwork.updated_at, ignore_milliseconds: true) %>
+              <%= tag.span "-" %>
+            <% else %>
+              <%= tag.span l(artwork.updated_at) %><%= tag.span "(#{updated_at_in_words(artwork)})", class: "text-gray-500 ml-1" %>
+            <% end %>
+          <% end %>
+        <% end %>
       <% end %>
     <% end %>
     <div class="mt-10 flex justify-evenly">
