@@ -75,10 +75,6 @@ class Artwork < ApplicationRecord
     MAX_DESCRIPTION_LENGTH
   end
 
-  # def self.search(query)
-  #   where('title LIKE ? OR description LIKE ?', "%#{query}%", "%#{query}%").with_publication
-  # end
-
   private
   def decode_image(data)
     # Base64のプレフィックスを削除し、デコードする

@@ -129,6 +129,7 @@ class Public::ArtworksController < ApplicationController
   def calc_dotsize(width, height)
     dot_ratio = [width, height].max
     dotsize = BASE_CANVAS_SIZE / dot_ratio
+    dotsize
   end
 
   def update_artwork_and_canvas(pixel_data, image_data)
