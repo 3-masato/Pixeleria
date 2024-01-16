@@ -5,11 +5,7 @@
   </div>
   <div class="mt-4 pt-4 border-t border-gray-300 space-y-1">
     <div>
-      <%= link_to admin_users_path, class: "inline-flex items-center text-sm font-bold text-gray-600 transition-all no-underline hover:text-blue-500 hover:underline" do %>
-        <%= component "utils/icon_text", fa_class: "fa-solid fa-chevron-left text-xs" do %>
-          <%= t("user.list") %>
-        <% end %>
-      <% end %>
+      <%= component "shared/back_link", path: admin_users_path, text: t("user.list") %>
     </div>
   </div>
 <% end %>

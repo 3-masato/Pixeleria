@@ -1,0 +1,5 @@
+<%= link_to path, class: "inline-flex items-center text-sm font-bold text-gray-600 transition-all no-underline hover:text-blue-500 hover:underline" do %>
+  <%= render Utils::IconTextComponent.new(fa_class: "fa-solid fa-chevron-left text-xs") do %>
+    <%= text %>
+  <% end %>
+<% end %>
