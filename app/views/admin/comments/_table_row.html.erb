@@ -1,0 +1,36 @@
+<%
+  user = comment.user
+  artwork = comment.artwork
+%>
+<%= component "shared/table/row" do %>
+  <%= component "shared/table/cell", is_header: true do %>
+    <%= comment.id %>
+  <% end %>
+  <%= component "shared/table/cell" do %>
+    <%= component "artwork/image", artwork: artwork, size: :xxs %>
+  <% end %>
+  <%= component "shared/table/cell" do %>
+    <%= link_to artwork.title, admin_artwork_path(artwork), class: "font-bold text-blue-500 hover:underline" %>
+  <% end %>
+  <%= component "shared/table/cell" do %>
+    <%= link_to user.display_name, admin_user_path(user.account_name), class: "font-bold text-blue-500 hover:underline" %>
+  <% end %>
+  <%= component "shared/table/cell" do %>
+    <div class="truncate max-w-[24rem]">
+      <%= comment.content %>
+    </div>
+  <% end %>
+  <%= component "shared/table/cell" do %>
+    <%= component(
+      "shared/button",
+      style: :outline,
+      color: :red,
+      path: admin_comment_path(comment, return_to: request.path),
+      method: :delete,
+      "data-confirm" => "Are you sure?",
+      class: "w-8 h-8 mx-auto my-0"
+    ) do %>
+      <i class="fa-solid fa-trash-can"></i>
+    <% end %>
+  <% end %>
+<% end %>
