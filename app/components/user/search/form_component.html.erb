@@ -1,0 +1,36 @@
+<%= form_with url: admin_users_path, method: :get, remote: true, local: false, id: "search-form", data: { action: "ajax:success->admin-user-search#updateResults", "admin-user-search-target": "form" } do |f| %>
+  <div class="grid gap-y-3">
+    <div>
+      <%= render Shared::Form::LabelComponent.new(form: f, field: :status, text: t("user.searches.status")) %>
+      <%= render Shared::Form::SelectComponent.new(
+        form: f,
+        field_name: :status,
+        choices: options,
+        selected: params[:status],
+        include_blank: t("shared.all"),
+        size: :small,
+      ) %>
+    </div>
+    <div>
+      <%= render Shared::Form::LabelComponent.new(form: f, field: :query, text: t("user.searches.query")) %>
+      <%= render Shared::Form::TextFieldComponent.new(
+        form: f,
+        field_type: :text_field,
+        field_name: :query,
+        size: :small,
+        value: @query,
+        placeholder: t("user.searches.query_placeholder")
+      ) %>
+    </div>
+    <div class="flex justify-center items-center">
+      <%= render Shared::ButtonComponent.new(
+        style: :solid,
+        color: :sky,
+        type: :submit,
+        class: "px-4 py-1 text-sm"
+      ) do %>
+        <%= t("user.searches.search") %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
