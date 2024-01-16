@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Artwork::Search::QueryComponent < ViewComponent::Base
+class Artwork::Admin::Search::QueryComponent < ViewComponent::Base
   attr_reader :form
 
   def initialize(form:)
