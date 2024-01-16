@@ -7,97 +7,90 @@
   <div class="overflow-auto grow">
     <%= component "shared/table/base" do %>
       <%= component "shared/table/body" do %>
-        <%= component "shared/table/row" do %>
-          <%= component "shared/table/cell", is_header: true do %>
-            <%= t("activerecord.attributes.artwork.title") %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <%= artwork.title %>
-          <% end %>
+
+        <%= component(
+          "artwork/details_row",
+          heading: t("activerecord.attributes.artwork.title")
+        ) do %>
+          <%= artwork.title %>
         <% end %>
-        <%= component "shared/table/row" do %>
-          <%= component "shared/table/cell", is_header: true do %>
-            <%= t("activerecord.attributes.artwork.description") %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <div class="whitespace-normal max-w-[32rem]">
-              <%= artwork.description %>
-            </div>
-          <% end %>
+
+        <%= component(
+          "artwork/details_row",
+          heading: t("activerecord.attributes.artwork.description")
+        ) do %>
+          <div class="whitespace-normal max-w-[32rem]">
+            <%= artwork.description %>
+          </div>
         <% end %>
-        <%= component "shared/table/row" do %>
-          <%= component "shared/table/cell", is_header: true do %>
-            <%= t("activerecord.attributes.artwork.tags") %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <% if artwork.tags.empty? %>
-              <%= tag.span t("messages.tag.empty"), class: "text-xs text-gray-500" %>
-            <% else %>
-              <% artwork.tags.each do |tag| %>
-                <%= component "artwork/tag", tag: tag, path: nil %>
-              <% end %>
+
+        <%= component(
+          "artwork/details_row",
+          heading: t("activerecord.attributes.artwork.tags")
+        ) do %>
+          <% if artwork.tags.empty? %>
+            <%= tag.span t("messages.tag.empty"), class: "text-xs text-gray-500" %>
+          <% else %>
+            <% artwork.tags.each do |tag| %>
+              <%= component "artwork/tag", tag: tag, path: nil %>
             <% end %>
           <% end %>
         <% end %>
-        <%= component "shared/table/row" do %>
-          <%= component "shared/table/cell", is_header: true do %>
-            <%= t("activerecord.attributes.artwork.is_public") %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <% if artwork.is_public %>
-              <%= t("artwork.published") %>
-            <% else %>
-              <i class="fa-solid fa-lock"></i>
-              <%= t("artwork.private") %>
-            <% end %>
-          <% end %>
-        <% end %>
-        <%= component "shared/table/row" do %>
-          <%= component "shared/table/cell", is_header: true do %>
-            <%= t("activerecord.attributes.artwork.author") %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <%= link_to author.display_name, admin_user_path(author.account_name), class: "font-bold text-blue-500 hover:underline" %>
+
+        <%= component(
+          "artwork/details_row",
+          heading: t("activerecord.attributes.artwork.is_public")
+        ) do %>
+          <% if artwork.is_public %>
+            <%= t("artwork.published") %>
+          <% else %>
+            <i class="fa-solid fa-lock"></i>
+            <%= t("artwork.private") %>
           <% end %>
         <% end %>
-        <%= component "shared/table/row" do %>
-          <%= component "shared/table/cell", is_header: true do %>
-            <%= t("activerecord.attributes.artwork_canvas.width") %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <%= artwork.width_px %>
+
+        <%= component(
+          "artwork/details_row",
+          heading: t("activerecord.attributes.artwork.author")
+        ) do %>
+          <%= link_to author.display_name, admin_user_path(author.account_name), class: "font-bold text-blue-500 hover:underline" %>
+        <% end %>
+
+        <%= component(
+          "artwork/details_row",
+          heading: t("activerecord.attributes.artwork_canvas.width")
+        ) do %>
+          <%= artwork.width_px %>
+        <% end %>
+
+        <%= component(
+          "artwork/details_row",
+          heading: t("activerecord.attributes.artwork_canvas.height")
+        ) do %>
+          <%= artwork.height_px %>
+        <% end %>
+
+        <%= component(
+          "artwork/details_row",
+          heading: t("activerecord.attributes.artwork.created_at")
+        ) do %>
+          <%= tag.span l(artwork.created_at) %><%= tag.span "(#{created_at_in_words(artwork)})", class: "text-gray-500 ml-1" %>
+        <% end %>
+
+        <%= component(
+          "artwork/details_row",
+          heading: t("activerecord.attributes.artwork.updated_at")
+        ) do %>
+          <% if same_time?(artwork.created_at, artwork.updated_at, ignore_milliseconds: true) %>
+            <%= tag.span "-" %>
+          <% else %>
+            <%= tag.span l(artwork.updated_at) %><%= tag.span "(#{updated_at_in_words(artwork)})", class: "text-gray-500 ml-1" %>
           <% end %>
         <% end %>
-        <%= component "shared/table/row" do %>
-          <%= component "shared/table/cell", is_header: true do %>
-            <%= t("activerecord.attributes.artwork_canvas.height") %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <%= artwork.height_px %>
-          <% end %>
-        <% end %>
-        <%= component "shared/table/row" do %>
-          <%= component "shared/table/cell", is_header: true do %>
-            <%= t("activerecord.attributes.artwork.created_at") %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <%= tag.span l(artwork.created_at) %><%= tag.span "(#{created_at_in_words(artwork)})", class: "text-gray-500 ml-1" %>
-          <% end %>
-        <% end %>
-        <%= component "shared/table/row" do %>
-          <%= component "shared/table/cell", is_header: true do %>
-            <%= t("activerecord.attributes.artwork.updated_at") %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <% if same_time?(artwork.created_at, artwork.updated_at, ignore_milliseconds: true) %>
-              <%= tag.span "-" %>
-            <% else %>
-              <%= tag.span l(artwork.updated_at) %><%= tag.span "(#{updated_at_in_words(artwork)})", class: "text-gray-500 ml-1" %>
-            <% end %>
-          <% end %>
-        <% end %>
+
       <% end %>
     <% end %>
+    
     <div class="mt-10 flex justify-evenly">
       <%= component(
         "shared/button",
