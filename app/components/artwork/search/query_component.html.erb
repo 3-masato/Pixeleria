@@ -1,0 +1,11 @@
+<div>
+  <%= render Shared::Form::LabelComponent.new(form: form, field: :query, text: t("artwork.searches.query")) %>
+  <%= render Shared::Form::TextFieldComponent.new(
+    form: form,
+    field_type: :text_field,
+    field_name: :query,
+    size: :small,
+    value: @query,
+    placeholder: t("artwork.searches.query_placeholder")
+  ) %>
+</div>

@@ -1,0 +1,15 @@
+<div>
+  <%= render Shared::Form::LabelComponent.new(form: form, field: :public_status, text: t("artwork.searches.public_status")) %>
+  <div class="flex items-center gap-4">
+    <% radio_options.each do |option| %>
+      <%= render Shared::Form::RadioComponent.new(
+        form: form,
+        field_name: :public_status,
+        value: option[:value],
+        label_field: option[:label_field],
+        label_text: option[:label_text],
+        checked: option[:checked]
+      ) %>
+    <% end %>
+  </div>
+</div>

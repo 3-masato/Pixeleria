@@ -11,65 +11,7 @@
   </div>
   <div class="overflow-hidden transition-[height] duration-500" style="height: 0px;" data-accordion-target="content">
     <div class="mx-auto mt-6 mb-2 w-96" data-controller="admin-user-search">
-      <%= form_with url: admin_artworks_path, method: :get, remote: true, local: false, id: "search-form", data: { action: "ajax:success->admin-user-search#updateResults", "admin-user-search-target": "form" } do |f| %>
-        <div class="grid gap-y-3">
-          <div>
-            <%= component "shared/form/label", form: f, field: :public_status, text: t("artwork.searches.public_status") %>
-            <div class="flex items-center gap-4">
-              <%= component(
-                "shared/form/radio",
-                form: f,
-                field_name: :public_status,
-                value: :all,
-                label_field: :public_status_all,
-                label_text: t("artwork.searches.all"),
-                checked: true
-              ) %>
-              <%= component(
-                "shared/form/radio",
-                form: f,
-                field_name: :public_status,
-                value: :public,
-                label_field: :public_status_public,
-                label_text: t("artwork.searches.public"),
-                checked: false
-              ) %>
-              <%= component(
-                "shared/form/radio",
-                form: f,
-                field_name: :public_status,
-                value: :private,
-                label_field: :public_status_private,
-                label_text: t("artwork.searches.private"),
-                checked: false
-              ) %>
-            </div>
-          </div>
-          <div>
-            <%= component "shared/form/label", form: f, field: :query, text: t("artwork.searches.query") %>
-            <%= component(
-              "shared/form/text_field",
-              form: f,
-              field_type: :text_field,
-              field_name: :query,
-              size: :small,
-              value: @query,
-              placeholder: t("artwork.searches.query_placeholder")
-            ) %>
-          </div>
-          <div class="flex justify-center items-center">
-            <%= component(
-              "shared/button",
-              style: :solid,
-              color: :sky,
-              type: :submit,
-              class: "px-4 py-1 text-sm"
-            ) do %>
-              <%= t("artwork.searches.search") %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+      <%= component "artwork/search/form" %>
     </div>
   </div>
 </div>
