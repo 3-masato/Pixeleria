@@ -1,0 +1,8 @@
+<%= render Shared::Table::RowComponent.new do %>
+  <%= render Shared::Table::CellComponent.new is_header: true do %>
+    <%= heading %>
+  <% end %>
+  <%= render Shared::Table::CellComponent.new do %>
+    <%= content %>
+  <% end %>
+<% end %>
