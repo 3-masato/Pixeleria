@@ -1,0 +1,14 @@
+<% if artworks.size > 0 %>
+  <%= render "public/artworks/list", artworks: artworks.limit(artworks_display_limit) %>
+  <% if artworks.size > artworks_display_limit %>
+    <div class="text-right mt-4 mr-2">
+      <%= link_to more_link, class: "inline-block text-sm text-blue-500 no-underline hover:underline" do %>
+        <%= component "utils/icon_text", fa_class: "fa-solid fa-chevron-right", position: :right do %>
+          <%= t("user.more_artworks") %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <%= tag.p not_found_text, class: "m-5 text-center text-gray-500 text-sm" %>
+<% end %>

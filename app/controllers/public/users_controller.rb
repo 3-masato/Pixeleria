@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!,  except: %i[index show artworks]
+  before_action :authenticate_user!,  except: %i[index show artworks liked_artworks]
   before_action :ensure_correct_user, only: %i[edit update my_artworks]
   before_action :ensure_guest_user,   only: %i[confirm_deactivation deactivate]
   before_action :set_user,            only: %i[edit show update artworks my_artworks liked_artworks]
@@ -19,6 +19,27 @@ class Public::UsersController < ApplicationController
     end
   end
 
+  # 公開済みの作品
+  def artworks
+    @user_artworks = @user.artworks.with_publication.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  # いいねした作品
+  def liked_artworks
+    @user_liked_artworks = @user.liked_artworks.with_publication.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  # すべての作品
   def my_artworks
     @artworks = @user.artworks.with_details.page(params[:page])
   end
@@ -31,14 +52,6 @@ class Public::UsersController < ApplicationController
     deactivate_related_content
     reset_session
     redirect_to root_path, notice: t("messages.user.delete_account.success")
-  end
-
-  def artworks
-    @user_artworks = @user.artworks.with_publication.page(params[:page])
-  end
-
-  def liked_artworks
-    @user_liked_artworks = @user.liked_artworks.with_publication.page(params[:page])
   end
 
   private

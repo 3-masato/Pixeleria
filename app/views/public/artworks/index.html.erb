@@ -3,7 +3,7 @@
     <%= render "public/artworks/search_form" %>
   </div>
   <h3><%= @heading %></h3>
-  <div id="artworks">
+  <div id="artworks" class="my-4">
     <% if @message.present? %>
       <%= tag.p @message, class: "m-5 text-center text-gray-500 text-sm" %>
     <% else %>

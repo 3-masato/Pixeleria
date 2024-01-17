@@ -14,8 +14,8 @@ module Seeds
 
   # ドット絵のSeed作成
   require_relative "module/artwork"
-  users.slice(0, 5).each do |user|
-    Artworks.create_artwork_canvases(user, 50)
+  users.slice(0, 3).each do |user|
+    Artworks.create_artwork_canvases(user, 100)
   end
 
   # コメントのSeed作成

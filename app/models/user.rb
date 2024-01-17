@@ -15,7 +15,13 @@ class User < ApplicationRecord
   }
 
   # 保存先のサービスをここで指定する。
-  has_one_attached :profile_image, service: :amazon_profile_images
+  if Rails.env.production?
+    # 本番環境ではS3に保存する。
+    has_one_attached :profile_image, service: :amazon_profile_images
+  else
+    # 開発環境ではローカルに保存する。
+    has_one_attached :profile_image, service: :local
+  end
 
   has_many :artworks,       dependent: :destroy
   has_many :likes,          dependent: :destroy
@@ -62,7 +68,11 @@ class User < ApplicationRecord
 
   def get_profile_image
     if profile_image.attached?
-      "https://d39xcen2r68k3d.cloudfront.net/profile/#{profile_image.key}.webp"
+      if Rails.env.production?
+        "https://d39xcen2r68k3d.cloudfront.net/profile/#{profile_image.key}.webp"
+      else
+        profile_image
+      end
     else
       nil
     end

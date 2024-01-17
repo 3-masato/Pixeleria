@@ -1,7 +1,7 @@
 <%= component "shared/card", class: "my-10 px-6" do %>
   <%= tag.h2 t("artwork.liked_list") %>
   <div class="flex items-center space-x-2">
-    <%= component "user/avatar", user: @user, size: :sm %>
+    <%= component "user/avatar", user: @user, size: :xs %>
     <%= component "user/name_link", user: @user, size: :sm %>
   </div>
   <section class="py-6 px-2">

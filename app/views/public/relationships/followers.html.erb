@@ -7,6 +7,7 @@
   <section class="py-6 px-2">
     <% if @followers.size > 0 %>
       <%= render "public/users/list", users: @followers %>
+      <%= paginate @followers %>
     <% else %>
       <%= tag.p t("messages.user.relationships.no_followers"), class: "m-5 text-center text-gray-500 text-sm" %>
     <% end %>
