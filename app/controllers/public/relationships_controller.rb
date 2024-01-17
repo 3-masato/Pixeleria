@@ -18,6 +18,7 @@ class Public::RelationshipsController < ApplicationController
     @followers = @user.followers.page(params[:page]).per(4).includes(artworks: :image_attachment)
   end
 
+  private
   def set_user
     @user = User.find_by(account_name: params[:account_name])
   end

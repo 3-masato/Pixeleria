@@ -1,13 +1,23 @@
 <%= component "shared/card", class: "my-10 p-6" do %>
   <%= render "public/users/profile", user: @user, user_artworks: @user_artworks %>
 
-  <div class="w-full flex justify-start items-center text-sm border-b border-gray-300">
-    <%= link_to user_artworks_path(@user.account_name), remote: true, class: "inline-block px-5 py-3 no-underline duration-100 hover:bg-gray-100" do %>
-      <%= "投稿した作品" %>
-    <% end %>
-    <%= link_to user_liked_artworks_path(@user.account_name), remote: true, class: "inline-block px-5 py-3 no-underline duration-100 hover:bg-gray-100" do %>
-      <%= "いいねした作品" %>
-    <% end %>
+  <div class="w-full border-b border-gray-300">
+    <div class="w-full flex justify-start items-center text-sm -mb-[1px]">
+      <%= link_to(
+        t("artwork.list"),
+        user_artworks_path(@user.account_name),
+        remote: true,
+        class: "inline-block px-5 py-3 no-underline transiton-all duration-100 border-b-2 border-sky-400 hover:bg-gray-100 hover:border-gray-400",
+        id: "artworks-button"
+      ) %>
+      <%= link_to(
+        t("artwork.liked_list"),
+        user_liked_artworks_path(@user.account_name),
+        remote: true,
+        class: "inline-block px-5 py-3 no-underline transiton-all duration-100 border-b-2 border-transparent hover:bg-gray-100 hover:border-gray-400",
+        id: "liked-artworks-button"
+      ) %>
+    </div>
   </div>
 
   <section class="mt-6 py-6 px-2" id="artworks">
