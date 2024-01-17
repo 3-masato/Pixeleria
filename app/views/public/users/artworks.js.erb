@@ -1,0 +1,13 @@
+{
+  const artworks = document.getElementById("artworks");
+  if (artworks) {
+    artworks.innerHTML = "<%= j(
+      render(
+        "public/users/artworks",
+        artworks: @user_artworks,
+        more_link: user_artworks_path(@user.account_name),
+        not_found_text: t("messages.user.artworks.no_artworks")
+      )
+    ) %>";
+  }
+}

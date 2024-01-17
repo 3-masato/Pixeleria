@@ -19,10 +19,6 @@ class Public::UsersController < ApplicationController
     end
   end
 
-  def my_artworks
-    @artworks = @user.artworks.with_details.page(params[:page])
-  end
-
   def confirm_deactivation
     @user = current_user
   end
@@ -33,12 +29,29 @@ class Public::UsersController < ApplicationController
     redirect_to root_path, notice: t("messages.user.delete_account.success")
   end
 
-  def artworks
-    @user_artworks = @user.artworks.with_publication.page(params[:page])
+  # すべての作品
+  def my_artworks
+    @artworks = @user.artworks.with_details.page(params[:page])
   end
 
+  # 公開済みの作品
+  def artworks
+    @user_artworks = @user.artworks.with_publication.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  # いいねした作品
   def liked_artworks
     @user_liked_artworks = @user.liked_artworks.with_publication.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   private
