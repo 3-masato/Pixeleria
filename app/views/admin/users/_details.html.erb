@@ -5,42 +5,57 @@
   <div class="overflow-auto grow">
     <%= component "shared/table/base" do %>
       <%= component "shared/table/body" do %>
-        <%= component "shared/table/row" do %>
-          <%= component "shared/table/cell", is_header: true do %>
-            <%= t("activerecord.attributes.user.display_name") %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <%= user.display_name %>
+        <%= component(
+          "shared/details_row",
+          heading: t("activerecord.attributes.user.display_name")
+        ) do %>
+          <%= user.display_name %>
+        <% end %>
+
+        <%= component(
+          "shared/details_row",
+          heading: t("activerecord.attributes.user.account_name")
+        ) do %>
+          <%= user.account_name %>
+        <% end %>
+
+        <%= component(
+          "shared/details_row",
+          heading: t("activerecord.attributes.user.introduction")
+        ) do %>
+          <div class="whitespace-normal max-w-[32rem]">
+            <%= user.introduction %>
+          </div>
+        <% end %>
+
+        <%= component(
+          "shared/details_row",
+          heading: t("activerecord.attributes.user.status")
+        ) do %>
+          <%= component "user/status_label", status: user.status_before_type_cast, text: user.status_i18n %>
+        <% end %>
+
+        <%= component(
+          "shared/details_row",
+          heading: t("activerecord.attributes.user.created_at")
+        ) do %>
+          <%= tag.span l(user.created_at) %><%= tag.span "(#{created_at_in_words(user)})", class: "text-gray-500 ml-1" %>
+        <% end %>
+
+        <%= component(
+          "shared/details_row",
+          heading: t("activerecord.attributes.user.updated_at")
+        ) do %>
+          <% if same_time?(user.created_at, user.updated_at, ignore_milliseconds: true) %>
+            <%= tag.span "-" %>
+          <% else %>
+            <%= tag.span l(user.updated_at) %><%= tag.span "(#{updated_at_in_words(user)})", class: "text-gray-500 ml-1" %>
           <% end %>
         <% end %>
-        <%= component "shared/table/row" do %>
-          <%= component "shared/table/cell", is_header: true do %>
-            <%= t("activerecord.attributes.user.account_name") %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <%=  user.account_name %>
-          <% end %>
-        <% end %>
-        <%= component "shared/table/row" do %>
-          <%= component "shared/table/cell", is_header: true do %>
-            <%= t("activerecord.attributes.user.introduction") %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <div class="whitespace-normal max-w-[32rem]">
-              <%= user.introduction %>
-            </div>
-          <% end %>
-        <% end %>
-        <%= component "shared/table/row" do %>
-          <%= component "shared/table/cell", is_header: true do %>
-            <%= t("activerecord.attributes.user.status") %>
-          <% end %>
-          <%= component "shared/table/cell" do %>
-            <%= component "user/status_label", status: user.status_before_type_cast, text: user.status_i18n %>
-          <% end %>
-        <% end %>
+
       <% end %>
     <% end %>
+
     <div class="mt-10 flex justify-evenly">
       <%= component(
         "shared/button",

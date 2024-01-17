@@ -1,8 +1,8 @@
 <% if @admin_signed_in %>
   <header class="w-full h-20 px-6 bg-fuchsia-200 flex justify-between items-center fixed top-0 z-50">
     <div class="">
-      <%= link_to admin_root_path, class: "text-xl", aria: { label: "Pixeleria admin" } do %>
-        Pixeleria<span class="text-sm ml-2">admin</span>
+      <%= link_to admin_root_path, class: "flex items-baseline text-xl", aria: { label: "Pixeleria admin" } do %>
+        <%= image_tag "p.svg", width: 116 %><span class="text-sm ml-2" aria-hidden="true">admin</span>
       <% end %>
     </div>
     <nav>

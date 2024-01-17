@@ -1,0 +1,22 @@
+{
+  const artworks = document.getElementById("artworks");
+  if (artworks) {
+    artworks.innerHTML = "<%= j(
+      render(
+        "public/users/artworks",
+        artworks: @user_artworks,
+        more_link: user_artworks_path(@user.account_name),
+        not_found_text: t("messages.user.artworks.no_artworks")
+      )
+    ) %>";
+  }
+
+  const artworksButton = document.getElementById("artworks-button");
+  const likedArtworksButton = document.getElementById("liked-artworks-button");
+  if (artworksButton && likedArtworksButton) {
+    artworksButton.classList.toggle("border-sky-400");
+    artworksButton.classList.toggle("border-transparent");
+    likedArtworksButton.classList.toggle("border-sky-400");
+    likedArtworksButton.classList.toggle("border-transparent");
+  }
+}

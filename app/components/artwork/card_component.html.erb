@@ -1,0 +1,20 @@
+<div class="relative w-48 flex bg-slate-50 justify-center items-center flex-col gap-2 shadow transition-shadow hover:shadow-lg">
+  <div class="py-6">
+    <%= link_to artwork_path(artwork), class: "hover:underline w-32 h-32" do %>
+      <%= render Artwork::ImageComponent.new(artwork: artwork, size: :lg) %>
+    <% end %>
+  </div>
+  <div class="py-4 flex justify-evenly border-t w-full text-sm">
+    <%= tag.div id: "like-#{artwork.id}" do %>
+      <%= render Interaction::LikeButtonComponent.new(artwork: artwork, current_user: current_user) %>
+    <% end %>
+    <%= tag.div id: "comment-count-#{artwork.id}" do %>
+      <%= render Interaction::CommentCountComponent.new(count: artwork.comments.size) %>
+    <% end %>
+  </div>
+  <% unless artwork.is_public %>
+    <div class="absolute top-2 left-2">
+      <i class="fa-solid fa-lock"></i>
+    </div>
+  <% end %>
+</div>

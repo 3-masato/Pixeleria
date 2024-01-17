@@ -5,7 +5,13 @@ class Artwork < ApplicationRecord
   belongs_to :user
 
   # 保存先のサービスをここで指定する。
-  has_one_attached :image, service: :amazon_artwork_images
+  if Rails.env.production?
+    # 本番環境ではS3に保存する。
+    has_one_attached :image, service: :amazon_artwork_images
+  else
+    # 開発環境ではローカルに保存する。
+    has_one_attached :image, service: :local
+  end
 
   has_one :artwork_canvas, dependent: :destroy
   accepts_nested_attributes_for :artwork_canvas
@@ -35,9 +41,12 @@ class Artwork < ApplicationRecord
     artworks
   }
 
-
   def get_image
-    "https://d39xcen2r68k3d.cloudfront.net/#{image.key}"
+    if Rails.env.production?
+      "https://d39xcen2r68k3d.cloudfront.net/#{image.key}"
+    else
+      image
+    end
   end
 
   def liked_by?(user)
@@ -74,10 +83,6 @@ class Artwork < ApplicationRecord
   def self.max_description_length
     MAX_DESCRIPTION_LENGTH
   end
-
-  # def self.search(query)
-  #   where('title LIKE ? OR description LIKE ?', "%#{query}%", "%#{query}%").with_publication
-  # end
 
   private
   def decode_image(data)
