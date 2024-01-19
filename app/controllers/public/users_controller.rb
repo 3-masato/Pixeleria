@@ -13,6 +13,8 @@ class Public::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
+      # AWS Lambdaでの画像処理が完了するまで待機するため、2秒sleepする。
+      sleep 2 if user_params[:profile_image].present?
       redirect_to user_profile_path(@user.account_name), notice: t("messages.user.profile.update_success")
     else
       render :edit

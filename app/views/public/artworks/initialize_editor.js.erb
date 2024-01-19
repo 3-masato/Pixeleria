@@ -1,42 +1,59 @@
 {
   const toggleVisibility = (visibility) => {
     const value = visibility ? "visible" : "hidden";
-    $("#form-modal").attr("data-visibility", value);
-    $("#form-modal-backdrop").attr("data-visibility", value);
+    const formModal = document.getElementById("form-modal");
+    const formModalBackdrop = document.getElementById("form-modal-backdrop");
+    if (formModal && formModalBackdrop) {
+      formModal.setAttribute("data-visibility", value);
+      formModalBackdrop.setAttribute("data-visibility", value);
+    }
   };
 
   const close = () => {
     toggleVisibility(false);
   };
 
-  $("#modal-close-button").on("click", close);
+  const closeButton = document.getElementById("modal-close-button");
+  if (closeButton) {
+    closeButton.addEventListener("click", close);
+  }
 
-  $("#modal-title").html("<%= j(t("artwork.submit_form_title")) %>");
-  $("#modal-content").html("<%= j(render "public/artworks/save_form", artwork: @artwork, text: t("artwork.submit")) %>");
+  const modalTitle = document.getElementById("modal-title");
+  const modalContent = document.getElementById("modal-content");
+  if (modalTitle) {
+    modalTitle.innerHTML = "<%= j(t("artwork.submit_form_title")) %>";
+  }
+  if (modalContent) {
+    modalContent.innerHTML = "<%= j(render "public/artworks/save_form", artwork: @artwork, text: t("artwork.submit")) %>";
+  }
 
-  $("#editor-container").html("<%= j(
-    render "public/artworks/editor", artwork_id: @artwork_id, width: @width, height: @height, dotsize: @dotsize
-  ) %>");
+  const editorContainer = document.getElementById("editor-container");
+  if (editorContainer) {
+    editorContainer.innerHTML = "<%= j(
+      render "public/artworks/editor", artwork_id: @artwork_id, width: @width, height: @height, dotsize: @dotsize
+    ) %>";
+  }
 
-  $("#post-button").on("click", () => {
-    const editor = document.getElementById("pixeleria-editor");
-    const detail = editor.getDetails();
+  const postButton = document.getElementById("post-button");
+  if (postButton) {
+    postButton.addEventListener("click", () => {
+      const editor = document.getElementById("pixeleria-editor");
+      const detail = editor.getDetails();
 
-    const image_data = document.getElementById("image_data");
-    const pixel_data = document.getElementById("pixel_data");
-    const width = document.getElementById("width");
-    const height = document.getElementById("height");
+      const image_data = document.getElementById("image_data");
+      const pixel_data = document.getElementById("pixel_data");
+      const width = document.getElementById("width");
+      const height = document.getElementById("height");
 
-    image_data.value = detail.imageData;
-    pixel_data.value = detail.pixelData.join(",");
-    width.value = "<%= @width %>";
-    height.value = "<%= @height %>";
+      image_data.value = detail.imageData;
+      pixel_data.value = detail.pixelData.join(",");
+      width.value = "<%= @width %>";
+      height.value = "<%= @height %>";
 
-    toggleVisibility(true);
-  });
-}
+      toggleVisibility(true);
+    });
+  }
 
-{
   const postArtworkButton = document.getElementById("post-artwork-button");
   const postArtworkTitleField = document.getElementById("post-artwork-title-filed");
 
