@@ -14,9 +14,11 @@
   const artworksButton = document.getElementById("artworks-button");
   const likedArtworksButton = document.getElementById("liked-artworks-button");
   if (artworksButton && likedArtworksButton) {
-    artworksButton.classList.toggle("border-sky-400");
-    artworksButton.classList.toggle("border-transparent");
-    likedArtworksButton.classList.toggle("border-sky-400");
-    likedArtworksButton.classList.toggle("border-transparent");
+    artworksButton.classList.add("border-transparent");
+    artworksButton.classList.remove("border-sky-400");
+    artworksButton.classList.remove("pointer-events-none");
+    likedArtworksButton.classList.remove("border-transparent");
+    likedArtworksButton.classList.add("border-sky-400");
+    likedArtworksButton.classList.add("pointer-events-none");
   }
 }
