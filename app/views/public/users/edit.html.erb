@@ -5,6 +5,13 @@
     <%= form_with model: @user, url: update_user_profile_path, local: true do |f| %>
       <div class="grid gap-y-4">
         <div>
+          <%= component "shared/form/label", form: f, field: :email %>
+          <div class="text-gray-500 text-sm mx-4">
+            <%= @user.is_guest ? t("messages.user.guest.email_not_displayed") :@user.email %>
+          </div>
+        </div>
+
+        <div>
           <%= component "shared/form/label", form: f, field: :profile_image %>
           <%= component "shared/form/file_input", form: f, field_name: :profile_image, image: @user.get_profile_image %>
         </div>

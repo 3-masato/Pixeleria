@@ -105,6 +105,8 @@ ja:
           comments: "コメント"
           followings_followers: "フォロー・フォロワー"
         success: "アカウントを削除しました"
+      guest:
+        email_not_displayed: "ゲストユーザーのため、メールアドレスは表示されません"
     comment:
       required_sign_in: "コメントを投稿するにはログインもしくはアカウント新規登録をしてください"
     admin:
