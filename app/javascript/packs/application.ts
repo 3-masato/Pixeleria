@@ -8,7 +8,7 @@ import Turbolinks from "turbolinks";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
 import "controllers";
-import "jquery";
+// import "jquery";
 import "./dist/pixeleria-editor";
 
 Rails.start();
