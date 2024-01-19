@@ -14,7 +14,6 @@
     "@types/rails__activestorage": "^7.1.1",
     "@types/rails__ujs": "^6.0.4",
     "@types/turbolinks": "^5.2.2",
-    "jquery": "^3.7.1",
     "tailwindcss": "^3.4.0",
     "tailwindcss-image-rendering": "^1.0.2",
     "ts-loader": "6.2.0",
