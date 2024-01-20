@@ -10,7 +10,6 @@
   ![Ruby on Rails](https://img.shields.io/badge/Ruby%20on%20Rails-%23D30001?logo=rubyonrails "Ruby on Rails")
   ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-%23334155?logo=tailwindcss "Tailwind CSS")
   ![Stimulus](https://img.shields.io/badge/Stimulus-%2377E8B9?logo=stimulus&logoColor=%23000000 "Stimulus")
-  ![jQuery](https://img.shields.io/badge/jQuery-%230769AD?logo=jquery&logoColor=%23000000 "jQuery")
   ![MySQL](https://img.shields.io/badge/MySQL-%234479A1?logo=mysql&logoColor=%23ffffff "MySQL")
   ![nginx](https://img.shields.io/badge/nginx-%234479A1?logo=nginx&logoColor=%23ffffff "nginx")
   ![AWS](https://img.shields.io/badge/AWS-%23232F3E?logo=amazonaws&logoColor=%23FF9900 "AWS")
@@ -24,7 +23,7 @@
 ドット絵の作成と共有を可能にするクリエイティブなコミュニティサービスです。
 ユーザーは他の人々のドット絵作品を閲覧したり、簡単な操作で自分自身のドット絵を描くことができます。
 
-![エディタのスクリーンショット](https://raw.githubusercontent.com/3-masato/Pixeleria/main/application_spec/screen.png "エディタのスクリーンショット")
+![エディタのスクリーンショット](https://raw.githubusercontent.com/3-masato/Pixeleria/main/application_spec/assets/screenshot_v2.png "エディタのスクリーンショット")
 
 ### テーマを選んだ理由
 
@@ -84,14 +83,12 @@
 - SQL
 - Ruby on Rails
 - Stimulus
-- jQuery
 
 ドット絵エディタはサブモジュールとして別々に実装しています：
 [Pixeleria-Editor](https://github.com/3-masato/Pixeleria-Editor)
 
 ## 今後の課題
 
-- ドット絵エディタ使用中、ページ離脱時にアラートを出す
 - ドット絵エディタのサイズ変更時にアラートを出す
 - ドット絵エディタのレスポンシブ対応
 - メインビジュアル
