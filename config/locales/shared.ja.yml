@@ -135,4 +135,4 @@ ja:
     email: "sample@example.com"
     display_name: ユーザー名を入力してください
     account_name: 半角英数字とアンダースコアが使用できます
-    introduction: 自己紹介文を自由に入力してください
+    introduction: 自己紹介文を自由に入力してください (%{count}文字まで)

@@ -52,7 +52,7 @@
             field_name: :introduction,
             rows: 12,
             model: @user,
-            placeholder: t("placeholder.introduction"),
+            placeholder: t("placeholder.introduction", count: User.max_introduction_length),
             maxlength: User.max_introduction_length
           ) %>
         </div>
