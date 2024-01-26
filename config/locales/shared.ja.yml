@@ -132,7 +132,10 @@ ja:
       submit_success: "通報を受け付けました。ご協力ありがとうございます"
       unread_notice: "未読の通報が%{count}件あります"
   placeholder:
-    email: "sample@example.com"
-    display_name: ユーザー名を入力してください
-    account_name: 半角英数字とアンダースコアが使用できます
-    introduction: 自己紹介文を自由に入力してください (%{count}文字まで)
+    user:
+      email: "sample@example.com"
+      display_name: ユーザー名を入力してください
+      account_name: 半角英数字とアンダースコアが使用できます
+      introduction: 自己紹介文を自由に入力してください (%{count}文字まで)
+    admin:
+      email: "sample@example.com"
