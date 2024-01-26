@@ -8,7 +8,8 @@
         </div>
         <div class="grow">
           <%= component "user/name_link", user: user, size: :sm %>
-          <div class="text-sm break-all">
+          <div class="text-xs text-gray-500"><%= l(@artwork.created_at, format: :long) %></div>
+          <div class="text-sm break-all mt-1">
             <%= comment.content %>
           </div>
         </div>
