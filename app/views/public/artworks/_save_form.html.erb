@@ -15,6 +15,7 @@
         field_type: :text_field,
         field_name: :title,
         model: artwork,
+        placeholder: t("placeholder.artwork.title", count: Artwork.max_title_length),
         maxlength: Artwork.max_title_length,
         id: "post-artwork-title-filed"
       ) %>
@@ -29,6 +30,7 @@
         rows: 3,
         placeholder: "",
         model: artwork,
+        placeholder: t("placeholder.artwork.description", count: Artwork.max_description_length),
         maxlength: Artwork.max_description_length,
       ) %>
     </div>

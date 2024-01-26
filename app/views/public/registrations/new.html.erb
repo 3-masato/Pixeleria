@@ -13,7 +13,7 @@
           field_type: :text_field,
           field_name: :display_name,
           autofocus: true,
-          placeholder: t("placeholder.display_name"),
+          placeholder: t("placeholder.user.display_name"),
           model: resource,
           maxlength: User.max_display_name_length
         ) %>
@@ -26,7 +26,7 @@
           form: f,
           field_type: :text_field,
           field_name: :account_name,
-          placeholder: t("placeholder.account_name"),
+          placeholder: t("placeholder.user.account_name"),
           model: resource,
           maxlength: User.max_account_name_length
         ) %>
@@ -40,7 +40,7 @@
           field_type: :email_field,
           field_name: :email,
           autocomplete: "email",
-          placeholder: t("placeholder.email"),
+          placeholder: t("placeholder.user.email"),
           model: resource
         ) %>
       </div>

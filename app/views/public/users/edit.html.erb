@@ -25,7 +25,7 @@
             field_name: :display_name,
             size: :small,
             model: @user,
-            placeholder: t("placeholder.display_name"),
+            placeholder: t("placeholder.user.display_name"),
             maxlength: User.max_display_name_length
           ) %>
         </div>
@@ -39,7 +39,7 @@
             field_name: :account_name,
             size: :small,
             model: @user,
-            placeholder: t("placeholder.account_name"),
+            placeholder: t("placeholder.user.account_name"),
             maxlength: User.max_account_name_length,
           ) %>
         </div>
@@ -52,7 +52,7 @@
             field_name: :introduction,
             rows: 12,
             model: @user,
-            placeholder: t("placeholder.introduction"),
+            placeholder: t("placeholder.user.introduction", count: User.max_introduction_length),
             maxlength: User.max_introduction_length
           ) %>
         </div>
