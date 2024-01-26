@@ -139,3 +139,6 @@ ja:
       introduction: 自己紹介文を自由に入力してください (%{count}文字まで)
     admin:
       email: "sample@example.com"
+    artwork:
+      title: タイトルを入力してください (%{count}文字まで)
+      description: ドット絵の説明文を自由に入力してください (%{count}文字まで)
