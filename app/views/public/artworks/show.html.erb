@@ -4,23 +4,22 @@
       <%= component "artwork/image", artwork: @artwork, size: :xxxxl %>
     </div>
     <div class="flex">
-      <div class="grow space-y-2">
+      <div class="grow">
         <div class="flex items-center space-x-2">
           <% if @artwork.is_public %>
-            <%= tag.div @artwork.title, class: "font-bold text-lg" %>
+            <%= tag.span @artwork.title, class: "font-bold text-lg" %>
           <% else %>
             <i class="fa-solid fa-lock"></i>
-            <%= tag.div @artwork.title, class: "font-bold text-lg" %>
+            <%= tag.span @artwork.title, class: "font-bold text-lg" %>
           <% end %>
         </div>
+        <div class="text-sm text-gray-500"><%= l(@artwork.created_at, format: :long) %></div>
         <div class="flex gap-2">
           <% @artwork.tags.each do |tag| %>
             <%= component "artwork/tag", tag: tag, path: artworks_path(tag: tag.name) %>
           <% end %>
         </div>
-        <p class="min-h-[5rem]">
-          <%= @artwork.description %>
-        </p>
+        <%= tag.p @artwork.description, class: "min-h-[5rem] my-2 text-left whitespace-pre-line" %>
       </div>
       <div>
         <% if @author == current_user %>
