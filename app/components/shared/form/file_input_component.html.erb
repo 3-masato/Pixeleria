@@ -20,7 +20,7 @@
 
     const isImageFile = (file) => file.type.startsWith("image/");
 
-    dropzoneFile.addEventListener("change", async (e) => {
+    dropzoneFile.addEventListener("change", (e) => {
       preview.innerHTML = "";
       const file = e.target.files[0];
 
