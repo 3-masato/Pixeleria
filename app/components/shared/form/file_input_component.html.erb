@@ -21,12 +21,10 @@
     const isImageFile = (file) => file.type.startsWith("image/");
 
     dropzoneFile.addEventListener("change", async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-
       preview.innerHTML = "";
+      const file = e.target.files[0];
 
-      if (!isImageFile(file)) {
+      if (!file || !isImageFile(file)) {
         return;
       }
 
